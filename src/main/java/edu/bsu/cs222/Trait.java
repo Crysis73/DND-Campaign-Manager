@@ -17,4 +17,8 @@ public class Trait {
     public Integer getValue(){
         return this.value;
     }
+
+    public String toString(){
+        return("Name : " + this.name + " , Value : " + this.value);
+    }
 }
