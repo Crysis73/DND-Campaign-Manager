@@ -4,9 +4,13 @@ public class Description {
     private String height, weight, age, eyeColor, skinColor, additionalFeatures, alignment, languages, exoticLanguages, personalityTrait1, personalityTrait2, ideals, bonds, flaws;
 
     /*
+
+    Author: Casey Haskins
+
     All of the member variables of this class are initialized by member variables so that the when creating a character
     a player may be as detailed as they wish to be. Not all of these descriptors are necessary for game play, so we shouldn't
-    require a player/dm to enter in all of these details.
+    require a player/
+
      */
 
     public void setHeight(String height){

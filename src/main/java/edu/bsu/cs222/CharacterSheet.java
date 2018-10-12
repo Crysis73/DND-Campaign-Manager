@@ -5,8 +5,9 @@ import java.util.LinkedList;
 
 public class CharacterSheet {
     private Race race;
+    private dndClass dndClass;
     private Trait strength, dexterity, constitution, intelligence, wisdom, charisma;
-    private Integer wealth, xp, hp;
+    private Integer wealth, experiencepoints, hitPoints;
     private Description description;
 
     public CharacterSheet(){
@@ -54,12 +55,12 @@ public class CharacterSheet {
         this.wealth = startingValue;
     }
 
-    public void setXP(Integer value){
-        this.xp = value;
+    public void setExperiencepoints(Integer value){
+        this.experiencepoints = value;
     }
 
-    public void setHp(Integer startingValue){
-        this.hp = startingValue;
+    public void setHitPoints(Integer startingValue){
+        this.hitPoints = startingValue;
     }
 
     public void setDescription(){

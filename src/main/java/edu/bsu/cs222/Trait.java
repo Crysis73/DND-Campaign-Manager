@@ -14,6 +14,10 @@ public class Trait {
         this.value = value;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public Integer getValue(){
         return this.value;
     }
