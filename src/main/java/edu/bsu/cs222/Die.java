@@ -1,5 +1,7 @@
 package edu.bsu.cs222;
 
+import java.util.Random;
+
 public class Die {
     private int size;
 
@@ -7,8 +9,10 @@ public class Die {
         this.size = size;
     }
 
-    public int rollDie(){
-
+    public double rollDie(){
+        Random randomNumberList = new Random();
+        int result = randomNumberList.nextInt(size);
+        return result+1;
     }
 
 }
