@@ -31,6 +31,6 @@ public class dndClass {
         return this.hitDice;
     }
     public String toString(){
-        return("Class : "+name+"\nDescription : "+description+" ")
+        return("Class : "+name+"\nDescription : "+description+"\nAdds "+hitPointsAtFirstLevel+" to your constitution modifier and 1d"+hitDice+" per "+name+" level.");
     }
 }

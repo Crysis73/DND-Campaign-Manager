@@ -14,5 +14,9 @@ public class testFinalProject {
         Trait valueAfter = characterSheet.getCharisma();
         Assert.assertEquals(charisma.toString(),valueAfter.toString());
     }
+    @Test
+    public void testCreateCharacter(){
+
+    }
 
 }

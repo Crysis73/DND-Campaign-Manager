@@ -55,4 +55,51 @@ public class Description {
     public void setFlaws(String flaws){
         this.flaws = flaws;
     }
+
+    public String toString(){
+        String result = "";
+        if(height !=null){
+            result += "Height : "+height;
+        }
+        if(weight!=null){
+            result+= "\nWeight : "+weight;
+        }
+        if(age!=null){
+            result+= "\nAge : "+age;
+        }
+        if(eyeColor!=null){
+            result+="\nEye Color : "+eyeColor;
+        }
+        if(skinColor!=null){
+            result+="\nSkin Color : "+skinColor;
+        }
+        if(additionalFeatures!=null){
+            result+="\nAdditional Features : "+additionalFeatures;
+        }
+        if(alignment!=null){
+            result+="\nAlignment : "+alignment;
+        }
+        if(languages!=null){
+            result+="\nLanguages : "+languages;
+        }
+        if(exoticLanguages!=null){
+            result+="\nExotic Languages : "+exoticLanguages;
+        }
+        if(personalityTrait1!=null){
+            result+="\nPersonality Trait 1 : "+personalityTrait1;
+        }
+        if(personalityTrait2!=null){
+            result+="\nPersonality Trait 2 : "+personalityTrait2;
+        }
+        if(ideals!=null){
+            result+="\nIdeals : "+ideals;
+        }
+        if(bonds!=null){
+            result+="\nBonds : "+bonds;
+        }
+        if(flaws!=null){
+            result+="\nFlaws : "+flaws;
+        }
+        return result;
+    }
 }

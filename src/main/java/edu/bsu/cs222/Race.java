@@ -3,7 +3,7 @@ package edu.bsu.cs222;
 public class Race {
     private String name;
     private Integer traitBonus; //Will need to be manually set for each race.
-    private Trait trait; //Will need to be manually set for each race.
+    private Trait trait; //Will need to be manually set for each race. This is the trait that the trait bonus is applied to.
     private String description; //Will need to be manually set for each race.
 
     public Race(String name,Trait trait, Integer traitBonus, String description){

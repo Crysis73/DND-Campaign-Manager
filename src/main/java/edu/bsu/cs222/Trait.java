@@ -23,6 +23,6 @@ public class Trait {
     }
 
     public String toString(){
-        return("Name : " + this.name + " , Value : " + this.value);
+        return("Trait : " + this.name + " , Value : " + this.value);
     }
 }

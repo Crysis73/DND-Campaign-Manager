@@ -68,7 +68,20 @@ public class CharacterSheet {
     }
 
     public String toString(){
-        return("Race: " + race + " , ");
+        String result ="";
+        result += race.toString();
+        result += dndClass.toString();
+        result += strength.toString();
+        result += dexterity.toString();
+        result += constitution.toString();
+        result += intelligence.toString();
+        result += wisdom.toString();
+        result += charisma.toString();
+        result += "\n Wealth : " + wealth;
+        result += "\n XP : " + experiencepoints;
+        result += "\n HP : " + hitPoints;
+        result += "\n Description : " + description.toString();
+        return result;
     }
 
 
