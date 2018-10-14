@@ -7,7 +7,8 @@ public class Trait {
 
     public Trait(String name){
         this.name = name;
-        //set value equal to the sum of the three highest random d6 rolls
+        Die d6 = new Die(6);
+        this.value = d6.rollD6FourTimesDropLeast();
     }
 
     public void setValue(Integer value){

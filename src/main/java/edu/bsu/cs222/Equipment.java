@@ -11,8 +11,11 @@ public class Equipment {
         this.name = name;
         this.traitBonus = traitBonus;
         this.description = description;
-        this.name = name;
-        trait.setValue( traitBonus +
-                trait.getValue());
+        this.trait = trait;
+        trait.setValue(traitBonus + trait.getValue());
+    }
+
+    public String toString(){
+        return ("Name : "+this.name+"\n"+this.description+"\n\tAdds "+this.traitBonus+" points to "+this.trait);
     }
 }

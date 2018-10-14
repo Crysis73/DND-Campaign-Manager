@@ -4,7 +4,7 @@ public class dndClass {
     private String name;
     private String description;
     private Integer hitDice; //number of dice you roll to determine how many HitPoints you gain per level. Will need to implement scaling for levels.
-    private Integer hitPointsAtFirstLevel;
+    private Integer hitPointBonus;
 
     /*
     Passing all arguments through the constructor because classes are static. We will need to manually create each class that
@@ -12,11 +12,12 @@ public class dndClass {
     and description will probably never be used but I added them just in case.
      */
 
-    public dndClass(String name, String description, Integer hitDice, Integer hitPointsAtFirstLevel) {
+    public dndClass(String name, String description, Integer hitDice) {
         this.name = name;
         this.description = description;
         this.hitDice = hitDice;
-        this.hitPointsAtFirstLevel = hitPointsAtFirstLevel;
+        Die die = new Die(hitDice);
+        this.hitPointBonus = die.rollDie();
     }
 
     public String getName() {
@@ -30,7 +31,12 @@ public class dndClass {
     public Integer getHitDice() {
         return this.hitDice;
     }
+
+    public Integer getHitPointBonus(){
+        return this.hitPointBonus;
+    }
+
     public String toString(){
-        return("Class : "+name+"\nDescription : "+description+"\nAdds "+hitPointsAtFirstLevel+" to your constitution modifier and 1d"+hitDice+" per "+name+" level.");
+        return("Class : "+name+"\nDescription : "+description+"\nAdds "+hitPointBonus+" to your constitution and 1d"+hitDice+" per "+name+" level.");
     }
 }
