@@ -4,11 +4,11 @@ public class Equipment {
     private String description;
     private Trait trait;
     private Integer traitBonus;
-    private String name;
+    private String equipmentName;
     //How to add trait bonus
 
-    public Equipment(String name, Trait trait, Integer traitBonus, String description){
-        this.name = name;
+    public Equipment(String equipmentName, Trait trait, Integer traitBonus, String description){
+        this.equipmentName = equipmentName;
         this.traitBonus = traitBonus;
         this.description = description;
         this.trait = trait;
@@ -16,6 +16,6 @@ public class Equipment {
     }
 
     public String toString(){
-        return ("Name : "+this.name+"\n"+this.description+"\n\tAdds "+this.traitBonus+" points to "+this.trait);
+        return ("Name : "+this.equipmentName+"\n"+this.description+"\n\tAdds "+this.traitBonus+" points to "+this.trait);
     }
 }

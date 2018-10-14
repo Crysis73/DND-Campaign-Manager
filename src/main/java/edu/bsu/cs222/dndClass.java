@@ -21,18 +21,22 @@ public class dndClass {
     }
 
     public String getName() {
+
         return this.name;
     }
 
     public String getDescription() {
+
         return this.description;
     }
 
     public Integer getHitDice() {
+
         return this.hitDice;
     }
 
     public Integer getHitPointBonus(){
+
         return this.hitPointBonus;
     }
 

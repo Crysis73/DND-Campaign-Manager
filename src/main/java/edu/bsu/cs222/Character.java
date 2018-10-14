@@ -13,7 +13,7 @@ public class Character {
     private Integer wealth, experiencepoints, hitPoints;
     private Race race;
     private dndClass dndClass;
-    private Description description;
+    private Description characterDescription;
 
     public Character(String name, dndClass dndClass, Race race){
         this.name = name;
@@ -51,42 +51,52 @@ public class Character {
     }
 
     public void setWealth(Integer startingValue){
+
         this.wealth = startingValue;
     }
 
     public void setExperiencepoints(Integer value){
+
         this.experiencepoints = value;
     }
 
     public void setHitPoints(Integer startingValue){
+
         this.hitPoints = startingValue;
     }
 
     public void addEquipment(Equipment item){
+
         equipment.add(item);
     }
 
     public Trait getStrength(){
+
         return this.strength;
     }
 
     public Trait getDexterity(){
+
         return this.dexterity;
     }
 
     public Trait getConstitution(){
+
         return this.constitution;
     }
 
     public Trait getIntelligence(){
+
         return this.intelligence;
     }
 
     public Trait getWisdom(){
+
         return this.wisdom;
     }
 
     public Trait getCharisma(){
+
         return this.charisma;
     }
 

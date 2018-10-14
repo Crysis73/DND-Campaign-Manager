@@ -72,6 +72,13 @@ public class testFinalProject {
     }
 
     @Test
+    public void testDiceRoll(){
+        DiceRoll roll2Dice = new DiceRoll(2,6);
+        Integer result = roll2Dice.getDiceRollResult();
+        Assert.assertTrue(2<=result && result<=12);
+    }
+
+    @Test
     public void testAutomaticTraitValueGeneration(){
         Trait Diligence = new Trait("Diligence");
         Integer value = Diligence.getValue();
