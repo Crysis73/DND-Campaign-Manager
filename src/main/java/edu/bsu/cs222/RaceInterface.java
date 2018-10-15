@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface RaceInterface {
 
     String getRaceName();
-    ArrayList<Trait> getRaceTraits();
+    TraitMap getRaceTraitBonuses();
     String getRaceDescription();
 
 }

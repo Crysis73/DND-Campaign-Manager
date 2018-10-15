@@ -4,19 +4,19 @@ import java.util.LinkedList;
 
 public class Character {
     private String name;
-    private Trait[] traits;
+    private TraitMap traits;
     private LinkedList<Equipment> equipment;
-    private Trait strength, dexterity, constitution, intelligence, wisdom, charisma;
     private Integer wealth, experiencepoints, hitPoints;
     private Race race;
     private dndClass dndClass;
-    private Description description;
+    private Description characterDescription;
 
     public Character(String name, dndClass dndClass, Race race){
         this.name = name;
         this.dndClass = dndClass;
         this.equipment = new LinkedList<>();
         this.race = race;
+        this.traits = new TraitMap();
         initializeTraits();
         initializeTraitBonuses();
         this.experiencepoints = 0;
