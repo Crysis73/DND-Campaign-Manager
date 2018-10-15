@@ -37,6 +37,6 @@ public class dndClass {
     }
 
     public String toString(){
-        return("Class : "+name+"\nDescription : "+description+"\nAdds "+hitPointBonus+" to your constitution and 1d"+hitDice+" per "+name+" level.");
+        return("Class :\n\t"+name+" - adds "+hitPointBonus+" to Constitution and 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
     }
 }
