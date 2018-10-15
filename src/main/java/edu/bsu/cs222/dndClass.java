@@ -37,6 +37,6 @@ public class dndClass {
     }
 
     public String toString(){
-        return("Class :\n\t"+name+" - added "+hitPointBonus+" to Constitution and adds an additional 1d"+hitDice+" to Constitution per "+name+" level."+"\n\tDescription : "+description);
+        return("Class :\n\t"+name+" - added "+hitPointBonus+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
     }
 }
