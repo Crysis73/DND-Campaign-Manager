@@ -90,25 +90,38 @@ public class testFinalProject {
 
     @Test
     public void testCharacterCreation(){
-        traitBonus constitutionBonus = new traitBonus("Constitution",1);
-        traitBonus strengthBonus = new traitBonus("Strength",1);
-        traitBonus wisdomBonus = new traitBonus("Wisdom",1);
-        traitBonus intelligenceBonus = new traitBonus("Intelligence",1);
-        traitBonus charismaBonus = new traitBonus("Charisma",1);
-        traitBonus dexterityBonus = new traitBonus("Dexterity",1);
+        traitBonus humanconstitutionBonus = new traitBonus("Constitution",1);
+        traitBonus humanstrengthBonus = new traitBonus("Strength",1);
+        traitBonus humanwisdomBonus = new traitBonus("Wisdom",1);
+        traitBonus humanintelligenceBonus = new traitBonus("Intelligence",1);
+        traitBonus humancharismaBonus = new traitBonus("Charisma",1);
+        traitBonus humandexterityBonus = new traitBonus("Dexterity",1);
         ArrayList<traitBonus> humanTraitBonuses= new ArrayList<>();
-        humanTraitBonuses.add(constitutionBonus);
-        humanTraitBonuses.add(strengthBonus);
-        humanTraitBonuses.add(wisdomBonus);
-        humanTraitBonuses.add(intelligenceBonus);
-        humanTraitBonuses.add(charismaBonus);
-        humanTraitBonuses.add(dexterityBonus);
+        humanTraitBonuses.add(humanconstitutionBonus);
+        humanTraitBonuses.add(humanstrengthBonus);
+        humanTraitBonuses.add(humanwisdomBonus);
+        humanTraitBonuses.add(humanintelligenceBonus);
+        humanTraitBonuses.add(humancharismaBonus);
+        humanTraitBonuses.add(humandexterityBonus);
+
+
         Race Human = new Race("Human",humanTraitBonuses,"This is a sample description");
         dndClass Bard = new dndClass("Bard","This is a sample description",8);
         Character Jack = new Character("Jack",Bard,Human);
         Jack.setExperiencepoints(500);
         Jack.setWealth(600);
         System.out.println(Jack.toString());
+
+        traitBonus dwarfConstitutionBonus = new traitBonus("Constitution",2);
+        ArrayList<traitBonus> dwarfTraitBonuses = new ArrayList<>();
+        dwarfTraitBonuses.add(dwarfConstitutionBonus);
+        Race Dwarf = new Race("Dwarf",dwarfTraitBonuses,"This is a sample description");
+        dndClass Barbarian = new dndClass("Barbarian","This is a sample description",12);
+
+        Character Jill = new Character("Jill",Barbarian,Dwarf);
+        Jill.setExperiencepoints(300);
+        Jill.setWealth(2);
+        System.out.println(Jill.toString());
     }
 
     @Test
