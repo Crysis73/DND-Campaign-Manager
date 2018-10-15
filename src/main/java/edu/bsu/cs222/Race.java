@@ -1,31 +1,39 @@
 package edu.bsu.cs222;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Race {
     private String name;
     private String description; //Will need to be manually set for each race.
-    private ArrayList<traitBonus> traitBonus;
+    private TraitMap traitBonus;
 
     /*
     Passing all arguments through the constructor because Races are static. We will need to manually create each Race that
     users are able to choose from. These Races will have preset names, traitBonuses, traitNames, and descriptions.
      */
 
-    public Race(String name,ArrayList<traitBonus> traitBonus, String description){
+    public Race(String name){
         this.name = name;
-        this.traitBonus = traitBonus;
-        this.description = description;
+        if(name == "Dwarf"){
+            Dwarf dwarf = new Dwarf();
+            this.traitBonus = dwarf.getRaceTraitBonuses();
+            this.description = dwarf.getRaceDescription();
+        }
+
+
     }
 
-    public ArrayList<traitBonus> getTraitBonuses(){
+    public TraitMap getTraitBonuses(){
         return this.traitBonus;
     }
 
     public String toString(){
         String result = "Race : "+this.name+"\n\tDescription : "+this.description;
-        for(int i=0;i<traitBonus.size();i++){
-            result += "\n\tAdds "+traitBonus.get(i).getTraitBonusValue()+" to "+traitBonus.get(i).getTraitName();
+        ArrayList<String> traitNames = new ArrayList<>();
+        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
+        for(int i=0;i<traitNames.size();i++){
+            result += "\n\tAdds "+traitBonus.getValue(traitNames.get(i))+" to "+traitNames.get(i);
         }
         return result;
     }

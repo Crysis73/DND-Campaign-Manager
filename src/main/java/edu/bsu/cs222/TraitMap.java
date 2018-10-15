@@ -40,8 +40,10 @@ public class TraitMap {
     public String toString(){
         LinkedList<String> listOfTraits = new LinkedList<>();
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
-            String trait = entry.getKey() + ": "+ entry.getValue();
-            listOfTraits.add(trait);
+            if(entry.getValue() != 0){
+                String trait = "\n"+ entry.getKey() + ": "+ entry.getValue();
+                listOfTraits.add(trait);
+            }
         }
         return listOfTraits.toString();
     }

@@ -2,17 +2,20 @@ package edu.bsu.cs222;
 
 public class Equipment {
     private String description;
-    private Trait trait;
+    private TraitMap traitMap;
     private Integer traitBonus;
+    private String trait;
     private String equipmentName;
     //How to add trait bonus
 
-    public Equipment(String equipmentName, Trait trait, Integer traitBonus, String description){
+    public Equipment(String equipmentName, String trait, Integer traitBonus, String description){
         this.equipmentName = equipmentName;
-        this.traitBonus = traitBonus;
+        TraitMap traitMap = new TraitMap();
+        traitMap.setAllValues(0);
+        traitMap.setValue(trait,traitBonus);
         this.description = description;
-        this.trait = trait;
-        trait.setValue(traitBonus + trait.getValue());
+        this.traitMap = traitMap;
+
     }
 
     public String toString(){

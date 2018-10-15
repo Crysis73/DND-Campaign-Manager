@@ -11,11 +11,11 @@ public class Character {
     private dndClass dndClass;
     private Description characterDescription;
 
-    public Character(String name, dndClass dndClass, Race race){
+    public Character(String name, dndClass dndClass, String race){
         this.name = name;
         this.dndClass = dndClass;
         this.equipment = new LinkedList<>();
-        this.race = race;
+        this.race = new Race(race);
         this.traits = new TraitMap();
         this.experiencepoints = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
@@ -50,6 +50,7 @@ public class Character {
                     "\n\tWealth : " + wealth+
                     "\n\tXP : " + experiencepoints+
                     "\n\tHP : " + hitPoints+
+                "\nDescription: " +characterDescription+
                 "\nTraits :"+
                     "\n\tStrength : "+ this.traits.getValue("Strength")+
                     "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
