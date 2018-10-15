@@ -17,41 +17,10 @@ public class Character {
         this.equipment = new LinkedList<>();
         this.race = race;
         this.traits = new TraitMap();
-        initializeTraits();
-        initializeTraitBonuses();
         this.experiencepoints = 0;
-        this.hitPoints = constitution.getValue() + dndClass.getHitPointBonus();
+        this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
     }
 
-    public void initializeTraits(){
-        this.strength = new Trait("Strength");
-        this.dexterity = new Trait("Dexterity");
-        this.constitution = new Trait("Constitution");
-        this.intelligence = new Trait("Intelligence");
-        this.wisdom = new Trait("Wisdom");
-        this.charisma = new Trait("Charisma");
-        this.traits = new Trait[6];
-        traits[0] = this.strength;
-        traits[1] = this.dexterity;
-        traits[2] = this.constitution;
-        traits[3] = this.intelligence;
-        traits[4] = this.wisdom;
-        traits[5] = this.charisma;
-
-    }
-
-    public void initializeTraitBonuses(){
-        for(int i =0;i<race.getTraitBonuses().size();i++){
-            String traitName = race.getTraitBonuses().get(i).getTraitName();
-            for(int j=0;j<traits.length;j++){
-                String secondtraitName = traits[j].getName();
-                if(traitName.equals(secondtraitName)){
-                    Integer replacementValue = race.getTraitBonuses().get(i).getTraitBonusValue() + traits[j].getValue();
-                    traits[j].setValue(replacementValue);
-                }
-            }
-        }
-    }
 
     public void setWealth(Integer startingValue){
         this.wealth = startingValue;
@@ -69,33 +38,11 @@ public class Character {
         equipment.add(item);
     }
 
-    public Trait getStrength(){
-        return this.strength;
+
+    public TraitMap getTraits(){
+        return this.traits;
     }
 
-    public Trait getDexterity(){
-        return this.dexterity;
-    }
-
-    public Trait getConstitution(){
-        return this.constitution;
-    }
-
-    public Trait getIntelligence(){
-        return this.intelligence;
-    }
-
-    public Trait getWisdom(){
-        return this.wisdom;
-    }
-
-    public Trait getCharisma(){
-        return this.charisma;
-    }
-
-    public void setTrait(Trait trait, Integer value){
-        trait.setValue(value);
-    }
 
     public String toString(){
         String result = "";
@@ -104,12 +51,12 @@ public class Character {
                     "\n\tXP : " + experiencepoints+
                     "\n\tHP : " + hitPoints+
                 "\nTraits :"+
-                    "\n\tStrength : "+ this.strength.getValue()+
-                    "\n\tDexterity : "+ this.dexterity.getValue()+
-                    "\n\tConstitution : "+ this.constitution.getValue()+
-                    "\n\tIntelligence : "+ this.intelligence.getValue()+
-                    "\n\tWisdom : "+ this.wisdom.getValue()+
-                    "\n\tConstitution : "+ this.constitution.getValue()+
+                    "\n\tStrength : "+ this.traits.getValue("Strength")+
+                    "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
+                    "\n\tConstitution : "+ this.traits.getValue("Constitution")+
+                    "\n\tIntelligence : "+ this.traits.getValue("Intelligence")+
+                    "\n\tWisdom : "+ this.traits.getValue("Wisdom")+
+                    "\n\tCharisma : "+ this.traits.getValue("Charisma")+
                 "\n"+ race.toString() + "\n"+
                 dndClass.toString() + "\n"+
                 "\nEquipment : " + equipment;

@@ -3,8 +3,8 @@ package edu.bsu.cs222;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class testFinalProject {
 
@@ -18,8 +18,8 @@ public class testFinalProject {
         Race Dwarf = new Race("Dwarf",traitBonuses,"This is a sample description");
         dndClass Bard = new dndClass("Bard","This is a test description",8);
         Character Jack = new Character("Jack",Bard,Dwarf);
-        Jack.getCharisma().setValue(10);
-        Trait valueAfter = Jack.getCharisma();
+        Jack.getTraits().setValue("Charisma", 10);
+        Integer valueAfter = Jack.getTraits().getValue("Charisma");
         Assert.assertEquals(charisma.toString(),valueAfter.toString());
     }
 
@@ -94,6 +94,51 @@ public class testFinalProject {
         Integer value = Diligence.getValue();
         Assert.assertTrue(1<=value && value<=18);
     }
+
+    @Test
+    public void testTraitMapCreation(){
+        TraitMap traitMap = new TraitMap();
+        ArrayList<String> traitNames = new ArrayList<>();
+        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
+        Assert.assertTrue(traitMap.getTraitMap().size() == traitNames.size());
+    }
+
+    @Test
+    public void testSetTraitMapValues(){
+        TraitMap traitMap = new TraitMap();
+        traitMap.setAllValues(0);
+        ArrayList<Integer> newTraitValues = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : traitMap.getTraitMap().entrySet()){
+            Integer trait = entry.getValue();
+            newTraitValues.add(trait);
+        }
+        ArrayList<Integer> testTraitValues = new ArrayList<>();
+        testTraitValues.addAll(Arrays.asList(0,0,0,0,0,0));
+
+        for(int i=0;i<newTraitValues.size();i++){
+            Assert.assertTrue(testTraitValues.get(i)==newTraitValues.get(i));
+        }
+
+    }
+
+    @Test
+    public void testDwarfClassTraitBonuses(){
+        Dwarf dwarf = new Dwarf();
+        TraitMap dwarfTraitMap = dwarf.getRaceTraitBonuses();
+        ArrayList<Integer> dwarfTraitValues = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : dwarfTraitMap.getTraitMap().entrySet()){
+            Integer trait = entry.getValue();
+            dwarfTraitValues.add(trait);
+        }
+        ArrayList<Integer> testTraitValues = new ArrayList<>();
+        testTraitValues.addAll(Arrays.asList(0,0,0,0,0,2));
+        for(int i=0;i<dwarfTraitValues.size();i++){
+            Assert.assertTrue(testTraitValues.get(i)==dwarfTraitValues.get(i));
+        }
+
+    }
+
+
 
     @Test
     public void testCharacterCreation(){

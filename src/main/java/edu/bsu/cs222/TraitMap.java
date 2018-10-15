@@ -1,9 +1,6 @@
 package edu.bsu.cs222;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class TraitMap {
 
@@ -12,9 +9,9 @@ public class TraitMap {
     TraitMap(){
         Map<String, Integer> traitmap = new HashMap<>();
         ArrayList<String> traitNames = new ArrayList<>();
-        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma"));
+        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
 
-        for (int i=0; i<=traitNames.size();i++){
+        for (int i=0; i<=traitNames.size()-1;i++){
             Die d6 = new Die(6);
             Integer value = d6.rollD6FourTimesDropLeast();
             traitmap.put(traitNames.get(i),value);
@@ -38,6 +35,15 @@ public class TraitMap {
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
             entry.setValue(value);
         }
+    }
+
+    public String toString(){
+        LinkedList<String> listOfTraits = new LinkedList<>();
+        for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
+            String trait = entry.getKey() + ": "+ entry.getValue();
+            listOfTraits.add(trait);
+        }
+        return listOfTraits.toString();
     }
 
 }
