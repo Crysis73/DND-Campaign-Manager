@@ -20,6 +20,11 @@ public class TraitMap {
         this.traitMap = traitmap;
     }
 
+    public TraitMap mergeTraitMaps(TraitMap traitMap1){
+        traitMap.forEach((k, v) -> traitMap1.getTraitMap().merge(k, v, Integer::sum));
+        return traitMap1;
+    }
+
     public Map<String,Integer> getTraitMap(){
         return traitMap;
     }
@@ -27,6 +32,7 @@ public class TraitMap {
     public Integer getValue(String trait){
         return traitMap.get(trait);
     }
+
     public void setValue(String trait, Integer value){
         traitMap.replace(trait, value);
     }

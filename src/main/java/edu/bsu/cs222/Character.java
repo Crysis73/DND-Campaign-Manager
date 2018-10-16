@@ -1,6 +1,7 @@
 package edu.bsu.cs222;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Character {
     private String name;
@@ -11,12 +12,15 @@ public class Character {
     private dndClass dndClass;
     private Description characterDescription;
 
-    public Character(String name, dndClass dndClass, String race){
+    public Character(String name, dndClass dndClass, String raceName){
         this.name = name;
         this.dndClass = dndClass;
         this.equipment = new LinkedList<>();
-        this.race = new Race(race);
-        this.traits = new TraitMap();
+        Race setRace = new Race(raceName);
+        this.race = setRace;
+        TraitMap characterTraits = new TraitMap();
+        characterTraits = characterTraits.mergeTraitMaps(setRace.getTraitBonuses());
+        this.traits = characterTraits;
         this.experiencepoints = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
     }
@@ -40,7 +44,7 @@ public class Character {
 
 
     public TraitMap getTraits(){
-        return this.traits;
+        return traits;
     }
 
 
