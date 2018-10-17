@@ -21,7 +21,12 @@ public class TraitMap {
     }
 
     public TraitMap mergeTraitMaps(TraitMap traitMap1){
-        traitMap.forEach((k, v) -> traitMap1.getTraitMap().merge(k, v, Integer::sum));
+        for(Map.Entry<String,Integer> entry : traitMap1.getTraitMap().entrySet()){
+            if(entry.getValue() != 0){
+                Integer value = traitMap.get(entry.getKey()) + entry.getValue();
+                traitMap.replace(entry.getKey(),value);
+            }
+        }
         return traitMap1;
     }
 
@@ -38,8 +43,12 @@ public class TraitMap {
     }
 
     public void setAllValues(Integer value){
+        //System.out.println("SET ALL VALUES"+"\n------------------------");
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
+            //System.out.println("Before setting value to "+value+": \n"+traitMap);
             entry.setValue(value);
+            //System.out.println("After setting value to :"+value+": \n\t"+traitMap);
+            //System.out.println(traitMap);
         }
     }
 

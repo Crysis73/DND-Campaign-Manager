@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Campaign {
     private ArrayList<Character> characters = new ArrayList<>();
     private String campaignName;
+    private String log;
 
 
     public Campaign(String campaignName) {
@@ -18,6 +19,10 @@ public class Campaign {
 
     public ArrayList<Character> getCharacters(){
         return this.characters;
+    }
+
+    public String getCampaignName(){
+        return this.campaignName;
     }
 
     public String toString(){
@@ -39,5 +44,4 @@ public class Campaign {
         result += "]}}";
         return result;
     }
-
 }

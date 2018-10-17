@@ -19,7 +19,8 @@ public class Character {
         Race setRace = new Race(raceName);
         this.race = setRace;
         TraitMap characterTraits = new TraitMap();
-        characterTraits = characterTraits.mergeTraitMaps(setRace.getTraitBonuses());
+        TraitMap raceBonuses = setRace.getTraitBonuses();
+        characterTraits = characterTraits.mergeTraitMaps(raceBonuses);
         this.traits = characterTraits;
         this.experiencepoints = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
@@ -42,11 +43,9 @@ public class Character {
         equipment.add(item);
     }
 
-
     public TraitMap getTraits(){
         return traits;
     }
-
 
     public String toString(){
         String result = "";
@@ -68,5 +67,24 @@ public class Character {
 
         return result;
 
+    }
+
+    public String generateJsonString(){
+        String result = "{\"name\":\""+name+"\"," +
+                "\"wealth\":\""+wealth+"\"," +
+                "\"experiencepoints\":\""+experiencepoints+"\","+
+                "\"hitPoints\":\""+hitPoints+"\","+
+                "\"Traits\": [" +
+                "{\"Strength\": \""+this.traits.getValue("Strength")+"\"},"+
+                "{\"Dexterity\": \""+this.traits.getValue("Dexterity")+"\"},"+
+                "{\"Constitution\": \""+this.traits.getValue("Constitution")+"\"},"+
+                "{\"Intelligence\": \""+this.traits.getValue("Intelligence")+"\"},"+
+                "{\"Wisdom\": \""+this.traits.getValue("Wisdom")+"\"},"+
+                "{\"Charisma\": \""+this.traits.getValue("Charisma")+"\"}"+
+                "]"+
+                "}";
+        //Add description
+        //Add equipment
+        return result;
     }
 }

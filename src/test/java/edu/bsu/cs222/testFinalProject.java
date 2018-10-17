@@ -147,86 +147,38 @@ public class testFinalProject {
         Assert.assertTrue(traitMap.toString()=="[]");
     }
 
+    @Test
+    public void testCharacterCreation(){
+        dndClass Bard = new dndClass("Bard","This is a descrption",8);
+        Character Jack = new Character("Jack",Bard,"Dwarf");
+        Jack.setWealth(300);
+        System.out.println(Jack.toString());
+    }
 
+    @Test
+    public void testMergeTraitMaps(){
+        Map<String,Integer> traitMap = new HashMap<>();
+        ArrayList<String> traitNames = new ArrayList<>();
+        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
+        Dwarf dwarf = new Dwarf();
+        TraitMap traitMap1 = dwarf.getRaceTraitBonuses();
+        for(Map.Entry<String,Integer> entry : traitMap.entrySet()){
+            if(entry.getValue() != 0){
+                Integer value = traitMap1.getTraitMap().get(entry.getKey()) + entry.getValue();
+                traitMap.replace(entry.getKey(),value);
+                Assert.assertTrue(traitMap.get(entry.getKey())==value);
+            }
+        }
+}
 
-////    @Test
-////    public void testCharacterCreation(){
-////        traitBonus humanconstitutionBonus = new traitBonus("Constitution",1);
-////        traitBonus humanstrengthBonus = new traitBonus("Strength",1);
-////        traitBonus humanwisdomBonus = new traitBonus("Wisdom",1);
-////        traitBonus humanintelligenceBonus = new traitBonus("Intelligence",1);
-////        traitBonus humancharismaBonus = new traitBonus("Charisma",1);
-////        traitBonus humandexterityBonus = new traitBonus("Dexterity",1);
-////        ArrayList<traitBonus> humanTraitBonuses= new ArrayList<>();
-////        humanTraitBonuses.add(humanconstitutionBonus);
-////        humanTraitBonuses.add(humanstrengthBonus);
-////        humanTraitBonuses.add(humanwisdomBonus);
-////        humanTraitBonuses.add(humanintelligenceBonus);
-////        humanTraitBonuses.add(humancharismaBonus);
-////        humanTraitBonuses.add(humandexterityBonus);
-////
-////
-////        Race Human = new Race("Human",humanTraitBonuses,"This is a sample description");
-////        dndClass Bard = new dndClass("Bard","This is a sample description",8);
-////        Character Jack = new Character("Jack",Bard,Human);
-////        Jack.setExperiencepoints(500);
-////        Jack.setWealth(600);
-////        System.out.println(Jack.toString());
-////
-////        traitBonus dwarfConstitutionBonus = new traitBonus("Constitution",2);
-////        ArrayList<traitBonus> dwarfTraitBonuses = new ArrayList<>();
-////        dwarfTraitBonuses.add(dwarfConstitutionBonus);
-////        Race Dwarf = new Race("Dwarf",dwarfTraitBonuses,"This is a sample description");
-////        dndClass Barbarian = new dndClass("Barbarian","This is a sample description",12);
-////
-////        Character Jill = new Character("Jill",Barbarian,Dwarf);
-////        Jill.setExperiencepoints(300);
-////        Jill.setWealth(2);
-////        System.out.println(Jill.toString());
-////    }
-//
-//    @Test
-//    public void testTraitBonusFromRace(){
-//        traitBonus constitutionBonus = new traitBonus("Constitution",1);
-//        traitBonus strengthBonus = new traitBonus("Strength",1);
-//        traitBonus wisdomBonus = new traitBonus("Wisdom",1);
-//        traitBonus intelligenceBonus = new traitBonus("Intelligence",1);
-//        traitBonus charismaBonus = new traitBonus("Charisma",1);
-//        traitBonus dexterityBonus = new traitBonus("Dexterity",1);
-//        ArrayList<traitBonus> humanTraitBonuses= new ArrayList<>();
-//        humanTraitBonuses.add(constitutionBonus);
-//        humanTraitBonuses.add(strengthBonus);
-//        humanTraitBonuses.add(wisdomBonus);
-//        humanTraitBonuses.add(intelligenceBonus);
-//        humanTraitBonuses.add(charismaBonus);
-//        humanTraitBonuses.add(dexterityBonus);
-//        Trait[] traits = new Trait[6];
-//        Trait strength = new Trait("Strength");
-//        Trait dexterity = new Trait("Dexterity");
-//        Trait constitution = new Trait("Constitution");
-//        Trait intelligence = new Trait("Intelligence");
-//        Trait wisdom = new Trait("Wisdom");
-//        Trait charisma = new Trait("Charisma");
-//        traits[0] = strength;
-//        traits[1] = dexterity;
-//        traits[2] = constitution;
-//        traits[3] = intelligence;
-//        traits[4] = wisdom;
-//        traits[5] = charisma;
-//        for(int i =0;i<humanTraitBonuses.size();i++){
-//            String traitName = humanTraitBonuses.get(i).getTraitName();
-//            for(int j=0;j<traits.length;j++){
-//                String secondTraitName = traits[j].getName();
-//                Integer valueBefore = traits[j].getValue();
-//                if(traitName.equals(secondTraitName)){
-//                    Integer replacementValue = humanTraitBonuses.get(i).getTraitBonusValue() + traits[j].getValue();
-//                    traits[j].setValue(replacementValue);
-//                    Integer valueAfter = traits[j].getValue();
-//                    Assert.assertTrue(valueBefore<valueAfter && valueBefore!=valueAfter && (((valueAfter-valueBefore)==humanTraitBonuses.get(i).getTraitBonusValue())));
-//
-//                }
-//
-//            }
-//        }
-//    }
+    @Test
+    public void testJsonWriter(){
+        JsonWriter writer = new JsonWriter();
+        Campaign myCampaign = new Campaign("myCampaign");
+        dndClass Bard = new dndClass("Bard","This is a descrption",8);
+        Character Jack = new Character("Jack",Bard,"Dwarf");
+        myCampaign.addCharacer(Jack);
+        writer.writeCampaignJson(myCampaign);
+        System.out.println(myCampaign.generateJsonString());
+    }
 }
