@@ -160,19 +160,14 @@ public class testFinalProject {
 
     @Test
     public void testMergeTraitMaps(){
-        Map<String,Integer> traitMap = new HashMap<>();
-        ArrayList<String> traitNames = new ArrayList<>();
-        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
         Dwarf dwarf = new Dwarf();
-        TraitMap traitMap1 = dwarf.getRaceTraitBonuses();
-        for(Map.Entry<String,Integer> entry : traitMap.entrySet()){
-            if(entry.getValue() != 0){
-                Integer value = traitMap1.getTraitMap().get(entry.getKey()) + entry.getValue();
-                traitMap.replace(entry.getKey(),value);
-                Assert.assertTrue(traitMap.get(entry.getKey())==value);
-            }
-        }
-}
+        TraitMap traitMap = new TraitMap();
+        TraitMap raceTraits = dwarf.getRaceTraitBonuses();
+        System.out.println(traitMap.getTraitMap());
+        TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
+        System.out.println(newTraitMap.getTraitMap());
+        //Need to add automated test.
+    }
 
     @Test
     public void testJsonWriter(){
