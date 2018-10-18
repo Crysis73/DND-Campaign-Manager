@@ -20,7 +20,7 @@ public class Character {
         this.race = setRace;
         TraitMap characterTraits = new TraitMap();
         TraitMap raceBonuses = setRace.getTraitBonuses();
-        characterTraits = characterTraits.mergeTraitMaps(raceBonuses);
+        characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
         this.traits = characterTraits;
         this.experiencepoints = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();

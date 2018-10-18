@@ -151,8 +151,11 @@ public class testFinalProject {
     public void testCharacterCreation(){
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack",Bard,"Dwarf");
+        Character Jill = new Character("Jill",Bard,"Stout");
+        Jill.setWealth(51);
         Jack.setWealth(300);
         System.out.println(Jack.toString());
+        System.out.println(Jill.toString());
     }
 
     @Test
@@ -177,7 +180,9 @@ public class testFinalProject {
         Campaign myCampaign = new Campaign("myCampaign");
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack",Bard,"Dwarf");
+        Character Jill = new Character("Jill",Bard,"Rock Gnome");
         myCampaign.addCharacer(Jack);
+        myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
         System.out.println(myCampaign.generateJsonString());
     }

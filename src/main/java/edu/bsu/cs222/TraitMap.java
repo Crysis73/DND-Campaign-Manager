@@ -5,12 +5,12 @@ import java.util.*;
 public class TraitMap {
 
     private Map<String, Integer> traitMap;
+    private Map<String,Integer> bonusValues;
 
     TraitMap(){
         Map<String, Integer> traitmap = new HashMap<>();
         ArrayList<String> traitNames = new ArrayList<>();
         traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
-
         for (int i=0; i<=traitNames.size()-1;i++){
             Die d6 = new Die(6);
             Integer value = d6.rollD6FourTimesDropLeast();
@@ -18,16 +18,20 @@ public class TraitMap {
         }
 
         this.traitMap = traitmap;
+        //System.out.println("TraitMapConstructor : "+traitmap);
     }
 
-    public TraitMap mergeTraitMaps(TraitMap traitMap1){
-        for(Map.Entry<String,Integer> entry : traitMap1.getTraitMap().entrySet()){
+    public TraitMap mergeTraitMaps(TraitMap characterTraits,TraitMap raceTraitBonuses){
+        Map<String,Integer> bonusValues = new HashMap<>();
+        for(Map.Entry<String,Integer> entry : raceTraitBonuses.getTraitMap().entrySet()){
             if(entry.getValue() != 0){
-                Integer value = traitMap.get(entry.getKey()) + entry.getValue();
-                traitMap.replace(entry.getKey(),value);
+                Integer value = characterTraits.getTraitMap().get(entry.getKey()) + entry.getValue();
+                characterTraits.getTraitMap().replace(entry.getKey(),value);
             }
         }
-        return traitMap1;
+        setBonusValues(bonusValues);
+        return characterTraits;
+
     }
 
     public Map<String,Integer> getTraitMap(){
@@ -50,6 +54,14 @@ public class TraitMap {
             //System.out.println("After setting value to :"+value+": \n\t"+traitMap);
             //System.out.println(traitMap);
         }
+    }
+
+    public void setBonusValues(Map<String,Integer> bonusValues){
+        this.bonusValues = bonusValues;
+    }
+
+    public Map<String,Integer> getBonusValues(){
+        return this.bonusValues;
     }
 
     public String toString(){

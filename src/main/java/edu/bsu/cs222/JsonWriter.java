@@ -4,7 +4,10 @@ package edu.bsu.cs222;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.MalformedJsonException;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,7 +21,6 @@ public class JsonWriter {
 
     public void writeCampaignJson(Campaign campaign){
         JSONArray JsonCampaign = new JSONArray();
-        JsonParser parser = new JsonParser();
         String jsonString = campaign.generateJsonString();
         JsonCampaign.add(jsonString);
         try (FileWriter file = new FileWriter(campaign.getCampaignName()+".json")) {
