@@ -1,10 +1,11 @@
 package edu.bsu.cs222;
 
+@SuppressWarnings("WeakerAccess")
 public class dndClass {
-    private String name;
-    private String description;
-    private Integer hitDice; //number of dice you roll to determine how many HitPoints you gain per level. Will need to implement scaling for levels.
-    private Integer hitPointBonus;
+    private final String name;
+    private final String description;
+    private final Integer hitDice; //number of dice you roll to determine how many HitPoints you gain per level. Will need to implement scaling for levels.
+    private final Integer hitPointBonus;
 
     /*
     Passing all arguments through the constructor because classes are static. We will need to manually create each class that

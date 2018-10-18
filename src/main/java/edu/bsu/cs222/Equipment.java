@@ -1,11 +1,10 @@
 package edu.bsu.cs222;
 
-public class Equipment {
-    private String description;
-    private TraitMap traitMap;
+class Equipment {
+    private final String description;
     private Integer traitBonus;
     private String trait;
-    private String equipmentName;
+    private final String equipmentName;
     //How to add trait bonus
 
     public Equipment(String equipmentName, String trait, Integer traitBonus, String description){
@@ -14,7 +13,6 @@ public class Equipment {
         traitMap.setAllValues(0);
         traitMap.setValue(trait,traitBonus);
         this.description = description;
-        this.traitMap = traitMap;
 
     }
 

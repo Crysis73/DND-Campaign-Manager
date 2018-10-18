@@ -2,15 +2,15 @@ package edu.bsu.cs222;
 
 import java.util.*;
 
+@SuppressWarnings("WeakerAccess")
 public class TraitMap {
 
-    private Map<String, Integer> traitMap;
+    private final Map<String, Integer> traitMap;
     private Map<String,Integer> bonusValues;
 
     TraitMap(){
         Map<String, Integer> traitmap = new HashMap<>();
-        ArrayList<String> traitNames = new ArrayList<>();
-        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
+        ArrayList<String> traitNames = new ArrayList<>(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
         for (int i=0; i<=traitNames.size()-1;i++){
             Die d6 = new Die(6);
             Integer value = d6.rollD6FourTimesDropLeast();

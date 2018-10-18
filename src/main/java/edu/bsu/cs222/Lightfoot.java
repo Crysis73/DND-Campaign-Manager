@@ -3,9 +3,9 @@ package edu.bsu.cs222;
 //This race is a subrace of Halflings
 public class Lightfoot implements RaceInterface{
 
-    private String raceName;
-    private TraitMap raceTraits;
-    private String raceDescription;
+    private final String raceName;
+    private final TraitMap raceTraits;
+    private final String raceDescription;
 
     public Lightfoot(){
         this.raceName = "Lightfoot";

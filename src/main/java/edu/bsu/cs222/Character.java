@@ -1,15 +1,15 @@
 package edu.bsu.cs222;
 
 import java.util.LinkedList;
-import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class Character {
-    private String name;
-    private TraitMap traits;
-    private LinkedList<Equipment> equipment;
+    private final String name;
+    private final TraitMap traits;
+    private final LinkedList<Equipment> equipment;
     private Integer wealth, experiencepoints, hitPoints;
-    private Race race;
-    private dndClass dndClass;
+    private final Race race;
+    private final dndClass dndClass;
     private Description characterDescription;
 
     public Character(String name, dndClass dndClass, String raceName){
@@ -25,7 +25,6 @@ public class Character {
         this.experiencepoints = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
     }
-
 
     public void setWealth(Integer startingValue){
         this.wealth = startingValue;
@@ -70,21 +69,20 @@ public class Character {
     }
 
     public String generateJsonString(){
-        String result = "{\"name\":\""+name+"\"," +
+        //Add description
+        //Add equipment
+        return "{\"name\":\""+name+"\"," +
                 "\"wealth\":\""+wealth+"\"," +
                 "\"experiencepoints\":\""+experiencepoints+"\","+
                 "\"hitPoints\":\""+hitPoints+"\","+
                 "\"Traits\": [" +
-                "{\"Strength\": \""+this.traits.getValue("Strength")+"\"},"+
-                "{\"Dexterity\": \""+this.traits.getValue("Dexterity")+"\"},"+
-                "{\"Constitution\": \""+this.traits.getValue("Constitution")+"\"},"+
-                "{\"Intelligence\": \""+this.traits.getValue("Intelligence")+"\"},"+
-                "{\"Wisdom\": \""+this.traits.getValue("Wisdom")+"\"},"+
-                "{\"Charisma\": \""+this.traits.getValue("Charisma")+"\"}"+
+                "{\"Strength\": \""+ this.traits.getValue("Strength")+"\"},"+
+                "{\"Dexterity\": \""+ this.traits.getValue("Dexterity")+"\"},"+
+                "{\"Constitution\": \""+ this.traits.getValue("Constitution")+"\"},"+
+                "{\"Intelligence\": \""+ this.traits.getValue("Intelligence")+"\"},"+
+                "{\"Wisdom\": \""+ this.traits.getValue("Wisdom")+"\"},"+
+                "{\"Charisma\": \""+ this.traits.getValue("Charisma")+"\"}"+
                 "]"+
                 "}";
-        //Add description
-        //Add equipment
-        return result;
     }
 }

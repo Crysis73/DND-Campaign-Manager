@@ -3,14 +3,13 @@ package edu.bsu.cs222;
 import java.util.ArrayList;
 
 public class Campaign {
-    private ArrayList<Character> characters = new ArrayList<>();
+    private final ArrayList<Character> characters;
     private String campaignName;
     private String log;
 
 
-    public Campaign(String campaignName) {
+    public Campaign() {
         this.characters = new ArrayList<>();
-        this.campaignName = campaignName;
     }
 
     public void addCharacer(Character character){
@@ -26,22 +25,27 @@ public class Campaign {
     }
 
     public String toString(){
-        String result ="Campaign : "+this.campaignName;
-        for(int i =0;i<characters.size();i++){
-            result +="\n"+characters.get(i).toString();
+        StringBuilder result = new StringBuilder("Campaign : " + this.campaignName);
+        for (Character character : characters) {
+            result.append("\n").append(character.toString());
         }
-        return result;
+        return result.toString();
     }
 
     public String generateJsonString(){
-        String result = "{\""+campaignName+"\":{" + "\"Characters\":[";
-        for(int i =0;i<characters.size();i++){
-            result+=characters.get(i).generateJsonString();
+        StringBuilder resultBuilder = new StringBuilder("{\"" + campaignName + "\":{" + "\"Characters\":[");
+        for(int i = 0; i<characters.size(); i++){
+            resultBuilder.append(characters.get(i).generateJsonString());
             if(i<characters.size()-1){
-                result+=",";
+                resultBuilder.append(",");
             }
         }
+        String result = resultBuilder.toString();
         result += "]}}";
         return result;
+    }
+
+    public void setCampaignName(String campaignName){
+        this.campaignName = campaignName;
     }
 }

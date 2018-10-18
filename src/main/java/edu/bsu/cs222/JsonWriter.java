@@ -1,19 +1,12 @@
 package edu.bsu.cs222;
 
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.stream.MalformedJsonException;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.jar.JarEntry;
 
+@SuppressWarnings({"WeakerAccess", "unchecked"})
 public class JsonWriter {
 
 

@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+@SuppressWarnings("ALL")
 public class Halfling implements RaceInterface{
 
     private String raceName;

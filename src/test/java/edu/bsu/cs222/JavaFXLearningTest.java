@@ -7,8 +7,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class JavaFXLearningTest extends Application {
-    private VBox parent = new VBox();
+class JavaFXLearningTest extends Application {
+    private final VBox parent = new VBox();
 
     @Override
     public void start(Stage primaryStage) {

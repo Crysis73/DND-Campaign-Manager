@@ -2,19 +2,18 @@ package edu.bsu.cs222;
 
 import java.util.LinkedList;
 
+@SuppressWarnings("WeakerAccess")
 public class DiceRoll {
-    private int numberOfDice;
-    private LinkedList<Die> diceRollList;
+    private final LinkedList<Die> diceRollList;
 
     public DiceRoll(int numberOfDice, int diceSize){
-        LinkedList<Die> diceRollList = new LinkedList<Die>();
+        LinkedList<Die> diceRollList = new LinkedList<>();
         for(int i=0;i<numberOfDice;i++){
             Die die = new Die(diceSize);
             diceRollList.add(die);
         }
 
         this.diceRollList = diceRollList;
-        this.numberOfDice = numberOfDice;
 
     }
 

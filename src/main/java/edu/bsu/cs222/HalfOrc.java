@@ -2,9 +2,9 @@ package edu.bsu.cs222;
 
 public class HalfOrc implements RaceInterface{
 
-    private String raceName;
-    private TraitMap raceTraits;
-    private String raceDescription;
+    private final String raceName;
+    private final TraitMap raceTraits;
+    private final String raceDescription;
 
     public HalfOrc(){
         this.raceName = "Half-Orc";

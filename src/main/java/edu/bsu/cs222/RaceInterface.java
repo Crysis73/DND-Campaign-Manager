@@ -1,7 +1,6 @@
 package edu.bsu.cs222;
 
-import java.util.ArrayList;
-
+@SuppressWarnings("WeakerAccess")
 public interface RaceInterface {
 
     String getRaceName();

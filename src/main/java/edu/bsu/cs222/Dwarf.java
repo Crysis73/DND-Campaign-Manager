@@ -1,13 +1,10 @@
 package edu.bsu.cs222;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 public class Dwarf implements RaceInterface{
 
-    private String raceName;
-    private TraitMap raceTraits;
-    private String raceDescription;
+    private final String raceName;
+    private final TraitMap raceTraits;
+    private final String raceDescription;
 
     public Dwarf(){
         this.raceName = "Dwarf";

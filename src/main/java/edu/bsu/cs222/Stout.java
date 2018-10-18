@@ -3,9 +3,9 @@ package edu.bsu.cs222;
 //This race is a subrace of Halflings
 public class Stout implements RaceInterface{
 
-    private String raceName;
-    private TraitMap raceTraits;
-    private String raceDescription;
+    private final String raceName;
+    private final TraitMap raceTraits;
+    private final String raceDescription;
 
     public Stout(){
         this.raceName = "Stout";

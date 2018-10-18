@@ -2,11 +2,10 @@ package edu.bsu.cs222;
 
 import org.junit.Assert;
 import org.junit.Test;
-import sun.awt.image.ImageWatched;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
+@SuppressWarnings("WeakerAccess")
 public class testFinalProject {
 
     @Test
@@ -15,7 +14,7 @@ public class testFinalProject {
         Character Jack = new Character("Jack",Bard,"Dwarf");
         Jack.getTraits().setValue("Charisma", 10);
         Integer valueAfter = Jack.getTraits().getValue("Charisma");
-        Assert.assertTrue(valueAfter == 10);
+        Assert.assertEquals(10, (int) valueAfter);
     }
 
     @Test
@@ -25,8 +24,8 @@ public class testFinalProject {
         for(int i=0;i<results.length;i++) {
             results[i] = d6.rollD6FourTimesDropLeast();
         }
-        for(int i=0;i<results.length;i++){
-            Assert.assertTrue(results[i]<=18);
+        for (Integer result : results) {
+            Assert.assertTrue(result <= 18);
         }
     }
 
@@ -91,17 +90,16 @@ public class testFinalProject {
             Integer trait = entry.getValue();
             traitValues.add(trait);
         }
-        for(int i=0;i<traitValues.size();i++){
-            Assert.assertTrue(1<=traitValues.get(i) && traitValues.get(i)<=18);
+        for (Integer traitValue : traitValues) {
+            Assert.assertTrue(1 <= traitValue && traitValue <= 18);
         }
     }
 
     @Test
     public void testTraitMapCreation(){
         TraitMap traitMap = new TraitMap();
-        ArrayList<String> traitNames = new ArrayList<>();
-        traitNames.addAll(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
-        Assert.assertTrue(traitMap.getTraitMap().size() == traitNames.size());
+        ArrayList<String> traitNames = new ArrayList<>(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
+        Assert.assertEquals(traitMap.getTraitMap().size(), traitNames.size());
     }
 
     @Test
@@ -113,11 +111,10 @@ public class testFinalProject {
             Integer trait = entry.getValue();
             newTraitValues.add(trait);
         }
-        ArrayList<Integer> testTraitValues = new ArrayList<>();
-        testTraitValues.addAll(Arrays.asList(0,0,0,0,0,0));
+        ArrayList<Integer> testTraitValues = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
 
         for(int i=0;i<newTraitValues.size();i++){
-            Assert.assertTrue(testTraitValues.get(i)==newTraitValues.get(i));
+            Assert.assertSame(testTraitValues.get(i), newTraitValues.get(i));
         }
 
     }
@@ -131,10 +128,9 @@ public class testFinalProject {
             Integer trait = entry.getValue();
             dwarfTraitValues.add(trait);
         }
-        ArrayList<Integer> testTraitValues = new ArrayList<>();
-        testTraitValues.addAll(Arrays.asList(0,0,0,0,0,2));
+        ArrayList<Integer> testTraitValues = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 2));
         for(int i=0;i<dwarfTraitValues.size();i++){
-            Assert.assertTrue(testTraitValues.get(i)==dwarfTraitValues.get(i));
+            Assert.assertSame(testTraitValues.get(i), dwarfTraitValues.get(i));
         }
 
     }
@@ -144,7 +140,7 @@ public class testFinalProject {
         TraitMap traitMap = new TraitMap();
         traitMap.setAllValues(0);
         LinkedList<String> compareList = new LinkedList<>();
-        Assert.assertTrue(traitMap.toString()=="[]");
+        Assert.assertSame("[]", traitMap.toString());
     }
 
     @Test
@@ -172,7 +168,8 @@ public class testFinalProject {
     @Test
     public void testJsonWriter(){
         JsonWriter writer = new JsonWriter();
-        Campaign myCampaign = new Campaign("myCampaign");
+        Campaign myCampaign = new Campaign();
+        myCampaign.setCampaignName("myCampaign");
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack",Bard,"Dwarf");
         Character Jill = new Character("Jill",Bard,"Rock Gnome");
