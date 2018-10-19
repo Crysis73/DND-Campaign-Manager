@@ -33,7 +33,7 @@ public class Controller extends Application {
     public void start(Stage stage) throws IOException {
         Stage window = stage;
         FXMLLoader loader = new FXMLLoader();
-        String fxmlLocation = "C:\\Users\\Casey Haskins\\IdeaProjects\\Final-Project-Team-Bravo\\src\\main\\resources\\GUIFile.fxml";
+        String fxmlLocation = "/Users/rebeccaauger/IdeaProjects/Final-Project-Team-Bravo/src/main/resources/GUIFile.fxml";
         FileInputStream fxmlStream = new FileInputStream(fxmlLocation);
         Pane root = loader.load(fxmlStream);
         Scene scene = new Scene(root);
