@@ -1,7 +1,8 @@
 package edu.bsu.cs222;
 
-@SuppressWarnings("WeakerAccess")
-public class dndClass {
+//@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("SameParameterValue")
+class dndClass {
     private final String name;
     private final String description;
     private final Integer hitDice; //number of dice you roll to determine how many HitPoints you gain per level. Will need to implement scaling for levels.
@@ -13,7 +14,7 @@ public class dndClass {
     and description will probably never be used but I added them just in case.
      */
 
-    public dndClass(String name, String description, Integer hitDice) {
+    dndClass(String name, String description, Integer hitDice) {
         this.name = name;
         this.description = description;
         this.hitDice = hitDice;
@@ -36,7 +37,7 @@ public class dndClass {
         return this.hitDice;
     }
 
-    public Integer getHitPointBonus(){
+    Integer getHitPointBonus(){
 
         return this.hitPointBonus;
     }

@@ -6,7 +6,7 @@ public class Gnome implements RaceInterface{
     private final TraitMap raceTraits;
     private final String raceDescription;
 
-    public Gnome(){
+    Gnome(){
         this.raceName = "Gnome";
         this.raceDescription = "https://www.dndbeyond.com/compendium/rules/basic-rules/races";
         TraitMap traitMap = new TraitMap();

@@ -1,13 +1,12 @@
 package edu.bsu.cs222;
 
-@SuppressWarnings("ALL")
 public class Human implements RaceInterface{
 
-    private String raceName;
-    private TraitMap raceTraits;
-    private String raceDescription;
+    private final String raceName;
+    private final TraitMap raceTraits;
+    private final String raceDescription;
 
-    public Human(){
+    Human(){
         this.raceName = "Human";
         this.raceDescription = "https://www.dndbeyond.com/compendium/rules/basic-rules/races";
         TraitMap traitMap = new TraitMap();

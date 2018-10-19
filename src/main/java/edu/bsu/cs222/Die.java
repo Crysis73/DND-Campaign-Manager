@@ -2,16 +2,16 @@ package edu.bsu.cs222;
 
 import java.util.Random;
 
-@SuppressWarnings("WeakerAccess")
-public class Die {
+//@SuppressWarnings("WeakerAccess")
+class Die {
     private final int sides;
 
-    public Die(int sides){
+    Die(int sides){
 
         this.sides = sides;
     }
 
-    public Integer rollDie(){
+    Integer rollDie(){
         Random randomNumberList = new Random();
         /*
 
@@ -20,7 +20,7 @@ public class Die {
         return randomNumberList.nextInt(sides)+1;
     }
 
-    public Integer rollD6FourTimesDropLeast(){
+    Integer rollD6FourTimesDropLeast(){
         Integer result = 0;
         Integer[] results = new Integer[4];
         Die d6 = new Die(6);
@@ -44,7 +44,4 @@ public class Die {
         }
         return result;
     }
-
-
-
 }

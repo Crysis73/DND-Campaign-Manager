@@ -16,7 +16,7 @@ class Race {
     users are able to choose from. These Races will have preset names, traitBonuses, traitNames, and descriptions.
      */
 
-    public Race(String name){
+    Race(String name){
         this.name = name;
         if(Objects.equals(name, "Dwarf")){
             Dwarf dwarf = new Dwarf();

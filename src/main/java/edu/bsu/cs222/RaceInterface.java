@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
-@SuppressWarnings("WeakerAccess")
-public interface RaceInterface {
+//@SuppressWarnings("WeakerAccess")
+interface RaceInterface {
 
     String getRaceName();
     TraitMap getRaceTraitBonuses();

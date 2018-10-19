@@ -7,7 +7,7 @@ public class Lightfoot implements RaceInterface{
     private final TraitMap raceTraits;
     private final String raceDescription;
 
-    public Lightfoot(){
+    Lightfoot(){
         this.raceName = "Lightfoot";
         this.raceDescription = "https://www.dndbeyond.com/compendium/rules/basic-rules/races";
         TraitMap traitMap = new TraitMap();
