@@ -210,6 +210,21 @@
                                                   <items>
                                                     <MenuItem mnemonicParsing="false" text="Dwarf" />
                                                     <MenuItem mnemonicParsing="false" text="Hill Dwarf" />
+                                                      <MenuItem mnemonicParsing="false" text="Mountain Dwarf" />
+                                                      <MenuItem mnemonicParsing="false" text="Elf" />
+                                                      <MenuItem mnemonicParsing="false" text="High Elf" />
+                                                      <MenuItem mnemonicParsing="false" text="Wood Elf" />
+                                                      <MenuItem mnemonicParsing="false" text="Halfling" />
+                                                      <MenuItem mnemonicParsing="false" text="Lightfoot" />
+                                                      <MenuItem mnemonicParsing="false" text="Stout" />
+                                                      <MenuItem mnemonicParsing="false" text="Human" />
+                                                      <MenuItem mnemonicParsing="false" text="Dragonborn" />
+                                                      <MenuItem mnemonicParsing="false" text="Gnome" />
+                                                      <MenuItem mnemonicParsing="false" text="Forest Gnome" />
+                                                      <MenuItem mnemonicParsing="false" text="Deep Gnome" />
+                                                      <MenuItem mnemonicParsing="false" text="Rock Gnome" />
+                                                      <MenuItem mnemonicParsing="false" text="Half-Orc" />
+                                                      <MenuItem mnemonicParsing="false" text="Tiefling" />
                                                   </items>
                                                 </MenuButton>
                                                 <MenuButton mnemonicParsing="false" text="Select Class" GridPane.columnIndex="3" GridPane.rowIndex="3">
