@@ -6,7 +6,7 @@ public class HighElf implements RaceInterface{
     private final TraitMap raceTraits;
     private final String raceDescription;
 
-    public HighElf(){
+    HighElf(){
         this.raceName = "High Elf";
         this.raceDescription = "https://www.dndbeyond.com/compendium/rules/basic-rules/races";
         TraitMap traitMap = new TraitMap();

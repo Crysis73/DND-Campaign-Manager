@@ -75,12 +75,6 @@ public class testFinalProject {
         Assert.assertTrue(1<=d20.rollDie() && d20.rollDie()<=20);
     }
 
-    @Test
-    public void testDiceRoll(){
-        DiceRoll roll2Dice = new DiceRoll(2,6);
-        Integer result = roll2Dice.getDiceRollResult();
-        Assert.assertTrue(2<=result && result<=12);
-    }
 
     @Test
     public void testAutomaticTraitValueGeneration(){

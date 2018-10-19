@@ -2,8 +2,8 @@ package edu.bsu.cs222;
 
 import java.util.LinkedList;
 
-@SuppressWarnings("WeakerAccess")
-public class Character {
+//@SuppressWarnings("WeakerAccess")
+class Character {
     private final String name;
     private final TraitMap traits;
     private final LinkedList<Equipment> equipment;
@@ -26,7 +26,7 @@ public class Character {
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
     }
 
-    public void setWealth(Integer startingValue){
+    void setWealth(Integer startingValue){
         this.wealth = startingValue;
     }
 
@@ -42,7 +42,7 @@ public class Character {
         equipment.add(item);
     }
 
-    public TraitMap getTraits(){
+    TraitMap getTraits(){
         return traits;
     }
 
@@ -68,7 +68,7 @@ public class Character {
 
     }
 
-    public String generateJsonString(){
+    String generateJsonString(){
         //Add description
         //Add equipment
         return "{\"name\":\""+name+"\"," +

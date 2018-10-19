@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("WeakerAccess")
 public class Controller extends Application {
     @FXML
     private TextField inputCampaignText;
@@ -22,8 +22,6 @@ public class Controller extends Application {
     private TabPane TabPane;
     @FXML
     private Tab CharacterCreatorTab;
-    //@FXML
-    //private TextArea outputText;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -31,18 +29,15 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Stage window = stage;
         FXMLLoader loader = new FXMLLoader();
         String fxmlLocation = "C:\\Users\\Casey Haskins\\IdeaProjects\\Final-Project-Team-Bravo\\src\\main\\resources\\GUIFile.fxml";
         FileInputStream fxmlStream = new FileInputStream(fxmlLocation);
         Pane root = loader.load(fxmlStream);
         Scene scene = new Scene(root);
-        window.setScene(scene);
-        window.setTitle("D&D Game Master Thingy 3000");
-        window.show();
+        stage.setScene(scene);
+        stage.setTitle("D&D Game Master Thingy 3000");
+        stage.show();
     }
-
-
 
     public void onCreateNewCampaign(javafx.event.ActionEvent actionEvent) {
         Campaign campaign = new Campaign();

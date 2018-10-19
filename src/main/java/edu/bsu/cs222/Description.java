@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
-@SuppressWarnings("WeakerAccess")
-public class Description {
+//@SuppressWarnings("WeakerAccess")
+class Description {
     private String height, weight, age, eyeColor, skinColor, additionalFeatures, alignment, languages, exoticLanguages, personalityTrait1, personalityTrait2, ideals, bonds, flaws;
 
     /*

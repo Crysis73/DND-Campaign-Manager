@@ -12,7 +12,7 @@ public class Campaign {
         this.characters = new ArrayList<>();
     }
 
-    public void addCharacer(Character character){
+    void addCharacer(Character character){
         characters.add(character);
     }
 
@@ -20,7 +20,7 @@ public class Campaign {
         return this.characters;
     }
 
-    public String getCampaignName(){
+    String getCampaignName(){
         return this.campaignName;
     }
 
@@ -32,7 +32,7 @@ public class Campaign {
         return result.toString();
     }
 
-    public String generateJsonString(){
+    String generateJsonString(){
         StringBuilder resultBuilder = new StringBuilder("{\"" + campaignName + "\":{" + "\"Characters\":[");
         for(int i = 0; i<characters.size(); i++){
             resultBuilder.append(characters.get(i).generateJsonString());

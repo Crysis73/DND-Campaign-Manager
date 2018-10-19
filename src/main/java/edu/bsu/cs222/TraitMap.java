@@ -2,7 +2,7 @@ package edu.bsu.cs222;
 
 import java.util.*;
 
-@SuppressWarnings("WeakerAccess")
+//@SuppressWarnings("WeakerAccess")
 public class TraitMap {
 
     private final Map<String, Integer> traitMap;
@@ -21,7 +21,7 @@ public class TraitMap {
         //System.out.println("TraitMapConstructor : "+traitmap);
     }
 
-    public TraitMap mergeTraitMaps(TraitMap characterTraits,TraitMap raceTraitBonuses){
+    TraitMap mergeTraitMaps(TraitMap characterTraits, TraitMap raceTraitBonuses){
         Map<String,Integer> bonusValues = new HashMap<>();
         for(Map.Entry<String,Integer> entry : raceTraitBonuses.getTraitMap().entrySet()){
             if(entry.getValue() != 0){
@@ -38,7 +38,7 @@ public class TraitMap {
         return traitMap;
     }
 
-    public Integer getValue(String trait){
+    Integer getValue(String trait){
         return traitMap.get(trait);
     }
 
@@ -56,7 +56,7 @@ public class TraitMap {
         }
     }
 
-    public void setBonusValues(Map<String,Integer> bonusValues){
+    private void setBonusValues(Map<String, Integer> bonusValues){
         this.bonusValues = bonusValues;
     }
 

@@ -6,7 +6,7 @@ public class Dragonborn implements RaceInterface{
     private final TraitMap raceTraits;
     private final String raceDescription;
 
-    public Dragonborn(){
+    Dragonborn(){
         this.raceName = "Dragonborn";
         this.raceDescription = "https://www.dndbeyond.com/compendium/rules/basic-rules/races";
         TraitMap traitMap = new TraitMap();
