@@ -2,12 +2,14 @@ package edu.bsu.cs222.GUI;
 
 import edu.bsu.cs222.Campaign;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -46,4 +48,9 @@ public class Controller extends Application {
         TabPane.getSelectionModel().select(CharacterCreatorTab);
     }
 
+    public void loadCurrentCharacters(TreeTableColumn.CellEditEvent cellEditEvent) {
+    }
+
+    public void displayDieRollResultInResultWindow(ActionEvent actionEvent) {
+    }
 }
