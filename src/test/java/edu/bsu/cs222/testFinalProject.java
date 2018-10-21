@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.lang.model.type.NullType;
 import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
@@ -146,6 +147,9 @@ public class testFinalProject {
         Jack.setWealth(300);
         System.out.println(Jack.toString());
         System.out.println(Jill.toString());
+        Assert.assertFalse(Jack.toString()=="");
+        Assert.assertFalse(Jill.toString()=="");
+
     }
 
     @Test
@@ -154,9 +158,23 @@ public class testFinalProject {
         TraitMap traitMap = new TraitMap();
         TraitMap raceTraits = dwarf.getRaceTraitBonuses();
         System.out.println(traitMap.getTraitMap());
+        Map<String,Integer> originalTraitMap = traitMap.getTraitMap();
         TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
         System.out.println(newTraitMap.getTraitMap());
         //Need to add automated test.
+        Boolean isGood = new Boolean(false);
+        for (Map.Entry<String, Integer> entry : originalTraitMap.entrySet()){
+            String key = entry.getKey();
+            if(raceTraits.getTraitMap().get(key)>0) {
+                System.out.println(key + " " + newTraitMap.getTraitMap().get(key));
+                System.out.println(key + " " + entry.getValue());
+                isGood = true;
+            } else{
+                isGood = false;
+            }
+        }
+        Assert.assertTrue(isGood);
+
     }
 
     @Test
