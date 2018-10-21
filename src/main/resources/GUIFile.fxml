@@ -3,286 +3,259 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" prefHeight="422.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.Controller">
-  <children>
-      <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+<!--suppress JavaFxUnresolvedFxIdReference -->
+
+<AnchorPane fx:id="rootPane" prefHeight="422.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.Controller">
+    <MenuBar layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem fx:id="loadCampaignFileMenu" mnemonicParsing="false" onAction="#loadOldCampaign" text="Load Campaign" />
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+            <MenuItem mnemonicParsing="false" text="Delete" />
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About" />
+        </Menu>
+    </MenuBar>
     <TabPane fx:id="TabPane" layoutY="35.0" prefHeight="368.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
-      <tabs>
-        <Tab text="Main">
-          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <SplitPane dividerPositions="0.7" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                 <children>
-                                    <SplitPane dividerPositions="0.75" layoutX="307.0" layoutY="41.0" prefHeight="229.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                             <children>
-                                                <TreeTableView layoutX="96.0" layoutY="-39.0" prefHeight="227.0" prefWidth="538.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columns>
-                                                    <TreeTableColumn fx:id="currentCharacterTreeTableDisplay" onEditStart="#loadCurrentCharacters" prefWidth="228.0" text="Characters" />
-                                                    <TreeTableColumn fx:id="currentCharacterInformationTreeTableDisplay" prefWidth="291.0" text="Character Information" />
-                                                  </columns>
-                                                   <columnResizePolicy>
-                                                      <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                </TreeTableView>
-                                             </children>
-                                          </AnchorPane>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                             <children>
-                                                <ListView fx:id="combatOrderList" layoutX="-38.0" layoutY="-17.0" prefHeight="227.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
-                                                <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <menus>
-                                                    <Menu mnemonicParsing="false" text="Combat Order">
-                                                      <items>
-                                                            <MenuItem fx:id="generateNewCombatOrder" mnemonicParsing="false" text="Generate Combat Order" />
-                                                        <MenuItem fx:id="clearCombatOrder" mnemonicParsing="false" text="Clear" />
-                                                      </items>
-                                                    </Menu>
-                                                  </menus>
-                                                </MenuBar>
-                                             </children>
-                                          </AnchorPane>
-                                      </items>
-                                    </SplitPane>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                 <children>
-                                    <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <items>
-                                        <Button fx:id="rollDieButton" mnemonicParsing="false" onAction="#displayDieRollResultInResultWindow" text="Roll Die" />
-                                      </items>
-                                    </ToolBar>
-                                  <AnchorPane layoutX="151.0" layoutY="-25.0" minHeight="0.0" minWidth="0.0" prefHeight="104.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+        <!--
+              <Tab text="Main">
+                <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <SplitPane dividerPositions="0.7" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <HBox layoutX="36.0" layoutY="2.0" prefHeight="104.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                          <SplitPane dividerPositions="0.75" layoutX="307.0" layoutY="41.0" prefHeight="229.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
-                                                         <children>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Die Size:" />
-                                                            <TextField fx:id="dieNumberOfSidesInput" prefHeight="27.0" prefWidth="136.0" promptText="Number of Sides" />
-                                                         </children>
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </VBox>
+                                                      <TreeTableView layoutX="96.0" layoutY="-39.0" prefHeight="227.0" prefWidth="538.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                          <TreeTableColumn fx:id="currentCharacterTreeTableDisplay" onEditStart="#loadCurrentCharacters" prefWidth="228.0" text="Characters" />
+                                                          <TreeTableColumn fx:id="currentCharacterInformationTreeTableDisplay" prefWidth="291.0" text="Character Information" />
+                                                        </columns>
+                                                         <columnResizePolicy>
+                                                            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TreeTableView>
                                                    </children>
-                                                </StackPane>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                    <children>
-                                                      <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                         <children>
-                                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
-                                                            <TextField fx:id="dieRollOutput" editable="false" prefHeight="27.0" prefWidth="136.0" promptText="Result" />
-                                                         </children>
-                                                      </VBox>
+                                                      <ListView fx:id="combatOrderList" layoutX="-38.0" layoutY="-17.0" prefHeight="227.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                                                      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <menus>
+                                                          <Menu mnemonicParsing="false" text="Combat Order">
+                                                            <items>
+                                                                  <MenuItem fx:id="generateNewCombatOrder" mnemonicParsing="false" text="Generate Combat Order" />
+                                                              <MenuItem fx:id="clearCombatOrder" mnemonicParsing="false" text="Clear" />
+                                                            </items>
+                                                          </Menu>
+                                                        </menus>
+                                                      </MenuBar>
                                                    </children>
-                                                </StackPane>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0" StackPane.alignment="CENTER">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                         </StackPane.margin>
-                                                      </VBox>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane prefHeight="150.0" prefWidth="200.0" />
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </HBox>
+                                                </AnchorPane>
+                                            </items>
+                                          </SplitPane>
                                        </children>
                                     </AnchorPane>
-                                 </children>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children></AnchorPane>
-          </content>
-        </Tab>
-        <Tab text="Character Creator">
-          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-              <children>
-                <TextField fx:id="characterNameField" layoutX="16.0" layoutY="14.0" promptText="Character Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="10.0" />
-                <Accordion layoutX="14.0" layoutY="54.0" prefHeight="335.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
-                  <panes>
-                    <TitledPane animated="false" prefHeight="130.0" prefWidth="661.0" text="Description">
-                      <content>
-                        <AnchorPane prefHeight="332.0" prefWidth="714.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                        <children>
-                                          <ScrollPane prefHeight="256.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <GridPane alignment="CENTER" hgap="5.0" prefHeight="373.0" prefWidth="676.0" vgap="5.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints />
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
+                                          <ToolBar prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <items>
+                                              <Button fx:id="rollDieButton" mnemonicParsing="false" onAction="#displayDieRollResultInResultWindow" text="Roll Die" />
+                                            </items>
+                                          </ToolBar>
+                                        <AnchorPane layoutX="151.0" layoutY="-25.0" minHeight="0.0" minWidth="0.0" prefHeight="104.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
+                                             <children>
+                                                <HBox layoutX="36.0" layoutY="2.0" prefHeight="104.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                                      <TextField fx:id="weightNewCharacter" promptText="Weight" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                                      <TextField fx:id="ageNewCharacter" promptText="Age" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                                      <TextField fx:id="eyeColorNewCharacter" promptText="Eye Color" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                                      <TextField fx:id="skinColorNewCharacter" promptText="Skin Color" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                                      <TextField fx:id="alignmentNewCharacter" promptText="Alignment" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                                      <TextField fx:id="languagesNewCharacter" promptText="Languages" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                                      <TextField fx:id="flawsNewCharacter" promptText="Flaws" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Race:" GridPane.rowIndex="2" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" GridPane.rowIndex="3" />
-                                                      <TextField fx:id="wealthNewCharacter" promptText="Wealth" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                                                      <TextField promptText="Experience Points" GridPane.columnIndex="3" GridPane.rowIndex="10" fx:id="xpNewCharacter" />
-                                                      <MenuButton fx:id="selectRaceNewCharacter" mnemonicParsing="false" text="Select Race" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                        <items>
-                                                          <MenuItem fx:id="menuItemDwarf" mnemonicParsing="false" onAction="#setRaceNameDwarf" text="Dwarf" />
-                                                          <MenuItem fx:id="menuItemHillDwarf" mnemonicParsing="false" onAction="#setRaceNameHillDwarf" text="Hill Dwarf" />
-                                                            <MenuItem fx:id="menuItemMountainDwarf" mnemonicParsing="false" onAction="#setRaceNameMountainDwarf" text="Mountain Dwarf" />
-                                                            <MenuItem fx:id="menuItemElf" mnemonicParsing="false" onAction="#setRaceNameElf" text="Elf" />
-                                                            <MenuItem fx:id="menuItemHighElf" mnemonicParsing="false" onAction="#setRaceNameHighElf" text="High Elf" />
-                                                            <MenuItem fx:id="menuItemWoodElf" mnemonicParsing="false" onAction="#setRaceNameWoodElf" text="Wood Elf" />
-                                                            <MenuItem fx:id="menuItemHalfling" mnemonicParsing="false" onAction="#setRaceNameHalfling" text="Halfling" />
-                                                            <MenuItem fx:id="menuItemLightfoot" mnemonicParsing="false" onAction="#setRaceNameLightfoot" text="Lightfoot" />
-                                                            <MenuItem fx:id="menuItemStout" mnemonicParsing="false" onAction="#setRaceNameStout" text="Stout" />
-                                                            <MenuItem fx:id="menuItemHuman" mnemonicParsing="false" onAction="#setRaceNameHuman" text="Human" />
-                                                            <MenuItem fx:id="menuItemDragonborn" mnemonicParsing="false" onAction="#setRaceNameDragonborn" text="Dragonborn" />
-                                                            <MenuItem fx:id="menuItemGnome" mnemonicParsing="false" onAction="#setRaceNameGnome" text="Gnome" />
-                                                            <MenuItem fx:id="menuItemForestGnome" mnemonicParsing="false" onAction="#setRaceNameForestGnome" text="Forest Gnome" />
-                                                            <MenuItem fx:id="menuItemDeepGnome" mnemonicParsing="false" onAction="#setRaceNameDeepGnome" text="Deep Gnome" />
-                                                            <MenuItem fx:id="menuItemRockGnome" mnemonicParsing="false" onAction="#setRaceNameRockGnome" text="Rock Gnome" />
-                                                            <MenuItem fx:id="menuItemHalfOrc" mnemonicParsing="false" onAction="#setRaceNameHalfOrc" text="Half-Orc" />
-                                                            <MenuItem fx:id="menuItemTiefling" mnemonicParsing="false" onAction="#setRaceNameTiefling" text="Tiefling" />
-                                                        </items>
-                                                      </MenuButton>
-                                                      <MenuButton fx:id="selectClassNewCharacter" mnemonicParsing="false" text="Select Class" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                        <items>
-                                                          <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                          <MenuItem mnemonicParsing="false" text="Action 2" />
-                                                        </items>
-                                                      </MenuButton>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:" GridPane.rowIndex="1" />
-                                                      <TextField fx:id="heightNewCharacter" promptText="Height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Die Size:" />
+                                                                  <TextField fx:id="dieNumberOfSidesInput" prefHeight="27.0" prefWidth="136.0" promptText="Number of Sides" />
+                                                               </children>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
+                                                                  <TextField fx:id="dieRollOutput" editable="false" prefHeight="27.0" prefWidth="136.0" promptText="Result" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0" StackPane.alignment="CENTER">
+                                                               <StackPane.margin>
+                                                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                               </StackPane.margin>
+                                                            </VBox>
+                                                         </children>
+                                                      </StackPane>
+                                                      <StackPane prefHeight="150.0" prefWidth="200.0" />
                                                    </children>
                                                    <padding>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                    </padding>
-                                                </GridPane>
-                                             </content>
-                                          </ScrollPane>
+                                                </HBox>
+                                             </children>
+                                          </AnchorPane>
                                        </children>
-                        </AnchorPane>
-                      </content>
-                    </TitledPane>
-                    <TitledPane animated="false" text="Equipment">
-                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                          <children>
-                            <TextField fx:id="nameNewEquipmentNewCharacter" layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="126.0" promptText="Equipment Name" />
-                            <TextField fx:id="bonusAmountNewEquipmentNewCharacter" layoutX="267.0" layoutY="9.0" prefHeight="27.0" prefWidth="106.0" promptText="Bonus Amount" />
-                            <SplitMenuButton fx:id="traitMenuNewEquipment" layoutX="147.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" text="Pick A Trait">
-                              <items>
-                                <MenuItem fx:id="strengthTraitMenuNewEquipment" mnemonicParsing="false" text="Strength" />
-                                <MenuItem fx:id="dexterityTraitMenuNewEquipment" mnemonicParsing="false" text="Dexterity" />
-                                <MenuItem fx:id="constitutionTraitMenuNewEquipment" mnemonicParsing="false" text="Constitution" />
-                                <MenuItem fx:id="intelligenceTraitMenuNewEquipment" mnemonicParsing="false" text="Intelligence" />
-                                <MenuItem fx:id="wisdomTraitMenuNewEquipment" mnemonicParsing="false" text="Wisdom" />
-                                <MenuItem fx:id="charismaTraitMenuNewEquipment" mnemonicParsing="false" text="Charisma" />
-                              </items>
-                            </SplitMenuButton>
-                            <Button fx:id="addEquipmentNewCharacter" layoutX="441.0" layoutY="9.0" mnemonicParsing="false" text="Add Item to Inventory" />
-                                          <ListView fx:id="equipmentListNewCharacter" layoutX="21.4" layoutY="31.4" prefHeight="103.0" prefWidth="592.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-                          </children>
-                        </AnchorPane>
-                      </content></TitledPane>
-                  </panes>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children></AnchorPane>
+                </content>
+              </Tab>-->
+        <Tab text="Character Creator">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <padding>
+                    <Insets left="5.0" right="5.0" top="5.0" />
+                </padding>
+                <TextField fx:id="characterNameField" layoutX="16.0" layoutY="14.0" promptText="Character Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="10.0" />
+                <Accordion layoutX="14.0" layoutY="54.0" prefHeight="335.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                    <panes>
+                        <TitledPane animated="false" prefHeight="130.0" prefWidth="661.0" text="Description">
+                            <AnchorPane prefHeight="332.0" prefWidth="714.0">
+                                <ScrollPane prefHeight="256.0" prefWidth="714.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane alignment="CENTER" hgap="5.0" prefHeight="373.0" prefWidth="676.0" vgap="5.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <padding>
+                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                        </padding>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                        <TextField fx:id="weightNewCharacter" promptText="Weight" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                        <TextField fx:id="ageNewCharacter" promptText="Age" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                        <TextField fx:id="eyeColorNewCharacter" promptText="Eye Color" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                        <TextField fx:id="skinColorNewCharacter" promptText="Skin Color" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                        <TextField fx:id="alignmentNewCharacter" promptText="Alignment" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                        <TextField fx:id="languagesNewCharacter" promptText="Languages" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                        <TextField fx:id="flawsNewCharacter" promptText="Flaws" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Race:" GridPane.rowIndex="2" />
+                                        <!--<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" GridPane.rowIndex="3" />-->
+                                        <TextField fx:id="wealthNewCharacter" promptText="Wealth" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                        <TextField promptText="Experience Points" text="0" GridPane.columnIndex="3" GridPane.rowIndex="10" fx:id="xpNewCharacter" />
+                                        <MenuButton fx:id="selectRaceNewCharacter" mnemonicParsing="false" text="Select Race" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                            <items>
+                                                <MenuItem fx:id="menuItemDwarf" mnemonicParsing="false" onAction="#setRaceNameDwarf" text="Dwarf" />
+                                                <MenuItem fx:id="menuItemHillDwarf" mnemonicParsing="false" onAction="#setRaceNameHillDwarf" text="Hill Dwarf" />
+                                                <MenuItem fx:id="menuItemMountainDwarf" mnemonicParsing="false" onAction="#setRaceNameMountainDwarf" text="Mountain Dwarf" />
+                                                <MenuItem fx:id="menuItemElf" mnemonicParsing="false" onAction="#setRaceNameElf" text="Elf" />
+                                                <MenuItem fx:id="menuItemHighElf" mnemonicParsing="false" onAction="#setRaceNameHighElf" text="High Elf" />
+                                                <MenuItem fx:id="menuItemWoodElf" mnemonicParsing="false" onAction="#setRaceNameWoodElf" text="Wood Elf" />
+                                                <MenuItem fx:id="menuItemHalfling" mnemonicParsing="false" onAction="#setRaceNameHalfling" text="Halfling" />
+                                                <MenuItem fx:id="menuItemLightfoot" mnemonicParsing="false" onAction="#setRaceNameLightfoot" text="Lightfoot" />
+                                                <MenuItem fx:id="menuItemStout" mnemonicParsing="false" onAction="#setRaceNameStout" text="Stout" />
+                                                <MenuItem fx:id="menuItemHuman" mnemonicParsing="false" onAction="#setRaceNameHuman" text="Human" />
+                                                <MenuItem fx:id="menuItemDragonborn" mnemonicParsing="false" onAction="#setRaceNameDragonborn" text="Dragonborn" />
+                                                <MenuItem fx:id="menuItemGnome" mnemonicParsing="false" onAction="#setRaceNameGnome" text="Gnome" />
+                                                <MenuItem fx:id="menuItemForestGnome" mnemonicParsing="false" onAction="#setRaceNameForestGnome" text="Forest Gnome" />
+                                                <MenuItem fx:id="menuItemDeepGnome" mnemonicParsing="false" onAction="#setRaceNameDeepGnome" text="Deep Gnome" />
+                                                <MenuItem fx:id="menuItemRockGnome" mnemonicParsing="false" onAction="#setRaceNameRockGnome" text="Rock Gnome" />
+                                                <MenuItem fx:id="menuItemHalfOrc" mnemonicParsing="false" onAction="#setRaceNameHalfOrc" text="Half-Orc" />
+                                                <MenuItem fx:id="menuItemTiefling" mnemonicParsing="false" onAction="#setRaceNameTiefling" text="Tiefling" />
+                                            </items>
+                                        </MenuButton>
+                                        <!--
+                                                                       <MenuButton fx:id="selectClassNewCharacter" mnemonicParsing="false" text="Select Class" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                                         <items>
+                                                                           <MenuItem mnemonicParsing="false" text="Action 1" />
+                                                                           <MenuItem mnemonicParsing="false" text="Action 2" />
+                                                                         </items>
+                                                                       </MenuButton>-->
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:" GridPane.rowIndex="1" />
+                                        <TextField fx:id="heightNewCharacter" promptText="Height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    </GridPane>
+                                </ScrollPane>
+                            </AnchorPane>
+                        </TitledPane>
+                        <!--
+                                      <TitledPane animated="false" text="Equipment">
+                                        <content>
+                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                              <TextField fx:id="nameNewEquipmentNewCharacter" layoutX="14.0" layoutY="9.0" prefHeight="27.0" prefWidth="126.0" promptText="Equipment Name" />
+                                              <TextField fx:id="bonusAmountNewEquipmentNewCharacter" layoutX="267.0" layoutY="9.0" prefHeight="27.0" prefWidth="106.0" promptText="Bonus Amount" />
+                                              <SplitMenuButton fx:id="traitMenuNewEquipment" layoutX="147.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" text="Pick A Trait">
+                                                <items>
+                                                  <MenuItem fx:id="strengthTraitMenuNewEquipment" mnemonicParsing="false" text="Strength" />
+                                                  <MenuItem fx:id="dexterityTraitMenuNewEquipment" mnemonicParsing="false" text="Dexterity" />
+                                                  <MenuItem fx:id="constitutionTraitMenuNewEquipment" mnemonicParsing="false" text="Constitution" />
+                                                  <MenuItem fx:id="intelligenceTraitMenuNewEquipment" mnemonicParsing="false" text="Intelligence" />
+                                                  <MenuItem fx:id="wisdomTraitMenuNewEquipment" mnemonicParsing="false" text="Wisdom" />
+                                                  <MenuItem fx:id="charismaTraitMenuNewEquipment" mnemonicParsing="false" text="Charisma" />
+                                                </items>
+                                              </SplitMenuButton>
+                                              <Button fx:id="addEquipmentNewCharacter" layoutX="441.0" layoutY="9.0" mnemonicParsing="false" text="Add Item to Inventory" />
+                                                            <ListView fx:id="equipmentListNewCharacter" layoutX="21.4" layoutY="31.4" prefHeight="103.0" prefWidth="592.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                                            </children>
+                                          </AnchorPane>
+                                        </content></TitledPane>-->
+                    </panes>
                 </Accordion>
-                        <Button fx:id="addCharacterToCampaign" layoutX="653.0" layoutY="7.0" mnemonicParsing="false" onAction="#onAddCharacterToCampaign" text="Add Character to Campaign" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="9.0" />
-                        <Button fx:id="clearAllNewCharacter" layoutX="431.0" layoutY="2.0" mnemonicParsing="false" text="Clear All" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="9.0" />
-              </children>
-                     <padding>
-                        <Insets left="5.0" right="5.0" top="5.0" />
-                     </padding></AnchorPane>
-          </content>
+                <Button fx:id="addCharacterToCampaign" layoutX="653.0" layoutY="7.0" mnemonicParsing="false" onAction="#onAddCharacterToCampaign" text="Add Character to Campaign" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="9.0" />
+                <Button fx:id="clearAllNewCharacter" layoutX="431.0" layoutY="2.0" mnemonicParsing="false" onAction="#clearAllNewCharacter" text="Clear All" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="9.0" />
+            </AnchorPane>
         </Tab>
-      </tabs>
     </TabPane>
-  </children>
 </AnchorPane>

@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import java.util.*;
 
-//@SuppressWarnings("WeakerAccess")
 public class TraitMap {
 
     private final Map<String, Integer> traitMap;

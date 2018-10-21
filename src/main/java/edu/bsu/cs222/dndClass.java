@@ -1,6 +1,6 @@
 package edu.bsu.cs222;
 
-//@SuppressWarnings("WeakerAccess")
+
 @SuppressWarnings("SameParameterValue")
 class dndClass {
     private final String name;
@@ -14,7 +14,7 @@ class dndClass {
     and description will probably never be used but I added them just in case.
      */
 
-    dndClass(String name, String description, Integer hitDice) {
+    dndClass(String name, String description, @SuppressWarnings("SameParameterValue") Integer hitDice) {
         this.name = name;
         this.description = description;
         this.hitDice = hitDice;

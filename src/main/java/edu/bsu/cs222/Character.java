@@ -2,19 +2,16 @@ package edu.bsu.cs222;
 
 import java.util.LinkedList;
 
-//@SuppressWarnings("WeakerAccess")
 class Character {
     private final String name;
     private final TraitMap traits;
     private final LinkedList<Equipment> equipment;
     private Integer wealth, experiencepoints, hitPoints;
     private final Race race;
-    private final dndClass dndClass;
-    private Description characterDescription;
+    private final Description characterDescription;
 
     public Character(String name, dndClass dndClass, String raceName){
         this.name = name;
-        this.dndClass = dndClass;
         this.equipment = new LinkedList<>();
         Race setRace = new Race(raceName);
         this.race = setRace;
@@ -62,7 +59,6 @@ class Character {
                     "\n\tWealth : " + wealth+
                     "\n\tXP : " + experiencepoints+
                     "\n\tHP : " + hitPoints+
-                "\nDescription: " +characterDescription+
                 "\nTraits :"+
                     "\n\tStrength : "+ this.traits.getValue("Strength")+
                     "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
@@ -70,8 +66,11 @@ class Character {
                     "\n\tIntelligence : "+ this.traits.getValue("Intelligence")+
                     "\n\tWisdom : "+ this.traits.getValue("Wisdom")+
                     "\n\tCharisma : "+ this.traits.getValue("Charisma")+
+                "\nDescription: " +characterDescription+
                 "\n"+ race.toString() + "\n"+
+                /*
                 dndClass.toString() + "\n"+
+                */
                 "\nEquipment : " + equipment;
 
         return result;

@@ -1,6 +1,5 @@
 package edu.bsu.cs222;
 
-import edu.bsu.cs222.Campaign;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,12 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import javax.xml.soap.Text;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "EmptyMethod"})
 public class Controller extends Application {
     @FXML
     private TextField inputCampaignText;
@@ -49,40 +46,6 @@ public class Controller extends Application {
     private TextField wealthNewCharacter;
     @FXML
     private TextField xpNewCharacter;
-    /*
-    @FXML
-    private MenuItem menuItemDwarf;
-    @FXML
-    private MenuItem menuItemHillDwarf;
-    @FXML
-    private MenuItem menuItemElf;
-    @FXML
-    private MenuItem menuItemHighElf;
-    @FXML
-    private MenuItem menuItemWoodElf;
-    @FXML
-    private MenuItem menuItemHalfling;
-    @FXML
-    private MenuItem menuItemLightfoot;
-    @FXML
-    private MenuItem menuItemStout;
-    @FXML
-    private MenuItem menuItemHuman;
-    @FXML
-    private MenuItem menuItemDragonborn;
-    @FXML
-    private MenuItem menuItemGnome;
-    @FXML
-    private MenuItem menuItemForestGnome;
-    @FXML
-    private MenuItem menuItemDeepGnome;
-    @FXML
-    private MenuItem menuItemRockGnome;
-    @FXML
-    private MenuItem menuItemHalfOrc;
-    @FXML
-    private MenuItem menuItemTiefling;
-    */
     private String raceName;
     private Campaign campaign;
 
@@ -93,82 +56,85 @@ public class Controller extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        String fxmlLocation = "/Users/rebeccaauger/IdeaProjects/Final-Project-Team-Bravo/src/main/resources/GUIFile.fxml";
-        FileInputStream fxmlStream = new FileInputStream(fxmlLocation);
-        Pane root = loader.load(fxmlStream);
+        Pane root = FXMLLoader.load(getClass().getResource("/GUIFile.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("D&D Game Master Thingy 3000");
         stage.show();
     }
-
     public void onCreateNewCampaign(javafx.event.ActionEvent actionEvent) {
         this.campaign = new Campaign();
         String campaignName = inputCampaignText.getText();
         campaign.setCampaignName(campaignName);
         TabPane.getSelectionModel().select(CharacterCreatorTab);
     }
-
     public void onAddCharacterToCampaign(ActionEvent actionEvent){
-        Campaign campaign = new Campaign();
-        this.campaign = campaign;
+        this.campaign = new Campaign();
         String name = characterNameField.getText();
         dndClass Bard = new dndClass("Bard","Description",8);
-        Character character = new Character(name,Bard,raceName);
-        if(ageNewCharacter.getText()!=null){
-            character.getCharacterDescription().setAge(ageNewCharacter.getText());
+        try {
+            Character character = new Character(name, Bard, raceName);
 
-        }
-        if(heightNewCharacter.getText()!=null){
-            character.getCharacterDescription().setHeight(heightNewCharacter.getText());
-        }
-        if(weightNewCharacter.getText()!=null){
-            character.getCharacterDescription().setWeight(weightNewCharacter.getText());
-        }
-        if(eyeColorNewCharacter.getText()!=null){
-            character.getCharacterDescription().setEyeColor(eyeColorNewCharacter.getText());
-        }
-        if(skinColorNewCharacter.getText()!=null){
-            character.getCharacterDescription().setSkinColor(skinColorNewCharacter.getText());
-        }
-        if(alignmentNewCharacter.getText()!=null){
-            character.getCharacterDescription().setAlignment(alignmentNewCharacter.getText());
-        }
-        if(languagesNewCharacter.getText()!=null){
-            character.getCharacterDescription().setLanguages(languagesNewCharacter.getText());
-        }
-        if(flawsNewCharacter.getText()!=null){
-            character.getCharacterDescription().setFlaws(flawsNewCharacter.getText());
-        }
+            if (ageNewCharacter.getText() != null) {
+                character.getCharacterDescription().setAge(ageNewCharacter.getText());
+            }
+            if (heightNewCharacter.getText() != null) {
+                character.getCharacterDescription().setHeight(heightNewCharacter.getText());
+            }
+            if (weightNewCharacter.getText() != null) {
+                character.getCharacterDescription().setWeight(weightNewCharacter.getText());
+            }
+            if (eyeColorNewCharacter.getText() != null) {
+                character.getCharacterDescription().setEyeColor(eyeColorNewCharacter.getText());
+            }
+            if (skinColorNewCharacter.getText() != null) {
+                character.getCharacterDescription().setSkinColor(skinColorNewCharacter.getText());
+            }
+            if (alignmentNewCharacter.getText() != null) {
+                character.getCharacterDescription().setAlignment(alignmentNewCharacter.getText());
+            }
+            if (languagesNewCharacter.getText() != null) {
+                character.getCharacterDescription().setLanguages(languagesNewCharacter.getText());
+            }
+            if (flawsNewCharacter.getText() != null) {
+                character.getCharacterDescription().setFlaws(flawsNewCharacter.getText());
+            }
 
-        if(wealthNewCharacter!=null){
-            character.setWealth(Integer.parseInt(wealthNewCharacter.getText()));
+            if (!Objects.equals(wealthNewCharacter.getText(), "\\s")) {
+                character.setWealth(Integer.parseInt(wealthNewCharacter.getText()));
+            }
+            if (!Objects.equals(xpNewCharacter.getText(), "\\s")) {
+                character.setExperiencepoints(Integer.parseInt(xpNewCharacter.getText()));
+            }
+            this.campaign.addCharacer(character);
+            createNewCharacterTab(character.getName(), character);
+        }catch(NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Please enter a name and select a race and try again");
+            alert.showAndWait();
+        }catch(NumberFormatException e){
+            Alert numberAlert = new Alert(Alert.AlertType.ERROR,"Please enter an integer value for your Wealth and XP.");
+            numberAlert.showAndWait();
         }
-        if(xpNewCharacter.getText()!=null){
-            character.setExperiencepoints(Integer.parseInt(xpNewCharacter.getText()));
-        }
-
-        this.campaign.addCharacer(character);
-        createNewCharacterTab(character.getName(),character);
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void loadCurrentCharacters(TreeTableColumn.CellEditEvent cellEditEvent) {
 
     }
 
+    @SuppressWarnings("EmptyMethod")
     public void displayDieRollResultInResultWindow(ActionEvent actionEvent) {
 
     }
-
     public void createNewCharacterTab(String tabName,Character character){
         Tab tab = new Tab(tabName);
         TextArea textArea = new TextArea();
         tab.setContent(textArea);
         textArea.setText(character.toString());
+        textArea.setEditable(false);
         TabPane.getTabs().add(tab);
     }
-
     public void setRaceNameDwarf(ActionEvent actionEvent){
         this.raceName="Dwarf";
     }
@@ -219,5 +185,22 @@ public class Controller extends Application {
     }
     public void setRaceNameTiefling(ActionEvent actionEvent){
         this.raceName="Tiefling";
+    }
+    public void clearAllNewCharacter(ActionEvent actionEvent){
+        heightNewCharacter.clear();
+        weightNewCharacter.clear();
+        ageNewCharacter.clear();
+        eyeColorNewCharacter.clear();
+        skinColorNewCharacter.clear();
+        alignmentNewCharacter.clear();
+        languagesNewCharacter.clear();
+        flawsNewCharacter.clear();
+        characterNameField.clear();
+        wealthNewCharacter.setText("0");
+        xpNewCharacter.setText("0");
+        this.raceName = null;
+    }
+    public void loadOldCampaign(ActionEvent actionEvent) {
+
     }
 }

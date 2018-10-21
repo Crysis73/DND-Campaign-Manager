@@ -2,7 +2,7 @@ package edu.bsu.cs222;
 
 import java.util.ArrayList;
 
-public class Campaign {
+class Campaign {
     private final ArrayList<Character> characters;
     private String campaignName;
     private String log;

@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import java.util.Random;
 
-//@SuppressWarnings("WeakerAccess")
 class Die {
     private final int sides;
 

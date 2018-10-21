@@ -1,7 +1,5 @@
 package edu.bsu.cs222;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
@@ -127,7 +125,6 @@ class Race {
 
     public String toString(){
         StringBuilder result = new StringBuilder("Race : " + this.name + "\n\tDescription : " + this.description);
-        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") ArrayList<String> traitNames = new ArrayList<>(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
         for(Map.Entry<String,Integer> entry : traitBonus.getTraitMap().entrySet()){
             if(entry.getValue()!=0){
                 result.append("\n\tAdds ").append(entry.getValue()).append(" to ").append(entry.getKey());

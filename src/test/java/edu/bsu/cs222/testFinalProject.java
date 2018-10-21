@@ -144,8 +144,7 @@ public class testFinalProject {
         Character Jill = new Character("Jill",Bard,"Stout");
         Jill.setWealth(51);
         Jack.setWealth(300);
-        System.out.println(Jack.toString());
-        System.out.println(Jill.toString());
+        Assert.assertTrue(true);
     }
 
     @Test
@@ -155,8 +154,8 @@ public class testFinalProject {
         TraitMap raceTraits = dwarf.getRaceTraitBonuses();
         System.out.println(traitMap.getTraitMap());
         TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
-        System.out.println(newTraitMap.getTraitMap());
-        //Need to add automated test.
+        System.out.println(traitMap.getTraitMap());
+
     }
 
     @Test
@@ -170,6 +169,6 @@ public class testFinalProject {
         myCampaign.addCharacer(Jack);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
-        System.out.println(myCampaign.generateJsonString());
+        Assert.assertNotNull(myCampaign.generateJsonString());
     }
 }
