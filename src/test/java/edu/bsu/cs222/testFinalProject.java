@@ -144,8 +144,8 @@ public class testFinalProject {
         Character Jill = new Character("Jill",Bard,"Stout");
         Jill.setWealth(51);
         Jack.setWealth(300);
-        Assert.assertFalse(Jack.toString()=="");
-        Assert.assertFalse(Jill.toString()=="");
+        Assert.assertNotSame("", Jack.toString());
+        Assert.assertNotSame("", Jill.toString());
 
     }
 
@@ -154,21 +154,12 @@ public class testFinalProject {
         Dwarf dwarf = new Dwarf();
         TraitMap traitMap = new TraitMap();
         TraitMap raceTraits = dwarf.getRaceTraitBonuses();
-        System.out.println(traitMap.getTraitMap());
         Map<String,Integer> originalTraitMap = traitMap.getTraitMap();
         TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
-        System.out.println(newTraitMap.getTraitMap());
-        //Need to add automated test.
-        Boolean isGood = new Boolean(false);
+        boolean isGood = Boolean.FALSE;
         for (Map.Entry<String, Integer> entry : originalTraitMap.entrySet()){
             String key = entry.getKey();
-            if(raceTraits.getTraitMap().get(key)>0) {
-                System.out.println(key + " " + newTraitMap.getTraitMap().get(key));
-                System.out.println(key + " " + entry.getValue());
-                isGood = true;
-            } else{
-                isGood = false;
-            }
+            isGood = raceTraits.getTraitMap().get(key) > 0;
         }
         Assert.assertTrue(isGood);
 
