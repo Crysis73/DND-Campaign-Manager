@@ -220,4 +220,8 @@ public class Controller extends Application {
     public void setRaceNameTiefling(ActionEvent actionEvent){
         this.raceName="Tiefling";
     }
+
+    public void loadOldCampaign(ActionEvent actionEvent) {
+
+    }
 }
