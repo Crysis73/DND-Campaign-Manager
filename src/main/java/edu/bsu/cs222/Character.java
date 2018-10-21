@@ -23,7 +23,9 @@ class Character {
         characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
         this.traits = characterTraits;
         this.experiencepoints = 0;
+        this.wealth = 0;
         this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
+        this.characterDescription = new Description();
     }
 
     void setWealth(Integer startingValue){
@@ -40,6 +42,14 @@ class Character {
 
     public void addEquipment(Equipment item){
         equipment.add(item);
+    }
+
+    public Description getCharacterDescription(){
+        return this.characterDescription;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     TraitMap getTraits(){

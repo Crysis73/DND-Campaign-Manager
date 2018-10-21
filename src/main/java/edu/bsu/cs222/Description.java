@@ -60,46 +60,46 @@ class Description {
     public String toString(){
         String result = "";
         if(height !=null){
-            result += "Height : "+height;
+            result += "\n\tHeight : "+height;
         }
         if(weight!=null){
-            result+= "\nWeight : "+weight;
+            result+= "\n\tWeight : "+weight;
         }
         if(age!=null){
-            result+= "\nAge : "+age;
+            result+= "\n\tAge : "+age;
         }
         if(eyeColor!=null){
-            result+="\nEye Color : "+eyeColor;
+            result+="\n\tEye Color : "+eyeColor;
         }
         if(skinColor!=null){
-            result+="\nSkin Color : "+skinColor;
+            result+="\n\tSkin Color : "+skinColor;
         }
         if(additionalFeatures!=null){
-            result+="\nAdditional Features : "+additionalFeatures;
+            result+="\n\tAdditional Features : "+additionalFeatures;
         }
         if(alignment!=null){
-            result+="\nAlignment : "+alignment;
+            result+="\n\tAlignment : "+alignment;
         }
         if(languages!=null){
-            result+="\nLanguages : "+languages;
+            result+="\n\tLanguages : "+languages;
         }
         if(exoticLanguages!=null){
-            result+="\nExotic Languages : "+exoticLanguages;
+            result+="\n\tExotic Languages : "+exoticLanguages;
         }
         if(personalityTrait1!=null){
-            result+="\nPersonality Trait 1 : "+personalityTrait1;
+            result+="\n\tPersonality Trait 1 : "+personalityTrait1;
         }
         if(personalityTrait2!=null){
-            result+="\nPersonality Trait 2 : "+personalityTrait2;
+            result+="\n\tPersonality Trait 2 : "+personalityTrait2;
         }
         if(ideals!=null){
-            result+="\nIdeals : "+ideals;
+            result+="\n\tIdeals : "+ideals;
         }
         if(bonds!=null){
-            result+="\nBonds : "+bonds;
+            result+="\n\tBonds : "+bonds;
         }
         if(flaws!=null){
-            result+="\nFlaws : "+flaws;
+            result+="\n\tFlaws : "+flaws;
         }
         return result;
     }
