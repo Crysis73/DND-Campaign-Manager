@@ -75,7 +75,6 @@ public class testFinalProject {
         Assert.assertTrue(1<=d20.rollDie() && d20.rollDie()<=20);
     }
 
-
     @Test
     public void testAutomaticTraitValueGeneration(){
         TraitMap traitMap = new TraitMap();
