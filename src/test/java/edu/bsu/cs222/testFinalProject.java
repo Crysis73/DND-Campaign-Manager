@@ -144,7 +144,8 @@ public class testFinalProject {
         Character Jill = new Character("Jill",Bard,"Stout");
         Jill.setWealth(51);
         Jack.setWealth(300);
-        Assert.assertTrue(true);
+        //noinspection SimplifiableJUnitAssertion
+        Assert.assertNotNull(Jack);
     }
 
     @Test
