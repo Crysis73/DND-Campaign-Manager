@@ -145,8 +145,6 @@ public class testFinalProject {
         Character Jill = new Character("Jill",Bard,"Stout");
         Jill.setWealth(51);
         Jack.setWealth(300);
-        System.out.println(Jack.toString());
-        System.out.println(Jill.toString());
         Assert.assertFalse(Jack.toString()=="");
         Assert.assertFalse(Jill.toString()=="");
 
@@ -188,6 +186,6 @@ public class testFinalProject {
         myCampaign.addCharacer(Jack);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
-        System.out.println(myCampaign.generateJsonString());
+        Assert.assertNotNull(myCampaign.generateJsonString());
     }
 }
