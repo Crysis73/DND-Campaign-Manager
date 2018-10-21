@@ -93,9 +93,7 @@ public class Controller extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        String fxmlLocation = "/Users/rebeccaauger/IdeaProjects/Final-Project-Team-Bravo/src/main/resources/GUIFile.fxml";
-        FileInputStream fxmlStream = new FileInputStream(fxmlLocation);
-        Pane root = loader.load(fxmlStream);
+        Pane root = loader.load(getClass().getResource("/GUIFile.fxml") );
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("D&D Game Master Thingy 3000");
@@ -223,5 +221,18 @@ public class Controller extends Application {
 
     public void loadOldCampaign(ActionEvent actionEvent) {
 
+    }
+    public void clearAllNewCharacter(ActionEvent actionEvent){
+        heightNewCharacter.clear();
+        weightNewCharacter.clear();
+        ageNewCharacter.clear();
+        eyeColorNewCharacter.clear();
+        skinColorNewCharacter.clear();
+        alignmentNewCharacter.clear();
+        languagesNewCharacter.clear();
+        flawsNewCharacter.clear();
+        wealthNewCharacter.setText("0");
+        xpNewCharacter.setText("0");
+        this.raceName = "";
     }
 }
