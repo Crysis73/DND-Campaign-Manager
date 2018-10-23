@@ -4,28 +4,22 @@ import java.util.LinkedList;
 
 class Character {
     private final String name;
-    private final TraitMap traits;
+    private TraitMap traits;
     private final LinkedList<Equipment> equipment;
     private Integer wealth, experiencepoints, hitPoints;
     private Race race;
+    private dndClass dndClass;
     private final Description characterDescription;
 
-    public Character(String name, dndClass dndClass, String raceName){
+    public Character(String name, String dndClass, String raceName){
         this.name = name;
         this.equipment = new LinkedList<>();
-        raceList races = new raceList();
-        for(int i =0;i<races.getRaces().length;i++){
-            if(races.getRaces()[i].getName().equals(raceName)){
-                this.race = races.getRaces()[i];
-            }
-        }
-        TraitMap characterTraits = new TraitMap();
-        TraitMap raceBonuses = race.getTraitBonuses();
-        characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
-        this.traits = characterTraits;
+        setRace(raceName);
+        setDndClass(dndClass);
+        setTraits();
         this.experiencepoints = 0;
         this.wealth = 0;
-        this.hitPoints = traits.getValue("Constitution") + dndClass.getHitPointBonus();
+        this.hitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
         this.characterDescription = new Description();
     }
 
@@ -43,6 +37,31 @@ class Character {
 
     public void addEquipment(Equipment item){
         equipment.add(item);
+    }
+
+    private void setRace(String raceName){
+        raceList races = new raceList();
+        for(int i =0;i<races.getRaces().length;i++){
+            if(races.getRaces()[i].getName().equals(raceName)){
+                this.race = races.getRaces()[i];
+            }
+        }
+    }
+
+    private void setDndClass(String dndClass){
+        dndClassList dndClasses = new dndClassList();
+        for(int i =0;i<dndClasses.getDndClasses().length;i++){
+            if(dndClass.equals(dndClasses.getDndClasses()[i].getName())){
+                this.dndClass = dndClasses.getDndClasses()[i];
+            }
+        }
+    }
+
+    private void setTraits(){
+        TraitMap characterTraits = new TraitMap();
+        TraitMap raceBonuses = race.getTraitBonuses();
+        characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
+        this.traits = characterTraits;
     }
 
     public Description getCharacterDescription(){
@@ -72,9 +91,7 @@ class Character {
                     "\n\tCharisma : "+ this.traits.getValue("Charisma")+
                 "\nDescription: " +characterDescription+
                 "\n"+ race.toString() + "\n"+
-                /*
                 dndClass.toString() + "\n"+
-                */
                 "\nEquipment : " + equipment;
 
         return result;

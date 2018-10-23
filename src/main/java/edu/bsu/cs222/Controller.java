@@ -47,6 +47,7 @@ public class Controller extends Application {
     @FXML
     private TextField xpNewCharacter;
     private String raceName;
+    private String dndClassName;
     private Campaign campaign;
 
     public static void main(String[] args) {
@@ -71,9 +72,8 @@ public class Controller extends Application {
     public void onAddCharacterToCampaign(ActionEvent actionEvent){
         this.campaign = new Campaign();
         String name = characterNameField.getText();
-        dndClass Bard = new dndClass("Bard","Description",8);
         try {
-            Character character = new Character(name, Bard, raceName);
+            Character character = new Character(name,dndClassName, raceName);
 
             if (ageNewCharacter.getText() != null) {
                 character.getCharacterDescription().setAge(ageNewCharacter.getText());
@@ -117,12 +117,10 @@ public class Controller extends Application {
         }
 
     }
-
     @SuppressWarnings("EmptyMethod")
     public void loadCurrentCharacters(TreeTableColumn.CellEditEvent cellEditEvent) {
 
     }
-
     @SuppressWarnings("EmptyMethod")
     public void displayDieRollResultInResultWindow(ActionEvent actionEvent) {
 
@@ -135,59 +133,14 @@ public class Controller extends Application {
         textArea.setEditable(false);
         TabPane.getTabs().add(tab);
     }
-
-    public void setRaceNameDwarf(ActionEvent actionEvent){
-        this.raceName="Dwarf";
+    public void setRaceName(ActionEvent actionEvent){
+            MenuItem item = (MenuItem)actionEvent.getSource();
+            this.raceName = item.getText();
     }
-    public void setRaceNameHillDwarf(ActionEvent actionEvent){
-        this.raceName="Hill Dwarf";
+    public void setClassName(ActionEvent actionEvent){
+        MenuItem item = (MenuItem)actionEvent.getSource();
+        this.dndClassName = item.getText();
     }
-    public void setRaceNameMountainDwarf(ActionEvent actionEvent){
-        this.raceName="Hill Dwarf";
-    }
-    public void setRaceNameElf(ActionEvent actionEvent){
-        this.raceName="Elf";
-    }
-    public void setRaceNameHighElf(ActionEvent actionEvent){
-        this.raceName="High Elf";
-    }
-    public void setRaceNameWoodElf(ActionEvent actionEvent){
-        this.raceName="Wood Elf";
-    }
-    public void setRaceNameHalfling(ActionEvent actionEvent){
-        this.raceName="Halfling";
-    }
-    public void setRaceNameLightfoot(ActionEvent actionEvent){
-        this.raceName="Lightfoot";
-    }
-    public void setRaceNameStout(ActionEvent actionEvent){
-        this.raceName="Stout";
-    }
-    public void setRaceNameHuman(ActionEvent actionEvent){
-        this.raceName="Human";
-    }
-    public void setRaceNameDragonborn(ActionEvent actionEvent){
-        this.raceName="Dragonborn";
-    }
-    public void setRaceNameGnome(ActionEvent actionEvent){
-        this.raceName="Gnome";
-    }
-    public void setRaceNameForestGnome(ActionEvent actionEvent){
-        this.raceName="Forest Gnome";
-    }
-    public void setRaceNameDeepGnome(ActionEvent actionEvent){
-        this.raceName="Deep Gnome";
-    }
-    public void setRaceNameRockGnome(ActionEvent actionEvent){
-        this.raceName="Rock Gnome";
-    }
-    public void setRaceNameHalfOrc(ActionEvent actionEvent){
-        this.raceName="Half-Orc";
-    }
-    public void setRaceNameTiefling(ActionEvent actionEvent){
-        this.raceName="Tiefling";
-    }
-
     public void clearAllNewCharacter(ActionEvent actionEvent){
         heightNewCharacter.clear();
         weightNewCharacter.clear();
@@ -201,6 +154,7 @@ public class Controller extends Application {
         wealthNewCharacter.setText("0");
         xpNewCharacter.setText("0");
         this.raceName = null;
+        this.dndClassName = null;
     }
     public void loadOldCampaign(ActionEvent actionEvent) {
 

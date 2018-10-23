@@ -1,15 +1,15 @@
 package edu.bsu.cs222;
 
 
-public class raceList {
-    private Race[] races;
+class raceList {
+    private final Race[] races;
 
     public raceList(){
         this.races = new Race[18];
         initializeRaces();
     }
 
-    public void initializeRaces(){
+    private void initializeRaces(){
 
         TraitMap DwarfTraits = new TraitMap();
         DwarfTraits.setAllValues(0);
@@ -130,10 +130,17 @@ public class raceList {
         races[15]=(Stout);
         races[16]=(Tiefling);
         races[17]=(WoodElf);
+        initializeRaceDescriptions();
     }
 
     public Race[] getRaces(){
         return this.races;
+    }
+
+    private void initializeRaceDescriptions(){
+        for (Race race : races) {
+            race.setDescription("https://www.dndbeyond.com/compendium/rules/basic-rules/races#" + race.getName().replace("\\s", ""));
+        }
     }
 
 }

@@ -12,7 +12,7 @@ public class testFinalProject {
     @Test
     public void testSetTrait(){
         dndClass Bard = new dndClass("Bard","This is a test description",8);
-        Character Jack = new Character("Jack",Bard,"Dwarf");
+        Character Jack = new Character("Jack","Bard","Dwarf");
         Jack.getTraits().setValue("Charisma", 10);
         Integer valueAfter = Jack.getTraits().getValue("Charisma");
         Assert.assertEquals(10, (int) valueAfter);
@@ -115,22 +115,6 @@ public class testFinalProject {
     }
 
     @Test
-    public void testDwarfClassTraitBonuses(){
-        Dwarf dwarf = new Dwarf();
-        TraitMap dwarfTraitMap = dwarf.getRaceTraitBonuses();
-        ArrayList<Integer> dwarfTraitValues = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : dwarfTraitMap.getTraitMap().entrySet()){
-            Integer trait = entry.getValue();
-            dwarfTraitValues.add(trait);
-        }
-        ArrayList<Integer> testTraitValues = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 2));
-        for(int i=0;i<dwarfTraitValues.size();i++){
-            Assert.assertSame(testTraitValues.get(i), dwarfTraitValues.get(i));
-        }
-
-    }
-
-    @Test
     public void testTraitMapToString(){
         TraitMap traitMap = new TraitMap();
         traitMap.setAllValues(0);
@@ -138,32 +122,38 @@ public class testFinalProject {
         Assert.assertSame("[]", traitMap.toString());
     }
 
-
     @Test
     public void testCharacterCreation(){
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
-        Character Jack = new Character("Jack",Bard,"Dwarf");
-        Character Jill = new Character("Jill",Bard,"Stout");
+        Character Jack = new Character("Jack","Bard","Dwarf");
+        Character Jill = new Character("Jill","Barbarian","Stout");
         Jill.setWealth(51);
         Jack.setWealth(300);
         Assert.assertNotSame("", Jack.toString());
         Assert.assertNotSame("", Jill.toString());
     }
 
-
     @Test
     public void testMergeTraitMaps(){
-        Dwarf dwarf = new Dwarf();
+        raceList races = new raceList();
         TraitMap traitMap = new TraitMap();
-        TraitMap raceTraits = dwarf.getRaceTraitBonuses();
+        TraitMap raceTraits = races.getRaces()[7].getTraitBonuses();
         Map<String,Integer> originalTraitMap = traitMap.getTraitMap();
         TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
         boolean isGood = Boolean.FALSE;
-        for (Map.Entry<String, Integer> entry : originalTraitMap.entrySet()){
-            String key = entry.getKey();
-            isGood = raceTraits.getTraitMap().get(key) > 0;
+        for(int i =0;i<races.getRaces().length;i++) {
+            int count = 0;
+            raceTraits = races.getRaces()[i].getTraitBonuses();
+            for (Map.Entry<String, Integer> entry : originalTraitMap.entrySet()) {
+                String key = entry.getKey();
+                if (raceTraits.getTraitMap().get(key) > 0) {
+                    count++;
+                }
+            }
+            isGood = count >= 1;
         }
         Assert.assertTrue(isGood);
+
 
     }
 
@@ -174,19 +164,12 @@ public class testFinalProject {
         Campaign myCampaign = new Campaign();
         myCampaign.setCampaignName("myCampaign");
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
-        Character Jack = new Character("Jack",Bard,"Dwarf");
-        Character Jill = new Character("Jill",Bard,"Rock Gnome");
+        Character Jack = new Character("Jack","Bard","Dwarf");
+        Character Jill = new Character("Jill","Cleric","Rock Gnome");
         myCampaign.addCharacer(Jack);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
         Assert.assertNotNull(myCampaign.generateJsonString());
     }
 
-
-    @Test
-    public void testraceList(){
-        raceList races = new raceList();
-        //System.out.println(races.getRaces());
-
-    }
 }
