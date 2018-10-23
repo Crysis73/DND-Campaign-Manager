@@ -7,16 +7,20 @@ class Character {
     private final TraitMap traits;
     private final LinkedList<Equipment> equipment;
     private Integer wealth, experiencepoints, hitPoints;
-    private final Race race;
+    private Race race;
     private final Description characterDescription;
 
     public Character(String name, dndClass dndClass, String raceName){
         this.name = name;
         this.equipment = new LinkedList<>();
-        Race setRace = new Race(raceName);
-        this.race = setRace;
+        raceList races = new raceList();
+        for(int i =0;i<races.getRaces().length;i++){
+            if(races.getRaces()[i].getName().equals(raceName)){
+                this.race = races.getRaces()[i];
+            }
+        }
         TraitMap characterTraits = new TraitMap();
-        TraitMap raceBonuses = setRace.getTraitBonuses();
+        TraitMap raceBonuses = race.getTraitBonuses();
         characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
         this.traits = characterTraits;
         this.experiencepoints = 0;

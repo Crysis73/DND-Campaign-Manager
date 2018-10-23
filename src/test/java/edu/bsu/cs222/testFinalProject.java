@@ -8,6 +8,7 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public class testFinalProject {
 
+
     @Test
     public void testSetTrait(){
         dndClass Bard = new dndClass("Bard","This is a test description",8);
@@ -16,6 +17,7 @@ public class testFinalProject {
         Integer valueAfter = Jack.getTraits().getValue("Charisma");
         Assert.assertEquals(10, (int) valueAfter);
     }
+
 
     @Test
     public void testRollD6FourTimesDropLeast(){
@@ -136,6 +138,7 @@ public class testFinalProject {
         Assert.assertSame("[]", traitMap.toString());
     }
 
+
     @Test
     public void testCharacterCreation(){
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
@@ -145,8 +148,8 @@ public class testFinalProject {
         Jack.setWealth(300);
         Assert.assertNotSame("", Jack.toString());
         Assert.assertNotSame("", Jill.toString());
-
     }
+
 
     @Test
     public void testMergeTraitMaps(){
@@ -164,6 +167,7 @@ public class testFinalProject {
 
     }
 
+
     @Test
     public void testJsonWriter(){
         JsonWriter writer = new JsonWriter();
@@ -176,5 +180,13 @@ public class testFinalProject {
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
         Assert.assertNotNull(myCampaign.generateJsonString());
+    }
+
+
+    @Test
+    public void testraceList(){
+        raceList races = new raceList();
+        //System.out.println(races.getRaces());
+
     }
 }

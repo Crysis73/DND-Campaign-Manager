@@ -15,9 +15,8 @@ public class TraitMap {
             Integer value = d6.rollD6FourTimesDropLeast();
             traitmap.put(traitNames.get(i),value);
         }
-
         this.traitMap = traitmap;
-        //System.out.println("TraitMapConstructor : "+traitmap);
+
     }
 
     TraitMap mergeTraitMaps(TraitMap characterTraits, TraitMap raceTraitBonuses){
@@ -46,12 +45,8 @@ public class TraitMap {
     }
 
     public void setAllValues(Integer value){
-        //System.out.println("SET ALL VALUES"+"\n------------------------");
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
-            //System.out.println("Before setting value to "+value+": \n"+traitMap);
             entry.setValue(value);
-            //System.out.println("After setting value to :"+value+": \n\t"+traitMap);
-            //System.out.println(traitMap);
         }
     }
 

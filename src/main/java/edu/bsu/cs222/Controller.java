@@ -135,6 +135,7 @@ public class Controller extends Application {
         textArea.setEditable(false);
         TabPane.getTabs().add(tab);
     }
+
     public void setRaceNameDwarf(ActionEvent actionEvent){
         this.raceName="Dwarf";
     }
@@ -186,6 +187,7 @@ public class Controller extends Application {
     public void setRaceNameTiefling(ActionEvent actionEvent){
         this.raceName="Tiefling";
     }
+
     public void clearAllNewCharacter(ActionEvent actionEvent){
         heightNewCharacter.clear();
         weightNewCharacter.clear();
