@@ -18,7 +18,6 @@ public class testFinalProject {
         Assert.assertEquals(10, (int) valueAfter);
     }
 
-
     @Test
     public void testRollD6FourTimesDropLeast(){
         Die d6 = new Die(6);
@@ -86,7 +85,7 @@ public class testFinalProject {
             traitValues.add(trait);
         }
         for (Integer traitValue : traitValues) {
-            Assert.assertTrue(1 <= traitValue && traitValue <= 18);
+            Assert.assertTrue(3 <= traitValue && traitValue <= 18);
         }
     }
 
@@ -156,7 +155,6 @@ public class testFinalProject {
 
 
     }
-
 
     @Test
     public void testJsonWriter(){

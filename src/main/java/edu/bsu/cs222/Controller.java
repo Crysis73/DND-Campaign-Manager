@@ -1,15 +1,23 @@
 package edu.bsu.cs222;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @SuppressWarnings({"WeakerAccess", "EmptyMethod"})
@@ -19,7 +27,7 @@ public class Controller extends Application {
     @FXML
     private TabPane TabPane;
     @FXML
-    private Tab CharacterCreatorTab;
+    private Tab CampaignViewTab;
     @FXML
     private TextField characterNameField;
     @FXML
@@ -46,6 +54,12 @@ public class Controller extends Application {
     private TextField wealthNewCharacter;
     @FXML
     private TextField xpNewCharacter;
+    @FXML
+    private TreeTableColumn currentCharacterTreeTableDisplay;
+    @FXML
+    private BarChart traitChart;
+    @FXML
+    private ListView characterList;
     private String raceName;
     private String dndClassName;
     private Campaign campaign;
@@ -53,7 +67,6 @@ public class Controller extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -63,16 +76,19 @@ public class Controller extends Application {
         stage.setTitle("D&D Game Master Thingy 3000");
         stage.show();
     }
-    public void onCreateNewCampaign(javafx.event.ActionEvent actionEvent) {
+
+    public void onCreateNewCampaign(ActionEvent actionEvent) {
         this.campaign = new Campaign();
         String campaignName = inputCampaignText.getText();
         campaign.setCampaignName(campaignName);
-        TabPane.getSelectionModel().select(CharacterCreatorTab);
+        Alert campaignCreated = new Alert(Alert.AlertType.CONFIRMATION,"Campaign "+campaign.getCampaignName()+" has been created",ButtonType.OK);
+        campaignCreated.showAndWait();
+        TabPane.getSelectionModel().select(CampaignViewTab);
     }
+
     public void onAddCharacterToCampaign(ActionEvent actionEvent){
-        this.campaign = new Campaign();
-        String name = characterNameField.getText();
         try {
+            String name = characterNameField.getText();
             Character character = new Character(name,dndClassName, raceName);
 
             if (ageNewCharacter.getText() != null) {
@@ -106,7 +122,7 @@ public class Controller extends Application {
             if (!Objects.equals(xpNewCharacter.getText(), "\\s")) {
                 character.setExperiencepoints(Integer.parseInt(xpNewCharacter.getText()));
             }
-            this.campaign.addCharacer(character);
+                this.campaign.addCharacer(character);
             createNewCharacterTab(character.getName(), character);
         }catch(NullPointerException e){
             Alert alert = new Alert(Alert.AlertType.ERROR,"Please enter a name and select a race and try again");
@@ -115,7 +131,8 @@ public class Controller extends Application {
             Alert numberAlert = new Alert(Alert.AlertType.ERROR,"Please enter an integer value for your Wealth and XP.");
             numberAlert.showAndWait();
         }
-
+        displayCharacters();
+        TabPane.getSelectionModel().selectPrevious();
     }
     @SuppressWarnings("EmptyMethod")
     public void loadCurrentCharacters(TreeTableColumn.CellEditEvent cellEditEvent) {
@@ -125,6 +142,7 @@ public class Controller extends Application {
     public void displayDieRollResultInResultWindow(ActionEvent actionEvent) {
 
     }
+
     public void createNewCharacterTab(String tabName,Character character){
         Tab tab = new Tab(tabName);
         TextArea textArea = new TextArea();
@@ -133,14 +151,17 @@ public class Controller extends Application {
         textArea.setEditable(false);
         TabPane.getTabs().add(tab);
     }
+
     public void setRaceName(ActionEvent actionEvent){
             MenuItem item = (MenuItem)actionEvent.getSource();
             this.raceName = item.getText();
     }
+
     public void setClassName(ActionEvent actionEvent){
         MenuItem item = (MenuItem)actionEvent.getSource();
         this.dndClassName = item.getText();
     }
+
     public void clearAllNewCharacter(ActionEvent actionEvent){
         heightNewCharacter.clear();
         weightNewCharacter.clear();
@@ -156,7 +177,32 @@ public class Controller extends Application {
         this.raceName = null;
         this.dndClassName = null;
     }
+
     public void loadOldCampaign(ActionEvent actionEvent) {
 
     }
+
+    public void displayCharacters(){
+        ArrayList<String> characters = new ArrayList<>();
+        for(int i=0;i<campaign.getCharacters().size();i++){
+            characters.add(campaign.getCharacters().get(i).getName());
+        }
+        ObservableList<String> characterNames = FXCollections.observableArrayList(characters);
+        characterList.setItems(characterNames);
+
+    }
+
+    public void createChart(ActionEvent actionEvent){
+        Character activeCharacter = (Character)actionEvent.getSource();
+        XYChart.Series series = new XYChart.Series();
+        series.setName(activeCharacter.getName()+" Traits");
+        String[] traitNames = (String[])activeCharacter.getTraits().getTraitMap().keySet().toArray();
+        Integer[] traitValues = (Integer[])activeCharacter.getTraits().getTraitMap().entrySet().toArray();
+        for(int i =0;i<activeCharacter.getTraits().getTraitMap().size();i++){
+            series.getData().add(new XYChart.Data(traitNames[i],traitValues[i]));
+            //series.getData().add();
+        }
+        traitChart.getData().add(series);
+    }
+
 }
