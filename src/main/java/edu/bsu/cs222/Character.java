@@ -9,6 +9,7 @@ class Character {
     private Integer wealth, experiencepoints, hitPoints;
     private Race race;
     private dndClass dndClass;
+    private Integer initiative;
     private final Description characterDescription;
 
     public Character(String name, String dndClass, String raceName){
@@ -17,6 +18,7 @@ class Character {
         setRace(raceName);
         setDndClass(dndClass);
         setTraits();
+        rollForInitiative();
         this.experiencepoints = 0;
         this.wealth = 0;
         this.hitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
@@ -64,6 +66,10 @@ class Character {
         this.traits = characterTraits;
     }
 
+    public void setInitiative(Integer initiative){
+        this.initiative = initiative;
+    }
+
     public Description getCharacterDescription(){
         return this.characterDescription;
     }
@@ -72,8 +78,25 @@ class Character {
         return this.name;
     }
 
+    public String getdndClass(){
+        return this.dndClass.getName();
+    }
+
+    public String getRace(){
+        return this.race.getName();
+    }
+
     TraitMap getTraits(){
         return traits;
+    }
+
+    private void rollForInitiative(){
+        Die d20 = new Die(20);
+        this.initiative = d20.rollDie() + traits.getValue("Dexterity");
+    }
+
+    public Integer getInitiative(){
+        return this.initiative;
     }
 
     public String toString(){
@@ -115,4 +138,5 @@ class Character {
                 "]"+
                 "}";
     }
+
 }

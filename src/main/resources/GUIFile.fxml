@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -43,72 +40,47 @@
         </Menu>
     </MenuBar>
     <TabPane fx:id="TabPane" layoutY="35.0" prefHeight="368.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
-      <Tab text="Campaign">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <GridPane prefHeight="238.0" prefWidth="726.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
+        <Tab text="Campaign">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <GridPane prefHeight="238.0" prefWidth="726.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
-                     <children>
-                        <TextField fx:id="inputCampaignText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
-                        <Button fx:id="createNewCampaignBtn" mnemonicParsing="false" onAction="#onCreateNewCampaign" prefHeight="63.0" prefWidth="335.0" text="Create New Campaign" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="335.0" text="Load Campaign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                     </children>
-                  </GridPane>
-               </children>
+                    <TextField fx:id="inputCampaignText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
+                    <Button fx:id="createNewCampaignBtn" mnemonicParsing="false" onAction="#onCreateNewCampaign" prefHeight="63.0" prefWidth="335.0" text="Create New Campaign" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                    <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="335.0" text="Load Campaign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                </GridPane>
             </AnchorPane>
-        </content>
-      </Tab>
+        </Tab>
 
         <Tab fx:id="CampaignViewTab" text="Campaign View">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <SplitPane dividerPositions="0.7" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                         <SplitPane dividerPositions="0.75" layoutX="307.0" layoutY="41.0" prefHeight="229.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                        <children>
-                           <TitledPane animated="false" prefHeight="249.0" text="Characters" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="2.0">
-                             <content>
-                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <children>
-                                       <ListView fx:id="characterList" layoutX="14.0" layoutY="10.0" onMouseClicked="#createChart" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                                    </children>
-                                 </AnchorPane>
-                             </content>
-                           </TitledPane>
-                           <TitledPane animated="false" layoutX="337.0" prefHeight="249.0" text="Character Information" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0">
-                              <content>
-                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <children>
-                                       <BarChart fx:id="traitChart" layoutX="6.6" layoutY="13.6" prefHeight="173.0" prefWidth="235.0" title="Trait Values" AnchorPane.bottomAnchor="-15.0" AnchorPane.leftAnchor="-20.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0">
-                                         <xAxis>
-                                           <CategoryAxis label="Trait Name" side="BOTTOM" />
-                                         </xAxis>
-                                         <yAxis>
-                                           <NumberAxis autoRanging="false" label="Value" minorTickCount="10" side="LEFT" tickLabelGap="1.0" upperBound="30.0" />
-                                         </yAxis>
-                                       </BarChart>
-                                    </children>
-                                 </AnchorPane>
-                              </content>
-                           </TitledPane>
-                        </children>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="249.0" prefWidth="536.0">
+                                <TitledPane animated="false" prefHeight="249.0" text="Characters" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="2.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                        <ListView fx:id="characterList" layoutX="14.0" layoutY="10.0" onMouseClicked="#createChart" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                    </AnchorPane>
+                                </TitledPane>
+                                <TitledPane fx:id="chartPane" animated="false" layoutX="337.0" prefHeight="249.0" prefWidth="229.0" text="Character Information" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="275.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                </TitledPane>
                             </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                <ListView fx:id="combatOrderList" layoutX="-38.0" layoutY="-17.0" prefHeight="227.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
                                 <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <Menu mnemonicParsing="false" text="Combat Order">
-                                        <MenuItem fx:id="generateNewCombatOrder" mnemonicParsing="false" text="Generate Combat Order" />
-                                        <MenuItem fx:id="clearCombatOrder" mnemonicParsing="false" text="Clear" />
+                                        <MenuItem fx:id="generateNewCombatOrder" mnemonicParsing="false" onAction="#generateCombatOrder" text="Generate Combat Order" />
+                                        <MenuItem fx:id="clearCombatOrder" mnemonicParsing="false" onAction="#clearCombatOrder" text="Clear" />
                                     </Menu>
                                 </MenuBar>
+                        <ListView fx:id="CombatOrderDisplay" layoutX="-36.0" layoutY="24.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0" />
                             </AnchorPane>
                         </SplitPane>
                     </AnchorPane>
@@ -192,25 +164,25 @@
                                         </padding>
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <TextField fx:id="weightNewCharacter" promptText="Weight" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                                        <TextField fx:id="ageNewCharacter" promptText="Age" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                        <TextField fx:id="eyeColorNewCharacter" promptText="Eye Color" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                                        <TextField fx:id="skinColorNewCharacter" promptText="Skin Color" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                                        <TextField fx:id="alignmentNewCharacter" promptText="Alignment" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                                        <TextField fx:id="languagesNewCharacter" promptText="Languages" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                                        <TextField fx:id="flawsNewCharacter" promptText="Flaws" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                        <TextField fx:id="setWeight" promptText="Weight" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                        <TextField fx:id="setAge" promptText="Age" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                        <TextField fx:id="setEyeColor" promptText="Eye Color" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                        <TextField fx:id="setSkinColor" promptText="Skin Color" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                        <TextField fx:id="setAlignment" promptText="Alignment" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                        <TextField fx:id="setLanguages" promptText="Languages" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                        <TextField fx:id="setFlaws" promptText="Flaws" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:" GridPane.columnIndex="2" GridPane.rowIndex="10" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Race:" GridPane.rowIndex="2" />
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" GridPane.rowIndex="3" />
-                                        <TextField fx:id="wealthNewCharacter" promptText="Wealth" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                                        <TextField promptText="Experience Points" text="0" GridPane.columnIndex="3" GridPane.rowIndex="10" fx:id="xpNewCharacter" />
+                                        <TextField fx:id="setWealth" promptText="Wealth" text="0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                                        <TextField fx:id="setXP" promptText="Experience Points" text="0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                                         <MenuButton fx:id="selectRaceNewCharacter" focusTraversable="false" mnemonicParsing="false" text="Select Race" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                             <items>
                                                 <MenuItem fx:id="menuItemDwarf" mnemonicParsing="false" onAction="#setRaceName" text="Dwarf" />
@@ -228,7 +200,7 @@
                                                 <MenuItem fx:id="menuItemForestGnome" mnemonicParsing="false" onAction="#setRaceName" text="Forest Gnome" />
                                                 <MenuItem fx:id="menuItemDeepGnome" mnemonicParsing="false" onAction="#setRaceName" text="Deep Gnome" />
                                                 <MenuItem fx:id="menuItemRockGnome" mnemonicParsing="false" onAction="#setRaceName" text="Rock Gnome" />
-                                                <MenuItem fx:id="menuItemHalfOrc" mnemonicParsing="false" onAction="#setRaceName" text="Half-Orc" />
+                                                <MenuItem fx:id="menuItemHalfOrc" mnemonicParsing="false" onAction="#setRaceName" text="Half Orc" />
                                                 <MenuItem fx:id="menuItemTiefling" mnemonicParsing="false" onAction="#setRaceName" text="Tiefling" />
                                             </items>
                                         </MenuButton>
@@ -249,7 +221,7 @@
                                                                          </items>
                                                                        </MenuButton>
                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:" GridPane.rowIndex="1" />
-                                        <TextField fx:id="heightNewCharacter" promptText="Height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                        <TextField fx:id="setHeight" promptText="Height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                     </GridPane>
                                 </ScrollPane>
                             </AnchorPane>

@@ -111,7 +111,7 @@ class raceList {
         Race RockGnome = new Race("Rock Gnome",RockGnomeTraits);
         Race Stout = new Race("Stout",StoutTraits);
         Race Tiefling = new Race("Tiefling",TieflingTraits);
-        Race WoodElf = new Race("Woof Elf",WoodElfTraits);
+        Race WoodElf = new Race("Wood Elf",WoodElfTraits);
         races[0]=(DeepGnome);
         races[1]=(Dragonborn);
         races[2]=(Dwarf);
