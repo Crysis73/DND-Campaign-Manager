@@ -423,14 +423,14 @@ public class Controller extends Application {
             if (traitCheckTotal >= difficultyClass) {
                 resultWindow.setText("SUCCESS");
                 Alert success = new Alert(Alert.AlertType.INFORMATION, characterName + "'s roll of " + advantageRoll +
-                        " added to their " + traitName + " score of " + character.getTraits().getValue(traitName) +
+                        " added to their " + traitName + " modifier of " + abilityModifier +
                         " was greater than or equal to the difficulty class of :" + difficultyClass, ButtonType.OK);
                 success.setHeaderText("Success");
                 success.showAndWait();
             } else {
                 resultWindow.setText("FAILURE");
                 Alert failure = new Alert(Alert.AlertType.INFORMATION, characterName + "'s roll of " + advantageRoll +
-                        " added to their " + traitName + " score of " + character.getTraits().getValue(traitName) +
+                        " added to their " + traitName + " modifier of " + abilityModifier +
                         " was less than the difficulty class of :" + difficultyClass, ButtonType.OK);
                 failure.setHeaderText("Failure");
                 failure.showAndWait();
@@ -453,7 +453,7 @@ public class Controller extends Application {
             }
             if(e.getMessage().equals("Advantage Roll Not Performed")){
                 Alert noRoll = new Alert(Alert.AlertType.ERROR,"No advantage roll performed");
-                noRoll.setHeaderText("How the fuck");
+                //noRoll.setHeaderText("How the fuck");
                 noRoll.showAndWait();
             }
         }catch(ArrayIndexOutOfBoundsException e){

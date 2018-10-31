@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static java.lang.Math.min;
 import static java.lang.StrictMath.max;
 
 @SuppressWarnings("WeakerAccess")
@@ -172,16 +173,23 @@ public class testFinalProject {
         Assert.assertNotNull(myCampaign.generateJsonString());
     }
 
-    /*
     @Test
     public void testRollDieTwiceUseGreatest(){
-        Die d6 = new Die(6);
-        Integer value1 = d6.rollDie();
-        Integer value2 = d6.rollDie();
+        Die d20 = new Die(20);
+        Integer value1 = d20.rollDie();
+        Integer value2 = d20.rollDie();
         Integer result = (max(value1,value2));
-        System.out.println(value1,value2,result)
         Assert.assertTrue(result>= value1 && result>=value2);
     }
-    */
+
+    @Test
+    public void testRollDieTwiceUseLeast(){
+        Die d20 = new Die(20);
+        Integer value1 = d20.rollDie();
+        Integer value2 = d20.rollDie();
+        Integer result = (min(value1,value2));
+        Assert.assertTrue(result<= value1 && result<=value2);
+    }
+
 
 }
