@@ -2,6 +2,9 @@ package edu.bsu.cs222;
 
 import java.util.Random;
 
+import static java.lang.StrictMath.max;
+import static java.lang.StrictMath.min;
+
 class Die {
     private final int sides;
 
@@ -12,10 +15,6 @@ class Die {
 
     Integer rollDie(){
         Random randomNumberList = new Random();
-        /*
-
-         */
-
         return randomNumberList.nextInt(sides)+1;
     }
 
@@ -42,5 +41,17 @@ class Die {
             result += results[i];
         }
         return result;
+    }
+
+    Integer rollDieTwiceUseGreatest(){
+        Integer value1 = rollDie();
+        Integer value2 = rollDie();
+        return(max(value1,value2));
+    }
+
+    Integer rollDieTwiceUseLeast(){
+        Integer value1 = rollDie();
+        Integer value2 = rollDie();
+        return min(value1,value2);
     }
 }

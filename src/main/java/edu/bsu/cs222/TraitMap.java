@@ -9,11 +9,11 @@ public class TraitMap {
 
     TraitMap(){
         Map<String, Integer> traitmap = new HashMap<>();
-        ArrayList<String> traitNames = new ArrayList<>(Arrays.asList("Strength", "Dexterity", "Intelligence", "Wisdom", "Charisma", "Constitution"));
-        for (int i=0; i<=traitNames.size()-1;i++){
+        ArrayList<String> traitNames = new ArrayList<>(Arrays.asList("Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"));
+        for (String traitName : traitNames) {
             Die d6 = new Die(6);
             Integer value = d6.rollD6FourTimesDropLeast();
-            traitmap.put(traitNames.get(i),value);
+            traitmap.put(traitName, value);
         }
         this.traitMap = traitmap;
 

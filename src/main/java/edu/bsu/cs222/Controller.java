@@ -20,7 +20,7 @@ import java.lang.reflect.MalformedParametersException;
 import java.util.ArrayList;
 import java.util.Map;
 
-@SuppressWarnings({"WeakerAccess", "EmptyMethod", "unchecked"})
+@SuppressWarnings({"WeakerAccess", "unchecked"})
 public class Controller extends Application {
     @FXML
     private TextField inputCampaignText;
@@ -60,10 +60,21 @@ public class Controller extends Application {
     private TitledPane chartPane;
     @FXML
     private ListView CombatOrderDisplay;
+    @FXML
+    private ChoiceBox characterChoiceBox;
+    @FXML
+    private ChoiceBox traitChoiceBox;
+    @FXML
+    private TextField resultWindow;
+    @FXML
+    private ComboBox difficultyClassComboBox;
+    @FXML
+    private Spinner<String> advantageSpinner;
     private String raceName;
     private String dndClassName;
     private Campaign campaign;
     private Character activeCharacter;
+    private boolean hasAdvantage;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -77,12 +88,13 @@ public class Controller extends Application {
         stage.setScene(scene);
         stage.setTitle("D&D Game Master Thingy 3000");
         stage.show();
+
     }
 
     public void onCreateNewCampaign(ActionEvent actionEvent) {
         try {
             String campaignName = inputCampaignText.getText();
-            if(campaignName==null||campaignName.equals("")){
+            if(campaignName==null||campaignName.equals("")||campaignName.equals("\\s")){
                 throw new IllegalArgumentException("Campaign name is null");
             }
             this.campaign = new Campaign();
@@ -90,6 +102,9 @@ public class Controller extends Application {
             Alert campaignCreated = new Alert(Alert.AlertType.CONFIRMATION, "Campaign " + campaign.getCampaignName() + " has been created", ButtonType.OK);
             campaignCreated.showAndWait();
             TabPane.getSelectionModel().select(CampaignViewTab);
+            initializeTraitChoices();
+            initializeDifficultyClasses();
+            initializeAdvantageStates();
         }catch(IllegalArgumentException e){
             Alert noCampaignName = new Alert(Alert.AlertType.ERROR,"Campaign name cannot be empty!",ButtonType.OK);
             noCampaignName.setHeaderText("No Campaign Name");
@@ -97,7 +112,7 @@ public class Controller extends Application {
         }
     }
 
-    public String getCreatedCharacterName(){
+    private String getCreatedCharacterName(){
         try{
             String name = characterNameField.getText();
             if(name==null || name.equals("")){
@@ -111,8 +126,6 @@ public class Controller extends Application {
         }
         return null;
     }
-
-
 
     public void onAddCharacterToCampaign(ActionEvent actionEvent) {
         try{
@@ -139,6 +152,7 @@ public class Controller extends Application {
             characterCreated.setTitle("Character Created");
             characterCreated.setHeaderText("SUCCESS");
             characterCreated.showAndWait();
+            initializeCharacterChoices();
         }catch(MalformedParametersException e){
             Alert noRaceAlert = new Alert(Alert.AlertType.ERROR,"You must select a Race before trying to create a character",ButtonType.OK);
             noRaceAlert.setHeaderText("No Race");
@@ -158,18 +172,7 @@ public class Controller extends Application {
         }
     }
 
-
-    @SuppressWarnings("EmptyMethod")
-    public void loadCurrentCharacters(TreeTableColumn.CellEditEvent cellEditEvent) {
-
-    }
-
-    @SuppressWarnings("EmptyMethod")
-    public void displayDieRollResultInResultWindow(ActionEvent actionEvent) {
-
-    }
-
-    public void createNewCharacterTab(String tabName,Character character){
+    private void createNewCharacterTab(String tabName, Character character){
         Tab tab = new Tab(tabName);
         TextArea textArea = new TextArea();
         tab.setContent(textArea);
@@ -252,11 +255,7 @@ public class Controller extends Application {
         }
     }
 
-    public void loadOldCampaign(ActionEvent actionEvent) {
-
-    }
-
-    public void displayCharacters(){
+    private void displayCharacters(){
         ArrayList<String> characters = new ArrayList<>();
         for(int i=0;i<campaign.getCharacters().size();i++){
             characters.add(campaign.getCharacters().get(i).getName());
@@ -265,7 +264,7 @@ public class Controller extends Application {
         characterList.setItems(characterNames);
     }
 
-    public void setActiveCharacter(String name){
+    private void setActiveCharacter(String name){
         for(int i =0;i<campaign.getCharacters().size();i++){
             if(campaign.getCharacters().get(i).getName().equals(name)){
                 this.activeCharacter = campaign.getCharacters().get(i);
@@ -278,6 +277,7 @@ public class Controller extends Application {
         ObservableList activeCharacterName = view.getSelectionModel().getSelectedItems();
         String characterName = activeCharacterName.toString().replace("[","").replace("]","");
         setActiveCharacter(characterName);
+        TraitMap test = activeCharacter.getTraits();
         final XYChart.Series<String,Integer> series = new XYChart.Series<>();
         final Map<String,Integer> characterTraits = activeCharacter.getTraits().getTraitMap();
         series.setName(activeCharacter.getName() + "'s Traits");
@@ -299,21 +299,170 @@ public class Controller extends Application {
         chart.setLegendSide(Side.TOP);
         chart.setPadding(new Insets(2,2,2,2));
         chartPane.setContent(chart);
-
-
-
     }
 
     public void generateCombatOrder(ActionEvent actionEvent){
+        clearCombatOrder(actionEvent);
         ArrayList charactersInCombatOrder = campaign.generateCombatOrder();
         for(int i=0;i<charactersInCombatOrder.size();i++){
             Character character = (Character) charactersInCombatOrder.get(charactersInCombatOrder.size()-i-1);
-            CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :"+(character.getInitiative()));
+            if(!CombatOrderDisplay.getItems().contains(character.getName() + "'s roll for initiative :"+(character.getInitiative()))){
+                CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :" + (character.getInitiative()));
+            }
         }
     }
 
-    public void clearCombatOrder(ActionEvent actionEvent){
+    @FXML
+    private void clearCombatOrder(ActionEvent actionEvent){
         CombatOrderDisplay.getItems().setAll();
     }
 
+    @FXML
+    private void initializeCharacterChoices(){
+        ArrayList<Character> characters = this.campaign.getCharacters();
+        ArrayList<String> characterNames = new ArrayList<>();
+        for (Character character : characters) {
+            characterNames.add(character.getName());
+        }
+        characterChoiceBox.getItems().setAll(characterNames);
+    }
+
+    private void initializeTraitChoices(){
+        TraitMap traits = new TraitMap();
+        ArrayList<String> traitNames = new ArrayList<>();
+        for(Map.Entry<String,Integer> entry : traits.getTraitMap().entrySet()){
+            traitNames.add(entry.getKey());
+        }
+        traitChoiceBox.getItems().setAll(traitNames);
+    }
+
+    private void initializeDifficultyClasses(){
+        ArrayList<String> difficultyClasses = new ArrayList<>();
+        ArrayList<Integer> difficultyClassValues = new ArrayList<>();
+        difficultyClasses.add("Very Easy");
+        difficultyClasses.add("Easy");
+        difficultyClasses.add("Medium");
+        difficultyClasses.add("Hard");
+        difficultyClasses.add("Very Hard");
+        difficultyClasses.add("Nearly Impossible");
+        difficultyClassValues.add(5);
+        difficultyClassValues.add(10);
+        difficultyClassValues.add(15);
+        difficultyClassValues.add(20);
+        difficultyClassValues.add(25);
+        difficultyClassValues.add(30);
+        difficultyClassComboBox.getItems().setAll(difficultyClasses);
+        difficultyClassComboBox.getItems().setAll(difficultyClassValues);
+    }
+
+    private void initializeAdvantageStates(){
+        ArrayList<String> advantageStates = new ArrayList<>();
+        advantageStates.add("Neutral");
+        advantageStates.add("Advantage");
+        advantageStates.add("Disadvantage");
+        ObservableList<String> list = FXCollections.observableArrayList(advantageStates);
+        SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(list);
+        advantageSpinner.setValueFactory(valueFactory);
+    }
+
+    private Integer rollBasedOnAdvantage(){
+        Integer value = 0;
+        Die d20 = new Die(20);
+        if(advantageSpinner.getValue().equals("Advantage")){
+            value = d20.rollDieTwiceUseGreatest();
+        }
+        if(advantageSpinner.getValue().equals("Neutral")){
+            value = d20.rollDie();
+        }
+        if(advantageSpinner.getValue().equals("Disadvantage")){
+            value = d20.rollDieTwiceUseLeast();
+        }
+        return value;
+    }
+
+    private Character getCharacter(String name){
+        for(int i=0;i<campaign.getCharacters().size();i++){
+            if(campaign.getCharacters().get(i).getName().equals(name)){
+                return campaign.getCharacters().get(i);
+            }
+        }
+        return null;
+    }
+
+    private String getTraitToCheck(){
+        return (String) traitChoiceBox.getItems().get(traitChoiceBox.getSelectionModel().getSelectedIndex());
+    }
+
+    private Integer getDifficultyClass(){
+        return (Integer) difficultyClassComboBox.getItems().get(difficultyClassComboBox.getSelectionModel().getSelectedIndex());
+    }
+
+    public void onTraitCheck(ActionEvent actionEvent){
+        try {
+            String characterName = (String) characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
+            if (characterName.equals("") || characterName.isEmpty()) {
+                throw new IllegalArgumentException("No Character Selected");
+            }
+            Character character = getCharacter(characterName);
+            String traitName = getTraitToCheck();
+            if(traitName.equals("")||traitName.isEmpty()){
+                throw new IllegalArgumentException("No Trait Selected");
+            }
+            Integer difficultyClass = getDifficultyClass();
+            if(difficultyClass == null){
+                throw new IllegalArgumentException("No Difficulty Class Selected");
+            }
+            Integer advantageRoll = rollBasedOnAdvantage();
+            if(advantageRoll == null){
+                throw new IllegalArgumentException("Advantage Roll Not Performed");
+            }
+            assert character != null;
+            Integer traitCheckTotal = character.getTraits().getValue(traitName) + advantageRoll;
+            if (traitCheckTotal >= difficultyClass) {
+                resultWindow.setText("SUCCESS");
+                Alert success = new Alert(Alert.AlertType.INFORMATION, characterName + "'s roll of " + advantageRoll +
+                        " added to their " + traitName + " score of " + character.getTraits().getValue(traitName) +
+                        " was greater than or equal to the difficulty class of :" + difficultyClass, ButtonType.OK);
+                success.setHeaderText("Success");
+                success.showAndWait();
+            } else {
+                resultWindow.setText("FAILURE");
+                Alert failure = new Alert(Alert.AlertType.INFORMATION, characterName + "'s roll of " + advantageRoll +
+                        " added to their " + traitName + " score of " + character.getTraits().getValue(traitName) +
+                        " was less than the difficulty class of :" + difficultyClass, ButtonType.OK);
+                failure.setHeaderText("Failure");
+                failure.showAndWait();
+            }
+        }catch(IllegalArgumentException e){
+            if(e.getMessage().equals("No Character Selected")){
+                Alert noCharacter = new Alert(Alert.AlertType.ERROR,"No character selected");
+                noCharacter.setHeaderText("Please select a character");
+                noCharacter.showAndWait();
+            }
+            if(e.getMessage().equals("No Trait Selected")){
+                Alert noTrait = new Alert(Alert.AlertType.ERROR,"No trait selected");
+                noTrait.setHeaderText("Please select a trait");
+                noTrait.showAndWait();
+            }
+            if(e.getMessage().equals("No Difficulty Class Selected")){
+                Alert noDifficultyClass = new Alert(Alert.AlertType.ERROR,"No Difficulty Class selected");
+                noDifficultyClass.setHeaderText("Please select a Difficulty Class");
+                noDifficultyClass.showAndWait();
+            }
+            if(e.getMessage().equals("Advantage Roll Not Performed")){
+                Alert noRoll = new Alert(Alert.AlertType.ERROR,"No advantage roll performed");
+                noRoll.setHeaderText("How the fuck");
+                noRoll.showAndWait();
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Please select a character and try again.");
+            alert.setHeaderText("No character selected");
+            alert.showAndWait();
+        }
+
+    }
+
+    @SuppressWarnings("EmptyMethod")
+    public void loadOldCampaign(ActionEvent actionEvent) {
+    }
 }

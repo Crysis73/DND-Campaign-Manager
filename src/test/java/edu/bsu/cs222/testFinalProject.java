@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static java.lang.StrictMath.max;
+
 @SuppressWarnings("WeakerAccess")
 public class testFinalProject {
 
@@ -26,7 +28,7 @@ public class testFinalProject {
             results[i] = d6.rollD6FourTimesDropLeast();
         }
         for (Integer result : results) {
-            Assert.assertTrue(result <= 18);
+            Assert.assertTrue(result <= 18 || result >=3);
         }
     }
 
@@ -168,6 +170,14 @@ public class testFinalProject {
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
         Assert.assertNotNull(myCampaign.generateJsonString());
+    }
+
+    @Test
+    public void testRollDieTwiceUseGreatest(){
+        Die d6 = new Die(6);
+        Integer value1 = d6.rollDie();
+        Integer value2 = d6.rollDie();
+        Integer value = (max(value1,value2));
     }
 
 }
