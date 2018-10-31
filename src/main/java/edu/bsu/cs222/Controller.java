@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import com.sun.org.apache.xpath.internal.functions.FuncFloor;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -417,7 +418,8 @@ public class Controller extends Application {
                 throw new IllegalArgumentException("Advantage Roll Not Performed");
             }
             assert character != null;
-            Integer traitCheckTotal = character.getTraits().getValue(traitName) + advantageRoll;
+            Integer abilityModifier = ((character.getTraits().getValue(traitName) - 10) / 2);
+            Integer traitCheckTotal = abilityModifier + advantageRoll;
             if (traitCheckTotal >= difficultyClass) {
                 resultWindow.setText("SUCCESS");
                 Alert success = new Alert(Alert.AlertType.INFORMATION, characterName + "'s roll of " + advantageRoll +
