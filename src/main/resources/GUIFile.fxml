@@ -61,20 +61,40 @@
             </AnchorPane>
         </Tab>
 
-        <Tab fx:id="CampaignViewTab" text="Campaign View">
+        <Tab fx:id="CampaignViewTab" disable="true" text="Campaign View">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <SplitPane dividerPositions="0.8" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
-                    <AnchorPane>
+                    <AnchorPane SplitPane.resizableWithParent="false">
                         <SplitPane dividerPositions="0.75" layoutX="307.0" layoutY="41.0" prefHeight="229.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0">
-                                <TitledPane animated="false" text="Characters" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="498.0" AnchorPane.topAnchor="5.0">
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                        <ListView fx:id="characterList" layoutX="14.0" layoutY="10.0" onMouseClicked="#createChart" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <TitledPane fx:id="charactersPane" expanded="false" text="Characters"
+                                                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                                        prefWidth="200.0">
+                                                <ListView fx:id="characterList" layoutX="14.0" layoutY="10.0"
+                                                          onMouseClicked="#createChart" AnchorPane.bottomAnchor="5.0"
+                                                          AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                                                          AnchorPane.topAnchor="5.0"/>
+                                            </AnchorPane>
+                                        </TitledPane>
                                     </AnchorPane>
-                                </TitledPane>
-                                <TitledPane fx:id="chartPane" animated="false" layoutX="171.0" layoutY="2.0" prefHeight="370.0" prefWidth="499.0" text="Character Traits" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                </TitledPane>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                            <TitledPane fx:id="chartPane" expanded="false" prefHeight="428.0"
+                                                        prefWidth="465.0" text="Character Traits">
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                                            prefWidth="200.0"/>
+                                            </TitledPane>
+                                        </VBox>
+                                    </AnchorPane>
+                                </SplitPane>
                             </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                 <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -88,75 +108,95 @@
                         </SplitPane>
                     </AnchorPane>
                     <AnchorPane prefHeight="104.0" prefWidth="898.0" SplitPane.resizableWithParent="false">
-                        <ToolBar layoutY="1.0" prefHeight="25.0" prefWidth="898.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
-                            <Button fx:id="rollDieButton" mnemonicParsing="false" onAction="#onTraitCheck" text="Trait Check" />
-                        </ToolBar>
-                        <AnchorPane layoutX="151.0" layoutY="93.0" minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="93.0">
-                            <HBox alignment="CENTER" focusTraversable="true" layoutX="36.0" layoutY="-61.0" prefHeight="73.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-61.0">
-                                <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                </padding>
-                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                    <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
-                                        <StackPane.margin>
-                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                        </StackPane.margin>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Character:" />
-                              <ChoiceBox fx:id="characterChoiceBox" onMouseClicked="#initializeCharacterChoices" prefWidth="150.0" />
-                                    </VBox>
-                                </StackPane>
-                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                    <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                        <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <ToolBar prefHeight="25.0" prefWidth="898.0" AnchorPane.bottomAnchor="0.0"
+                                         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                         AnchorPane.topAnchor="0.0">
+                                    <Button fx:id="rollDieButton" alignment="CENTER" contentDisplay="CENTER"
+                                            mnemonicParsing="false" onAction="#onTraitCheck" text="Trait Check"
+                                            textAlignment="CENTER">
                                         <opaqueInsets>
-                                            <Insets />
+                                            <Insets/>
                                         </opaqueInsets>
-                                        <StackPane.margin>
-                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                        </StackPane.margin>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trait:" />
-                              <ChoiceBox fx:id="traitChoiceBox" prefWidth="150.0" />
-                                    </VBox>
-                                </StackPane>
-                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                    <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
-                                        <opaqueInsets>
-                                            <Insets />
-                                        </opaqueInsets>
-                                        <StackPane.margin>
-                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                        </StackPane.margin>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty Class:" />
-                                        <ComboBox fx:id="difficultyClassComboBox" prefWidth="150.0" />
-                                    </VBox>
-                                </StackPane>
-                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                    <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0" StackPane.alignment="CENTER">
-                                        <StackPane.margin>
-                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                        </StackPane.margin>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Advantage:" />
-                                        <Spinner fx:id="advantageSpinner" />
-                                    </VBox>
-                                </StackPane>
-                                <StackPane prefHeight="150.0" prefWidth="200.0">
-                                    <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
-                                        <opaqueInsets>
-                                            <Insets />
-                                        </opaqueInsets>
-                                        <StackPane.margin>
-                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                        </StackPane.margin>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Result:" />
-                                        <TextField fx:id="resultWindow" alignment="CENTER" editable="false" maxWidth="-Infinity" prefWidth="150.0" />
-                                    </VBox>
-                                </StackPane>
-                            </HBox>
-                        </AnchorPane>
+                                    </Button>
+                                </ToolBar>
+                            </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <HBox alignment="CENTER_LEFT" fillHeight="false" focusTraversable="true"
+                                      prefHeight="73.0"
+                                      prefWidth="898.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                            <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </StackPane.margin>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Character:"/>
+                                            <ChoiceBox fx:id="characterChoiceBox"
+                                                       onMouseClicked="#initializeCharacterChoices" prefWidth="150.0"/>
+                                        </VBox>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                            <opaqueInsets>
+                                                <Insets/>
+                                            </opaqueInsets>
+                                            <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </StackPane.margin>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Trait:"/>
+                                            <ChoiceBox fx:id="traitChoiceBox" prefWidth="150.0"/>
+                                        </VBox>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                            <opaqueInsets>
+                                                <Insets/>
+                                            </opaqueInsets>
+                                            <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </StackPane.margin>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Difficulty Class:"/>
+                                            <ComboBox fx:id="difficultyClassComboBox" prefWidth="150.0"/>
+                                        </VBox>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0"
+                                              StackPane.alignment="CENTER">
+                                            <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </StackPane.margin>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Advantage:"/>
+                                            <Spinner fx:id="advantageSpinner"/>
+                                        </VBox>
+                                    </StackPane>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="219.0">
+                                            <opaqueInsets>
+                                                <Insets/>
+                                            </opaqueInsets>
+                                            <StackPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                            </StackPane.margin>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Result:"/>
+                                            <TextField fx:id="resultWindow" alignment="CENTER" editable="false"
+                                                       maxWidth="-Infinity" prefWidth="150.0"/>
+                                        </VBox>
+                                    </StackPane>
+                                </HBox>
+                            </AnchorPane>
+                        </SplitPane>
                     </AnchorPane>
                 </SplitPane>
             </AnchorPane>
         </Tab>
-        <Tab text="Character Creator">
+        <Tab fx:id="CharacterCreatorTab" disable="true" text="Character Creator">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                 <padding>
                     <Insets left="5.0" right="5.0" top="5.0" />

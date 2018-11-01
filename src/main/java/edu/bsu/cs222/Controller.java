@@ -1,13 +1,11 @@
 package edu.bsu.cs222;
 
-import com.sun.org.apache.xpath.internal.functions.FuncFloor;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -29,6 +27,8 @@ public class Controller extends Application {
     private TabPane TabPane;
     @FXML
     private Tab CampaignViewTab;
+    @FXML
+    private Tab CharacterCreatorTab;
     @FXML
     private TextField characterNameField;
     @FXML
@@ -59,6 +59,8 @@ public class Controller extends Application {
     private ListView characterList;
     @FXML
     private TitledPane chartPane;
+    @FXML
+    private TitledPane charactersPane;
     @FXML
     private ListView CombatOrderDisplay;
     @FXML
@@ -98,6 +100,9 @@ public class Controller extends Application {
             if(campaignName==null||campaignName.equals("")||campaignName.equals("\\s")){
                 throw new IllegalArgumentException("Campaign name is null");
             }
+            if(campaignName.trim().isEmpty()){
+                throw new IllegalArgumentException("Campaign name cannot ONLY be spaces");
+            }
             this.campaign = new Campaign();
             campaign.setCampaignName(campaignName);
             Alert campaignCreated = new Alert(Alert.AlertType.CONFIRMATION, "Campaign " + campaign.getCampaignName() + " has been created", ButtonType.OK);
@@ -106,10 +111,19 @@ public class Controller extends Application {
             initializeTraitChoices();
             initializeDifficultyClasses();
             initializeAdvantageStates();
+            CampaignViewTab.disableProperty().setValue(false);
+            CharacterCreatorTab.disableProperty().set(false);
         }catch(IllegalArgumentException e){
-            Alert noCampaignName = new Alert(Alert.AlertType.ERROR,"Campaign name cannot be empty!",ButtonType.OK);
-            noCampaignName.setHeaderText("No Campaign Name");
-            noCampaignName.showAndWait();
+            if(e.getMessage().equals("Campaign name is null")) {
+                Alert noCampaignName = new Alert(Alert.AlertType.ERROR, "Campaign name cannot be empty!", ButtonType.OK);
+                noCampaignName.setHeaderText("No Campaign Name");
+                noCampaignName.showAndWait();
+            }
+            if(e.getMessage().equals("Campaign name cannot ONLY be spaces")){
+                Alert nameIsSpaces = new Alert(Alert.AlertType.ERROR, "Campaign name cannot only be spaces", ButtonType.OK);
+                nameIsSpaces.setHeaderText("Campaign Name is only spaces");
+                nameIsSpaces.showAndWait();
+            }
         }
     }
 
@@ -134,8 +148,11 @@ public class Controller extends Application {
             if(characterName ==null || characterName.equals("")){
                 throw new NullPointerException("Character name is empty");
             }
+            if(characterName.trim().isEmpty()){
+                throw new IllegalArgumentException("Character name cannot ONLY be spaces");
+            }
             for(int i =0;i<campaign.getCharacters().size();i++){
-                if(characterName.equals(campaign.getCharacters().get(i).getName())){
+                if(characterName.trim().equals(campaign.getCharacters().get(i).getName().trim())){
                     throw new IllegalArgumentException("Character already exists!");
                 }
             }
@@ -146,6 +163,7 @@ public class Controller extends Application {
                 throw new IllegalArgumentException("Class not selected");
             }
             Character character = new Character(characterName, dndClassName, raceName);
+            addDescription(character);
             campaign.addCharacer(character);
             createNewCharacterTab(character.getName(),character);
             displayCharacters();
@@ -154,20 +172,40 @@ public class Controller extends Application {
             characterCreated.setHeaderText("SUCCESS");
             characterCreated.showAndWait();
             initializeCharacterChoices();
+            charactersPane.expandedProperty().set(true);
         }catch(MalformedParametersException e){
             Alert noRaceAlert = new Alert(Alert.AlertType.ERROR,"You must select a Race before trying to create a character",ButtonType.OK);
             noRaceAlert.setHeaderText("No Race");
             noRaceAlert.showAndWait();
         }catch(IllegalArgumentException e){
             if(e.getMessage().equals("Character already exists!")){
-                Alert existingCharacter = new Alert(Alert.AlertType.ERROR,"Character already exists!");
+                Alert existingCharacter = new Alert(Alert.AlertType.ERROR,"A character with that name already exists!");
                 existingCharacter.setHeaderText("Existing Character");
                 existingCharacter.showAndWait();
-            }else {
+            }
+            if(e.getMessage().equals("Wealth must be an integer value")){
+                Alert wealthNonInteger = new Alert(Alert.AlertType.ERROR,"Wealth must be an integer value");
+                wealthNonInteger.setHeaderText("Non Integer Wealth");
+                wealthNonInteger.show();
+            }
+            if(e.getMessage().equals("XP must be an integer value")){
+                Alert XPNonInteger = new Alert(Alert.AlertType.ERROR,"XP must be an integer value");
+                XPNonInteger.setHeaderText("Non Integer XP");
+                XPNonInteger.showAndWait();
+            }
+            if(e.getMessage().equals("Class not selected")){
                 Alert noClassAlert = new Alert(Alert.AlertType.ERROR, "You must select a Class before trying to create a Character");
                 noClassAlert.setHeaderText("No Class");
                 noClassAlert.showAndWait();
             }
+            if(e.getMessage().equals("Character name cannot ONLY be spaces")){
+                Alert nameIsSpace = new Alert(Alert.AlertType.ERROR,"Character name cannot only be spaces");
+                nameIsSpace.setHeaderText("Name is only spaces");
+                nameIsSpace.showAndWait();
+            }else{
+                //
+            }
+
         }catch(NullPointerException e){
             //This is being caught to avoid redundant alerts for not having inputted a character name.
         }
@@ -218,7 +256,13 @@ public class Controller extends Application {
         descriptionItems.add(setAlignment.getText());
         descriptionItems.add(setLanguages.getText());
         descriptionItems.add(setFlaws.getText());
+        if(setWealth.getText().matches(".*[a-zA-Z]+.*")){
+            throw new IllegalArgumentException("Wealth must be an integer value");
+        }
         descriptionItems.add(setWealth.getText());
+        if(setXP.getText().matches(".*[a-zA-Z]+.*")){
+            throw new IllegalArgumentException("XP must be an integer value");
+        }
         descriptionItems.add(setXP.getText());
         for (String descriptionItem : descriptionItems) {
             if (descriptionItem != null) {
@@ -298,8 +342,13 @@ public class Controller extends Application {
         ((NumberAxis) yAxis).setLowerBound(0);
         ((NumberAxis) yAxis).setUpperBound(20);
         chart.setLegendSide(Side.TOP);
-        chart.setPadding(new Insets(2,2,2,2));
+        chart.setLegendVisible(false);
+        chart.animatedProperty().setValue(true);
         chartPane.setContent(chart);
+        chartPane.expandedProperty().setValue(true);
+
+
+
     }
 
     public void generateCombatOrder(ActionEvent actionEvent){

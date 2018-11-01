@@ -188,7 +188,7 @@ public class testFinalProject {
         Integer value1 = d20.rollDie();
         Integer value2 = d20.rollDie();
         Integer result = (min(value1,value2));
-        Assert.assertTrue(result<= value1 && result<=value2);
+        Assert.assertTrue(result <= value1);
     }
 
 
