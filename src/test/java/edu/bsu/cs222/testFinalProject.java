@@ -170,6 +170,7 @@ public class testFinalProject {
         myCampaign.addCharacer(Jack);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
+        System.out.println(myCampaign.generateJsonString());
         Assert.assertNotNull(myCampaign.generateJsonString());
     }
 
@@ -189,6 +190,13 @@ public class testFinalProject {
         Integer value2 = d20.rollDie();
         Integer result = (min(value1,value2));
         Assert.assertTrue(result <= value1);
+    }
+
+    @Test
+    public void testJsonLoader(){
+        String filename = "myCampaign.json";
+        JsonLoader loader = new JsonLoader();
+        loader.fromJsontoCampaign(filename);
     }
 
 

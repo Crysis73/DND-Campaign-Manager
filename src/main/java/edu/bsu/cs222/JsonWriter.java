@@ -17,8 +17,9 @@ class JsonWriter {
         String jsonString = campaign.generateJsonString();
         JsonCampaign.add(jsonString);
         try (FileWriter file = new FileWriter(campaign.getCampaignName()+".json")) {
-            file.write(JsonCampaign.toJSONString());
-            file.flush();
+            //String fileContents = campaign.getCampaignName().replace("\\","".trim());
+            file.write(jsonString);
+            //file.flush();
 
         } catch (IOException e) {
             e.printStackTrace();

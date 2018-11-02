@@ -125,6 +125,8 @@ class Character {
         //Add description
         //Add equipment
         return "{\"name\":\""+name+"\"," +
+                "\"race\":\""+this.race.getName()+"\","+
+                "\"dndclass\":\""+this.dndClass.getName()+"\","+
                 "\"wealth\":\""+wealth+"\"," +
                 "\"experiencepoints\":\""+experiencepoints+"\","+
                 "\"hitPoints\":\""+hitPoints+"\","+

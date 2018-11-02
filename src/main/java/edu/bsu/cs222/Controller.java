@@ -203,7 +203,7 @@ public class Controller extends Application {
                 nameIsSpace.setHeaderText("Name is only spaces");
                 nameIsSpace.showAndWait();
             }else{
-                //
+                e.printStackTrace();
             }
 
         }catch(NullPointerException e){

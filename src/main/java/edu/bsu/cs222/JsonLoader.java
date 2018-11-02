@@ -1,26 +1,51 @@
 package edu.bsu.cs222;
 
-// --Commented out by Inspection START (10/18/2018 5:49 PM):
-// --Commented out by Inspection START (10/18/2018 5:49 PM):
-////public class JsonLoader {
-////
-////// --Commented out by Inspection START (10/18/2018 5:49 PM):
-//////    public Campaign fromJsontoCampaign(String filename){
-//////        Campaign campaign = new Campaign(filename);
-//////        JsonParser parser = new JsonParser();
-//////        try{
-//////            FileReader reader = new FileReader(filename+".json");
-//////            JsonElement rootElement = parser.parse(reader);
-//////            JsonObject rootObject = rootElement.getAsJsonObject();
-//////            JsonArray jsoncampaign = rootObject.getAsJsonArray(filename);
-//////            JsonObject jsonCharacters = rootObject.getAsJsonObject(filename).getAsJsonObject("Characters");
-// --Commented out by Inspection STOP (10/18/2018 5:49 PM)
-////            System.out.println(jsonCharacters);
-////        } catch(IOException e) {
-// --Commented out by Inspection STOP (10/18/2018 5:49 PM)
-//            e.printStackTrace();
-//        }
-//        return campaign;
-//    }
-// --Commented out by Inspection STOP (10/18/2018 5:49 PM)
-//}
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class JsonLoader {
+
+    public Campaign fromJsontoCampaign(String filename){
+        try {
+            Campaign campaign = new Campaign();
+            campaign.setCampaignName(filename);
+            JsonParser parser = new JsonParser();
+            String data = readFileAsString(filename);
+            JsonElement rootElement = parser.parse(data);
+            JsonObject rootObject = rootElement.getAsJsonObject();
+            JsonObject jsonCampaign = rootObject.getAsJsonObject(filename.replace(".json",""));
+            JsonArray characters = jsonCampaign.getAsJsonArray("Characters");
+            for(int i =0;i<characters.size();i++){
+                String characterName = characters.get(i).getAsJsonObject().get("name").toString().replace("\"","");
+                String raceName = characters.get(i).getAsJsonObject().get("race").toString().replace("\"","");
+                String dndClassName = characters.get(i).getAsJsonObject().get("dndclass").toString().replace("\"","");
+                Character character = new Character(characterName,dndClassName,raceName);
+                System.out.println(character);
+                campaign.addCharacer(character);
+            }
+            System.out.println(characters.get(0));
+            System.out.println(characters.get(1));
+            System.out.println(jsonCampaign);
+            System.out.println(rootObject);
+            return campaign;
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String readFileAsString(String filename) throws IOException {
+        String data ="";
+        data = new String(Files.readAllBytes(Paths.get(filename)));
+        return data;
+    }
+}
