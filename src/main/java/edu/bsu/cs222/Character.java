@@ -1,8 +1,9 @@
 package edu.bsu.cs222;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
-class Character {
+class Character implements Comparable<Character> {
     private final String name;
     private TraitMap traits;
     private final LinkedList<Equipment> equipment;
@@ -29,7 +30,7 @@ class Character {
         this.wealth = startingValue;
     }
 
-    public void setExperiencepoints(Integer value){
+    void setExperiencepoints(Integer value){
         this.experiencepoints = value;
     }
 
@@ -99,6 +100,12 @@ class Character {
         return this.initiative;
     }
 
+    @Override
+    public int compareTo(Character character){
+        return(this.getInitiative() < character.getInitiative() ?-1 :
+                (Objects.equals(this.getInitiative(), character.getInitiative()) ? 0:1));
+    }
+
     public String toString(){
         String result = "";
         result+="Name : " + name +
@@ -122,11 +129,10 @@ class Character {
     }
 
     String generateJsonString(){
-        //Add description
         //Add equipment
         return "{\"name\":\""+name+"\"," +
-                "\"race\":\""+this.race.getName()+"\","+
-                "\"dndclass\":\""+this.dndClass.getName()+"\","+
+                "\"race\":\""+ this.race.getName()+"\","+
+                "\"dndclass\":\""+ this.dndClass.getName()+"\","+
                 "\"wealth\":\""+wealth+"\"," +
                 "\"experiencepoints\":\""+experiencepoints+"\","+
                 "\"hitPoints\":\""+hitPoints+"\","+
@@ -137,6 +143,9 @@ class Character {
                 "{\"Intelligence\": \""+ this.traits.getValue("Intelligence")+"\"},"+
                 "{\"Wisdom\": \""+ this.traits.getValue("Wisdom")+"\"},"+
                 "{\"Charisma\": \""+ this.traits.getValue("Charisma")+"\"}"+
+                "],"+
+                "\"Description\": ["+
+                getCharacterDescription().generateJsonString()+
                 "]"+
                 "}";
     }

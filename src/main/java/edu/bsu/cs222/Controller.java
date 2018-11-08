@@ -202,9 +202,8 @@ public class Controller extends Application {
                 Alert nameIsSpace = new Alert(Alert.AlertType.ERROR,"Character name cannot only be spaces");
                 nameIsSpace.setHeaderText("Name is only spaces");
                 nameIsSpace.showAndWait();
-            }else{
-                e.printStackTrace();
-            }
+            }//e.printStackTrace();
+
 
         }catch(NullPointerException e){
             //This is being caught to avoid redundant alerts for not having inputted a character name.

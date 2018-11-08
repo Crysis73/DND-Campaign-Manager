@@ -5,14 +5,8 @@ package edu.bsu.cs222;
 class dndClass {
     private final String name;
     private final String description;
-    private final Integer hitDice; //number of dice you roll to determine how many HitPoints you gain per level. Will need to implement scaling for levels.
+    private final Integer hitDice;
     private final Integer hitPointBonus;
-
-    /*
-    Passing all arguments through the constructor because classes are static. We will need to manually create each class that
-    users are able to choose from. These classes will have preset names, descriptions, and hitDice. The 'get' methods for name
-    and description will probably never be used but I added them just in case.
-     */
 
     dndClass(String name, String description, @SuppressWarnings("SameParameterValue") Integer hitDice) {
         this.name = name;
@@ -22,8 +16,7 @@ class dndClass {
         this.hitPointBonus = die.rollDie();
     }
 
-    public String getName() {
-
+    String getName() {
         return this.name;
     }
 
@@ -43,6 +36,6 @@ class dndClass {
     }
 
     public String toString(){
-        return("Class :\n\t"+name+" - added "+hitPointBonus+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
+        return("Class :\n\t"+name+" - added 1d"+hitDice+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
     }
 }

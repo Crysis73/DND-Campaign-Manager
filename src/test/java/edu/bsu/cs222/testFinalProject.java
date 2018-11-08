@@ -38,31 +38,7 @@ public class testFinalProject {
         Random randomNumberList = new Random();
         Integer[] results = new Integer[10000];
         for(int i=0;i<results.length;i++){
-            results[i] = randomNumberList.nextInt(7);
-            if(results[i]==0){
-                results[i] += randomNumberList.nextInt(7);
-                if(results[i]==0){
-                    results[i] += randomNumberList.nextInt(7);
-                }
-                    if(results[i]==0){
-                        results[i] += randomNumberList.nextInt(7);
-                    }
-                        if(results[i]==0){
-                            results[i] += randomNumberList.nextInt(7);
-                        }
-                            if(results[i]==0){
-                                results[i] += randomNumberList.nextInt(7);
-                            }
-                                if(results[i]==0){
-                                    results[i] += randomNumberList.nextInt(7);
-                                }
-                                    if(results[i]==0){
-                                        results[i] += randomNumberList.nextInt(7);
-                                        }
-                                        if(results[i]==0){
-                                            results[i] += randomNumberList.nextInt(7);
-                                        }
-            }
+            results[i] = randomNumberList.nextInt(6)+1;
             Assert.assertTrue(1<= results[i] && results[i]<=6 );
         }
     }
@@ -126,7 +102,6 @@ public class testFinalProject {
 
     @Test
     public void testCharacterCreation(){
-        dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack","Bard","Dwarf");
         Character Jill = new Character("Jill","Barbarian","Stout");
         Jill.setWealth(51);
@@ -155,8 +130,6 @@ public class testFinalProject {
             isGood = count >= 1;
         }
         Assert.assertTrue(isGood);
-
-
     }
 
     @Test
@@ -167,10 +140,10 @@ public class testFinalProject {
         dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack","Bard","Dwarf");
         Character Jill = new Character("Jill","Cleric","Rock Gnome");
+        Jill.getCharacterDescription().setPersonalityTrait2("Cool");
         myCampaign.addCharacer(Jack);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
-        System.out.println(myCampaign.generateJsonString());
         Assert.assertNotNull(myCampaign.generateJsonString());
     }
 

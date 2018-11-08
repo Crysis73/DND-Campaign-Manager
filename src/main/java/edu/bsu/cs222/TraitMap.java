@@ -32,7 +32,7 @@ public class TraitMap {
 
     }
 
-    public Map<String,Integer> getTraitMap(){
+    Map<String,Integer> getTraitMap(){
         return traitMap;
     }
 
@@ -40,11 +40,11 @@ public class TraitMap {
         return traitMap.get(trait);
     }
 
-    public void setValue(String trait, Integer value){
+    void setValue(String trait, Integer value){
         traitMap.replace(trait, value);
     }
 
-    public void setAllValues(Integer value){
+    void setAllValues(Integer value){
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
             entry.setValue(value);
         }

@@ -13,7 +13,7 @@ class Race {
         this.traitBonus = traitBonus;
     }
 
-    public TraitMap getTraitBonuses(){
+    TraitMap getTraitBonuses(){
         return this.traitBonus;
     }
 
@@ -28,11 +28,11 @@ class Race {
         return result.toString();
     }
 
-    public String getName(){
+    String getName(){
         return this.name;
     }
 
-    public void setDescription(String description){
+    void setDescription(String description){
         this.description = description;
     }
 

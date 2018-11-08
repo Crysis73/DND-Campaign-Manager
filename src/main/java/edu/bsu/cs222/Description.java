@@ -3,38 +3,28 @@ package edu.bsu.cs222;
 class Description {
     private String height, weight, age, eyeColor, skinColor, additionalFeatures, alignment, languages, exoticLanguages, personalityTrait1, personalityTrait2, ideals, bonds, flaws;
 
-    /*
-
-    Author: Casey Haskins
-
-    All of the member variables of this class are initialized by member variables so that the when creating a character
-    a player may be as detailed as they wish to be. Not all of these descriptors are necessary for game play, so we shouldn't
-    require a player/
-
-     */
-
-    public void setHeight(String height){
+    void setHeight(String height){
         this.height = height;
     }
-    public void setWeight(String weight){
+    void setWeight(String weight){
         this.weight = weight;
     }
-    public void setAge(String age){
+    void setAge(String age){
         this.age = age;
     }
-    public void setEyeColor(String eyeColor){
+    void setEyeColor(String eyeColor){
         this.eyeColor = eyeColor;
     }
-    public void setSkinColor(String skinColor){
+    void setSkinColor(String skinColor){
         this.skinColor = skinColor;
     }
     public void setAdditionalFeatures(String additionalFeatures){
         this.additionalFeatures = additionalFeatures;
     }
-    public void setAlignment(String alignment){
+    void setAlignment(String alignment){
         this.alignment = alignment;
     }
-    public void setLanguages(String languages){
+    void setLanguages(String languages){
         this.languages = languages;
     }
     public void setExoticLanguages(String exoticLanguages){
@@ -43,7 +33,8 @@ class Description {
     public void setPersonalityTrait1(String personalityTrait1){
         this.personalityTrait1 = personalityTrait1;
     }
-    public void setPersonalityTrait2(String personalityTrait2){
+    @SuppressWarnings("SameParameterValue")
+    void setPersonalityTrait2(String personalityTrait2){
         this.personalityTrait2 = personalityTrait2;
     }
     public void setIdeals(String ideals){
@@ -52,54 +43,62 @@ class Description {
     public void setBonds(String bonds){
         this.bonds = bonds;
     }
-    public void setFlaws(String flaws){
+    void setFlaws(String flaws){
         this.flaws = flaws;
+    }
+    void setAllValues(String height, String weight, String age, String eyeColor, String skinColor, String additionalFeatures,
+                      String alignment, String languages, String exoticLanguages, String personalityTrait1,
+                      String personalityTrait2, String ideals, String bonds, String flaws){
+        this.height = height;
+        this.weight = weight;
+        this.age = age;
+        this.eyeColor = eyeColor;
+        this.skinColor = skinColor;
+        this.additionalFeatures = additionalFeatures;
+        this.alignment = alignment;
+        this.languages = languages;
+        this.exoticLanguages = exoticLanguages;
+        this.personalityTrait1 = personalityTrait1;
+        this.personalityTrait2 = personalityTrait2;
+        this.ideals = ideals;
+        this.bonds = bonds;
+        this.flaws = flaws;
+
     }
 
     public String toString(){
+        return  "\n\tHeight : "+height+
+                "\n\tWeight : "+weight+
+                "\n\tAge : "+age+
+                "\n\tEye Color : "+eyeColor+
+                "\n\tSkin Color : "+skinColor+
+                "\n\tAdditional Features : "+additionalFeatures+
+                "\n\tAlignment : "+alignment+
+                "\n\tLanguages : "+languages+
+                "\n\tExotic Languages : "+exoticLanguages+
+                "\n\tPersonality Trait 1 : "+personalityTrait1+
+                "\n\tPersonality Trait 2 : "+personalityTrait2+
+                "\n\tIdeals : "+ideals+
+                "\n\tBonds : "+bonds+
+                "\n\tFlaws : "+flaws;
+    }
+
+    public String generateJsonString(){
         String result = "";
-        if(height !=null){
-            result += "\n\tHeight : "+height;
-        }
-        if(weight!=null){
-            result+= "\n\tWeight : "+weight;
-        }
-        if(age!=null){
-            result+= "\n\tAge : "+age;
-        }
-        if(eyeColor!=null){
-            result+="\n\tEye Color : "+eyeColor;
-        }
-        if(skinColor!=null){
-            result+="\n\tSkin Color : "+skinColor;
-        }
-        if(additionalFeatures!=null){
-            result+="\n\tAdditional Features : "+additionalFeatures;
-        }
-        if(alignment!=null){
-            result+="\n\tAlignment : "+alignment;
-        }
-        if(languages!=null){
-            result+="\n\tLanguages : "+languages;
-        }
-        if(exoticLanguages!=null){
-            result+="\n\tExotic Languages : "+exoticLanguages;
-        }
-        if(personalityTrait1!=null){
-            result+="\n\tPersonality Trait 1 : "+personalityTrait1;
-        }
-        if(personalityTrait2!=null){
-            result+="\n\tPersonality Trait 2 : "+personalityTrait2;
-        }
-        if(ideals!=null){
-            result+="\n\tIdeals : "+ideals;
-        }
-        if(bonds!=null){
-            result+="\n\tBonds : "+bonds;
-        }
-        if(flaws!=null){
-            result+="\n\tFlaws : "+flaws;
-        }
-        return result;
+            result +=  "{\"height\":\""+height+"\"},";
+            result+= "{\"weight\":\""+weight+"\"},";
+            result+= "{\"age\":\""+age+"\"},";
+            result+="{\"eyeColor\":\""+eyeColor+"\"},";
+            result+="{\"skinColor\":\""+skinColor+"\"},";
+            result+="{\"additionalFeatures\":\""+additionalFeatures+"\"},";
+            result+="{\"alignment\":\""+alignment+"\"},";
+            result+="{\"languages\":\""+languages+"\"},";
+            result+="{\"exoticLanguages\":\""+exoticLanguages+"\"},";
+            result+="{\"personalityTrait1\":\""+personalityTrait1+"\"},";
+            result+="{\"personalityTrait2\":\""+personalityTrait2+"\"},";
+            result+="{\"ideals\":\""+ideals+"\"},";
+            result+="{\"bonds\":\""+bonds+"\"},";
+            result+="{\"flaws\":\""+flaws+"\"}";
+            return result;
     }
 }

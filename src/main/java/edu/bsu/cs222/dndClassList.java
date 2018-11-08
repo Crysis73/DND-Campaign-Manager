@@ -35,7 +35,7 @@ class dndClassList {
         dndClasses[11]=Wizard;
     }
 
-    public dndClass[] getDndClasses(){
+    dndClass[] getDndClasses(){
         return this.dndClasses;
     }
 }

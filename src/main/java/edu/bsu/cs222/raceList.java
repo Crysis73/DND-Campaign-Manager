@@ -133,13 +133,13 @@ class raceList {
         initializeRaceDescriptions();
     }
 
-    public Race[] getRaces(){
+    Race[] getRaces(){
         return this.races;
     }
 
     private void initializeRaceDescriptions(){
         for (Race race : races) {
-            race.setDescription("https://www.dndbeyond.com/compendium/rules/basic-rules/races#" + race.getName().replace("\\s", ""));
+            race.setDescription("https://www.dndbeyond.com/compendium/rules/basic-rules/races#" + race.getName().replace(" ", ""));
         }
     }
 
