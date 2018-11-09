@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+@SuppressWarnings("ALL")
 class Equipment {
     private final String description;
     private Integer traitBonus;

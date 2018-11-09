@@ -1,12 +1,11 @@
 package edu.bsu.cs222;
 
-import java.util.LinkedList;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 class Character implements Comparable<Character> {
     private final String name;
     private TraitMap traits;
-    private final LinkedList<Equipment> equipment;
     private Integer wealth, experiencepoints, hitPoints;
     private Race race;
     private dndClass dndClass;
@@ -15,7 +14,6 @@ class Character implements Comparable<Character> {
 
     public Character(String name, String dndClass, String raceName){
         this.name = name;
-        this.equipment = new LinkedList<>();
         setRace(raceName);
         setDndClass(dndClass);
         setTraits();
@@ -34,12 +32,8 @@ class Character implements Comparable<Character> {
         this.experiencepoints = value;
     }
 
-    public void setHitPoints(Integer Value){
+    void setHitPoints(Integer Value){
         this.hitPoints = Value;
-    }
-
-    public void addEquipment(Equipment item){
-        equipment.add(item);
     }
 
     private void setRace(String raceName){
@@ -71,11 +65,11 @@ class Character implements Comparable<Character> {
         this.initiative = initiative;
     }
 
-    public Description getCharacterDescription(){
+    Description getCharacterDescription(){
         return this.characterDescription;
     }
 
-    public String getName(){
+    String getName(){
         return this.name;
     }
 
@@ -96,7 +90,7 @@ class Character implements Comparable<Character> {
         this.initiative = d20.rollDie() + traits.getValue("Dexterity");
     }
 
-    public Integer getInitiative(){
+    Integer getInitiative(){
         return this.initiative;
     }
 
@@ -121,9 +115,7 @@ class Character implements Comparable<Character> {
                     "\n\tCharisma : "+ this.traits.getValue("Charisma")+
                 "\nDescription: " +characterDescription+
                 "\n"+ race.toString() + "\n"+
-                dndClass.toString() + "\n"+
-                "\nEquipment : " + equipment;
-
+                dndClass.toString() + "\n";
         return result;
 
     }

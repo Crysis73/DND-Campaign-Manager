@@ -14,7 +14,6 @@ public class testFinalProject {
 
     @Test
     public void testSetTrait(){
-        dndClass Bard = new dndClass("Bard","This is a test description",8);
         Character Jack = new Character("Jack","Bard","Dwarf");
         Jack.getTraits().setValue("Charisma", 10);
         Integer valueAfter = Jack.getTraits().getValue("Charisma");
@@ -96,7 +95,6 @@ public class testFinalProject {
     public void testTraitMapToString(){
         TraitMap traitMap = new TraitMap();
         traitMap.setAllValues(0);
-        LinkedList<String> compareList = new LinkedList<>();
         Assert.assertSame("[]", traitMap.toString());
     }
 
@@ -114,9 +112,8 @@ public class testFinalProject {
     public void testMergeTraitMaps(){
         raceList races = new raceList();
         TraitMap traitMap = new TraitMap();
-        TraitMap raceTraits = races.getRaces()[7].getTraitBonuses();
+        TraitMap raceTraits;
         Map<String,Integer> originalTraitMap = traitMap.getTraitMap();
-        TraitMap newTraitMap = traitMap.mergeTraitMaps(traitMap,raceTraits);
         boolean isGood = Boolean.FALSE;
         for(int i =0;i<races.getRaces().length;i++) {
             int count = 0;
@@ -137,7 +134,6 @@ public class testFinalProject {
         JsonWriter writer = new JsonWriter();
         Campaign myCampaign = new Campaign();
         myCampaign.setCampaignName("myCampaign");
-        dndClass Bard = new dndClass("Bard","This is a descrption",8);
         Character Jack = new Character("Jack","Bard","Dwarf");
         Character Jill = new Character("Jill","Cleric","Rock Gnome");
         Jill.getCharacterDescription().setPersonalityTrait2("Cool");

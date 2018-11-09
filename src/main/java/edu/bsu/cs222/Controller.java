@@ -22,62 +22,32 @@ import java.util.Map;
 @SuppressWarnings({"WeakerAccess", "unchecked"})
 public class Controller extends Application {
     @FXML
-    private TextField inputCampaignText;
-    @FXML
     private TabPane TabPane;
     @FXML
-    private Tab CampaignViewTab;
+    private Tab CampaignViewTab,CharacterCreatorTab;
+
     @FXML
-    private Tab CharacterCreatorTab;
+    private MenuButton selectRaceNewCharacter,selectClassNewCharacter;
     @FXML
-    private TextField characterNameField;
-    @FXML
-    private MenuButton selectRaceNewCharacter;
-    @FXML
-    private MenuButton selectClassNewCharacter;
-    @FXML
-    private TextField setAge;
-    @FXML
-    private TextField setHeight;
-    @FXML
-    private TextField setWeight;
-    @FXML
-    private TextField setEyeColor;
-    @FXML
-    private TextField setSkinColor;
-    @FXML
-    private TextField setAlignment;
-    @FXML
-    private TextField setLanguages;
-    @FXML
-    private TextField setFlaws;
-    @FXML
-    private TextField setWealth;
-    @FXML
-    private TextField setXP;
+    private TextField inputCampaignText, characterNameField, setAge, setHeight, setWeight, setEyeColor, setSkinColor, setAdditionalFeatures, setAlignment,
+            setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
+            setWealth, setXP, resultWindow;
     @FXML
     private ListView characterList;
     @FXML
-    private TitledPane chartPane;
-    @FXML
-    private TitledPane charactersPane;
+    private TitledPane chartPane,charactersPane;
     @FXML
     private ListView CombatOrderDisplay;
     @FXML
-    private ChoiceBox characterChoiceBox;
-    @FXML
-    private ChoiceBox traitChoiceBox;
-    @FXML
-    private TextField resultWindow;
-    @FXML
     private ComboBox difficultyClassComboBox;
+    @FXML
+    private ChoiceBox characterChoiceBox, traitChoiceBox;
     @FXML
     private Spinner<String> advantageSpinner;
     private String raceName;
     private String dndClassName;
     private Campaign campaign;
     private Character activeCharacter;
-    private boolean hasAdvantage;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -85,7 +55,6 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
         Pane root = FXMLLoader.load(getClass().getResource("/GUIFile.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -142,26 +111,32 @@ public class Controller extends Application {
         return null;
     }
 
+    public void checkCharacterValidity(String characterName){
+        if(characterName ==null || characterName.equals("")){
+            throw new NullPointerException("Character name is empty");
+        }
+        if(characterName.trim().isEmpty()){
+            throw new IllegalArgumentException("Character name cannot ONLY be spaces");
+        }
+        for(int i =0;i<campaign.getCharacters().size();i++){
+            if(characterName.trim().equals(campaign.getCharacters().get(i).getName().trim())){
+                throw new IllegalArgumentException("Character already exists!");
+            }
+        }
+        if(this.raceName == null){
+            throw new MalformedParametersException("Race not selected");
+        }
+        if(this.dndClassName == null){
+            throw new IllegalArgumentException("Class not selected");
+        }
+    }
+
+    //public void
+
     public void onAddCharacterToCampaign(ActionEvent actionEvent) {
         try{
             String characterName = getCreatedCharacterName();
-            if(characterName ==null || characterName.equals("")){
-                throw new NullPointerException("Character name is empty");
-            }
-            if(characterName.trim().isEmpty()){
-                throw new IllegalArgumentException("Character name cannot ONLY be spaces");
-            }
-            for(int i =0;i<campaign.getCharacters().size();i++){
-                if(characterName.trim().equals(campaign.getCharacters().get(i).getName().trim())){
-                    throw new IllegalArgumentException("Character already exists!");
-                }
-            }
-            if(this.raceName == null){
-                throw new MalformedParametersException("Race not selected");
-            }
-            if(this.dndClassName == null){
-                throw new IllegalArgumentException("Class not selected");
-            }
+            checkCharacterValidity(characterName);
             Character character = new Character(characterName, dndClassName, raceName);
             addDescription(character);
             campaign.addCharacer(character);
@@ -235,8 +210,14 @@ public class Controller extends Application {
         setAge.clear();
         setEyeColor.clear();
         setSkinColor.clear();
+        setAdditionalFeatures.clear();
         setAlignment.clear();
         setLanguages.clear();
+        setExoticLanguages.clear();
+        setPersonalityTrait1.clear();
+        setPersonalityTrait2.clear();
+        setIdeals.clear();
+        setBonds.clear();
         setFlaws.clear();
         characterNameField.clear();
         setWealth.setText("0");
@@ -246,58 +227,32 @@ public class Controller extends Application {
     }
 
     public void addDescription(Character character){
-        ArrayList<String> descriptionItems = new ArrayList<>();
-        descriptionItems.add(setAge.getText());
-        descriptionItems.add(setHeight.getText());
-        descriptionItems.add(setWeight.getText());
-        descriptionItems.add(setEyeColor.getText());
-        descriptionItems.add(setSkinColor.getText());
-        descriptionItems.add(setAlignment.getText());
-        descriptionItems.add(setLanguages.getText());
-        descriptionItems.add(setFlaws.getText());
+        String age = (setAge.getText());
+        String height = (setHeight.getText());
+        String weight = (setWeight.getText());
+        String eyeColor = (setEyeColor.getText());
+        String skinColor = (setSkinColor.getText());
+        String additionalFeatures = (setAdditionalFeatures.getText());
+        String alignment = (setAlignment.getText());
+        String languages = (setLanguages.getText());
+        String exoticLanguages = (setExoticLanguages.getText());
+        String personalityTrait1 = (setPersonalityTrait1.getText());
+        String personalityTrait2 = (setPersonalityTrait2.getText());
+        String ideals = (setIdeals.getText());
+        String bonds = (setBonds.getText());
+        String flaws = (setFlaws.getText());
         if(setWealth.getText().matches(".*[a-zA-Z]+.*")){
             throw new IllegalArgumentException("Wealth must be an integer value");
         }
-        descriptionItems.add(setWealth.getText());
+        Integer wealth = Integer.parseInt(setWealth.getText());
+        character.setWealth(wealth);
         if(setXP.getText().matches(".*[a-zA-Z]+.*")){
             throw new IllegalArgumentException("XP must be an integer value");
         }
-        descriptionItems.add(setXP.getText());
-        for (String descriptionItem : descriptionItems) {
-            if (descriptionItem != null) {
-                if (descriptionItem.equals(setAge.getText())) {
-                    character.getCharacterDescription().setAge(setAge.getText());
-                }
-                if (descriptionItem.equals(setHeight.getText())) {
-                    character.getCharacterDescription().setHeight(setHeight.getText());
-                }
-                if (descriptionItem.equals(setWeight.getText())) {
-                    character.getCharacterDescription().setWeight(setWeight.getText());
-                }
-                if (descriptionItem.equals(setEyeColor.getText())) {
-                    character.getCharacterDescription().setEyeColor(setEyeColor.getText());
-                }
-                if (descriptionItem.equals(setSkinColor.getText())) {
-                    character.getCharacterDescription().setSkinColor(setSkinColor.getText());
-                }
-                if (descriptionItem.equals(setAlignment.getText())) {
-                    character.getCharacterDescription().setAlignment(setAlignment.getText());
-                }
-                if (descriptionItem.equals(setLanguages.getText())) {
-                    character.getCharacterDescription().setLanguages(setLanguages.getText());
-                }
-                if (descriptionItem.equals(setFlaws.getText())) {
-                    character.getCharacterDescription().setFlaws(setFlaws.getText());
-                }
-                if (descriptionItem.equals(setWealth.getText())) {
-                    character.setWealth(Integer.parseInt(setWealth.getText()));
-                }
-                if (descriptionItem.equals(setXP.getText())) {
-                    character.setExperiencepoints(Integer.parseInt(setXP.getText()));
-                }
-            }
+        Integer XP = Integer.parseInt(setXP.getText());
+        character.setExperiencepoints(XP);
+        character.getCharacterDescription().setAllValues(height,weight,age,eyeColor,skinColor,additionalFeatures,alignment,languages,exoticLanguages,personalityTrait1,personalityTrait2,ideals,bonds,flaws);
         }
-    }
 
     private void displayCharacters(){
         ArrayList<String> characters = new ArrayList<>();
@@ -321,14 +276,12 @@ public class Controller extends Application {
         ObservableList activeCharacterName = view.getSelectionModel().getSelectedItems();
         String characterName = activeCharacterName.toString().replace("[","").replace("]","");
         setActiveCharacter(characterName);
-        TraitMap test = activeCharacter.getTraits();
         final XYChart.Series<String,Integer> series = new XYChart.Series<>();
         final Map<String,Integer> characterTraits = activeCharacter.getTraits().getTraitMap();
         series.setName(activeCharacter.getName() + "'s Traits");
         CategoryAxis xAxis = new CategoryAxis();
         Axis<? extends Number> yAxis = new NumberAxis();
         ObservableList<String> traitNames = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().keySet());
-        ObservableList<Integer> traitValues = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().values());
         for(final Map.Entry<String,Integer> entry: characterTraits.entrySet()){
             series.getData().add(new XYChart.Data<>(entry.getKey(),entry.getValue()));
         }
@@ -351,13 +304,22 @@ public class Controller extends Application {
     }
 
     public void generateCombatOrder(ActionEvent actionEvent){
-        clearCombatOrder(actionEvent);
-        ArrayList charactersInCombatOrder = campaign.generateCombatOrder();
-        for(int i=0;i<charactersInCombatOrder.size();i++){
-            Character character = (Character) charactersInCombatOrder.get(charactersInCombatOrder.size()-i-1);
-            if(!CombatOrderDisplay.getItems().contains(character.getName() + "'s roll for initiative :"+(character.getInitiative()))){
-                CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :" + (character.getInitiative()));
+        try{
+            clearCombatOrder(actionEvent);
+            ArrayList charactersInCombatOrder = campaign.generateCombatOrder();
+            if(charactersInCombatOrder.size()==0){
+                throw new IllegalArgumentException("No characters");
             }
+            for (int i = 0; i < charactersInCombatOrder.size(); i++) {
+                Character character = (Character) charactersInCombatOrder.get(charactersInCombatOrder.size() - i - 1);
+                if (!CombatOrderDisplay.getItems().contains(character.getName() + "'s roll for initiative :" + (character.getInitiative()))) {
+                    CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :" + (character.getInitiative()));
+                }
+            }
+        }catch(IllegalArgumentException e){
+            Alert noCharacters = new Alert(Alert.AlertType.ERROR,"You can't generate a combat order if there are no characters in your campaign");
+            noCharacters.setHeaderText("No characters in campaign");
+            noCharacters.showAndWait();
         }
     }
 
@@ -485,8 +447,8 @@ public class Controller extends Application {
             }
         }catch(IllegalArgumentException e){
             if(e.getMessage().equals("No Character Selected")){
-                Alert noCharacter = new Alert(Alert.AlertType.ERROR,"No character selected");
-                noCharacter.setHeaderText("Please select a character");
+                Alert noCharacter = new Alert(Alert.AlertType.ERROR,"Can't perform trait check");
+                noCharacter.setHeaderText("Please make sure you have selected a character, a trait, a difficulty class, and updated the advantage state to your desired value.");
                 noCharacter.showAndWait();
             }
             if(e.getMessage().equals("No Trait Selected")){
@@ -501,7 +463,6 @@ public class Controller extends Application {
             }
             if(e.getMessage().equals("Advantage Roll Not Performed")){
                 Alert noRoll = new Alert(Alert.AlertType.ERROR,"No advantage roll performed");
-                //noRoll.setHeaderText("How the fuck");
                 noRoll.showAndWait();
             }
         }catch(ArrayIndexOutOfBoundsException e){

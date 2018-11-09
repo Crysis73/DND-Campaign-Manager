@@ -1,7 +1,7 @@
 package edu.bsu.cs222;
 
 
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "unused"})
 class dndClass {
     private final String name;
     private final String description;

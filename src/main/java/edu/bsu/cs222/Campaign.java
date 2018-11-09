@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import java.util.ArrayList;
 import java.util.Collections;
 
+@SuppressWarnings("unused")
 class Campaign {
     private final ArrayList<Character> characters;
     private String campaignName;
@@ -17,7 +18,7 @@ class Campaign {
         characters.add(character);
     }
 
-    public ArrayList<Character> getCharacters(){
+    ArrayList<Character> getCharacters(){
         return this.characters;
     }
 
@@ -25,7 +26,7 @@ class Campaign {
         return this.campaignName;
     }
 
-    public ArrayList generateCombatOrder(){
+    ArrayList generateCombatOrder(){
         Collections.sort(characters);
         return characters;
     }
@@ -52,7 +53,7 @@ class Campaign {
         return result;
     }
 
-    public void setCampaignName(String campaignName){
+    void setCampaignName(String campaignName){
         this.campaignName = campaignName;
     }
 }

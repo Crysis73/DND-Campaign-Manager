@@ -3,7 +3,7 @@ package edu.bsu.cs222;
 class dndClassList {
     private dndClass[] dndClasses;
 
-    public dndClassList(){
+    dndClassList(){
         initializedndClasses();
     }
 

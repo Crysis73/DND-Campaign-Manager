@@ -2,10 +2,9 @@ package edu.bsu.cs222;
 
 import java.util.*;
 
-public class TraitMap {
+class TraitMap {
 
     private final Map<String, Integer> traitMap;
-    private Map<String,Integer> bonusValues;
 
     TraitMap(){
         Map<String, Integer> traitmap = new HashMap<>();
@@ -27,7 +26,6 @@ public class TraitMap {
                 characterTraits.getTraitMap().replace(entry.getKey(),value);
             }
         }
-        setBonusValues(bonusValues);
         return characterTraits;
 
     }
@@ -48,14 +46,6 @@ public class TraitMap {
         for (Map.Entry<String, Integer> entry : traitMap.entrySet()){
             entry.setValue(value);
         }
-    }
-
-    private void setBonusValues(Map<String, Integer> bonusValues){
-        this.bonusValues = bonusValues;
-    }
-
-    public Map<String,Integer> getBonusValues(){
-        return this.bonusValues;
     }
 
     public String toString(){

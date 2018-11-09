@@ -6,7 +6,6 @@ class Race {
     private final String name;
     private String description; //Will need to be manually set for each race.
     private final TraitMap traitBonus;
-    private Map<String,Integer> bonusValues;
 
     Race(String name, TraitMap traitBonus){
         this.name = name;

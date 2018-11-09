@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+@SuppressWarnings("unused")
 class Description {
     private String height, weight, age, eyeColor, skinColor, additionalFeatures, alignment, languages, exoticLanguages, personalityTrait1, personalityTrait2, ideals, bonds, flaws;
 
@@ -83,7 +84,7 @@ class Description {
                 "\n\tFlaws : "+flaws;
     }
 
-    public String generateJsonString(){
+    String generateJsonString(){
         String result = "";
             result +=  "{\"height\":\""+height+"\"},";
             result+= "{\"weight\":\""+weight+"\"},";

@@ -4,7 +4,7 @@ package edu.bsu.cs222;
 class raceList {
     private final Race[] races;
 
-    public raceList(){
+    raceList(){
         this.races = new Race[18];
         initializeRaces();
     }
