@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 class JsonLoader {
 
     @SuppressWarnings("UnusedReturnValue")
-    public Campaign fromJsontoCampaign(String filename){
+    Campaign fromJsontoCampaign(String filename){
         try {
             Campaign campaign = new Campaign();
             campaign.setCampaignName(filename);
