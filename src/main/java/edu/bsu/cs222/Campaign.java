@@ -10,7 +10,8 @@ class Campaign {
     private String log;
 
 
-    public Campaign() {
+    public Campaign(String campaignName) {
+        this.campaignName = campaignName;
         this.characters = new ArrayList<>();
     }
 

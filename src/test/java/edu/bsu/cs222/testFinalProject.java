@@ -132,8 +132,7 @@ public class testFinalProject {
     @Test
     public void testJsonWriter(){
         JsonWriter writer = new JsonWriter();
-        Campaign myCampaign = new Campaign();
-        myCampaign.setCampaignName("myCampaign");
+        Campaign myCampaign = new Campaign("myCampaign");
         Character Jack = new Character("Jack","Bard","Dwarf");
         Character Jill = new Character("Jill","Cleric","Rock Gnome");
         Jill.getCharacterDescription().setPersonalityTrait2("Cool");

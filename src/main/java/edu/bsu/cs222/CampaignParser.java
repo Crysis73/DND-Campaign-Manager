@@ -8,8 +8,6 @@ import com.google.gson.JsonParser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Array;
-import java.util.Map;
 
 class CampaignParser {
     private final JsonArray charactersArray;
@@ -23,10 +21,6 @@ class CampaignParser {
         JsonArray characters = myCampaign.getAsJsonArray("characters");
         JsonArray characterArray = characters.getAsJsonArray();
         this.charactersArray = characters;
-
-        for (int i =0;i<characters.size();i++){
-            
-        }
 
 
     }
