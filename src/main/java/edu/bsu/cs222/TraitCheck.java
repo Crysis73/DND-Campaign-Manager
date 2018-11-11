@@ -1,16 +1,19 @@
 package edu.bsu.cs222;
 
-public class TraitCheck {
-    Character character;
-    String traitName;
-    DifficultyClass difficultyClass;
-    Integer totalModifier;
-    Integer abilityModifier;
-    Integer finalValue;
+import java.util.Objects;
 
-    public TraitCheck(Character character, String traitName, DifficultyClass difficultyClass, String advantageType){
+class TraitCheck {
+    private final Character character;
+    private final String traitName;
+    private final DifficultyClass difficultyClass;
+    private Integer totalModifier;
+    private final Integer abilityModifier;
+    private final Integer finalValue;
+
+    TraitCheck(Character character, String traitName, DifficultyClass difficultyClass, String advantageType){
         this.character = character;
         this.traitName = traitName;
+        this.difficultyClass = difficultyClass;
         Integer advantageRoll =0;
         Die d20 = new Die(20);
         if(advantageType.equals("Advantage")){
@@ -22,33 +25,30 @@ public class TraitCheck {
         if(advantageType.equals("Disadvantage")){
             advantageRoll = d20.rollDieTwiceUseLeast();
         }
-        this.abilityModifier = ((character.getTraits().getValue(traitName)-10)/2);
+        this.abilityModifier = ((Objects.requireNonNull(character).getTraits().getValue(traitName)-10)/2);
         this.finalValue = abilityModifier+advantageRoll;
 
     }
 
-    public String getTraitNameChecked(){
+    String getTraitNameChecked(){
         return traitName;
     }
-    public Integer getAbilityModifier(){
+    Integer getAbilityModifier(){
         return abilityModifier;
     }
-    public String getDifficultyClass(){
+    String getDifficultyClass(){
         return difficultyClass.toString();
     }
-    public Integer getFinalCheckValue(){
+    Integer getFinalCheckValue(){
         return finalValue;
     }
 
-    public String getCharacterName(){
+    String getCharacterName(){
         return character.getName();
     }
 
-    public boolean getTraitCheckResult(){
-        if(finalValue>difficultyClass.getValue()){
-            return true;
-        }
-        return false;
+    boolean getTraitCheckResult(){
+        return finalValue > difficultyClass.getValue();
     }
 
 }

@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 
 @SuppressWarnings({"WeakerAccess", "unchecked", "unused"})
 public class Controller extends Application {
@@ -409,8 +408,7 @@ public class Controller extends Application {
     }
 
     private DifficultyClass getDifficultyClass(){
-        DifficultyClass difficultyClass = (DifficultyClass) difficultyClassComboBox.getItems().get(difficultyClassComboBox.getSelectionModel().getSelectedIndex());
-        return difficultyClass;
+        return (DifficultyClass) difficultyClassComboBox.getItems().get(difficultyClassComboBox.getSelectionModel().getSelectedIndex());
     }
 
     public void showTraitCheckSuccessful(TraitCheck traitCheck){
@@ -460,12 +458,6 @@ public class Controller extends Application {
                 showTraitCheckSuccessful(traitCheck);
             }
             showTraitCheckFailure(traitCheck);
-//            Character character = getCharacterToCheck();
-//            String traitName = getTraitToCheck();
-//            Integer difficultyClass = getDifficultyClass();
-//            Integer advantageRoll = rollBasedOnAdvantage();
-//            Integer abilityModifier = ((Objects.requireNonNull(character).getTraits().getValue(traitName) - 10) / 2);
-//            Integer traitCheckTotal = abilityModifier + advantageRoll;
         }
 
     }
