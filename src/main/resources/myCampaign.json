@@ -1,0 +1,18 @@
+{
+  "myCampaign": {
+    "characters": [
+      {"name":"Jack", "wealth":"0",
+        "experiencePoints":"0",
+        "hitPoints":"17",
+        "Traits": [{"Strength":"6"},{"Dexterity":"14"},{"Constitution": "16"},{"Intelligence":"7"},{"Wisdon": "10"},{"Charisma":"15"}]
+      },
+      {"name": "Ellen", "wealth":"0","esperiencePoints":"0",
+        "hitPoints":"12",
+        "Traits":[{"Strength":"14"},{"Dexterity":"13"},{"Constitution":"8"},
+          {"Intelligence":"13"},
+          {"Wisdom":"16"},{"Charisma":"11"}
+        ]
+      }
+    ]
+  }
+}
