@@ -24,6 +24,7 @@ class Character implements Comparable<Character> {
         this.characterDescription = new Description();
     }
 
+
     void setWealth(Integer startingValue){
         this.wealth = startingValue;
     }
@@ -58,6 +59,7 @@ class Character implements Comparable<Character> {
         TraitMap characterTraits = new TraitMap();
         TraitMap raceBonuses = race.getTraitBonuses();
         characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
+
         this.traits = characterTraits;
     }
 
@@ -102,6 +104,7 @@ class Character implements Comparable<Character> {
     }
 
     public String toString(){
+
         String result = "";
         result+="Name : " + name +
                 "\n\tWealth : " + wealth+

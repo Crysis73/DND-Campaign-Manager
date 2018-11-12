@@ -34,12 +34,15 @@ class TraitCheck {
     String getTraitNameChecked(){
         return traitName;
     }
+
     Integer getAbilityModifier(){
         return abilityModifier;
     }
+
     String getDifficultyClass(){
         return difficultyClass.toString();
     }
+
     Integer getFinalCheckValue(){
         return finalValue;
     }

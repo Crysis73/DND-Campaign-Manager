@@ -148,6 +148,7 @@ public class Controller extends Application {
         this.dndClassName = item.getText();
     }
 
+
     public void addDescription(Character character){
         String age = (setAge.getText());
         String height = (setHeight.getText());
@@ -208,6 +209,7 @@ public class Controller extends Application {
         }
         return true;
     }
+
 
     public void onAddCharacterToCampaign(ActionEvent actionEvent) {
         if(validateCharacter()){
