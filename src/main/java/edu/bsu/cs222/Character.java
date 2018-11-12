@@ -87,7 +87,8 @@ class Character implements Comparable<Character> {
 
     private void rollForInitiative(){
         Die d20 = new Die(20);
-        this.initiative = d20.rollDie() + traits.getValue("Dexterity");
+        Integer traitModifier = (traits.getValue("Dexterity")-10)/2;
+        this.initiative = d20.rollDie() + traitModifier;
     }
 
     Integer getInitiative(){

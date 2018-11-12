@@ -23,7 +23,6 @@ public class Controller extends Application {
     private TabPane TabPane;
     @FXML
     private Tab CampaignViewTab,CharacterCreatorTab;
-
     @FXML
     private MenuButton selectRaceNewCharacter,selectClassNewCharacter;
     @FXML
@@ -287,18 +286,6 @@ public class Controller extends Application {
             return false;
         }
         return true;
-    }
-
-    public void checkChartCharacterValidity(String characterName){
-        if(characterName.trim().isEmpty() || characterName.equals("")){
-            throw new IllegalArgumentException("No character selected");
-        }
-    }
-
-    public void showNoCharacterSelectedForChart(){
-        Alert noCharacterForChart = new Alert(Alert.AlertType.ERROR,"No character selected for chart");
-        noCharacterForChart.setHeaderText("No character");
-        noCharacterForChart.showAndWait();
     }
 
     public void createChart(MouseEvent mouseEvent) {
