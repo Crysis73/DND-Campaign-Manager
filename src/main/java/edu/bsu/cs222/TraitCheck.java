@@ -9,12 +9,13 @@ class TraitCheck {
     private Integer totalModifier;
     private final Integer abilityModifier;
     private final Integer finalValue;
+    private Integer advantageRoll;
 
     TraitCheck(Character character, String traitName, DifficultyClass difficultyClass, String advantageType){
         this.character = character;
         this.traitName = traitName;
         this.difficultyClass = difficultyClass;
-        Integer advantageRoll =0;
+        advantageRoll =0;
         Die d20 = new Die(20);
         if(advantageType.equals("Advantage")){
             advantageRoll = d20.rollDieTwiceUseGreatest();
@@ -42,13 +43,15 @@ class TraitCheck {
     Integer getFinalCheckValue(){
         return finalValue;
     }
-
+    Integer getAdvantageRoll(){
+        return this.advantageRoll;
+    }
     String getCharacterName(){
         return character.getName();
     }
 
     boolean getTraitCheckResult(){
-        return finalValue > difficultyClass.getValue();
+        return finalValue >= difficultyClass.getValue();
     }
 
 }

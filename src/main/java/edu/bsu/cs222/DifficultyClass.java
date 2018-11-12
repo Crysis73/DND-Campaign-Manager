@@ -9,11 +9,11 @@ class DifficultyClass {
         this.difficultyClassValue = difficultyClassValue;
     }
 
-    public Integer getValue(){
+    Integer getValue(){
         return difficultyClassValue;
     }
 
     public String toString(){
-        return difficultyClassName;
+        return difficultyClassName + " - " + difficultyClassValue;
     }
 }

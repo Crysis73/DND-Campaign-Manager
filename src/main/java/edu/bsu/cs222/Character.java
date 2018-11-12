@@ -103,16 +103,16 @@ class Character implements Comparable<Character> {
     public String toString(){
         String result = "";
         result+="Name : " + name +
-                    "\n\tWealth : " + wealth+
-                    "\n\tXP : " + experiencepoints+
-                    "\n\tHP : " + hitPoints+
+                "\n\tWealth : " + wealth+
+                "\n\tXP : " + experiencepoints+
+                "\n\tHP : " + hitPoints+
                 "\nTraits :"+
-                    "\n\tStrength : "+ this.traits.getValue("Strength")+
-                    "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
-                    "\n\tConstitution : "+ this.traits.getValue("Constitution")+
-                    "\n\tIntelligence : "+ this.traits.getValue("Intelligence")+
-                    "\n\tWisdom : "+ this.traits.getValue("Wisdom")+
-                    "\n\tCharisma : "+ this.traits.getValue("Charisma")+
+                "\n\tStrength : "+ this.traits.getValue("Strength")+
+                "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
+                "\n\tConstitution : "+ this.traits.getValue("Constitution")+
+                "\n\tIntelligence : "+ this.traits.getValue("Intelligence")+
+                "\n\tWisdom : "+ this.traits.getValue("Wisdom")+
+                "\n\tCharisma : "+ this.traits.getValue("Charisma")+
                 "\nDescription: " +characterDescription+
                 "\n"+ race.toString() + "\n"+
                 dndClass.toString() + "\n";

@@ -29,6 +29,4 @@ class CampaignParser {
         return charactersArray;
     }
 
-
-
 }
