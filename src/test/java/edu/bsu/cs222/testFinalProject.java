@@ -167,5 +167,17 @@ public class testFinalProject {
         loader.fromJsontoCampaign(filename);
     }
 
+    @Test
+    public void testTraitCheck(){
+        Character character = new Character("Jim", "Bard", "Dwarf");
+        DifficultyClass difficultyClass = new DifficultyClass("Hard",30);
+        TraitCheck traitCheckAdvantage = new TraitCheck(character, "Dexterity",difficultyClass,"Advantage");
+        TraitCheck traitCheckDisadvantage = new TraitCheck(character, "Dexterity",difficultyClass,"Disadvantage");
+        TraitCheck traitCheckNeutral = new TraitCheck(character, "Dexterity",difficultyClass,"Neutral");
+        Assert.assertFalse(traitCheckAdvantage.getTraitCheckResult());
+        Assert.assertFalse(traitCheckDisadvantage.getTraitCheckResult());
+        Assert.assertFalse(traitCheckNeutral.getTraitCheckResult());
+    }
+
 
 }

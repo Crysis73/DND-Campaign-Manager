@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
@@ -11,6 +12,7 @@ class Character implements Comparable<Character> {
     private dndClass dndClass;
     private Integer initiative;
     private final Description characterDescription;
+    private ArrayList<Equipment> equipmentArray;
 
     public Character(String name, String dndClass, String raceName){
         this.name = name;
@@ -22,6 +24,10 @@ class Character implements Comparable<Character> {
         this.wealth = 0;
         this.hitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
         this.characterDescription = new Description();
+    }
+
+    void addEquipment(Equipment equipment){
+        equipmentArray.add(equipment);
     }
 
     void setWealth(Integer startingValue){
@@ -58,6 +64,11 @@ class Character implements Comparable<Character> {
         TraitMap characterTraits = new TraitMap();
         TraitMap raceBonuses = race.getTraitBonuses();
         characterTraits = characterTraits.mergeTraitMaps(characterTraits,raceBonuses);
+        if(equipmentArray.size()!=0){
+            for(int i=0;i<equipmentArray.size();i++){
+                characterTraits = characterTraits.mergeTraitMaps(characterTraits, equipmentArray.get(i).getTraitMap());
+            }
+        }
         this.traits = characterTraits;
     }
 
@@ -101,6 +112,11 @@ class Character implements Comparable<Character> {
     }
 
     public String toString(){
+        StringBuilder equipmentString = new StringBuilder();
+        for(int i=0;i<equipmentArray.size();i++){
+            equipmentString.append(equipmentArray.get(i).toString());
+        }
+
         String result = "";
         result+="Name : " + name +
                     "\n\tWealth : " + wealth+
@@ -115,7 +131,8 @@ class Character implements Comparable<Character> {
                     "\n\tCharisma : "+ this.traits.getValue("Charisma")+
                 "\nDescription: " +characterDescription+
                 "\n"+ race.toString() + "\n"+
-                dndClass.toString() + "\n";
+                dndClass.toString() + "\n"+
+                equipmentString;
         return result;
 
     }

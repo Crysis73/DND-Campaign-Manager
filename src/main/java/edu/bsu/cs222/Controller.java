@@ -32,7 +32,7 @@ public class Controller extends Application {
             setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
             setWealth, setXP, resultWindow;
     @FXML
-    private ListView characterList;
+    private ListView characterList,equipmentListNewCharacter;
     @FXML
     private TitledPane chartPane,charactersPane;
     @FXML
@@ -158,6 +158,7 @@ public class Controller extends Application {
         this.dndClassName = item.getText();
     }
 
+
     public void addDescription(Character character){
         String age = (setAge.getText());
         String height = (setHeight.getText());
@@ -218,6 +219,7 @@ public class Controller extends Application {
         }
         return true;
     }
+
 
     public void onAddCharacterToCampaign(ActionEvent actionEvent) {
         if(validateCharacter()){
@@ -421,7 +423,6 @@ public class Controller extends Application {
     }
 
     public void showTraitCheckFailure(TraitCheck traitCheck){
-            //String characterName, Integer advantageRoll, String traitName, Integer abilityModifier, Integer difficultyClass){
         resultWindow.setText("FAILURE");
         Alert failure = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getFinalCheckValue() +
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
