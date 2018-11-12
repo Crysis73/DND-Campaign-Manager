@@ -31,7 +31,7 @@ public class Controller extends Application {
             setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
             setWealth, setXP, resultWindow;
     @FXML
-    private ListView characterList,equipmentListNewCharacter;
+    private ListView characterList;
     @FXML
     private TitledPane chartPane,charactersPane;
     @FXML
