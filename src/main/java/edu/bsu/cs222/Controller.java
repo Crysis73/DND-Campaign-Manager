@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -43,8 +42,7 @@ public class Controller extends Application {
     private ChoiceBox characterChoiceBox, traitChoiceBox;
     @FXML
     private Spinner<String> advantageSpinner;
-    private String raceName;
-    private String dndClassName;
+    private String raceName,dndClassName;
     private Campaign campaign;
     private Character activeCharacter;
 
@@ -59,11 +57,9 @@ public class Controller extends Application {
         stage.setScene(scene);
         stage.setTitle("D&D Game Master Thingy 3000");
         stage.show();
-
     }
 
     //----------------------- START OF CREATE NEW CAMPAIGN CODE -----------------------------//
-
     public void showCampaignCreationSuccessfulAlert(){
         Alert campaignCreated = new Alert(Alert.AlertType.CONFIRMATION, "Campaign " + campaign.getCampaignName() + " has been created", ButtonType.OK);
         campaignCreated.showAndWait();
@@ -118,11 +114,9 @@ public class Controller extends Application {
     private void initializeDifficultyClasses(){
         String[] difficultyClassNames = {"Very Easy","Easy","Medium","Hard","Very Hard","Nearly Impossible"};
         ArrayList<Integer> difficultyClassValues = new ArrayList<>();
-        for(int i=5;i<35;i+=5){
-           difficultyClassValues.add(i);
-        }
         ArrayList<DifficultyClass> difficultyClasses = new ArrayList<>();
         for(int i=0;i<difficultyClassNames.length;i++){
+            difficultyClassValues.add(5*(i+1));
             DifficultyClass difficultyClass = new DifficultyClass(difficultyClassNames[i],difficultyClassValues.get(i));
             difficultyClasses.add(difficultyClass);
         }
@@ -135,12 +129,9 @@ public class Controller extends Application {
         SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(list);
         advantageSpinner.setValueFactory(valueFactory);
     }
-
     //--------------------- END OF CREATE NEW CAMPAIGN CODE ----------------------//
 
     //---------------------- START OF ADD CHARACTER TO CAMPAIGN CODE ----------------------------//
-
-
     public void showCharacterCreationSuccessAlert(String characterName){
         Alert characterCreated = new Alert(Alert.AlertType.INFORMATION,characterName+" has been created!");
         characterCreated.setTitle("Character Created");
@@ -291,15 +282,13 @@ public class Controller extends Application {
         if(campaign.getCharacters().size()==0){
             chartErrors.append(" - Please add a character to your campaign.\n");
         }
-
         if(chartErrors.length()>0){
             Alert chartAlert = new Alert(Alert.AlertType.ERROR, chartErrors.toString(),ButtonType.OK);
             chartAlert.setHeaderText("Invalid Chart Information");
             chartAlert.showAndWait();
             return false;
         }
-
-    return true;
+        return true;
     }
 
     public void checkChartCharacterValidity(String characterName){
@@ -314,43 +303,14 @@ public class Controller extends Application {
         noCharacterForChart.showAndWait();
     }
 
-    public ObservableList<XYChart.Series<String,Integer>> generateCharacterChartData(MouseEvent mouseEvent){
-        try {
-            ListView view = (ListView) mouseEvent.getSource();
-            ObservableList activeCharacterName = view.getSelectionModel().getSelectedItems();
-            String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
-            checkChartCharacterValidity(characterName);
-            setActiveCharacter(characterName);
-            final XYChart.Series<String, Integer> series = new XYChart.Series<>();
-            final Map<String, Integer> characterTraits = activeCharacter.getTraits().getTraitMap();
-            series.setName(activeCharacter.getName() + "'s Traits");
-            for (final Map.Entry<String, Integer> entry : characterTraits.entrySet()) {
-                series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
-            }
-            final ObservableList<XYChart.Series<String, Integer>> chartData = FXCollections.observableArrayList();
-            chartData.add(series);
-            return chartData;
-        }catch(IllegalArgumentException e){
-            showNoCharacterSelectedForChart();
-        }
-        return null;
-    }
-
     public void createChart(MouseEvent mouseEvent) {
-        if(validateChartCharacter()) {
-            ObservableList<XYChart.Series<String, Integer>> chartData = generateCharacterChartData(mouseEvent);
+        if(validateChartCharacter() && campaign.getCharacters().size()!=0) {
+            ObservableList activeCharacterName = characterList.getSelectionModel().getSelectedItems();
+            String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
+            setActiveCharacter(characterName);
+            ChartCreator chartCreator = new ChartCreator(activeCharacter.getTraits().getTraitMap());
             ObservableList<String> traitNames = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().keySet());
-            CategoryAxis xAxis = new CategoryAxis();
-            Axis<? extends Number> yAxis = new NumberAxis();
-            xAxis.setCategories(traitNames);
-            BarChart<String, Integer> chart = new BarChart<>(xAxis, (Axis<Integer>) yAxis);
-            chart.getData().addAll(chartData);
-            yAxis.setAutoRanging(false);
-            ((NumberAxis) yAxis).setLowerBound(0);
-            ((NumberAxis) yAxis).setUpperBound(20);
-            chart.setLegendSide(Side.TOP);
-            chart.setLegendVisible(false);
-            chart.animatedProperty().setValue(true);
+            BarChart chart = chartCreator.createChart(traitNames,characterName);
             chartPane.setContent(chart);
             chartPane.expandedProperty().setValue(true);
         }
@@ -358,7 +318,6 @@ public class Controller extends Application {
     //------------------------ END OF TRAIT CHART CODE -------------------------//
 
     //------------------- START OF COMBAT ORDER CODE ---------------------//
-
     private boolean validateCombatRoll(){
         StringBuilder combatOrderErrors = new StringBuilder();
         if(campaign.getCharacters().size()==0){
@@ -375,16 +334,16 @@ public class Controller extends Application {
     }
 
     public void generateCombatOrder(ActionEvent actionEvent){
-            clearCombatOrder(actionEvent);
-            ArrayList charactersInCombatOrder = campaign.generateCombatOrder();
-            if(validateCombatRoll()){
-                for (int i = 0; i < charactersInCombatOrder.size(); i++) {
-                    Character character = (Character) charactersInCombatOrder.get(charactersInCombatOrder.size() - i - 1);
-                    if (!CombatOrderDisplay.getItems().contains(character.getName() + "'s roll for initiative :" + (character.getInitiative()))) {
-                        CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :" + (character.getInitiative()));
-                    }
+        clearCombatOrder(actionEvent);
+        ArrayList charactersInCombatOrder = campaign.generateCombatOrder();
+        if(validateCombatRoll()){
+            for (int i = 0; i < charactersInCombatOrder.size(); i++) {
+                Character character = (Character) charactersInCombatOrder.get(charactersInCombatOrder.size() - i - 1);
+                if (!CombatOrderDisplay.getItems().contains(character.getName() + "'s roll for initiative :" + (character.getInitiative()))) {
+                    CombatOrderDisplay.getItems().add(character.getName() + "'s roll for initiative :" + (character.getInitiative()));
                 }
             }
+        }
     }
 
     @FXML
@@ -394,7 +353,6 @@ public class Controller extends Application {
     //----------------- END OF COMBAT ORDER CODE --------------------------//
 
     //--------------------- START OF TRAIT CHECK CODE ---------------------------//
-
     private Character getCharacterToCheck(){
         String characterName = (String) characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
         for(int i=0;i<campaign.getCharacters().size();i++){
@@ -415,22 +373,21 @@ public class Controller extends Application {
 
     public void showTraitCheckSuccessful(TraitCheck traitCheck){
         resultWindow.setText("SUCCESS");
-        Alert success = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getFinalCheckValue() +
+        Alert success = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getAdvantageRoll() +
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
-                " was greater than or equal to the difficulty class of :" + traitCheck.getDifficultyClass(), ButtonType.OK);
+                " was greater than or equal to the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         success.setHeaderText("Success");
         success.showAndWait();
     }
 
     public void showTraitCheckFailure(TraitCheck traitCheck){
         resultWindow.setText("FAILURE");
-        Alert failure = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getFinalCheckValue() +
+        Alert failure = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getAdvantageRoll() +
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
-                " was less than the difficulty class of :" + traitCheck.getDifficultyClass(), ButtonType.OK);
+                " was less than the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         failure.setHeaderText("Failure");
         failure.showAndWait();
     }
-
 
     private boolean validateTraitCheck(){
         StringBuilder traitCheckErrors = new StringBuilder();
@@ -458,11 +415,11 @@ public class Controller extends Application {
             if(traitCheck.getTraitCheckResult()){
                 showTraitCheckSuccessful(traitCheck);
             }
-            showTraitCheckFailure(traitCheck);
+            else{
+                showTraitCheckFailure(traitCheck);
+            }
         }
-
     }
-
     //---------------------- END OF TRAIT CHECK CODE ------------------------------//
 
     @SuppressWarnings("EmptyMethod")

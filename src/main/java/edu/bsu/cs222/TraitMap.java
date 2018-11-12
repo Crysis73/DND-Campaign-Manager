@@ -19,7 +19,6 @@ class TraitMap {
     }
 
     TraitMap mergeTraitMaps(TraitMap characterTraits, TraitMap raceTraitBonuses){
-        @SuppressWarnings("unused") Map<String,Integer> bonusValues = new HashMap<>();
         for(Map.Entry<String,Integer> entry : raceTraitBonuses.getTraitMap().entrySet()){
             if(entry.getValue() != 0){
                 Integer value = characterTraits.getTraitMap().get(entry.getKey()) + entry.getValue();

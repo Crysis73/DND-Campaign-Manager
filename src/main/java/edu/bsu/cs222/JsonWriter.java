@@ -9,7 +9,6 @@ class JsonWriter {
 
 
 
-    @SuppressWarnings("unchecked")
     void writeCampaignJson(Campaign campaign){
         String jsonString = campaign.generateJsonString();
         try (FileWriter file = new FileWriter(campaign.getCampaignName()+".json")) {
