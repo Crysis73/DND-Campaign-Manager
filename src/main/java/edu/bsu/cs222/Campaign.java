@@ -3,11 +3,9 @@ package edu.bsu.cs222;
 import java.util.ArrayList;
 import java.util.Collections;
 
-@SuppressWarnings("unused")
 class Campaign {
     private final ArrayList<Character> characters;
     private String campaignName;
-    private String log;
 
 
     public Campaign(String campaignName) {
@@ -31,7 +29,6 @@ class Campaign {
         Collections.sort(characters);
         return characters;
     }
-
 
     public String toString(){
         StringBuilder result = new StringBuilder("Campaign : " + this.campaignName);
