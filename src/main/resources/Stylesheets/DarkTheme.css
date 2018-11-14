@@ -1,0 +1,53 @@
+.menu-bar {-fx-background-color: #1a1a1a; -fx-font-family: "Segoe UI light";}
+.label {-fx-text-fill:#d9d9d9;}
+.tab-pane:top {-fx-background-color:#1a1a1a;}
+.button{-fx-background-color:#595959;-fx-font-family:"Segoe UI light";}
+.tab{-fx-background-color:#1a1a1a;}
+.tab-header-background{-fx-background-color:#595959;}
+.tab-label{-fx-text-fill:#d9d9d9;}
+.text{-fx-fill:#d9d9d9;}
+.titled-pane{-fx-background-color:#1a1a1a;}
+.title{-fx-background-color:#404040;}
+#additionalInformationPane{-fx-background-color:#1a1a1a;}
+.tool-bar{-fx-background-color:#8c8c8c;}
+.list-view{-fx-background-color:#1a1a1a;}
+#traitCheckAnchorPane{-fx-background-color:#404040;}
+#characterListAnchorPane{-fx-background-color:#8c8c8c;}
+.choice-box{-fx-background-color:#8c8c8c;}
+.combo-box{-fx-background-color:#8c8c8c;}
+.spinner{-fx-background-color:#8c8c8c;}
+.label{-fx-text-fill:#d9d9d9;}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {-fx-background-color:#8c8c8c;}
+.list-cell{-fx-background-color:#1a1a1a;}
+.chart-plot-background{-fx-background-color:#1a1a1a;}
+.chart-vertical-grid-lines{-fx-stroke:transparent;}
+.chart-horizontal-grid-lines{-fx-stroke:#e6e6e6;}
+.chart-alternative-row-fill{-fx-fill:#262626;-fx-stroke:#e6e6e6;-fx-stroke-width:0;}
+.default-color0.chart-bar { -fx-bar-fill:#005c99;}
+#chartPane{-fx-background-color:#1a1a1a;}
+.split-pane > .split-pane-divider{-fx-background-color:#262626;-fx-padding: 0 0.1em 0 0.1em;}
+.split-pane {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.titled-pane > *.content {
+    -fx-border-color: transparent;
+}
+.chart-title{-fx-background-color:#1a1a1a;-fx-border-color:#1a1a1a;}
+.chart-content{-fx-background-color: #1a1a1a;-fx-border-color:#1a1a1a;-fx-padding:0em;}
+.chart{-fx-padding:2.5em;}
+.button:focused,
+.toggle-button:focused,
+.radio-button:focused > .radio,
+.check-box:focused > .box,
+.menu-button:focused,
+.choice-box:focused,
+.color-picker.split-button:focused > .color-picker-label,
+.combo-box-base:focused,
+.slider:focused .thumb {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;}
+
+

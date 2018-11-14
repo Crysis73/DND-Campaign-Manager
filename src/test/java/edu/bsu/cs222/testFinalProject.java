@@ -133,10 +133,12 @@ public class testFinalProject {
     public void testJsonWriter(){
         JsonWriter writer = new JsonWriter();
         Campaign myCampaign = new Campaign("myCampaign");
-        Character Jack = new Character("Jack","Bard","Dwarf");
+        Character Casey = new Character("Casey","Ranger","Elf");
         Character Jill = new Character("Jill","Cleric","Rock Gnome");
         Jill.getCharacterDescription().setPersonalityTrait2("Cool");
-        myCampaign.addCharacer(Jack);
+        Casey.getTraits().setValue("Dexterity",20);
+        Casey.getTraits().setValue("Charisma",20);
+        myCampaign.addCharacer(Casey);
         myCampaign.addCharacer(Jill);
         writer.writeCampaignJson(myCampaign);
         Assert.assertNotNull(myCampaign.generateJsonString());
@@ -164,7 +166,8 @@ public class testFinalProject {
     public void testJsonLoader(){
         String filename = "myCampaign.json";
         JsonLoader loader = new JsonLoader();
-        loader.fromJsontoCampaign(filename);
+        Campaign campaign = loader.fromJsontoCampaign(filename);
+        System.out.println(campaign.toString());
     }
 
 }

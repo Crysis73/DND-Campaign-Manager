@@ -6,7 +6,7 @@ import java.util.Objects;
 class Character implements Comparable<Character> {
     private final String name;
     private TraitMap traits;
-    private Integer wealth, experiencepoints, hitPoints;
+    private Integer wealth, experiencepoints, currentHitPoints, maxHitPoints;
     private Race race;
     private dndClass dndClass;
     private Integer initiative;
@@ -20,10 +20,14 @@ class Character implements Comparable<Character> {
         rollForInitiative();
         this.experiencepoints = 0;
         this.wealth = 0;
-        this.hitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
+        this.maxHitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
+        this.currentHitPoints = maxHitPoints;
         this.characterDescription = new Description();
     }
 
+    void setCurrentHitPoints(Integer value){
+        this.currentHitPoints = value;
+    }
 
     void setWealth(Integer startingValue){
         this.wealth = startingValue;
@@ -31,10 +35,6 @@ class Character implements Comparable<Character> {
 
     void setExperiencepoints(Integer value){
         this.experiencepoints = value;
-    }
-
-    void setHitPoints(Integer Value){
-        this.hitPoints = Value;
     }
 
     private void setRace(String raceName){
@@ -97,6 +97,18 @@ class Character implements Comparable<Character> {
         return this.initiative;
     }
 
+    Integer getMaxHitPoints(){
+        return this.maxHitPoints;
+    }
+
+    Integer getCurrentHitPoints(){
+        return this.currentHitPoints;
+    }
+
+    void setMaxHitPoints(Integer value){
+        this.maxHitPoints = value;
+    }
+
     @Override
     public int compareTo(Character character){
         return(this.getInitiative() < character.getInitiative() ?-1 :
@@ -109,7 +121,8 @@ class Character implements Comparable<Character> {
         result+="Name : " + name +
                 "\n\tWealth : " + wealth+
                 "\n\tXP : " + experiencepoints+
-                "\n\tHP : " + hitPoints+
+                "\n\tMax HP : " + maxHitPoints+
+                "\n\tCurrent HP : " + currentHitPoints+
                 "\nTraits :"+
                 "\n\tStrength : "+ this.traits.getValue("Strength")+
                 "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
@@ -131,7 +144,9 @@ class Character implements Comparable<Character> {
                 "\"dndclass\":\""+ this.dndClass.getName()+"\","+
                 "\"wealth\":\""+wealth+"\"," +
                 "\"experiencepoints\":\""+experiencepoints+"\","+
-                "\"hitPoints\":\""+hitPoints+"\","+
+                "\"maxHitPoints\":\""+maxHitPoints+"\","+
+                "\"currentHitPoints\":\""+currentHitPoints+"\","+
+                "\"initiative\":\""+initiative+"\","+
                 "\"Traits\": [" +
                 "{\"Strength\": \""+ this.traits.getValue("Strength")+"\"},"+
                 "{\"Dexterity\": \""+ this.traits.getValue("Dexterity")+"\"},"+

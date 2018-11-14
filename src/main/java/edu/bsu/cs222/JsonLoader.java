@@ -26,7 +26,7 @@ class JsonLoader {
                 Character character = createCharacterFromJson(characters.get(i).getAsJsonObject());
                 addDescriptionToCharacter(character,characters.get(i).getAsJsonObject().getAsJsonArray("Description"));
                 setCharacterTraits(characters.get(i).getAsJsonObject(),character);
-                setWealthXPHP(characters.get(i).getAsJsonObject(),character);
+                setIntegerValues(characters.get(i).getAsJsonObject(),character);
                 campaign.addCharacer(character);
             }
             return campaign;
@@ -52,13 +52,17 @@ class JsonLoader {
         }
     }
 
-    private void setWealthXPHP(JsonObject jsonCharacter, Character character){
+    private void setIntegerValues(JsonObject jsonCharacter, Character character){
         Integer wealth = jsonCharacter.get("wealth").getAsInt();
         Integer xp = jsonCharacter.get("experiencepoints").getAsInt();
-        Integer hp = jsonCharacter.get("hitPoints").getAsInt();
+        Integer maxHitPoints = jsonCharacter.get("maxHitPoints").getAsInt();
+        Integer currentHitPoints = jsonCharacter.get("currentHitPoints").getAsInt();
+        Integer initiative = jsonCharacter.get("initiative").getAsInt();
         character.setExperiencepoints(xp);
         character.setWealth(wealth);
-        character.setHitPoints(hp);
+        character.setMaxHitPoints(maxHitPoints);
+        character.setCurrentHitPoints(currentHitPoints);
+        character.setInitiative(initiative);
     }
 
     private void addDescriptionToCharacter(Character character, JsonArray description){

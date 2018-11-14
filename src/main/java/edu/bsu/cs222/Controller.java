@@ -6,11 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,17 +31,21 @@ public class Controller extends Application {
             setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
             setWealth, setXP, resultWindow;
     @FXML
-    private ListView characterList;
+    private ListView characterList, CombatOrderDisplay;
     @FXML
-    private TitledPane chartPane,charactersPane;
-    @FXML
-    private ListView CombatOrderDisplay;
+    private TitledPane charactersPane, chartTitledPane;
     @FXML
     private ComboBox difficultyClassComboBox;
     @FXML
     private ChoiceBox characterChoiceBox, traitChoiceBox;
     @FXML
     private Spinner<String> advantageSpinner;
+    @FXML
+    private VBox hpVBox;
+    @FXML
+    private AnchorPane additionalInformationPane,chartPane;
+    @FXML
+    private HBox hpHBox;
     private String raceName,dndClassName;
     private Campaign campaign;
     private Character activeCharacter;
@@ -80,6 +85,7 @@ public class Controller extends Application {
 
     public void onCreateNewCampaign(ActionEvent actionEvent) {
         if(validateNewCampaign()){
+            refreshProgram();
             this.campaign = new Campaign(inputCampaignText.getText());
             showCampaignCreationSuccessfulAlert();
             TabPane.getSelectionModel().select(CampaignViewTab);
@@ -226,12 +232,13 @@ public class Controller extends Application {
 
     }
 
+
     private void createNewCharacterTab(String tabName, Character character){
         Tab tab = new Tab(tabName);
         TextArea textArea = new TextArea();
-        tab.setContent(textArea);
         textArea.setText(character.toString());
         textArea.setEditable(false);
+        tab.setContent(textArea);
         TabPane.getTabs().add(tab);
     }
 
@@ -298,8 +305,10 @@ public class Controller extends Application {
             ChartCreator chartCreator = new ChartCreator(activeCharacter.getTraits().getTraitMap());
             ObservableList<String> traitNames = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().keySet());
             BarChart chart = chartCreator.createChart(traitNames,characterName);
-            chartPane.setContent(chart);
-            chartPane.expandedProperty().setValue(true);
+            chartPane.getChildren().clear();
+            chartPane.getChildren().add(chart);
+            chartTitledPane.expandedProperty().setValue(true);
+            setHpProgressBar();
         }
     }
     //------------------------ END OF TRAIT CHART CODE -------------------------//
@@ -331,11 +340,12 @@ public class Controller extends Application {
                 }
             }
         }
+        CombatOrderDisplay.setStyle("fx-background-insets:0;-fx-background-color: #595959;");
     }
 
     @FXML
     private void clearCombatOrder(ActionEvent actionEvent){
-        CombatOrderDisplay.getItems().setAll();
+        CombatOrderDisplay.getItems().clear();
     }
     //----------------- END OF COMBAT ORDER CODE --------------------------//
 
@@ -409,7 +419,51 @@ public class Controller extends Application {
     }
     //---------------------- END OF TRAIT CHECK CODE ------------------------------//
 
-    @SuppressWarnings("EmptyMethod")
+    public void refreshProgram(){
+        CombatOrderDisplay.getItems().clear();
+        hpVBox.getChildren().clear();
+        chartPane.getChildren().clear();
+        characterList.getItems().clear();
+        for(int i=0;i<TabPane.getTabs().size();i++){
+            if(!(TabPane.getTabs().get(i).getText().equals("Campaign") || TabPane.getTabs().get(i).getText().equals("Campaign View") || TabPane.getTabs().get(i).getText().equals("Character Creator")) ) {
+                TabPane.getTabs().remove(i,TabPane.getTabs().size());
+            }
+        }
+    }
+
     public void loadOldCampaign(ActionEvent actionEvent) {
+        refreshProgram();
+        JsonLoader loader = new JsonLoader();
+        Campaign campaign = loader.fromJsontoCampaign("myCampaign.json");
+        this.campaign = campaign;
+        for(int j=0;j<campaign.getCharacters().size();j++){
+            if(!campaign.getCharacters().get(j).getName().equals(TabPane.getTabs().get(j).getText())) {
+                createNewCharacterTab(campaign.getCharacters().get(j).getName(), campaign.getCharacters().get(j));
+            }
+        }
+        clearCombatOrder(actionEvent);
+        CharacterCreatorTab.setDisable(false);
+        CampaignViewTab.setDisable(false);
+        TabPane.getSelectionModel().select(CampaignViewTab);
+        displayCharacters();
+        initializeCharacterChoices();
+        initializeTraitChoices();
+        initializeDifficultyClasses();
+        initializeAdvantageStates();
+        charactersPane.setExpanded(true);
+        chartPane.getChildren().clear();
+        clearAllNewCharacter(actionEvent);
+    }
+
+    //---------------------------- END LOAD CAMPAIGN CODE --------------------------------//
+
+    //----------------------------- START PROGRESS BAR CODE -------------------------------------------//
+    public void setHpProgressBar(){
+        hpVBox.getChildren().clear();
+        Label label = new Label("HP :"+activeCharacter.getCurrentHitPoints() +"/"+activeCharacter.getMaxHitPoints());
+        hpVBox.getChildren().add(label);
+        float progress = (float)activeCharacter.getCurrentHitPoints() / activeCharacter.getMaxHitPoints();
+        ProgressBar progressBar = new ProgressBar(progress);
+        hpVBox.getChildren().add(progressBar);
     }
 }
