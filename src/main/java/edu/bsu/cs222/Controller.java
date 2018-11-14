@@ -340,7 +340,6 @@ public class Controller extends Application {
                 }
             }
         }
-        CombatOrderDisplay.setStyle("fx-background-insets:0;-fx-background-color: #595959;");
     }
 
     @FXML

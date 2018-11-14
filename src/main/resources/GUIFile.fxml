@@ -144,7 +144,7 @@
                                 </MenuBar>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
                            <children>
-                              <ListView fx:id="CombatOrderDisplay" depthTest="DISABLE" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959; -fx-background-insets: 0;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
+                              <ListView fx:id="CombatOrderDisplay" depthTest="DISABLE" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959; -fx-background-insets: 0; -fx-padding: 0;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
