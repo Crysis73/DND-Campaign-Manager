@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -25,8 +24,6 @@ public class Controller extends Application {
     @FXML
     private Tab CampaignViewTab,CharacterCreatorTab;
     @FXML
-    private MenuButton selectRaceNewCharacter,selectClassNewCharacter;
-    @FXML
     private TextField inputCampaignText, characterNameField, setAge, setHeight, setWeight, setEyeColor, setSkinColor, setAdditionalFeatures, setAlignment,
             setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
             setWealth, setXP, resultWindow;
@@ -35,9 +32,7 @@ public class Controller extends Application {
     @FXML
     private TitledPane charactersPane, chartTitledPane;
     @FXML
-    private ComboBox difficultyClassComboBox;
-    @FXML
-    private ChoiceBox characterChoiceBox, traitChoiceBox;
+    private ChoiceBox characterChoiceBox, traitChoiceBox,difficultyClassChoiceBox,raceChoiceBox,dndClassChoiceBox;
     @FXML
     private Spinner<String> advantageSpinner;
     @FXML
@@ -86,14 +81,31 @@ public class Controller extends Application {
     public void onCreateNewCampaign(ActionEvent actionEvent) {
         if(validateNewCampaign()){
             refreshProgram();
+            clearAllNewCharacter(actionEvent);
             this.campaign = new Campaign(inputCampaignText.getText());
             showCampaignCreationSuccessfulAlert();
-            TabPane.getSelectionModel().select(CampaignViewTab);
+            TabPane.getSelectionModel().select(CharacterCreatorTab);
             initializeTraitChoices();
             initializeAdvantageStates();
             initializeDifficultyClasses();
+            initializeRaceChoices();
+            initializeDndClassChoices();
             CampaignViewTab.disableProperty().setValue(false);
             CharacterCreatorTab.disableProperty().setValue(false);
+        }
+    }
+
+    private void initializeRaceChoices(){
+        raceList raceList = new raceList();
+        for(int i=0;i<raceList.getRaces().length;i++){
+            raceChoiceBox.getItems().add(i,raceList.getRaces()[i].getName());
+        }
+    }
+
+    private void initializeDndClassChoices(){
+        dndClassList dndClassList = new dndClassList();
+        for(int i=0;i<dndClassList.getDndClasses().length;i++){
+            dndClassChoiceBox.getItems().add(i,dndClassList.getDndClasses()[i].getName());
         }
     }
 
@@ -125,7 +137,7 @@ public class Controller extends Application {
             DifficultyClass difficultyClass = new DifficultyClass(difficultyClassNames[i],difficultyClassValues.get(i));
             difficultyClasses.add(difficultyClass);
         }
-        difficultyClassComboBox.getItems().setAll(difficultyClasses);
+        difficultyClassChoiceBox.getItems().setAll(difficultyClasses);
     }
 
     private void initializeAdvantageStates(){
@@ -144,14 +156,14 @@ public class Controller extends Application {
         characterCreated.showAndWait();
     }
 
-    public void setRaceName(ActionEvent actionEvent){
-        MenuItem item = (MenuItem) actionEvent.getSource();
-        this.raceName = item.getText();
+    public void setRaceName(){
+        this.raceName =(String) raceChoiceBox.getItems().get(raceChoiceBox.getSelectionModel().getSelectedIndex());
+
     }
 
-    public void setClassName(ActionEvent actionEvent){
-        MenuItem item = (MenuItem) actionEvent.getSource();
-        this.dndClassName = item.getText();
+    public void setClassName(){
+        this.dndClassName =(String) dndClassChoiceBox.getItems().get(dndClassChoiceBox.getSelectionModel().getSelectedIndex());
+
     }
 
 
@@ -195,10 +207,10 @@ public class Controller extends Application {
         if(containsCharacter(characterNameField.getText().trim())){
             characterErrors.append(" - This character already exists. Please input a new character name. \n");
         }
-        if(raceName==null){
+        if(raceChoiceBox.getSelectionModel().getSelectedIndex() ==-1){
             characterErrors.append(" - Please choose a race for your character from the menu. \n");
         }
-        if(dndClassName==null){
+        if(dndClassChoiceBox.getSelectionModel().getSelectedIndex() == -1){
             characterErrors.append(" - Please choose a DnD class for your character from the menu. \n");
         }
         if(setWealth.getText().matches(".*[a-zA-Z]+.*")){
@@ -219,6 +231,8 @@ public class Controller extends Application {
 
     public void onAddCharacterToCampaign(ActionEvent actionEvent) {
         if(validateCharacter()){
+            setRaceName();
+            setClassName();
             String characterName = characterNameField.getText().trim();
             Character character = new Character(characterName, dndClassName,raceName);
             addDescription(character);
@@ -243,6 +257,8 @@ public class Controller extends Application {
     }
 
     public void clearAllNewCharacter(ActionEvent actionEvent){
+        raceChoiceBox.getSelectionModel().clearSelection();
+        dndClassChoiceBox.getSelectionModel().clearSelection();
         setHeight.clear();
         setWeight.clear();
         setAge.clear();
@@ -364,7 +380,7 @@ public class Controller extends Application {
     }
 
     private DifficultyClass getDifficultyClass(){
-        return (DifficultyClass) difficultyClassComboBox.getItems().get(difficultyClassComboBox.getSelectionModel().getSelectedIndex());
+        return (DifficultyClass) difficultyClassChoiceBox.getItems().get(difficultyClassChoiceBox.getSelectionModel().getSelectedIndex());
     }
 
     public void showTraitCheckSuccessful(TraitCheck traitCheck){
@@ -393,7 +409,7 @@ public class Controller extends Application {
         if(traitChoiceBox.getSelectionModel().isEmpty()){
             traitCheckErrors.append(" - Please choose a trait to perform a trait check. \n");
         }
-        if(difficultyClassComboBox.getSelectionModel().isEmpty()){
+        if(difficultyClassChoiceBox.getSelectionModel().isEmpty()){
             traitCheckErrors.append(" - Please choose a difficulty class to perform a trait check. \n");
         }
         if(traitCheckErrors.length()>0){
@@ -419,6 +435,8 @@ public class Controller extends Application {
     //---------------------- END OF TRAIT CHECK CODE ------------------------------//
 
     public void refreshProgram(){
+        raceChoiceBox.getItems().clear();
+        dndClassChoiceBox.getItems().clear();
         CombatOrderDisplay.getItems().clear();
         hpVBox.getChildren().clear();
         chartPane.getChildren().clear();
@@ -449,7 +467,11 @@ public class Controller extends Application {
         initializeTraitChoices();
         initializeDifficultyClasses();
         initializeAdvantageStates();
+        initializeDndClassChoices();
+        initializeRaceChoices();
         charactersPane.setExpanded(true);
+        chartTitledPane.setExpanded(true);
+        generateCombatOrder(actionEvent);
         chartPane.getChildren().clear();
         clearAllNewCharacter(actionEvent);
     }

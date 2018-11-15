@@ -134,12 +134,14 @@ public class testFinalProject {
         JsonWriter writer = new JsonWriter();
         Campaign myCampaign = new Campaign("myCampaign");
         Character Casey = new Character("Casey","Ranger","Elf");
-        Character Jill = new Character("Jill","Cleric","Rock Gnome");
-        Jill.getCharacterDescription().setPersonalityTrait2("Cool");
-        Casey.getTraits().setValue("Dexterity",20);
-        Casey.getTraits().setValue("Charisma",20);
+        Character Rebecca = new Character("Rebecca","Cleric","Rock Gnome");
+        Character Largent = new Character("Professor Largent","Barbarian","Dragonborn");
+        Casey.setCurrentHitPoints(3);
+        Rebecca.setCurrentHitPoints(10);
+        Largent.getTraits().setAllValues(20);
         myCampaign.addCharacer(Casey);
-        myCampaign.addCharacer(Jill);
+        myCampaign.addCharacer(Rebecca);
+        myCampaign.addCharacer(Largent);
         writer.writeCampaignJson(myCampaign);
         Assert.assertNotNull(myCampaign.generateJsonString());
     }
