@@ -6,7 +6,6 @@ class TraitCheck {
     private final Character character;
     private final String traitName;
     private final DifficultyClass difficultyClass;
-    private Integer totalModifier;
     private final Integer abilityModifier;
     private final Integer finalValue;
     private Integer advantageRoll;
@@ -43,9 +42,6 @@ class TraitCheck {
         return difficultyClass.toString();
     }
 
-    Integer getFinalCheckValue(){
-        return finalValue;
-    }
     Integer getAdvantageRoll(){
         return this.advantageRoll;
     }

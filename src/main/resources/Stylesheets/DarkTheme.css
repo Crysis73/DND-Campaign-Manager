@@ -27,12 +27,50 @@
 
 #resultWindow{-fx-text-inner-color:#d9d9d9;}
 
-.choice-box{-fx-background-color:#404040;-fx-focus-traverasble:false;}
+.choice-box{-fx-background-color:#404040;-fx-focus-traversable:false;}
 .choice-box .context-menu { -fx-background-color: black; }
 .choice-box .menu-item:focused { -fx-background-color:#005c99; }
 .choice-box .menu-item > .label { -fx-text-fill: white; }
 .choice-box .menu-item:focused > .label { -fx-fill: black; }
 
+.combo-box .list-cell 
+{
+    -fx-background-color: #404040;
+    -fx-text-fill: -fx-text-base-color; 
+}
+
+.combo-box-popup .list-view 
+{
+    -fx-background-color: #1a1a1a;
+}    
+
+.combo-box-popup .list-view .list-cell 
+{
+
+    -fx-background-color: #1a1a1a;
+}
+
+
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: #005c99;
+    -fx-text-fill:black;
+}
+
+.combo-box-base  
+{
+    -fx-background-color: #404040;
+}
+.combo-box-base:showing 
+{
+    -fx-color: -fx-pressed-base;
+}
+
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
 
 .progress-bar > .track{-fx-background-color:#1a1a1a;}
 .progress-bar{-fx-background-color:-fx-box-border,white;}

@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,9 @@ public class Controller extends Application {
     @FXML
     private TitledPane charactersPane, chartTitledPane;
     @FXML
-    private ChoiceBox characterChoiceBox, traitChoiceBox,difficultyClassChoiceBox,raceChoiceBox,dndClassChoiceBox;
+    private ChoiceBox characterChoiceBox, traitChoiceBox,difficultyClassChoiceBox;
+    @FXML
+    private ComboBox raceComboBox,dndClassComboBox;
     @FXML
     private Spinner<String> advantageSpinner;
     @FXML
@@ -98,15 +101,85 @@ public class Controller extends Application {
     private void initializeRaceChoices(){
         raceList raceList = new raceList();
         for(int i=0;i<raceList.getRaces().length;i++){
-            raceChoiceBox.getItems().add(i,raceList.getRaces()[i].getName());
+            raceComboBox.getItems().add(i,raceList.getRaces()[i]);
         }
+        initializeRaceTooltips();
+        initializeRaceComboBoxConverter();
+    }
+
+    private void initializeRaceTooltips(){
+        raceComboBox.setCellFactory(param -> new ListCell<Race>(){
+            @Override
+            public void updateItem(Race item, boolean empty){
+                super.updateItem(item,empty);
+
+                if(item!=null){
+                    setText(item.getName());
+                    Tooltip tooltip = new Tooltip();
+                    tooltip.setText(item.toString());
+                    setTooltip(tooltip);
+                }else{
+                    setText(null);
+                    setTooltip(null);
+                }
+            }
+        });
+    }
+
+    private void initializeRaceComboBoxConverter(){
+        raceComboBox.setConverter(new StringConverter<Race>() {
+            @Override
+            public String toString(Race race) {
+                return race.getName();
+            }
+
+            @Override
+            public Race fromString(String string) {
+                return (Race) raceComboBox.getItems().stream().filter(race -> race.getClass().getName().equals(string)).findFirst().orElse(null);
+            }
+        });
     }
 
     private void initializeDndClassChoices(){
         dndClassList dndClassList = new dndClassList();
         for(int i=0;i<dndClassList.getDndClasses().length;i++){
-            dndClassChoiceBox.getItems().add(i,dndClassList.getDndClasses()[i].getName());
+            dndClassComboBox.getItems().add(i,dndClassList.getDndClasses()[i]);
         }
+        initializeDndClassTooltips();
+        initializeDndClassComboBoxConverter();
+    }
+
+    private void initializeDndClassTooltips(){
+        dndClassComboBox.setCellFactory(param -> new ListCell<dndClass>(){
+            @Override
+            public void updateItem(dndClass item, boolean empty){
+                super.updateItem(item,empty);
+
+                if(item!=null){
+                    setText(item.getName());
+                    Tooltip tooltip = new Tooltip();
+                    tooltip.setText(item.toString());
+                    setTooltip(tooltip);
+                }else{
+                    setText(null);
+                    setTooltip(null);
+                }
+            }
+        });
+    }
+
+    private void initializeDndClassComboBoxConverter(){
+        dndClassComboBox.setConverter(new StringConverter<dndClass>() {
+            @Override
+            public String toString(dndClass dndClass) {
+                return dndClass.getName();
+            }
+
+            @Override
+            public dndClass fromString(String string) {
+                return (dndClass) dndClassComboBox.getItems().stream().filter(dndClass -> dndClass.getClass().getName().equals(string)).findFirst().orElse(null);
+            }
+        });
     }
 
     @FXML
@@ -157,13 +230,14 @@ public class Controller extends Application {
     }
 
     public void setRaceName(){
-        this.raceName =(String) raceChoiceBox.getItems().get(raceChoiceBox.getSelectionModel().getSelectedIndex());
+        Race race =(Race)raceComboBox.getItems().get(raceComboBox.getSelectionModel().getSelectedIndex());
+        this.raceName = race.getName();
 
     }
 
     public void setClassName(){
-        this.dndClassName =(String) dndClassChoiceBox.getItems().get(dndClassChoiceBox.getSelectionModel().getSelectedIndex());
-
+        dndClass dndClass =(dndClass) dndClassComboBox.getItems().get(dndClassComboBox.getSelectionModel().getSelectedIndex());
+        this.dndClassName = dndClass.getName();
     }
 
 
@@ -207,10 +281,10 @@ public class Controller extends Application {
         if(containsCharacter(characterNameField.getText().trim())){
             characterErrors.append(" - This character already exists. Please input a new character name. \n");
         }
-        if(raceChoiceBox.getSelectionModel().getSelectedIndex() ==-1){
+        if(raceComboBox.getSelectionModel().getSelectedIndex() ==-1){
             characterErrors.append(" - Please choose a race for your character from the menu. \n");
         }
-        if(dndClassChoiceBox.getSelectionModel().getSelectedIndex() == -1){
+        if(dndClassComboBox.getSelectionModel().getSelectedIndex() == -1){
             characterErrors.append(" - Please choose a DnD class for your character from the menu. \n");
         }
         if(setWealth.getText().matches(".*[a-zA-Z]+.*")){
@@ -257,8 +331,8 @@ public class Controller extends Application {
     }
 
     public void clearAllNewCharacter(ActionEvent actionEvent){
-        raceChoiceBox.getSelectionModel().clearSelection();
-        dndClassChoiceBox.getSelectionModel().clearSelection();
+        raceComboBox.getSelectionModel().clearSelection();
+        dndClassComboBox.getSelectionModel().clearSelection();
         setHeight.clear();
         setWeight.clear();
         setAge.clear();
@@ -435,8 +509,8 @@ public class Controller extends Application {
     //---------------------- END OF TRAIT CHECK CODE ------------------------------//
 
     public void refreshProgram(){
-        raceChoiceBox.getItems().clear();
-        dndClassChoiceBox.getItems().clear();
+        raceComboBox.getItems().clear();
+        dndClassComboBox.getItems().clear();
         CombatOrderDisplay.getItems().clear();
         hpVBox.getChildren().clear();
         chartPane.getChildren().clear();

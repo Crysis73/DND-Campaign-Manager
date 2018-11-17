@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+@SuppressWarnings("unused")
 class CampaignParser {
     private final JsonArray charactersArray;
 

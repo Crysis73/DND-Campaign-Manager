@@ -36,6 +36,6 @@ class dndClass {
     }
 
     public String toString(){
-        return("Class :\n\t"+name+" - added 1d"+hitDice+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
+        return("Class :\n\t"+name+" - adds 1d"+hitDice+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
     }
 }
