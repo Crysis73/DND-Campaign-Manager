@@ -109,6 +109,14 @@ class Character implements Comparable<Character> {
         this.maxHitPoints = value;
     }
 
+    void incrementCurrentHP(){
+        this.currentHitPoints +=1;
+    }
+
+    void decrementCurrentHP(){
+        this.currentHitPoints -=1;
+    }
+
     @Override
     public int compareTo(Character character){
         return(this.getInitiative() < character.getInitiative() ?-1 :

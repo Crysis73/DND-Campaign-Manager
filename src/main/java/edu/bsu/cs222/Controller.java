@@ -545,7 +545,6 @@ public class Controller extends Application {
         initializeRaceChoices();
         charactersPane.setExpanded(true);
         chartTitledPane.setExpanded(true);
-        generateCombatOrder(actionEvent);
         chartPane.getChildren().clear();
         clearAllNewCharacter(actionEvent);
     }
@@ -553,6 +552,20 @@ public class Controller extends Application {
     //---------------------------- END LOAD CAMPAIGN CODE --------------------------------//
 
     //----------------------------- START PROGRESS BAR CODE -------------------------------------------//
+    public boolean validateHPIncrement(){
+        if(activeCharacter!=null){
+            return activeCharacter.getCurrentHitPoints() != activeCharacter.getMaxHitPoints();
+        }else{
+            return false;
+        }
+    }
+    public boolean validateHPDecrement(){
+        if(activeCharacter!=null) {
+            return activeCharacter.getCurrentHitPoints() != 0;
+        }else{
+            return false;
+        }
+    }
     public void setHpProgressBar(){
         hpVBox.getChildren().clear();
         Label label = new Label("HP :"+activeCharacter.getCurrentHitPoints() +"/"+activeCharacter.getMaxHitPoints());
@@ -560,5 +573,19 @@ public class Controller extends Application {
         float progress = (float)activeCharacter.getCurrentHitPoints() / activeCharacter.getMaxHitPoints();
         ProgressBar progressBar = new ProgressBar(progress);
         hpVBox.getChildren().add(progressBar);
+    }
+
+    public void incrementActiveCharacterHP(ActionEvent actionEvent){
+        if(validateHPIncrement()) {
+            activeCharacter.incrementCurrentHP();
+            setHpProgressBar();
+        }
+    }
+
+    public void decrementActiveCharacterHP(ActionEvent actionEvent){
+        if(validateHPDecrement()) {
+            activeCharacter.decrementCurrentHP();
+            setHpProgressBar();
+        }
     }
 }

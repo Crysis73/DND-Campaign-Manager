@@ -14,7 +14,7 @@ class TraitCheck {
         this.character = character;
         this.traitName = traitName;
         this.difficultyClass = difficultyClass;
-        advantageRoll =0;
+        //advantageRoll =0;
         Die d20 = new Die(20);
         if(advantageType.equals("Advantage")){
             advantageRoll = d20.rollDieTwiceUseGreatest();
