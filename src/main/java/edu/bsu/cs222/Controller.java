@@ -554,7 +554,7 @@ public class Controller extends Application {
     //----------------------------- START PROGRESS BAR CODE -------------------------------------------//
     public boolean validateHPIncrement(){
         if(activeCharacter!=null){
-            return activeCharacter.getCurrentHitPoints() != activeCharacter.getMaxHitPoints();
+            return !activeCharacter.getCurrentHitPoints().equals(activeCharacter.getMaxHitPoints());
         }else{
             return false;
         }

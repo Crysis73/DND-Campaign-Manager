@@ -10,6 +10,7 @@ class TraitCheck {
     private final Integer finalValue;
     private Integer advantageRoll;
 
+    @SuppressWarnings("ConstantConditions")
     TraitCheck(Character character, String traitName, DifficultyClass difficultyClass, String advantageType){
         this.character = character;
         this.traitName = traitName;
