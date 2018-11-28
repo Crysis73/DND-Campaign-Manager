@@ -13,6 +13,10 @@ class DifficultyClass {
         return difficultyClassValue;
     }
 
+    String getName(){
+        return this.difficultyClassName;
+    }
+
     public String toString(){
         return difficultyClassName + " - " + difficultyClassValue;
     }

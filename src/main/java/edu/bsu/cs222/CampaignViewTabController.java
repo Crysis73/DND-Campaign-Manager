@@ -286,21 +286,21 @@ public class CampaignViewTabController {
             TraitCheck traitCheck = new TraitCheck(getCharacterToCheck(), getTraitToCheck(), getDifficultyClass(), advantageSpinner.getValue());
             if(traitCheck.getTraitCheckResult()){
                 showTraitCheckSuccessful(traitCheck);
-                if(!getTraitToCheck().equals("Intelligence")) {
-                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " + traitCheck.getTraitNameChecked() +
-                            " check and they were SUCCESSFUL");
+                if(!getDifficultyClass().getName().equals("Easy")) {
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " +getDifficultyClass().getName() + " "+ traitCheck.getTraitNameChecked() +
+                            " check and SUCCEEDED");
                 }else{
-                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " + traitCheck.getTraitNameChecked() +
-                            " check and they were SUCCESSFUL");
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " +getDifficultyClass().getName() + " " + traitCheck.getTraitNameChecked() +
+                            " check and SUCCEEDED");
                 }
             }
             else{
                 showTraitCheckFailure(traitCheck);
-                if(!getTraitToCheck().equals("Intelligence")) {
-                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " + traitCheck.getTraitNameChecked() +
-                            " check and they FAILED");
+                if(!getDifficultyClass().getName().equals("Easy")) {
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " +getDifficultyClass().getName()+" "+ traitCheck.getTraitNameChecked() +
+                            " check and FAILED");
                 }else{
-                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " + traitCheck.getTraitNameChecked() +
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " +getDifficultyClass().getName() + " " + traitCheck.getTraitNameChecked() +
                             " check and they FAILED");
                 }
             }

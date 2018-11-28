@@ -58,7 +58,7 @@ public class MainController{
         CharacterTabController characterTabController = new CharacterTabController(character);
         AnchorPane anchorPane = new AnchorPane();
         try {
-            anchorPane = FXMLLoader.load(getClass().getResource("/NewCharacterTab.fxml"));
+            anchorPane = FXMLLoader.load(getClass().getResource("/CharacterTab.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
