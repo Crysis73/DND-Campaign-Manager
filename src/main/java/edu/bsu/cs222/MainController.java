@@ -1,17 +1,14 @@
 package edu.bsu.cs222;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
+import java.util.Date;
 
 public class MainController{
     @FXML private CampaignOpenTabController campaignOpenTabController;
@@ -19,7 +16,7 @@ public class MainController{
     @FXML private NewCharacterTabController newCharacterTabController;
     @FXML private Tab CampaignViewTab,CharacterCreatorTab;
     @FXML private TabPane mainTabPane;
-    protected Campaign campaign;
+    private Campaign campaign;
 
 
     @FXML private void initialize(){
@@ -29,7 +26,7 @@ public class MainController{
     }
 
 
-    public void setCharacterCreatorTab(){
+    void setCharacterCreatorTab(){
         mainTabPane.getSelectionModel().select(CharacterCreatorTab);
         CampaignViewTab.disableProperty().setValue(false);
         campaignViewTabController.initializeCampaignViewTab();
@@ -37,9 +34,18 @@ public class MainController{
         newCharacterTabController.initializeNewCharacterTab();
     }
 
+    private void setLog(){
+        campaignViewTabController.addEntryToLog(new Date().toString() +": \""+campaign.getCampaignName() + "\" was created.");
+    }
+
+    void addEntryToLog(String entry){
+        campaignViewTabController.addEntryToLog(new Date().toString() + ": "+entry);
+    }
+
 
     public void setCampaign(Campaign campaign){
         this.campaign = campaign;
+        setLog();
     }
 
     public Campaign getCampaign(){
@@ -47,12 +53,12 @@ public class MainController{
     }
 
 
-    public void createNewCharacterTab(Character character){
+    void createNewCharacterTab(Character character){
         Tab tab = new Tab(character.getName());
         CharacterTabController characterTabController = new CharacterTabController(character);
         AnchorPane anchorPane = new AnchorPane();
         try {
-            anchorPane = FXMLLoader.load(getClass().getResource("/CharacterTab.fxml"));
+            anchorPane = FXMLLoader.load(getClass().getResource("/NewCharacterTab.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,7 +68,7 @@ public class MainController{
         campaignViewTabController.initializeCharacterChoices();
     }
 
-    public void refreshProgram(){
+    void refreshProgram(){
         campaignViewTabController.refreshCampaignView();
         newCharacterTabController.refreshNewCharacterTab();
         for(int i=0;i<mainTabPane.getTabs().size();i++){
@@ -73,11 +79,14 @@ public class MainController{
     }
 
     public void loadOldCampaign() {
-        setCharacterCreatorTab();
         refreshProgram();
+        Date date = new Date();
         JsonLoader loader = new JsonLoader();
-        Campaign campaign = loader.fromJsontoCampaign("myCampaign.json");
+        Campaign campaign = loader.fromJsontoCampaign("My Campaign.json");
         this.campaign = campaign;
+        campaign.fromFileToLog();
+        campaignViewTabController.addEntryToLog(campaign.getLog() + "\n"+date.toString() +": " +this.campaign.getCampaignName().replace(".json","")+" loaded.");
+        setCharacterCreatorTab();
         for(int j=0;j<campaign.getCharacters().size();j++){
             if(!campaign.getCharacters().get(j).getName().equals(mainTabPane.getTabs().get(j).getText())) {
                 createNewCharacterTab(campaign.getCharacters().get(j));
@@ -87,5 +96,13 @@ public class MainController{
         CampaignViewTab.setDisable(false);
         mainTabPane.getSelectionModel().select(CampaignViewTab);
     }
+
+    public void saveCampaign(javafx.event.ActionEvent actionEvent) {
+        campaignViewTabController.addEntryToLog(new Date().toString() + ": " + campaign.getCampaignName() + " was saved.");
+        campaign.writeLogToFile();
+        JsonWriter writer = new JsonWriter();
+        writer.writeCampaignJson(campaign);
+    }
+
 
 }

@@ -15,7 +15,7 @@ class JsonLoader {
     @SuppressWarnings("UnusedReturnValue")
     Campaign fromJsontoCampaign(String filename){
         try {
-            Campaign campaign = new Campaign(filename);
+            Campaign campaign = new Campaign(filename.replace(".json",""));
             JsonParser parser = new JsonParser();
             String data = readFileAsString(filename);
             JsonElement rootElement = parser.parse(data);

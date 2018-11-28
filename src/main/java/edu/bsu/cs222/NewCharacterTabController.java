@@ -1,6 +1,5 @@
 package edu.bsu.cs222;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -21,35 +20,35 @@ public class NewCharacterTabController {
     @FXML private MainController mainController;
 
 
-    public void injectMainController(MainController mainController){
+    void injectMainController(MainController mainController){
         this.mainController = mainController;
     }
 
-    protected void initializeNewCharacterTab(){
+    void initializeNewCharacterTab(){
         initializeDndClassChoices();
         initializeRaceChoices();
     }
 
 
-    public void showCharacterCreationSuccessAlert(String characterName){
+    private void showCharacterCreationSuccessAlert(String characterName){
         Alert characterCreated = new Alert(Alert.AlertType.INFORMATION,characterName+" has been created!");
         characterCreated.setTitle("Character Created");
         characterCreated.setHeaderText("SUCCESS");
         characterCreated.showAndWait();
     }
 
-    public String getRaceName(){
+    private String getRaceName(){
         Race race =(Race)raceComboBox.getItems().get(raceComboBox.getSelectionModel().getSelectedIndex());
         return race.getName();
     }
 
-    public String getClassName(){
+    private String getClassName(){
         dndClass dndClass =(dndClass) dndClassComboBox.getItems().get(dndClassComboBox.getSelectionModel().getSelectedIndex());
         return dndClass.getName();
     }
 
 
-    public void addDescription(Character character){
+    private void addDescription(Character character){
         String age = (setAge.getText());
         String height = (setHeight.getText());
         String weight = (setWeight.getText());
@@ -72,7 +71,7 @@ public class NewCharacterTabController {
                 languages,exoticLanguages,personalityTrait1,personalityTrait2,ideals,bonds,flaws);
     }
 
-    public boolean containsCharacter(String characterName){
+    private boolean containsCharacter(String characterName){
         for(int i =0;i<mainController.getCampaign().getCharacters().size();i++){
             if(characterName.equals(mainController.getCampaign().getCharacters().get(i).getName().trim())){
                 return true;
@@ -81,7 +80,7 @@ public class NewCharacterTabController {
         return false;
     }
 
-       public boolean validateCharacter(){
+    private boolean validateCharacter(){
         StringBuilder characterErrors = new StringBuilder();
         if(characterNameField.getText() == null||characterNameField.getText().trim().isEmpty()){
             characterErrors.append(" - Please add a valid character name . \n");
@@ -118,10 +117,9 @@ public class NewCharacterTabController {
             addDescription(character);
             mainController.getCampaign().addCharacer(character);
             mainController.createNewCharacterTab(character);
-//            initializeCharacterChoices();
             showCharacterCreationSuccessAlert(characterName);
-//            charactersPane.expandedProperty().set(true);
             clearAllNewCharacter();
+            mainController.addEntryToLog(character.getName() + " was added to \""+ mainController.getCampaign().getCampaignName()+"\"");
         }
 
     }
@@ -214,7 +212,8 @@ public class NewCharacterTabController {
 
 
 
-    public void clearAllNewCharacter(){
+    @FXML
+    private void clearAllNewCharacter(){
         raceComboBox.getSelectionModel().clearSelection();
         dndClassComboBox.getSelectionModel().clearSelection();
         setHeight.clear();
@@ -237,7 +236,7 @@ public class NewCharacterTabController {
     }
 
 
-    public void refreshNewCharacterTab(){
+    void refreshNewCharacterTab(){
         raceComboBox.getItems().clear();
         dndClassComboBox.getItems().clear();
     }

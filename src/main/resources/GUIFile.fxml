@@ -28,15 +28,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.Controller">
-    <MenuBar layoutX="-52.0" layoutY="-38.0" prefHeight="63.0" prefWidth="952.0" AnchorPane.bottomAnchor="575.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Menu mnemonicParsing="false" text="File">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" scaleShape="false" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.Controller">
+    <MenuBar layoutX="-52.0" layoutY="-38.0" prefHeight="63.0" prefWidth="952.0" style="-fx-background-color: #1a1a1a;" AnchorPane.bottomAnchor="575.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Menu mnemonicParsing="false" style="-fx-background-color: #1a1a1a;" text="File">
             <MenuItem fx:id="loadCampaignFileMenu" mnemonicParsing="false" onAction="#loadOldCampaign" text="Load Campaign" />
         </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
+        <Menu mnemonicParsing="false" style="-fx-background-color: #1a1a1a;" text="Edit">
             <MenuItem mnemonicParsing="false" text="Delete" />
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" style="-fx-background-color: #1a1a1a;" text="Help">
             <MenuItem mnemonicParsing="false" text="About" />
         </Menu>
     </MenuBar>
@@ -61,12 +61,12 @@
 
         <Tab fx:id="CampaignViewTab" disable="true" text="Campaign View">
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #595959; -fx-background-color: #595959;">
-                <SplitPane dividerPositions="0.8" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="695.0" style="-fx-border-color: #595959; -fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <SplitPane centerShape="false" dividerPositions="0.8" layoutX="110.0" layoutY="14.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="695.0" style="-fx-border-color: #595959; -fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <AnchorPane SplitPane.resizableWithParent="false">
                         <SplitPane dividerPositions="0.75" layoutX="307.0" layoutY="41.0" prefHeight="229.0" prefWidth="724.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
-                                <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="745.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <AnchorPane style="-fx-background-color: #595959;" SplitPane.resizableWithParent="false">
+                                <SplitPane centerShape="false" dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="745.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane maxWidth="209.0" minHeight="462.0" minWidth="209.0" prefWidth="209.0" style="-fx-background-color: #595959;" SplitPane.resizableWithParent="false">
                                         <TitledPane fx:id="charactersPane" alignment="TOP_LEFT" contentDisplay="CENTER" expanded="false" style="-fx-background-color: #595959;" text="Characters" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <AnchorPane fx:id="characterListAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="199.0" style="-fx-background-color: #1a1a1a;">
                                                 <ListView fx:id="characterList" layoutX="14.0" layoutY="10.0" onMouseClicked="#createChart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -76,26 +76,26 @@
                                             </AnchorPane>
                                         </TitledPane>
                                     </AnchorPane>
-                                    <SplitPane dividerPositions="0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #595959;">
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #595959;">
+                                    <SplitPane centerShape="false" dividerPositions="0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #595959;" SplitPane.resizableWithParent="false">
+                                        <AnchorPane maxWidth="496.0" minHeight="414.0" minWidth="496.0" prefHeight="414.0" prefWidth="496.0" style="-fx-background-color: #595959;" SplitPane.resizableWithParent="false">
                                             <padding>
                                                 <Insets bottom="-1.0" left="-1.0" right="-1.0" />
                                             </padding>
-                                            <TitledPane fx:id="chartTitledPane" alignment="TOP_LEFT" contentDisplay="CENTER" expanded="false" style="-fx-background-color: #595959;" text="Character Traits" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                <AnchorPane fx:id="chartPane" prefHeight="267.0" prefWidth="468.0" />
+                                            <TitledPane fx:id="chartTitledPane" alignment="TOP_LEFT" contentDisplay="CENTER" expanded="false" maxHeight="415.0" maxWidth="-Infinity" prefHeight="415.0" prefWidth="498.0" style="-fx-background-color: #595959;" text="Character Traits" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <AnchorPane fx:id="chartPane" maxHeight="415.0" />
                                             </TitledPane>
                                         </AnchorPane>
-                                        <AnchorPane fx:id="additionalInformationPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #1a1a1a;">
+                                        <AnchorPane fx:id="additionalInformationPane" maxHeight="44.0" maxWidth="496.0" minHeight="44.0" minWidth="496.0" prefHeight="44.0" prefWidth="496.0" style="-fx-background-color: #1a1a1a;" SplitPane.resizableWithParent="false">
                                             <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                                     <HBox fx:id="hpHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
                                                         <VBox fx:id="hpVBox" alignment="CENTER" prefHeight="200.0" prefWidth="106.0" HBox.hgrow="ALWAYS" />
-                                          <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decrementActiveCharacterHP" prefHeight="13.0" prefWidth="13.0" text="-" translateX="-98.0" translateY="8.0">
+                                          <Button fx:id="hpDecrement" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#decrementActiveCharacterHP" prefHeight="13.0" prefWidth="13.0" scaleShape="false" text="-" translateX="-103.0" translateY="8.0">
                                              <font>
                                                 <Font size="5.0" />
                                              </font>
                                           </Button>
-                                          <Button focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#incrementActiveCharacterHP" prefHeight="13.0" prefWidth="13.0" text="+" translateX="-28.0" translateY="8.0">
+                                          <Button fx:id="hpIncrement" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#incrementActiveCharacterHP" prefHeight="13.0" prefWidth="13.0" scaleShape="false" text="+" translateX="-31.0" translateY="8.0">
                                              <font>
                                                 <Font size="5.0" />
                                              </font>
@@ -117,7 +117,7 @@
                                     </SplitPane>
                                 </SplitPane>
                             </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <AnchorPane maxWidth="235.0" minHeight="462.0" minWidth="235.0" prefHeight="462.0" prefWidth="234.0" SplitPane.resizableWithParent="false">
                                 <MenuBar style="-fx-background-color: #404040;" AnchorPane.bottomAnchor="407.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <Menu mnemonicParsing="false" text="Combat Order">
                                         <MenuItem fx:id="generateNewCombatOrder" mnemonicParsing="false" onAction="#generateCombatOrder" text="Generate Combat Order" />
@@ -125,7 +125,7 @@
                                     </Menu>
                                 </MenuBar>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
-                                    <ListView fx:id="CombatOrderDisplay" depthTest="DISABLE" prefHeight="408.0" prefWidth="224.0" style="-fx-background-color: #595959; -fx-background-insets: 0; -fx-padding: 0;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                                    <ListView fx:id="CombatOrderDisplay" depthTest="DISABLE" maxWidth="237.0" minHeight="438.0" minWidth="237.0" prefHeight="438.0" prefWidth="237.0" style="-fx-background-color: #595959; -fx-background-insets: 0; -fx-padding: 0;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                                         <opaqueInsets>
                                             <Insets />
                                         </opaqueInsets>
@@ -135,8 +135,8 @@
                         </SplitPane>
                     </AnchorPane>
                     <AnchorPane prefHeight="104.0" prefWidth="898.0" SplitPane.resizableWithParent="false">
-                        <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                        <SplitPane centerShape="false" dividerPositions="0.35" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <AnchorPane maxHeight="38.0" minHeight="38.0" minWidth="948.0" prefHeight="38.0" prefWidth="948.0" SplitPane.resizableWithParent="false">
                                 <ToolBar prefHeight="25.0" prefWidth="898.0" style="-fx-background-color: #1a1a1a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <Button fx:id="rollDieButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onTraitCheck" text="Trait Check" textAlignment="CENTER">
                                         <opaqueInsets>
@@ -145,7 +145,7 @@
                                     </Button>
                                 </ToolBar>
                             </AnchorPane>
-                            <AnchorPane fx:id="traitCheckAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #1a1a1a;">
+                            <AnchorPane fx:id="traitCheckAnchorPane" maxHeight="72.0" minHeight="72.0" minWidth="948.0" prefHeight="72.0" prefWidth="948.0" style="-fx-background-color: #1a1a1a;">
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <HBox alignment="CENTER_LEFT" fillHeight="false" focusTraversable="true" prefHeight="73.0" prefWidth="898.0">
                                         <padding>
@@ -221,107 +221,69 @@
                 <TextField fx:id="characterNameField" layoutX="16.0" layoutY="14.0" promptText="Character Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="10.0" />
                   <TitledPane layoutX="5.0" layoutY="60.0" prefHeight="497.0" prefWidth="910.0" text="Description" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                       <AnchorPane prefHeight="465.0" prefWidth="907.0" style="-fx-background-color: #595959; -fx-background-insets: 0 -1 -1 -1;">
-                          <GridPane style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0"
-                                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <GridPane style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               </columnConstraints>
                               <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               </rowConstraints>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:"
-                                    GridPane.halignment="LEFT"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Race:"
-                                    GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:"
-                                    GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER"/>
-                              <ComboBox fx:id="raceComboBox" focusTraversable="false" prefWidth="125.0"
-                                        GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
-                              <ComboBox fx:id="dndClassComboBox" focusTraversable="false" prefWidth="125.0"
-                                        GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Height:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Features:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Exotic Languages:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 1:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 2:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="10"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Ideals:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="11"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonds:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="12"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="13"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="14"/>
-                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:"
-                                    GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="15"/>
-                              <TextField fx:id="setHeight" promptText="Height" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER"/>
-                              <TextField fx:id="setWeight" promptText="Weight" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
-                              <TextField fx:id="setAge" promptText="Age" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-                              <TextField fx:id="setEyeColor" promptText="Eye Color" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
-                              <TextField fx:id="setSkinColor" promptText="Skin Color" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="4"/>
-                              <TextField fx:id="setAdditionalFeatures" promptText="Additional Features"
-                                         GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
-                              <TextField fx:id="setAlignment" promptText="Alignment" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="6"/>
-                              <TextField fx:id="setLanguages" promptText="Languages" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
-                              <TextField fx:id="setExoticLanguages" promptText="Exotic Languages"
-                                         GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8"/>
-                              <TextField fx:id="setPersonalityTrait1" promptText="Personality Trait 1"
-                                         GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9"/>
-                              <TextField fx:id="setPersonalityTrait2" promptText="Personality Trait 2"
-                                         GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10"/>
-                              <TextField fx:id="setIdeals" promptText="Ideals" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="11"/>
-                              <TextField fx:id="setBonds" promptText="Bonds" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="12"/>
-                              <TextField fx:id="setFlaws" promptText="Flaws" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="13"/>
-                              <TextField fx:id="setWealth" promptText="Wealth" text="0" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="14"/>
-                              <TextField fx:id="setXP" promptText="Experience Points" text="0" GridPane.columnIndex="3"
-                                         GridPane.halignment="CENTER" GridPane.rowIndex="15"/>
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:" GridPane.halignment="LEFT" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Race:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                              <ComboBox fx:id="raceComboBox" focusTraversable="false" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="dndClassComboBox" focusTraversable="false" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Height:" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Features:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Exotic Languages:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 1:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 2:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="10" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Ideals:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="11" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonds:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="12" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="13" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="14" />
+                              <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="15" />
+                              <TextField fx:id="setHeight" promptText="Height" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                              <TextField fx:id="setWeight" promptText="Weight" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <TextField fx:id="setAge" promptText="Age" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <TextField fx:id="setEyeColor" promptText="Eye Color" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                              <TextField fx:id="setSkinColor" promptText="Skin Color" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                              <TextField fx:id="setAdditionalFeatures" promptText="Additional Features" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                              <TextField fx:id="setAlignment" promptText="Alignment" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                              <TextField fx:id="setLanguages" promptText="Languages" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+                              <TextField fx:id="setExoticLanguages" promptText="Exotic Languages" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                              <TextField fx:id="setPersonalityTrait1" promptText="Personality Trait 1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                              <TextField fx:id="setPersonalityTrait2" promptText="Personality Trait 2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+                              <TextField fx:id="setIdeals" promptText="Ideals" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+                              <TextField fx:id="setBonds" promptText="Bonds" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+                              <TextField fx:id="setFlaws" promptText="Flaws" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+                              <TextField fx:id="setWealth" promptText="Wealth" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
+                              <TextField fx:id="setXP" promptText="Experience Points" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
                           </GridPane>
                       </AnchorPane>
                   </TitledPane>

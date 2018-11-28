@@ -22,8 +22,13 @@
 .menu-item{-fx-background-color:black;}
 .menu-item .label{-fx-text-fill:#d9d9d9;}
 
-.menu-button{-fx-background-color:#404040;}
+.menu-button{-fx-background-color:#1a1a1a;}
 
+#CombatOrderButton{-fx-background-color:#404040;}
+#logDisplay{-fx-background-color:#0d0d0d;-fx-text-fill:#d9d9d9;}
+#logDisplay .content {-fx-background-color:#0d0d0d;-fx-text-fill:#d9d9d9;}
+#logEntry{-fx-background-color:#0d0d0d;-fx-text-fill:#d9d9d9;}
+#logEntry .content{-fx-background-color:#0d0d0d;}
 
 #resultWindow{-fx-text-inner-color:#d9d9d9;}
 
@@ -76,6 +81,91 @@
 .progress-bar{-fx-background-color:-fx-box-border,white;}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .dialog-pane{
+  -fx-border-color:black;
+  -fx-border-width:2.0px;
+ }
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+  -fx-background-color:black;
+}
+
+.dialog-pane > .content.label {
+   -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+   -fx-background-color: yellow;
+   -fx-text-fill:black;
+   -fx-font-size:15.0px;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+  -fx-background-color: black;
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color: yellow;
+  -fx-background-radius:10px;
+  -fx-text-fill:black;
+  -fx-font-size:15.0px;
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+   -fx-background-color:black;
+   -fx-text-fill:white;
+   -fx-wrap-text: true;
+   -fx-effect: dropshadow( three-pass-box, yellow, 10.0, 0.0, 0.0, 0.0);
+   -fx-cursor:hand;
+ }
+
+.dialog-pane .button:hover{     
+  -fx-background-color:white;
+  -fx-text-fill:black;
+  -fx-font-weight:bold; 
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .label{-fx-text-fill:#d9d9d9;}
 .list-cell:filled:selected:focused, .list-cell:filled:selected {-fx-background-color:#8c8c8c;}
 .list-cell{-fx-background-color:#1a1a1a;}
@@ -96,7 +186,6 @@
 }
 .chart-title{-fx-background-color:#1a1a1a;-fx-border-color:#1a1a1a;}
 .chart-content{-fx-background-color: #1a1a1a;-fx-border-color:#1a1a1a;-fx-padding:0em;}
-.chart{-fx-padding:2.5em;}
 .button:focused,
 .toggle-button:focused,
 .radio-button:focused > .radio,

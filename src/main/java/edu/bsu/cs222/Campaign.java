@@ -1,5 +1,9 @@
 package edu.bsu.cs222;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -27,11 +31,36 @@ class Campaign {
         return this.campaignName;
     }
 
+    String getLog(){
+        return this.log;
+    }
+
+    void addEntryToLog(String entry){
+        this.log += "\n" + entry;
+    }
+
+    void writeLogToFile(){
+        try (FileWriter file = new FileWriter(this.campaignName.replace(".json","")+".txt")) {
+            file.flush();
+            file.write(log.replace("null",""));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void fromFileToLog(){
+        try {
+            this.log = new String(Files.readAllBytes(Paths.get(this.campaignName+".txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     ArrayList generateCombatOrder(){
         Collections.sort(characters);
         return characters;
     }
-
 
     public String toString(){
         StringBuilder result = new StringBuilder("Campaign : " + this.campaignName);

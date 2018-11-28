@@ -12,41 +12,39 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class CampaignViewTabController {
 
-    @FXML
-    private TextField resultWindow;
-    @FXML
-    private ListView characterList, combatOrderDisplay;
-    @FXML
-    private TitledPane chartTitledPane, charactersPane;
-    @FXML
-    private ChoiceBox characterChoiceBox, traitChoiceBox,difficultyClassChoiceBox;
-    @FXML
-    private Spinner<String> advantageSpinner;
-    @FXML
-    private VBox hpVBox;
-    @FXML
-    private HBox hpHBox;
-    @FXML
-    private AnchorPane chartPane;
+    @FXML private TextField resultWindow, logEntry;
+    @FXML private TextArea logDisplay;
+    @FXML private ListView<String> characterList;
+    @FXML private ListView<String> combatOrderDisplay;
+    @FXML private TitledPane chartTitledPane, charactersPane;
+    @FXML private ChoiceBox<String> characterChoiceBox;
+    @FXML private ChoiceBox<String> traitChoiceBox;
+    @FXML private ChoiceBox<DifficultyClass> difficultyClassChoiceBox;
+    @FXML private Spinner<String> advantageSpinner;
+    @FXML private VBox hpVBox;
+    @FXML private HBox hpHBox;
+    @FXML private AnchorPane chartPane;
+    @FXML private Button hpIncrement, hpDecrement;
     @FXML private MainController mainController;
-
     private Character activeCharacter;
 
-    public void injectMainController(MainController mainController){
+    void injectMainController(MainController mainController){
         this.mainController = mainController;
     }
 
-    protected void displayCharacters(){
+    void displayCharacters(){
         ArrayList<String> characters = new ArrayList<>();
         for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
             characters.add(mainController.getCampaign().getCharacters().get(i).getName());
         }
         ObservableList<String> characterNames = FXCollections.observableArrayList(characters);
         characterList.setItems(characterNames);
+
     }
 
     private void setActiveCharacter(String name){
@@ -59,7 +57,7 @@ public class CampaignViewTabController {
 
     //--------------------- START OF INITIALIZE CAMPAIGN VIEW CODE ---------------------------//
 
-    protected void initializeCampaignViewTab(){
+    void initializeCampaignViewTab(){
         initializeCharacterChoices();
         initializeTraitChoices();
         initializeAdvantageStates();
@@ -128,7 +126,7 @@ public class CampaignViewTabController {
 
     public void createChart(MouseEvent mouseEvent) {
         if(validateChartCharacter() && mainController.getCampaign().getCharacters().size()!=0) {
-            ObservableList activeCharacterName = characterList.getSelectionModel().getSelectedItems();
+            ObservableList<String> activeCharacterName = characterList.getSelectionModel().getSelectedItems();
             String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
             setActiveCharacter(characterName);
             ChartCreator chartCreator = new ChartCreator(activeCharacter.getTraits().getTraitMap());
@@ -136,6 +134,10 @@ public class CampaignViewTabController {
             BarChart chart = chartCreator.createChart(traitNames,characterName);
             chartPane.getChildren().clear();
             chartPane.getChildren().add(chart);
+            AnchorPane.setTopAnchor(chart, (double)0);
+            AnchorPane.setLeftAnchor(chart,(double)0);
+            AnchorPane.setRightAnchor(chart,(double)0);
+            AnchorPane.setBottomAnchor(chart,(double)0);
             chartTitledPane.expandedProperty().setValue(true);
             setHpProgressBar();
         }
@@ -145,27 +147,28 @@ public class CampaignViewTabController {
 
     //--------------------- START OF HP PROGRESS BAR CODE ---------------------------//
 
-    public boolean validateHPIncrement(){
+    private boolean validateHPIncrement(){
         if(activeCharacter!=null){
             return !activeCharacter.getCurrentHitPoints().equals(activeCharacter.getMaxHitPoints());
         }else{
             return false;
         }
     }
-    public boolean validateHPDecrement(){
+    private boolean validateHPDecrement(){
         if(activeCharacter!=null) {
             return activeCharacter.getCurrentHitPoints() != 0;
         }else{
             return false;
         }
     }
-    public void setHpProgressBar(){
+    private void setHpProgressBar(){
         hpVBox.getChildren().clear();
         Label label = new Label("HP :"+activeCharacter.getCurrentHitPoints() +"/"+activeCharacter.getMaxHitPoints());
         hpVBox.getChildren().add(label);
         float progress = (float)activeCharacter.getCurrentHitPoints() / activeCharacter.getMaxHitPoints();
         ProgressBar progressBar = new ProgressBar(progress);
         hpVBox.getChildren().add(progressBar);
+
     }
 
     public void incrementActiveCharacterHP(ActionEvent actionEvent){
@@ -223,7 +226,7 @@ public class CampaignViewTabController {
 
     //--------------------- START OF TRAIT CHECK CODE ---------------------------//
     private Character getCharacterToCheck(){
-        String characterName = (String) characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
+        String characterName = characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
         for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
             if(mainController.getCampaign().getCharacters().get(i).getName().equals(characterName)){
                 return mainController.getCampaign().getCharacters().get(i);
@@ -233,14 +236,14 @@ public class CampaignViewTabController {
     }
 
     private String getTraitToCheck(){
-        return (String) traitChoiceBox.getItems().get(traitChoiceBox.getSelectionModel().getSelectedIndex());
+        return traitChoiceBox.getItems().get(traitChoiceBox.getSelectionModel().getSelectedIndex());
     }
 
     private DifficultyClass getDifficultyClass(){
-        return (DifficultyClass) difficultyClassChoiceBox.getItems().get(difficultyClassChoiceBox.getSelectionModel().getSelectedIndex());
+        return difficultyClassChoiceBox.getItems().get(difficultyClassChoiceBox.getSelectionModel().getSelectedIndex());
     }
 
-    public void showTraitCheckSuccessful(TraitCheck traitCheck){
+    private void showTraitCheckSuccessful(TraitCheck traitCheck){
         resultWindow.setText("SUCCESS");
         Alert success = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getAdvantageRoll() +
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
@@ -249,7 +252,7 @@ public class CampaignViewTabController {
         success.showAndWait();
     }
 
-    public void showTraitCheckFailure(TraitCheck traitCheck){
+    private void showTraitCheckFailure(TraitCheck traitCheck){
         resultWindow.setText("FAILURE");
         Alert failure = new Alert(Alert.AlertType.INFORMATION, traitCheck.getCharacterName() + "'s roll of " + traitCheck.getAdvantageRoll() +
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
@@ -283,10 +286,25 @@ public class CampaignViewTabController {
             TraitCheck traitCheck = new TraitCheck(getCharacterToCheck(), getTraitToCheck(), getDifficultyClass(), advantageSpinner.getValue());
             if(traitCheck.getTraitCheckResult()){
                 showTraitCheckSuccessful(traitCheck);
+                if(!getTraitToCheck().equals("Intelligence")) {
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " + traitCheck.getTraitNameChecked() +
+                            " check and they were SUCCESSFUL");
+                }else{
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " + traitCheck.getTraitNameChecked() +
+                            " check and they were SUCCESSFUL");
+                }
             }
             else{
                 showTraitCheckFailure(traitCheck);
+                if(!getTraitToCheck().equals("Intelligence")) {
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted a " + traitCheck.getTraitNameChecked() +
+                            " check and they FAILED");
+                }else{
+                    addEntryToLog(new Date().toString() + ": " + traitCheck.getCharacterName() + " attempted an " + traitCheck.getTraitNameChecked() +
+                            " check and they FAILED");
+                }
             }
+
         }
     }
     //---------------------- END OF TRAIT CHECK CODE ------------------------------//
@@ -294,12 +312,26 @@ public class CampaignViewTabController {
 
     //---------REFRESH AND LOAD OLD CAMPAIGN -------//
 
-    public void refreshCampaignView(){
-        combatOrderDisplay.getItems().clear();
+    void refreshCampaignView(){
+        logEntry.clear();
+        logDisplay.clear();
         hpVBox.getChildren().clear();
         chartPane.getChildren().clear();
         characterList.getItems().clear();
+        combatOrderDisplay.getItems().clear();
     }
 
+
+    //--------------------------- START OF LOG CODE ----------------------------------------//
+
+    void addEntryToLog(String entry){
+        mainController.getCampaign().addEntryToLog(entry);
+        logDisplay.setText(logDisplay.getText() + "\n" +entry);
+    }
+
+    public void onLogEntry(){
+        addEntryToLog(new Date().toString() +": " + logEntry.getText());
+        logEntry.clear();
+    }
 
 }

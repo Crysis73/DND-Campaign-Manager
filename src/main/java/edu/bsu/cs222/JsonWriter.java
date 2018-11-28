@@ -7,9 +7,17 @@ import java.io.IOException;
 class JsonWriter {
 
 
+
+
     void writeCampaignJson(Campaign campaign){
         String jsonString = campaign.generateJsonString();
-        try (FileWriter file = new FileWriter(campaign.getCampaignName()+".json")) {
+        String filename;
+        if(campaign.getCampaignName().contains(".json")){
+            filename = campaign.getCampaignName();
+        }else{
+            filename = campaign.getCampaignName()+".json";
+        }
+        try (FileWriter file = new FileWriter(filename)) {
             file.write(jsonString);
 
         } catch (IOException e) {

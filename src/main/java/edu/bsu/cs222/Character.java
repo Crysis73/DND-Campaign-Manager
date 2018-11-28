@@ -20,7 +20,8 @@ class Character implements Comparable<Character> {
         rollForInitiative();
         this.experiencepoints = 0;
         this.wealth = 0;
-        this.maxHitPoints = traits.getValue("Constitution") + this.dndClass.getHitPointBonus();
+        Integer abilityModifier = ( traits.getValue("Constitution") -10 ) / 2;
+        this.maxHitPoints = abilityModifier + this.dndClass.getHitDice();
         this.currentHitPoints = maxHitPoints;
         this.characterDescription = new Description();
     }
@@ -63,7 +64,7 @@ class Character implements Comparable<Character> {
         this.traits = characterTraits;
     }
 
-    public void setInitiative(Integer initiative){
+    void setInitiative(Integer initiative){
         this.initiative = initiative;
     }
 

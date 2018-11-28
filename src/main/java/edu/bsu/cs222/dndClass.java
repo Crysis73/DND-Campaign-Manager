@@ -8,7 +8,7 @@ class dndClass {
     private final Integer hitDice;
     private final Integer hitPointBonus;
 
-    dndClass(String name, String description, @SuppressWarnings("SameParameterValue") Integer hitDice) {
+    dndClass(String name, String description, Integer hitDice) {
         this.name = name;
         this.description = description;
         this.hitDice = hitDice;
@@ -25,7 +25,7 @@ class dndClass {
         return this.description;
     }
 
-    public Integer getHitDice() {
+    Integer getHitDice() {
 
         return this.hitDice;
     }
@@ -36,6 +36,6 @@ class dndClass {
     }
 
     public String toString(){
-        return("Class :\n\t"+name+" - adds 1d"+hitDice+" to Constitution to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
+        return("Class :\n\t"+name+" - adds "+hitDice+" to Constitution modifier to determine HP and adds an additional 1d"+hitDice+" per "+name+" level."+"\n\tDescription : "+description);
     }
 }

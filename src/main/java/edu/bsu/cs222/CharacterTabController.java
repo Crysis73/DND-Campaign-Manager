@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 
 public class CharacterTabController {
@@ -25,7 +24,7 @@ public class CharacterTabController {
     Character character;
 
 
-    protected CharacterTabController(Character characterName){
+    CharacterTabController(Character characterName){
 //        Text characterNameText = new Text(character.getName());
 //        this.characterNameText = characterNameText;
     }
