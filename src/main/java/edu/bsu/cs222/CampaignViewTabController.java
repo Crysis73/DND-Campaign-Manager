@@ -4,13 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -26,15 +29,22 @@ public class CampaignViewTabController {
     @FXML private ChoiceBox<String> traitChoiceBox;
     @FXML private ChoiceBox<DifficultyClass> difficultyClassChoiceBox;
     @FXML private Spinner<String> advantageSpinner;
-    @FXML private VBox hpVBox;
+    @FXML private VBox hpVBox, wealthVBox;
     @FXML private HBox hpHBox;
     @FXML private AnchorPane chartPane;
-    @FXML private Button hpIncrement, hpDecrement;
+    @FXML private Button hpIncrement, hpDecrement, modifyWealth;
+    @FXML private Label wealthLabel;
+    @FXML private WealthModificationController wealthModificationController;
     @FXML private MainController mainController;
     private Character activeCharacter;
 
     void injectMainController(MainController mainController){
         this.mainController = mainController;
+        wealthModificationController.injectCampaignViewTabController(this);
+    }
+
+    void injectWealthModificationController(WealthModificationController wealthModificationController){
+        this.wealthModificationController = wealthModificationController;
     }
 
     void displayCharacters(){
@@ -54,6 +64,16 @@ public class CampaignViewTabController {
             }
         }
     }
+
+    Character getCharacterInCampaign(String name){
+        for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
+            if(mainController.getCampaign().getCharacters().get(i).getName().equals(name)){
+                return mainController.getCampaign().getCharacters().get(i);
+            }
+        }
+        return null;
+    }
+
 
     //--------------------- START OF INITIALIZE CAMPAIGN VIEW CODE ---------------------------//
 
@@ -140,6 +160,7 @@ public class CampaignViewTabController {
             AnchorPane.setBottomAnchor(chart,(double)0);
             chartTitledPane.expandedProperty().setValue(true);
             setHpProgressBar();
+            setWealthDisplay();
         }
     }
 
@@ -326,12 +347,54 @@ public class CampaignViewTabController {
 
     void addEntryToLog(String entry){
         mainController.getCampaign().addEntryToLog(entry);
-        logDisplay.setText(logDisplay.getText() + "\n" +entry);
+        logDisplay.setText(mainController.getCampaign().getLog().replace("null",""));
     }
 
     public void onLogEntry(){
         addEntryToLog(new Date().toString() +": " + logEntry.getText());
         logEntry.clear();
     }
+
+    //-------------------------------- END OF LOG CODE -------------------------------------//
+
+    //--------------------------------- START OF WEALTH CODE -------------------------------------//
+
+    private void setWealthDisplay(){
+        if(activeCharacter!=null) {
+            wealthLabel.setText("Wealth: " + activeCharacter.getWealth().toString());
+        }
+    }
+
+    @FXML
+    private void showWealthModificationMenu(ActionEvent actionEvent){
+        FXMLLoader loader = new FXMLLoader();
+        WealthModificationController wealthModificationController = new WealthModificationController();
+        this.wealthModificationController = wealthModificationController;
+        loader.setController(wealthModificationController);
+        loader.setLocation(getClass().getResource("/WealthModificationMenu.fxml"));
+        ArrayList<Character> characters = mainController.getCampaign().getCharacters();
+
+        try {
+            AnchorPane anchorPane = loader.load();
+            wealthModificationController.injectCampaignCharacters(characters);
+            wealthModificationController.initializeCharacterChoices();
+            wealthModificationController.initializePayToChoices();
+            Scene scene = new Scene(anchorPane);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Wealth Modification Menu");
+            stage.show();
+            stage.onCloseRequestProperty().set(event -> {
+                setWealthDisplay();
+                String logUpdates = wealthModificationController.getLogUpdates();
+                addEntryToLog(logUpdates);
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }

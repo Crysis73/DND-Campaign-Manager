@@ -8,7 +8,8 @@ public class CharacterTabController {
 //    @FXML
 //    Text characterNameText;
     @FXML
-    TextField characterWealth, characterCurrentHP, characterMaxHP,
+    private
+TextField characterWealth, characterCurrentHP, characterMaxHP,
             characterHeight,
             characterWeight,
             characterAge,
@@ -27,6 +28,10 @@ public class CharacterTabController {
     CharacterTabController(Character characterName){
 //        Text characterNameText = new Text(character.getName());
 //        this.characterNameText = characterNameText;
+    }
+
+    protected void initialize(){
+
     }
 
     protected void setCharacterWealth(String characterWealth){

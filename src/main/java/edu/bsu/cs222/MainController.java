@@ -20,6 +20,8 @@ public class MainController{
 
 
     @FXML private void initialize(){
+        WealthModificationController wealthModificationController = new WealthModificationController();
+        campaignViewTabController.injectWealthModificationController(wealthModificationController);
         campaignOpenTabController.injectMainController(this);
         campaignViewTabController.injectMainController(this);
         newCharacterTabController.injectMainController(this);
@@ -57,11 +59,15 @@ public class MainController{
         Tab tab = new Tab(character.getName());
         CharacterTabController characterTabController = new CharacterTabController(character);
         AnchorPane anchorPane = new AnchorPane();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/CharacterTab.fxml"));
         try {
-            anchorPane = FXMLLoader.load(getClass().getResource("/CharacterTab.fxml"));
+            anchorPane = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loader.setController(characterTabController);
+
         tab.setContent(anchorPane);
         mainTabPane.getTabs().add(tab);
         campaignViewTabController.displayCharacters();
@@ -85,7 +91,7 @@ public class MainController{
         Campaign campaign = loader.fromJsontoCampaign("My Campaign.json");
         this.campaign = campaign;
         campaign.fromFileToLog();
-        campaignViewTabController.addEntryToLog(campaign.getLog() + "\n"+date.toString() +": " +this.campaign.getCampaignName().replace(".json","")+" loaded.");
+        campaignViewTabController.addEntryToLog(date.toString() +": " +this.campaign.getCampaignName().replace(".json","")+" loaded.");
         setCharacterCreatorTab();
         for(int j=0;j<campaign.getCharacters().size();j++){
             if(!campaign.getCharacters().get(j).getName().equals(mainTabPane.getTabs().get(j).getText())) {

@@ -115,6 +115,8 @@ public class NewCharacterTabController {
             String characterName = characterNameField.getText().trim();
             Character character = new Character(characterName, getClassName(),getRaceName());
             addDescription(character);
+            character.setWealth(Integer.parseInt(setWealth.getText()));
+            character.setExperiencepoints(Integer.parseInt(setXP.getText()));
             mainController.getCampaign().addCharacer(character);
             mainController.createNewCharacterTab(character);
             showCharacterCreationSuccessAlert(characterName);

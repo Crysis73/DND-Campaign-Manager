@@ -30,6 +30,10 @@ class Character implements Comparable<Character> {
         this.currentHitPoints = value;
     }
 
+    Integer getWealth(){
+        return this.wealth;
+    }
+
     void setWealth(Integer startingValue){
         this.wealth = startingValue;
     }
