@@ -1,192 +1,600 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="characterTab" prefHeight="400.0" prefWidth="600.0" stylesheets="@Stylesheets/DarkTheme.css"
-            xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox layoutX="118.0" layoutY="-78.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
-          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <AnchorPane fx:id="characterTabAnchorPane" prefHeight="150.0" prefWidth="200.0">
-            <GridPane fx:id="characterTabGridPane" alignment="CENTER" hgap="10.0" prefHeight="90.0"
-                      prefWidth="600.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="73.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="110.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="51.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="75.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="60.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="78.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" prefWidth="100.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES"/>
-                </rowConstraints>
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                </padding>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " GridPane.rowIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-                    </GridPane.margin>
-                </Text>
-                <Text fx:id="characterNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Current HP:" GridPane.columnIndex="5"
-                      GridPane.rowIndex="1"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Max HP: " GridPane.columnIndex="5"
-                      GridPane.rowIndex="2"/>
-                <TextField fx:id="characterWealth" prefHeight="26.0" prefWidth="82.0" GridPane.columnIndex="3"
-                           GridPane.rowIndex="1"/>
-                <TextField fx:id="characterMaxHP" prefHeight="27.0" prefWidth="59.0" GridPane.columnIndex="6"
-                           GridPane.rowIndex="2"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2"
-                      GridPane.rowIndex="1"/>
-                <TextField fx:id="characterCurrentHP" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
-            </GridPane>
+<AnchorPane fx:id="characterTab" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1a1a1a;" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: #595959;"
+               AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+               AnchorPane.topAnchor="5.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="1270.0"
+                    style="-fx-background-color: #595959;">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
+                        style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0"
+                        AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <SplitPane dividerPositions="0.33" prefHeight="160.0" prefWidth="200.0"
+                           style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"
+                                style="-fx-background-color: #595959;">
+                        <SplitPane dividerPositions="0.55" orientation="VERTICAL" prefHeight="200.0"
+                                   prefWidth="160.0" style="-fx-background-color: #595959;"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"
+                                        style="-fx-background-color: #595959;">
+                                <SplitPane dividerPositions="0.063" orientation="VERTICAL"
+                                           prefHeight="200.0" prefWidth="160.0"
+                                           style="-fx-background-color: #1a1a1a;"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
+                                                minWidth="-Infinity" prefHeight="23.0" prefWidth="417.0"
+                                                style="-fx-background-color: #1a1a1a;">
+                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                            <Label alignment="CENTER" contentDisplay="CENTER"
+                                                   text="Name:" textAlignment="CENTER">
+                                                <font>
+                                                    <Font size="15.0"/>
+                                                </font>
+                                            </Label>
+                                            <Region prefHeight="200.0" prefWidth="10.0"/>
+                                            <Label fx:id="characterNameText" alignment="CENTER"
+                                                   contentDisplay="CENTER" text="Label"
+                                                   textAlignment="CENTER">
+                                                <font>
+                                                    <Font size="15.0"/>
+                                                </font>
+                                            </Label>
+                                        </HBox>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="-Infinity" minHeight="300.0"
+                                                minWidth="-Infinity" prefHeight="362.0" prefWidth="417.0"
+                                                style="-fx-background-color: #595959;">
+                                        <opaqueInsets>
+                                            <Insets/>
+                                        </opaqueInsets>
+                                        <padding>
+                                            <Insets bottom="-1.0" left="-1.0" right="-1.0"/>
+                                        </padding>
+                                        <TitledPane alignment="TOP_LEFT" contentDisplay="CENTER"
+                                                    style="-fx-background-color: #595959;"
+                                                    text="Stats" AnchorPane.bottomAnchor="0.0"
+                                                    AnchorPane.leftAnchor="0.0"
+                                                    AnchorPane.rightAnchor="0.0"
+                                                    AnchorPane.topAnchor="0.0">
+                                            <padding>
+                                                <Insets bottom="-1.0" left="-1.0" right="-1.0"/>
+                                            </padding>
+                                            <AnchorPane depthTest="DISABLE"
+                                                        style="-fx-background-color: #1a1a1a;">
+                                                <opaqueInsets>
+                                                    <Insets/>
+                                                </opaqueInsets>
+                                                <GridPane layoutX="87.0" layoutY="106.0"
+                                                          AnchorPane.bottomAnchor="0.0"
+                                                          AnchorPane.leftAnchor="0.0"
+                                                          AnchorPane.rightAnchor="0.0"
+                                                          AnchorPane.topAnchor="0.0">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           maxWidth="243.33334350585938"
+                                                                           minWidth="125.0"
+                                                                           prefWidth="50.0"/>
+                                                        <ColumnConstraints halignment="RIGHT"
+                                                                           hgrow="SOMETIMES"
+                                                                           maxWidth="243.33334350585938"
+                                                                           minWidth="10.0"
+                                                                           prefWidth="111.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           maxWidth="162.5"
+                                                                           minWidth="0.0"
+                                                                           prefWidth="44.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES"
+                                                                           maxWidth="232.3333282470703"
+                                                                           minWidth="16.5"
+                                                                           prefWidth="125.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0"
+                                                                        prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="1">
+                                                        <Label contentDisplay="CENTER"
+                                                               text="Wealth:"
+                                                               textAlignment="CENTER"
+                                                               AnchorPane.bottomAnchor="0.0"
+                                                               AnchorPane.leftAnchor="0.0"
+                                                               AnchorPane.rightAnchor="0.0"
+                                                               AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="1">
+                                                        <Label contentDisplay="CENTER"
+                                                               text="Current HP:"
+                                                               textAlignment="CENTER"
+                                                               AnchorPane.bottomAnchor="0.0"
+                                                               AnchorPane.leftAnchor="0.0"
+                                                               AnchorPane.rightAnchor="0.0"
+                                                               AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="2">
+                                                        <Label contentDisplay="CENTER"
+                                                               text="Max HP:"
+                                                               textAlignment="CENTER"
+                                                               AnchorPane.bottomAnchor="0.0"
+                                                               AnchorPane.leftAnchor="0.0"
+                                                               AnchorPane.rightAnchor="0.0"
+                                                               AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="3">
+                                                        <Label contentDisplay="CENTER"
+                                                               text="Experience Points:"
+                                                               textAlignment="CENTER"
+                                                               AnchorPane.bottomAnchor="0.0"
+                                                               AnchorPane.leftAnchor="0.0"
+                                                               AnchorPane.rightAnchor="0.0"
+                                                               AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="4">
+                                                        <Label contentDisplay="CENTER"
+                                                               text="Level:"
+                                                               textAlignment="CENTER"
+                                                               AnchorPane.bottomAnchor="0.0"
+                                                               AnchorPane.leftAnchor="0.0"
+                                                               AnchorPane.rightAnchor="0.0"
+                                                               AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="2">
+                                                        <TextField fx:id="wealthBox"
+                                                                   layoutX="-60.0" layoutY="9.0"
+                                                                   AnchorPane.bottomAnchor="0.0"
+                                                                   AnchorPane.leftAnchor="0.0"
+                                                                   AnchorPane.rightAnchor="0.0"
+                                                                   AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="2"
+                                                                GridPane.rowIndex="1">
+                                                        <TextField fx:id="currentHPBox"
+                                                                   layoutX="-60.0" layoutY="9.0"
+                                                                   AnchorPane.bottomAnchor="0.0"
+                                                                   AnchorPane.leftAnchor="0.0"
+                                                                   AnchorPane.rightAnchor="0.0"
+                                                                   AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="2"
+                                                                GridPane.rowIndex="2">
+                                                        <TextField fx:id="maxHPBox"
+                                                                   layoutX="-60.0" layoutY="9.0"
+                                                                   AnchorPane.bottomAnchor="0.0"
+                                                                   AnchorPane.leftAnchor="0.0"
+                                                                   AnchorPane.rightAnchor="0.0"
+                                                                   AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="2"
+                                                                GridPane.rowIndex="3">
+                                                        <TextField layoutX="-60.0" layoutY="9.0"
+                                                                   AnchorPane.bottomAnchor="0.0"
+                                                                   AnchorPane.leftAnchor="0.0"
+                                                                   AnchorPane.rightAnchor="0.0"
+                                                                   AnchorPane.topAnchor="0.0"
+                                                                   fx:id="xpBox"/>
+                                                    </AnchorPane>
+                                                    <AnchorPane prefHeight="200.0"
+                                                                prefWidth="200.0"
+                                                                GridPane.columnIndex="2"
+                                                                GridPane.rowIndex="4">
+                                                        <TextField fx:id="levelBox"
+                                                                   layoutX="-60.0" layoutY="9.0"
+                                                                   AnchorPane.bottomAnchor="0.0"
+                                                                   AnchorPane.leftAnchor="0.0"
+                                                                   AnchorPane.rightAnchor="0.0"
+                                                                   AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                </GridPane>
+                                            </AnchorPane>
+                                        </TitledPane>
+                                    </AnchorPane>
+                                </SplitPane>
+                            </AnchorPane>
+                            <AnchorPane maxWidth="-Infinity" minHeight="267.0" minWidth="-Infinity"
+                                        prefHeight="317.0" prefWidth="417.0">
+                                <padding>
+                                    <Insets bottom="-2.0" left="-2.0" right="-1.0"/>
+                                </padding>
+                                <TitledPane animated="false" style="-fx-background-color: #595959;"
+                                            text="Traits" AnchorPane.bottomAnchor="0.0"
+                                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                            AnchorPane.topAnchor="0.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                                prefWidth="200.0" style="-fx-background-color: #1a1a1a;">
+                                        <GridPane AnchorPane.bottomAnchor="0.0"
+                                                  AnchorPane.leftAnchor="0.0"
+                                                  AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                   maxWidth="243.33334350585938"
+                                                                   minWidth="125.0" prefWidth="50.0"/>
+                                                <ColumnConstraints halignment="RIGHT"
+                                                                   hgrow="SOMETIMES"
+                                                                   maxWidth="243.33334350585938"
+                                                                   minWidth="10.0" prefWidth="111.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.5"
+                                                                   minWidth="0.0" prefWidth="44.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES"
+                                                                   maxWidth="232.3333282470703"
+                                                                   minWidth="16.5" prefWidth="125.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1">
+                                                <Label contentDisplay="CENTER" text="Strength:"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="1">
+                                                <Label contentDisplay="CENTER" text="Dexterity:"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="2">
+                                                <Label contentDisplay="CENTER" text="Constitution:"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="3">
+                                                <Label contentDisplay="CENTER" text="Intelligence:"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="4">
+                                                <Label contentDisplay="CENTER" text="Wisdom"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="5">
+                                                <Label contentDisplay="CENTER" text="Charisma:"
+                                                       textAlignment="CENTER"
+                                                       AnchorPane.bottomAnchor="0.0"
+                                                       AnchorPane.leftAnchor="0.0"
+                                                       AnchorPane.rightAnchor="0.0"
+                                                       AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2">
+                                                <TextField fx:id="strengthBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="1">
+                                                <TextField fx:id="dexterityBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="2">
+                                                <TextField fx:id="constitutionBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="3">
+                                                <TextField fx:id="intelligenceBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="4">
+                                                <TextField fx:id="wisdomBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                            <AnchorPane prefHeight="200.0" prefWidth="200.0"
+                                                        GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="5">
+                                                <TextField fx:id="charismaBox" layoutX="-60.0"
+                                                           layoutY="9.0"
+                                                           AnchorPane.bottomAnchor="0.0"
+                                                           AnchorPane.leftAnchor="0.0"
+                                                           AnchorPane.rightAnchor="0.0"
+                                                           AnchorPane.topAnchor="0.0"/>
+                                            </AnchorPane>
+                                        </GridPane>
+                                    </AnchorPane>
+                                </TitledPane>
+                            </AnchorPane>
+                        </SplitPane>
+                    </AnchorPane>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                        <SplitPane dividerPositions="0.35" orientation="VERTICAL" prefHeight="200.0"
+                                   prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0"
+                                                prefWidth="100.0">
+                                        <SplitPane dividerPositions="0.1" orientation="VERTICAL"
+                                                   prefHeight="200.0" prefWidth="160.0"
+                                                   style="-fx-background-color: #1a1a1a;"
+                                                   AnchorPane.bottomAnchor="0.0"
+                                                   AnchorPane.leftAnchor="0.0"
+                                                   AnchorPane.rightAnchor="0.0"
+                                                   AnchorPane.topAnchor="0.0">
+                                            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
+                                                        minWidth="-Infinity" prefHeight="23.0"
+                                                        prefWidth="423.0"
+                                                        style="-fx-background-color: #1a1a1a;">
+                                                <HBox alignment="CENTER" maxHeight="-Infinity"
+                                                      maxWidth="-Infinity" minHeight="-Infinity"
+                                                      minWidth="-Infinity" prefHeight="23.0"
+                                                      prefWidth="423.0"
+                                                      style="-fx-background-color: #1a1a1a;"
+                                                      AnchorPane.bottomAnchor="0.0"
+                                                      AnchorPane.leftAnchor="0.0"
+                                                      AnchorPane.rightAnchor="0.0"
+                                                      AnchorPane.topAnchor="0.0">
+                                                    <Label alignment="CENTER"
+                                                           contentDisplay="CENTER" text="Race:"
+                                                           textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="15.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Region prefHeight="200.0" prefWidth="10.0"/>
+                                                    <Label fx:id="raceNameText" alignment="CENTER"
+                                                           contentDisplay="CENTER" text="Label"
+                                                           textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="15.0"/>
+                                                        </font>
+                                                    </Label>
+                                                </HBox>
+                                            </AnchorPane>
+                                            <AnchorPane maxHeight="-Infinity" minHeight="110.0"
+                                                        minWidth="-Infinity" prefHeight="219.0"
+                                                        prefWidth="423.0">
+                                                <padding>
+                                                    <Insets bottom="-2.0" left="-2.0" right="-1.0"/>
+                                                </padding>
+                                                <TitledPane animated="false"
+                                                            style="-fx-background-color: #595959;"
+                                                            text="Race Description"
+                                                            AnchorPane.bottomAnchor="0.0"
+                                                            AnchorPane.leftAnchor="0.0"
+                                                            AnchorPane.rightAnchor="0.0"
+                                                            AnchorPane.topAnchor="0.0">
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                prefHeight="180.0"
+                                                                prefWidth="200.0"
+                                                                style="-fx-background-color: #1a1a1a;">
+                                                        <TextArea fx:id="raceDescriptionBox"
+                                                                  editable="false"
+                                                                  prefHeight="200.0"
+                                                                  prefWidth="200.0"
+                                                                  style="-fx-background-color: #d9d9d9;"
+                                                                  AnchorPane.bottomAnchor="0.0"
+                                                                  AnchorPane.leftAnchor="0.0"
+                                                                  AnchorPane.rightAnchor="0.0"
+                                                                  AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                </TitledPane>
+                                            </AnchorPane>
+                                        </SplitPane>
+                                    </AnchorPane>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0"
+                                                prefWidth="100.0">
+                                        <SplitPane dividerPositions="0.1" orientation="VERTICAL"
+                                                   prefHeight="200.0" prefWidth="160.0"
+                                                   style="-fx-background-color: #1a1a1a;"
+                                                   AnchorPane.bottomAnchor="0.0"
+                                                   AnchorPane.leftAnchor="0.0"
+                                                   AnchorPane.rightAnchor="0.0"
+                                                   AnchorPane.topAnchor="0.0">
+                                            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity"
+                                                        minWidth="-Infinity" prefHeight="23.0"
+                                                        prefWidth="422.0"
+                                                        style="-fx-background-color: #1a1a1a;">
+                                                <HBox alignment="CENTER" prefHeight="100.0"
+                                                      prefWidth="200.0"
+                                                      style="-fx-background-color: #1a1a1a;"
+                                                      AnchorPane.bottomAnchor="0.0"
+                                                      AnchorPane.leftAnchor="0.0"
+                                                      AnchorPane.rightAnchor="0.0"
+                                                      AnchorPane.topAnchor="0.0">
+                                                    <Label alignment="CENTER"
+                                                           contentDisplay="CENTER" text="Class:"
+                                                           textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="15.0"/>
+                                                        </font>
+                                                    </Label>
+                                                    <Region prefHeight="200.0" prefWidth="10.0"/>
+                                                    <Label fx:id="classNameText"
+                                                           alignment="CENTER"
+                                                           contentDisplay="CENTER" text="Label"
+                                                           textAlignment="CENTER">
+                                                        <font>
+                                                            <Font size="15.0"/>
+                                                        </font>
+                                                    </Label>
+                                                </HBox>
+                                            </AnchorPane>
+                                            <AnchorPane maxHeight="-Infinity" minHeight="110.0"
+                                                        minWidth="-Infinity" prefHeight="219.0"
+                                                        prefWidth="422.0">
+                                                <padding>
+                                                    <Insets bottom="-1.0" left="-1.0" right="-1.0"/>
+                                                </padding>
+                                                <TitledPane animated="false"
+                                                            style="-fx-background-color: #595959;"
+                                                            text="Class Descrption"
+                                                            AnchorPane.bottomAnchor="0.0"
+                                                            AnchorPane.leftAnchor="0.0"
+                                                            AnchorPane.rightAnchor="0.0"
+                                                            AnchorPane.topAnchor="0.0">
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                prefHeight="180.0"
+                                                                prefWidth="200.0"
+                                                                style="-fx-background-color: #1a1a1a;">
+                                                        <TextArea fx:id="classDescriptionBox"
+                                                                  minHeight="110.0"
+                                                                  prefHeight="200.0"
+                                                                  prefWidth="200.0"
+                                                                  AnchorPane.bottomAnchor="0.0"
+                                                                  AnchorPane.leftAnchor="0.0"
+                                                                  AnchorPane.rightAnchor="0.0"
+                                                                  AnchorPane.topAnchor="0.0"/>
+                                                    </AnchorPane>
+                                                </TitledPane>
+                                            </AnchorPane>
+                                        </SplitPane>
+                                    </AnchorPane>
+                                </SplitPane>
+                            </AnchorPane>
+                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0"
+                                        prefWidth="849.0">
+                                <padding>
+                                    <Insets bottom="-1.0" left="-1.0" right="-1.0"/>
+                                </padding>
+                                <TitledPane animated="false" layoutX="165.0" layoutY="34.0"
+                                            style="-fx-background-color: #595959;" text="Description"
+                                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+                                                prefWidth="200.0" style="-fx-background-color: #1a1a1a;"/>
+                                </TitledPane>
+                            </AnchorPane>
+                        </SplitPane>
+                    </AnchorPane>
+                </SplitPane>
+            </AnchorPane>
         </AnchorPane>
-        <Accordion prefHeight="400.0" prefWidth="600.0">
-            <panes>
-                <TitledPane animated="false" text="Traits/Abilities, Race, and Class">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <AnchorPane prefHeight="250.0" prefWidth="375.0" AnchorPane.bottomAnchor="0.0"
-                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <GridPane alignment="CENTER" hgap="5.0" layoutX="133.0" layoutY="74.0"
-                                      prefHeight="249.20000000000002" prefWidth="382.0" vgap="5.0"
-                                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                </rowConstraints>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Traits/Abilities:"
-                                      textAlignment="CENTER"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Strength:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dexterity:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Constitution:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Intelligence:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wisdom:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Charisma:"
-                                      GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                                <TextField GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-                            </GridPane>
-                        </AnchorPane>
-                        <VBox prefHeight="200.0" prefWidth="200.0" spacing="5.0" AnchorPane.bottomAnchor="0.0"
-                              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Race:"/>
-                            <TextArea fx:id="classDescription" prefHeight="200.0" prefWidth="200.0"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class:"/>
-                            <TextArea fx:id="raceDescription" prefHeight="200.0" prefWidth="200.0"/>
-                        </VBox>
-                    </AnchorPane>
-                </TitledPane>
-                <TitledPane animated="false" text="Description &amp; Personality">
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <GridPane hgap="5.0" layoutX="74.0" layoutY="45.0" prefHeight="270.0" prefWidth="598.0"
-                                  vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.00000762939453"
-                                                   minWidth="10.0" prefWidth="128.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0"
-                                                   prefWidth="102.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="10.0"
-                                                   prefWidth="78.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0"
-                                                   prefWidth="134.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                            </rowConstraints>
-                            <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                            </padding>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height:"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.rowIndex="1"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.rowIndex="2"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:"
-                                  GridPane.rowIndex="3"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color:"
-                                  GridPane.rowIndex="4"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Features:"
-                                  GridPane.rowIndex="5"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:"
-                                  GridPane.columnIndex="3"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:"
-                                  GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exotic Languages:"
-                                  GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Traits:"
-                                  GridPane.columnIndex="3" GridPane.rowIndex="3"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ideals:" GridPane.columnIndex="3"
-                                  GridPane.rowIndex="4"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bonds:" GridPane.columnIndex="3"
-                                  GridPane.rowIndex="5"/>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="3"
-                                  GridPane.rowIndex="6"/>
-                            <TextField fx:id="characterHeight" prefWidth="93.0" GridPane.columnIndex="1"/>
-                            <TextField fx:id="characterWeight" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                            <TextField fx:id="characterAge" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                            <TextField fx:id="characterAdditionalFeatures" GridPane.columnIndex="1"
-                                       GridPane.rowIndex="5"/>
-                            <TextField fx:id="characterAlignment" GridPane.columnIndex="4"/>
-                            <TextField fx:id="characterLanguages" GridPane.columnIndex="4"
-                                       GridPane.rowIndex="1"/>
-                            <TextField fx:id="characterExoticLanguages" GridPane.columnIndex="4"
-                                       GridPane.rowIndex="2"/>
-                            <TextField fx:id="characterPersonalityTraits" GridPane.columnIndex="4"
-                                       GridPane.rowIndex="3"/>
-                            <TextField fx:id="characterIdeals" GridPane.columnIndex="4" GridPane.rowIndex="4"/>
-                            <TextField fx:id="characterBonds" GridPane.columnIndex="4" GridPane.rowIndex="5"/>
-                            <TextField fx:id="characterEyeColor" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                            <TextField fx:id="characterSkinColor" GridPane.columnIndex="1"
-                                       GridPane.rowIndex="4"/>
-                            <TextField fx:id="characterFlaws" GridPane.columnIndex="4" GridPane.rowIndex="6"/>
-                        </GridPane>
-                    </AnchorPane>
-                </TitledPane>
-            </panes>
-        </Accordion>
-    </VBox>
+    </SplitPane>
 </AnchorPane>

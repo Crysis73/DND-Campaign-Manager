@@ -21,7 +21,6 @@ public class MainController{
 
     @FXML private void initialize(){
         WealthModificationController wealthModificationController = new WealthModificationController();
-        campaignViewTabController.injectWealthModificationController(wealthModificationController);
         campaignOpenTabController.injectMainController(this);
         campaignViewTabController.injectMainController(this);
         newCharacterTabController.injectMainController(this);
@@ -60,15 +59,17 @@ public class MainController{
         CharacterTabController characterTabController = new CharacterTabController(character);
         AnchorPane anchorPane = new AnchorPane();
         FXMLLoader loader = new FXMLLoader();
+        loader.setController(characterTabController);
         loader.setLocation(getClass().getResource("/CharacterTab.fxml"));
         try {
             anchorPane = loader.load();
+            characterTabController.initialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        loader.setController(characterTabController);
 
         tab.setContent(anchorPane);
+        tab.setOnSelectionChanged(event -> characterTabController.initialize());
         mainTabPane.getTabs().add(tab);
         campaignViewTabController.displayCharacters();
         campaignViewTabController.initializeCharacterChoices();

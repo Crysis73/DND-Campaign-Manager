@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -29,22 +30,15 @@ public class CampaignViewTabController {
     @FXML private ChoiceBox<String> traitChoiceBox;
     @FXML private ChoiceBox<DifficultyClass> difficultyClassChoiceBox;
     @FXML private Spinner<String> advantageSpinner;
-    @FXML private VBox hpVBox, wealthVBox;
+    @FXML private VBox hpVBox, wealthVBox,XPVBox;
     @FXML private HBox hpHBox;
     @FXML private AnchorPane chartPane;
-    @FXML private Button hpIncrement, hpDecrement, modifyWealth;
-    @FXML private Label wealthLabel;
-    @FXML private WealthModificationController wealthModificationController;
+    @FXML private Button hpIncrement, hpDecrement, modifyWealth, wealthDecrement, wealthIncrement,XPIncrement,XPDecrement;
     @FXML private MainController mainController;
     private Character activeCharacter;
 
     void injectMainController(MainController mainController){
         this.mainController = mainController;
-        wealthModificationController.injectCampaignViewTabController(this);
-    }
-
-    void injectWealthModificationController(WealthModificationController wealthModificationController){
-        this.wealthModificationController = wealthModificationController;
     }
 
     void displayCharacters(){
@@ -65,16 +59,6 @@ public class CampaignViewTabController {
         }
     }
 
-    Character getCharacterInCampaign(String name){
-        for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
-            if(mainController.getCampaign().getCharacters().get(i).getName().equals(name)){
-                return mainController.getCampaign().getCharacters().get(i);
-            }
-        }
-        return null;
-    }
-
-
     //--------------------- START OF INITIALIZE CAMPAIGN VIEW CODE ---------------------------//
 
     void initializeCampaignViewTab(){
@@ -85,7 +69,6 @@ public class CampaignViewTabController {
         charactersPane.setExpanded(true);
         chartTitledPane.setExpanded(true);
     }
-
 
     @FXML
     protected void initializeCharacterChoices(){
@@ -125,11 +108,10 @@ public class CampaignViewTabController {
         advantageSpinner.setValueFactory(valueFactory);
     }
 
-
-
     //--------------------- END OF CAMPAIGN VIEW INITIALIZATION CHARACTER CODE ---------------------------//
 
     //--------------------- START OF CHART POPULATION CODE ---------------------------//
+
     private boolean validateChartCharacter(){
         StringBuilder chartErrors = new StringBuilder();
         if(mainController.getCampaign().getCharacters().size()==0){
@@ -138,6 +120,9 @@ public class CampaignViewTabController {
         if(chartErrors.length()>0){
             Alert chartAlert = new Alert(Alert.AlertType.ERROR, chartErrors.toString(),ButtonType.OK);
             chartAlert.setHeaderText("Invalid Chart Information");
+            DialogPane dialogPane = chartAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             chartAlert.showAndWait();
             return false;
         }
@@ -161,6 +146,7 @@ public class CampaignViewTabController {
             chartTitledPane.expandedProperty().setValue(true);
             setHpProgressBar();
             setWealthDisplay();
+            setXPProgressBar();
         }
     }
 
@@ -175,6 +161,7 @@ public class CampaignViewTabController {
             return false;
         }
     }
+
     private boolean validateHPDecrement(){
         if(activeCharacter!=null) {
             return activeCharacter.getCurrentHitPoints() != 0;
@@ -182,9 +169,10 @@ public class CampaignViewTabController {
             return false;
         }
     }
+
     private void setHpProgressBar(){
         hpVBox.getChildren().clear();
-        Label label = new Label("HP :"+activeCharacter.getCurrentHitPoints() +"/"+activeCharacter.getMaxHitPoints());
+        Label label = new Label("HP: "+activeCharacter.getCurrentHitPoints() +"/"+activeCharacter.getMaxHitPoints());
         hpVBox.getChildren().add(label);
         float progress = (float)activeCharacter.getCurrentHitPoints() / activeCharacter.getMaxHitPoints();
         ProgressBar progressBar = new ProgressBar(progress);
@@ -208,8 +196,81 @@ public class CampaignViewTabController {
 
     //--------------------- END OF HP PROGRESS BAR CODE ---------------------------//
 
+    //--------------------- START OF WEALTH PROGRESS BAR CODE ---------------------------//
+
+    private void setWealthProgressBar(){
+        wealthVBox.getChildren().clear();
+        Label label = new Label("Wealth: "+activeCharacter.getWealth());
+        wealthVBox.getChildren().add(label);
+        ProgressBar progressBar = new ProgressBar((float)activeCharacter.getWealth());
+        wealthVBox.getChildren().add(progressBar);
+    }
+
+    @FXML
+    private void incrementActiveCharacterWealth(ActionEvent actionEvent){
+        activeCharacter.setWealth(activeCharacter.getWealth()+1);
+        setWealthProgressBar();
+    }
+
+    @FXML
+    private void decrementActiveCharacterWealth(ActionEvent actionEvent){
+        if(activeCharacter.getWealth()!=0){
+            activeCharacter.setWealth(activeCharacter.getWealth()-1);
+            setWealthProgressBar();
+        }
+    }
+
+    //----------------------- END OF WEALTH PROGRESS BAR CODE ------------------------------//
+
+    //----------------------- START OF XP PROGRESS BAR CODE ------------------------------------//
+    @FXML
+    private void incrementActiveCharacterXP(ActionEvent actionEvent){
+        Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
+        Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
+        Integer currentXP = activeCharacter.getExperiencepoints();
+        Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
+        int incrementAmount =  (levelUp-lowerBound) / 10;
+        if( (levelUp - currentXP < incrementAmount )){
+            incrementAmount = levelUp - currentXP;
+        }if(activeCharacter.getLevel().getCurrentLevel()!=20) {
+            activeCharacter.setExperiencepoints(incrementAmount + currentXP);
+        }
+        setXPProgressBar();
+    }
+
+    @FXML
+    private void decrementActiveCharacterXP(ActionEvent actionEvent){
+        if(activeCharacter.getExperiencepoints()>=10){
+            if(activeCharacter.getLevel().getCurrentLevel() < 4) {
+                activeCharacter.setExperiencepoints(activeCharacter.getExperiencepoints() - 100);
+            }
+            if(activeCharacter.getLevel().getCurrentLevel() < 5){
+                activeCharacter.setExperiencepoints(activeCharacter.getExperiencepoints() - 200);
+            }
+            setXPProgressBar();
+        }
+    }
+
+    private void setXPProgressBar(){
+        XPVBox.getChildren().clear();
+        Label label = new Label("Level: "+activeCharacter.getLevel().getCurrentLevel());
+        XPVBox.getChildren().add(label);
+        StackPane stackPane = new StackPane();
+        float progress = (float) activeCharacter.getExperiencepoints() / (float) activeCharacter.getNextLevel().getLevelUpAt();
+        ProgressBar progressBar = new ProgressBar(progress);
+        Label xpLabel = new Label(activeCharacter.getExperiencepoints()+"/"+activeCharacter.getNextLevel().getLevelUpAt());
+        xpLabel.setStyle("-fx-text-fill:white;-fx-font-size:9px;-fx-background-color:#1a1a1a;-fx-background-radius:0.0em;");
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add(progressBar);
+        stackPane.getChildren().add(xpLabel);
+        XPVBox.getChildren().add(stackPane);
+    }
+
+    //----------------------- END OF XP PROGRESS BAR CODE ---------------------------------------//
+
 
     //--------------------- START OF COMBAT ORDER CODE ---------------------------//
+
     private boolean validateCombatRoll(){
         StringBuilder combatOrderErrors = new StringBuilder();
         if(mainController.getCampaign().getCharacters().size()==0){
@@ -218,6 +279,9 @@ public class CampaignViewTabController {
         if(combatOrderErrors.length()>0){
             Alert combatOrderAlert = new Alert(Alert.AlertType.ERROR, combatOrderErrors.toString(),ButtonType.OK);
             combatOrderAlert.setHeaderText("Invalid Combat Order Information");
+            DialogPane dialogPane = combatOrderAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             combatOrderAlert.showAndWait();
             return false;
         }
@@ -246,6 +310,7 @@ public class CampaignViewTabController {
     //--------------------- END OF COMBAT ORDER CODE ---------------------------//
 
     //--------------------- START OF TRAIT CHECK CODE ---------------------------//
+
     private Character getCharacterToCheck(){
         String characterName = characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
         for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
@@ -270,6 +335,9 @@ public class CampaignViewTabController {
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
                 " was greater than or equal to the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         success.setHeaderText("Success");
+        DialogPane dialogPane = success.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("DarkTheme");
         success.showAndWait();
     }
 
@@ -279,6 +347,9 @@ public class CampaignViewTabController {
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
                 " was less than the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         failure.setHeaderText("Failure");
+        DialogPane dialogPane = failure.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("DarkTheme");
         failure.showAndWait();
     }
 
@@ -296,6 +367,9 @@ public class CampaignViewTabController {
         if(traitCheckErrors.length()>0){
             Alert characterAlert = new Alert(Alert.AlertType.ERROR, traitCheckErrors.toString(),ButtonType.OK);
             characterAlert.setHeaderText("Invalid Trait Check Information");
+            DialogPane dialogPane = characterAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             characterAlert.showAndWait();
             return false;
         }
@@ -342,7 +416,6 @@ public class CampaignViewTabController {
         combatOrderDisplay.getItems().clear();
     }
 
-
     //--------------------------- START OF LOG CODE ----------------------------------------//
 
     void addEntryToLog(String entry){
@@ -361,7 +434,7 @@ public class CampaignViewTabController {
 
     private void setWealthDisplay(){
         if(activeCharacter!=null) {
-            wealthLabel.setText("Wealth: " + activeCharacter.getWealth().toString());
+            setWealthProgressBar();
         }
     }
 
@@ -369,11 +442,9 @@ public class CampaignViewTabController {
     private void showWealthModificationMenu(ActionEvent actionEvent){
         FXMLLoader loader = new FXMLLoader();
         WealthModificationController wealthModificationController = new WealthModificationController();
-        this.wealthModificationController = wealthModificationController;
         loader.setController(wealthModificationController);
         loader.setLocation(getClass().getResource("/WealthModificationMenu.fxml"));
         ArrayList<Character> characters = mainController.getCampaign().getCharacters();
-
         try {
             AnchorPane anchorPane = loader.load();
             wealthModificationController.injectCampaignCharacters(characters);
@@ -392,9 +463,7 @@ public class CampaignViewTabController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-
+    //--------------------------- END OF WEALTH CODE --------------------//
 
 }

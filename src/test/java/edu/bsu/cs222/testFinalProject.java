@@ -172,4 +172,13 @@ public class testFinalProject {
         System.out.println(campaign.toString());
     }
 
+    @Test
+    public void testDetermineCharacterLevel(){
+        Character Jack = new Character("Jack","Fighter","Dwarf");
+        Jack.setExperiencepoints(162000);
+        Integer actual = Jack.getLevel().getCurrentLevel();
+        Integer expected = 14;
+        Assert.assertEquals(expected,actual);
+    }
+
 }

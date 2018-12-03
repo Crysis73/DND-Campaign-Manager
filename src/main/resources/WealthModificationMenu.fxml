@@ -95,7 +95,7 @@
                     <Font size="13.22222" />
                 </font>
             </Label>
-            <Label text="Character who will recieve the payment." GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label text="Character who will receive the payment." GridPane.columnIndex="1" GridPane.rowIndex="7">
                 <font>
                     <Font size="13.22222" />
                 </font>

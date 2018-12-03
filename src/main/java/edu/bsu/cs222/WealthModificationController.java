@@ -1,15 +1,12 @@
 package edu.bsu.cs222;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class WealthModificationController{
+class WealthModificationController{
     @FXML private ChoiceBox<String> wealthCharacterChoiceBox;
     @FXML private ChoiceBox<String> payToChoiceBox;
     @FXML private TextField modificationAmountWindow;
@@ -17,36 +14,45 @@ public class WealthModificationController{
     private String logUpdates;
 
 
-    void injectCampaignViewTabController(CampaignViewTabController campaignViewTabController) {
-    }
-
-
     private boolean validateWealthModification(String characterName, String payTo, String modificationAmount){
         StringBuilder wealthModificationErrors = new StringBuilder();
-        Character character = getCharacterInCampaign(characterName);
-        if(getCharacterInCampaign(characterName)==null){
-            wealthModificationErrors.append("Your selected character is not in the campaign.");
-        }
-        if(getCharacterInCampaign(payTo) ==null && !payTo.equals("The Void")){
-            wealthModificationErrors.append("The \"Pay To\" Character you selected is not in the campaign.");
+        if(characterName == null){
+            wealthModificationErrors.append(" - Please select a character to modify their wealth.\n");
         }
         if(modificationAmount.matches(".*[a-zA-Z]+.*")){
-            wealthModificationErrors.append("Please ensure that the \"Modification Amount\" entered only contains integers 0-9.");
-        }else {
-            assert character != null;
+            wealthModificationErrors.append(" - Please ensure that the \"Modification Amount\" entered only contains integers 0-9.\n");
+        }
+        if(modificationAmount.trim().isEmpty()){
+            wealthModificationErrors.append(" - Wealth modification amount cannot be empty.\n");
+        }
+        if(payTo == null){
+            wealthModificationErrors.append(" - Please select a wealth recipient. (It can be the same character!)\n");
+        }
+        if(payTo!= null && characterName != null) {
+            Character character = getCharacterInCampaign(characterName);
+            assert character!=null;
+            if (getCharacterInCampaign(characterName) == null) {
+                wealthModificationErrors.append(" - Your selected character is not in the campaign.\n");
+            }
+            if (getCharacterInCampaign(payTo) == null && !payTo.equals("The Void")) {
+                wealthModificationErrors.append(" - The \"Pay To\" Character you selected is not in the campaign.\n");
+            }
             if(character.getWealth() < Integer.parseInt(modificationAmount) && !payTo.equals(characterName)){
-                wealthModificationErrors.append("The entered modification amount is greater than the amount of wealth the selected character has available");
+                wealthModificationErrors.append(" - The entered modification amount is greater than the amount of wealth the selected character has available\n");
             }
         }
 
         if(wealthModificationErrors.length()!=0){
             Alert alert = new Alert(Alert.AlertType.ERROR, wealthModificationErrors.toString(), ButtonType.OK);
             alert.setHeaderText("Wealth Modification Errors");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             alert.showAndWait();
+            return false;
         }
+        return true;
 
-        assert character != null;
-        return (getCharacterInCampaign(characterName) != null && ( getCharacterInCampaign(payTo) != null || payTo.equals("The Void") )&& !modificationAmount.matches(".*[a-zA-Z]+.*") && !(character.getWealth() < Integer.parseInt(modificationAmount) && !payTo.equals(characterName)));
     }
 
     void initializeCharacterChoices(){
@@ -79,7 +85,7 @@ public class WealthModificationController{
         return null;
     }
 
-    public void onConfirm(javafx.event.ActionEvent actionEvent) {
+    @FXML public void onConfirm() {
         String characterName = wealthCharacterChoiceBox.getSelectionModel().getSelectedItem();
         String payToName = payToChoiceBox.getSelectionModel().getSelectedItem();
         String modificationAmount = modificationAmountWindow.getText();

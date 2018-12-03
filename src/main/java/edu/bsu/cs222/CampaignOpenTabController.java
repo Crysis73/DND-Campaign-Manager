@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 
 import java.util.Date;
@@ -18,6 +19,9 @@ public class CampaignOpenTabController {
 
     private void showCampaignCreationSuccessfulAlert(Campaign campaign){
         Alert campaignCreated = new Alert(Alert.AlertType.CONFIRMATION, "Campaign " + campaign.getCampaignName() + " has been created", ButtonType.OK);
+        DialogPane dialogPane = campaignCreated.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("DarkTheme");
         campaignCreated.showAndWait();
     }
 
@@ -29,6 +33,9 @@ public class CampaignOpenTabController {
         if(campaignErrors.length()>0){
             Alert campaignAlert = new Alert(Alert.AlertType.ERROR, campaignErrors.toString(),ButtonType.OK);
             campaignAlert.setHeaderText("Invalid Campaign Information");
+            DialogPane dialogPane = campaignAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             campaignAlert.showAndWait();
             return false;
         }

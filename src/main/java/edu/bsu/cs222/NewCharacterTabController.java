@@ -2,9 +2,9 @@ package edu.bsu.cs222;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
 
+@SuppressWarnings("unchecked")
 public class NewCharacterTabController {
 
     @FXML
@@ -13,9 +13,6 @@ public class NewCharacterTabController {
             setWealth, setXP;
     @FXML
     private ComboBox raceComboBox,dndClassComboBox;
-
-    @FXML
-    private AnchorPane additionalInformationPane;
 
     @FXML private MainController mainController;
 
@@ -34,6 +31,9 @@ public class NewCharacterTabController {
         Alert characterCreated = new Alert(Alert.AlertType.INFORMATION,characterName+" has been created!");
         characterCreated.setTitle("Character Created");
         characterCreated.setHeaderText("SUCCESS");
+        DialogPane dialogPane = characterCreated.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+        dialogPane.getStyleClass().add("DarkTheme");
         characterCreated.showAndWait();
     }
 
@@ -103,6 +103,9 @@ public class NewCharacterTabController {
         if(characterErrors.length()>0){
             Alert characterAlert = new Alert(Alert.AlertType.ERROR, characterErrors.toString(),ButtonType.OK);
             characterAlert.setHeaderText("Invalid Character Information");
+            DialogPane dialogPane = characterAlert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
             characterAlert.showAndWait();
             return false;
         }
@@ -120,7 +123,7 @@ public class NewCharacterTabController {
             mainController.getCampaign().addCharacer(character);
             mainController.createNewCharacterTab(character);
             showCharacterCreationSuccessAlert(characterName);
-            clearAllNewCharacter();
+            //clearAllNewCharacter();
             mainController.addEntryToLog(character.getName() + " was added to \""+ mainController.getCampaign().getCampaignName()+"\"");
         }
 

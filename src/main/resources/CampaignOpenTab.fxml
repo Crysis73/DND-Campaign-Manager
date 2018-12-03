@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="campaignOpenTab" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@Stylesheets/DarkTheme.css"
             xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="edu.bsu.cs222.CampaignOpenTabController">
@@ -25,7 +25,7 @@
                    minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="331.0"
                    GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES"
                    GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES"/>
-        <Button fx:id="createNewCampaignBtn" mnemonicParsing="false" onAction="#onCreateNewCampaign"
+        <Button  mnemonicParsing="false" onAction="#onCreateNewCampaign"
                 prefHeight="63.0" prefWidth="335.0" text="Create New Campaign" GridPane.halignment="CENTER"
                 GridPane.valignment="CENTER"/>
         <Button mnemonicParsing="false" onAction="#loadOldCampaign" prefHeight="63.0" prefWidth="335.0"

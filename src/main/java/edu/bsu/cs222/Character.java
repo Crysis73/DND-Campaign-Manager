@@ -7,6 +7,7 @@ class Character implements Comparable<Character> {
     private final String name;
     private TraitMap traits;
     private Integer wealth, experiencepoints, currentHitPoints, maxHitPoints;
+    private Level level,nextLevel;
     private Race race;
     private dndClass dndClass;
     private Integer initiative;
@@ -19,6 +20,7 @@ class Character implements Comparable<Character> {
         setTraits();
         rollForInitiative();
         this.experiencepoints = 0;
+        determineCharacterLevel();
         this.wealth = 0;
         Integer abilityModifier = ( traits.getValue("Constitution") -10 ) / 2;
         this.maxHitPoints = abilityModifier + this.dndClass.getHitDice();
@@ -40,6 +42,7 @@ class Character implements Comparable<Character> {
 
     void setExperiencepoints(Integer value){
         this.experiencepoints = value;
+        determineCharacterLevel();
     }
 
     private void setRace(String raceName){
@@ -80,12 +83,28 @@ class Character implements Comparable<Character> {
         return this.name;
     }
 
-    public String getdndClass(){
+    dndClass getDndClass(){
+        return this.dndClass;
+    }
+
+    String getdndClassName(){
         return this.dndClass.getName();
     }
 
-    public String getRace(){
+    Race getRace(){
+        return this.race;
+    }
+
+    String getRaceName(){
         return this.race.getName();
+    }
+
+    Level getLevel(){
+        return  this.level;
+    }
+
+    Level getNextLevel(){
+        return this.nextLevel;
     }
 
     TraitMap getTraits(){
@@ -110,6 +129,10 @@ class Character implements Comparable<Character> {
         return this.currentHitPoints;
     }
 
+    Integer getExperiencepoints(){
+        return this.experiencepoints;
+    }
+
     void setMaxHitPoints(Integer value){
         this.maxHitPoints = value;
     }
@@ -120,6 +143,24 @@ class Character implements Comparable<Character> {
 
     void decrementCurrentHP(){
         this.currentHitPoints -=1;
+    }
+
+    private void determineCharacterLevel(){
+        LevelList levels = new LevelList();
+        for(int i=0;i<levels.getLevels().size();i++){
+            if(i!=levels.getLevels().size()-1){
+                Integer lowerBound = levels.getLevels().get(i).getLevelUpAt();
+                Integer upperBound = levels.getLevels().get(i+1).getLevelUpAt();
+                if(lowerBound<=experiencepoints && experiencepoints<upperBound){
+                    this.level = levels.getLevels().get(i);
+                    this.nextLevel = levels.getLevels().get(i+1);
+                    break;
+                }
+            }else{
+                this.level = levels.getLevels().get(i);
+                this.nextLevel = null;
+            }
+        }
     }
 
     @Override
