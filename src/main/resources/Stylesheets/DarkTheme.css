@@ -14,6 +14,9 @@
 #traitCheckAnchorPane{-fx-background-color:#404040;}
 #characterListAnchorPane{-fx-background-color:#8c8c8c;}
 
+
+.split-pane:horizontal{-fx-background-color:#1a1a1a;}
+
 .spinner{-fx-background-color:#404040;}
 .spinner > .text-field{-fx-background-color:#404040;}
 .spinner > .text-field{-fx-text-fill:#d9d9d9;}

@@ -219,8 +219,8 @@ public class NewCharacterTabController {
 
     @FXML
     private void clearAllNewCharacter(){
-        raceComboBox.getSelectionModel().clearSelection();
-        dndClassComboBox.getSelectionModel().clearSelection();
+        //raceComboBox.getSelectionModel().clearSelection();
+        //dndClassComboBox.getSelectionModel().clearSelection();
         setHeight.clear();
         setWeight.clear();
         setAge.clear();

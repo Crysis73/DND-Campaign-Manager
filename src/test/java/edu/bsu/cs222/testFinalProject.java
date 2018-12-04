@@ -181,4 +181,18 @@ public class testFinalProject {
         Assert.assertEquals(expected,actual);
     }
 
+    @Test
+    public void testSetExperiencePoints(){
+        Character Jack = new Character("Jack","Fighter","Dwarf");
+        Integer startingLevel = Jack.getLevel().getCurrentLevel();
+        Jack.setExperiencepoints(900);
+        Integer levelAfter = Jack.getLevel().getCurrentLevel();
+        Assert.assertTrue(levelAfter>startingLevel && levelAfter == 3);
+    }
+
+    @Test
+    public void testSetLevel(){
+        Character Jack = new Character("Jack","Fighter","Dwarf");
+
+    }
 }

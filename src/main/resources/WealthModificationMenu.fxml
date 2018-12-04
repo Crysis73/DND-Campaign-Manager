@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<!--suppress XmlHighlighting, XmlHighlighting -->
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #1a1a1a;" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Label alignment="CENTER" contentDisplay="CENTER" text="Wealth Modification Menu" textAlignment="CENTER" AnchorPane.bottomAnchor="612.5" AnchorPane.leftAnchor="17.5" AnchorPane.rightAnchor="17.5" AnchorPane.topAnchor="17.5">
         <font>

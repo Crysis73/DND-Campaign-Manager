@@ -11,6 +11,7 @@ class Character implements Comparable<Character> {
     private Race race;
     private dndClass dndClass;
     private Integer initiative;
+    private boolean levelUp;
     private final Description characterDescription;
 
     public Character(String name, String dndClass, String raceName){
@@ -145,6 +146,12 @@ class Character implements Comparable<Character> {
         this.currentHitPoints -=1;
     }
 
+    private void updateHPFromLevel(){
+        Die updateRoll = new Die(dndClass.getHitDice());
+        this.maxHitPoints += updateRoll.rollDie();
+        this.currentHitPoints = maxHitPoints;
+    }
+
     private void determineCharacterLevel(){
         LevelList levels = new LevelList();
         for(int i=0;i<levels.getLevels().size();i++){
@@ -152,15 +159,55 @@ class Character implements Comparable<Character> {
                 Integer lowerBound = levels.getLevels().get(i).getLevelUpAt();
                 Integer upperBound = levels.getLevels().get(i+1).getLevelUpAt();
                 if(lowerBound<=experiencepoints && experiencepoints<upperBound){
+                    if(hasLeveledUp(this.level, levels.getLevels().get(i))){
+                        updateHPFromLevel();
+                    }
                     this.level = levels.getLevels().get(i);
                     this.nextLevel = levels.getLevels().get(i+1);
                     break;
                 }
             }else{
+                updateHPFromLevel();
                 this.level = levels.getLevels().get(i);
-                this.nextLevel = null;
+                this.nextLevel = levels.getLevels().get(i);
             }
         }
+    }
+
+    private boolean hasLeveledUp(Level previousLevel, Level currentLevel){
+        if(previousLevel!=null) {
+            if (previousLevel != currentLevel && previousLevel.getCurrentLevel() < currentLevel.getCurrentLevel()) {
+                this.levelUp = true;
+                return true;
+            } else {
+                this.levelUp = false;
+                return false;
+            }
+        }
+        this.levelUp = false;
+        return false;
+    }
+
+    void setLevel(Integer currentLevel, Integer desiredLevel){
+        for(int i=0;i<desiredLevel-currentLevel;i++){
+            updateHPFromLevel();
+        }
+        LevelList levels = new LevelList();
+        for(int i=0;i<levels.getLevels().size();i++){
+            if(levels.getLevels().get(i).getCurrentLevel().equals(desiredLevel)){
+                this.level = levels.getLevels().get(i);
+                this.experiencepoints = level.getLevelUpAt();
+                if(desiredLevel == 20) {
+                    break;
+                }
+                this.nextLevel = levels.getLevels().get(i+1);
+                break;
+            }
+        }
+    }
+
+    boolean getHasLeveledUp(){
+        return this.levelUp;
     }
 
     @Override
@@ -177,6 +224,7 @@ class Character implements Comparable<Character> {
                 "\n\tXP : " + experiencepoints+
                 "\n\tMax HP : " + maxHitPoints+
                 "\n\tCurrent HP : " + currentHitPoints+
+                "\n\tLevel : "+ level.getCurrentLevel()+
                 "\nTraits :"+
                 "\n\tStrength : "+ this.traits.getValue("Strength")+
                 "\n\tDexterity : "+ this.traits.getValue("Dexterity")+
@@ -192,7 +240,6 @@ class Character implements Comparable<Character> {
     }
 
     String generateJsonString(){
-        //Add equipment
         return "{\"name\":\""+name+"\"," +
                 "\"race\":\""+ this.race.getName()+"\","+
                 "\"dndclass\":\""+ this.dndClass.getName()+"\","+

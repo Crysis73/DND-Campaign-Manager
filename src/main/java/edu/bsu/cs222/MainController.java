@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -112,4 +113,10 @@ public class MainController{
     }
 
 
+    public void refreshCampaignViewTab(Event event) {
+        if(campaignViewTabController.getActiveCharacter() != null) {
+            campaignViewTabController.refreshProgressBars();
+        }
+
+    }
 }

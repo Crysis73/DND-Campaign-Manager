@@ -66,7 +66,48 @@ class Description {
         this.flaws = flaws;
 
     }
-
+    String getHeight(){
+        return this.height;
+    }
+    String getWeight(){
+        return this.weight;
+    }
+    String getAge(){
+        return this.age;
+    }
+    String getEyeColor(){
+        return this.eyeColor;
+    }
+    String getSkinColor(){
+        return this.skinColor;
+    }
+    String getAdditionalFeatures(){
+        return this.additionalFeatures;
+    }
+    String getAlignment(){
+        return this.alignment;
+    }
+    String getLanguages(){
+        return this.languages;
+    }
+    String getExoticLanguages(){
+        return this.exoticLanguages;
+    }
+    String getPersonalityTrait1(){
+        return  this.personalityTrait1;
+    }
+    String getPersonalityTrait2(){
+        return this.personalityTrait2;
+    }
+    String getIdeals(){
+        return this.ideals;
+    }
+    String getBonds(){
+        return this.bonds;
+    }
+    String getFlaws(){
+        return this.flaws;
+    }
     public String toString(){
         return  "\n\tHeight : "+height+
                 "\n\tWeight : "+weight+

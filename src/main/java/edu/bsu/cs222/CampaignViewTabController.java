@@ -236,19 +236,42 @@ public class CampaignViewTabController {
             activeCharacter.setExperiencepoints(incrementAmount + currentXP);
         }
         setXPProgressBar();
+        boolean hasLeveledUp = activeCharacter.getHasLeveledUp();
+        if(hasLeveledUp){
+            String alertText = activeCharacter.getName() + " has increased their "+activeCharacter.getdndClassName() + " from " +
+                    currentLevel.toString() +" to "+activeCharacter.getLevel().getCurrentLevel().toString() +". As a result, their " +
+                    "maximum HP has increased to "+activeCharacter.getMaxHitPoints().toString();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,alertText);
+            alert.setHeaderText("LEVEL UP");
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
+            alert.showAndWait();
+            addEntryToLog(new Date().toString() +": "+ activeCharacter.getName() +" leveled up from level "+currentLevel.toString() + " to "+activeCharacter.getLevel().getCurrentLevel().toString());
+            refreshProgressBars();
+        }
+    }
+
+    void refreshProgressBars(){
+        setXPProgressBar();
+        setWealthProgressBar();
+        setHpProgressBar();
     }
 
     @FXML
     private void decrementActiveCharacterXP(ActionEvent actionEvent){
-        if(activeCharacter.getExperiencepoints()>=10){
-            if(activeCharacter.getLevel().getCurrentLevel() < 4) {
-                activeCharacter.setExperiencepoints(activeCharacter.getExperiencepoints() - 100);
+        Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
+        Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
+        Integer currentXP = activeCharacter.getExperiencepoints();
+        Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
+        int decrementAmount =  (levelUp-lowerBound) / 10;
+        if(!currentXP.equals(lowerBound)){
+            if(currentXP - decrementAmount < lowerBound){
+                decrementAmount = currentXP - lowerBound;
             }
-            if(activeCharacter.getLevel().getCurrentLevel() < 5){
-                activeCharacter.setExperiencepoints(activeCharacter.getExperiencepoints() - 200);
-            }
-            setXPProgressBar();
+            activeCharacter.setExperiencepoints(currentXP - decrementAmount);
         }
+        setXPProgressBar();
     }
 
     private void setXPProgressBar(){
@@ -258,11 +281,8 @@ public class CampaignViewTabController {
         StackPane stackPane = new StackPane();
         float progress = (float) activeCharacter.getExperiencepoints() / (float) activeCharacter.getNextLevel().getLevelUpAt();
         ProgressBar progressBar = new ProgressBar(progress);
-        Label xpLabel = new Label(activeCharacter.getExperiencepoints()+"/"+activeCharacter.getNextLevel().getLevelUpAt());
-        xpLabel.setStyle("-fx-text-fill:white;-fx-font-size:9px;-fx-background-color:#1a1a1a;-fx-background-radius:0.0em;");
         stackPane.getChildren().clear();
         stackPane.getChildren().add(progressBar);
-        stackPane.getChildren().add(xpLabel);
         XPVBox.getChildren().add(stackPane);
     }
 
@@ -421,6 +441,7 @@ public class CampaignViewTabController {
     void addEntryToLog(String entry){
         mainController.getCampaign().addEntryToLog(entry);
         logDisplay.setText(mainController.getCampaign().getLog().replace("null",""));
+        logDisplay.setScrollTop(Double.MAX_VALUE);
     }
 
     public void onLogEntry(){
@@ -465,5 +486,9 @@ public class CampaignViewTabController {
         }
     }
     //--------------------------- END OF WEALTH CODE --------------------//
+
+    Character getActiveCharacter(){
+        return this.activeCharacter;
+    }
 
 }
