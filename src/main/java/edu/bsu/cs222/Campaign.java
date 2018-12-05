@@ -14,7 +14,7 @@ class Campaign {
     private String log;
 
 
-    public Campaign(String campaignName) {
+    Campaign(String campaignName) {
         this.campaignName = campaignName;
         this.characters = new ArrayList<>();
     }

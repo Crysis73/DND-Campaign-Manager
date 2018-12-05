@@ -32,10 +32,20 @@ public class CampaignViewTabController {
     @FXML private Spinner<String> advantageSpinner;
     @FXML private VBox hpVBox, wealthVBox,XPVBox;
     @FXML private HBox hpHBox;
-    @FXML private AnchorPane chartPane;
+    @FXML private AnchorPane rootPane, chartPane;
     @FXML private Button hpIncrement, hpDecrement, modifyWealth, wealthDecrement, wealthIncrement,XPIncrement,XPDecrement;
     @FXML private MainController mainController;
+    private boolean isDarkTheme;
     private Character activeCharacter;
+
+    void toDarkTheme(){
+        rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+        rootPane.getStyleClass().add("DarkTheme");
+        isDarkTheme = true;
+        if(activeCharacter!=null) {
+            refreshProgressBars();
+        }
+    }
 
     void injectMainController(MainController mainController){
         this.mainController = mainController;
@@ -120,9 +130,11 @@ public class CampaignViewTabController {
         if(chartErrors.length()>0){
             Alert chartAlert = new Alert(Alert.AlertType.ERROR, chartErrors.toString(),ButtonType.OK);
             chartAlert.setHeaderText("Invalid Chart Information");
-            DialogPane dialogPane = chartAlert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = chartAlert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             chartAlert.showAndWait();
             return false;
         }
@@ -133,20 +145,22 @@ public class CampaignViewTabController {
         if(validateChartCharacter() && mainController.getCampaign().getCharacters().size()!=0) {
             ObservableList<String> activeCharacterName = characterList.getSelectionModel().getSelectedItems();
             String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
-            setActiveCharacter(characterName);
-            ChartCreator chartCreator = new ChartCreator(activeCharacter.getTraits().getTraitMap());
-            ObservableList<String> traitNames = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().keySet());
-            BarChart chart = chartCreator.createChart(traitNames,characterName);
-            chartPane.getChildren().clear();
-            chartPane.getChildren().add(chart);
-            AnchorPane.setTopAnchor(chart, (double)0);
-            AnchorPane.setLeftAnchor(chart,(double)0);
-            AnchorPane.setRightAnchor(chart,(double)0);
-            AnchorPane.setBottomAnchor(chart,(double)0);
-            chartTitledPane.expandedProperty().setValue(true);
-            setHpProgressBar();
-            setWealthDisplay();
-            setXPProgressBar();
+            if(!characterName.trim().isEmpty()) {
+                setActiveCharacter(characterName);
+                ChartCreator chartCreator = new ChartCreator(activeCharacter.getTraits().getTraitMap());
+                ObservableList<String> traitNames = FXCollections.observableArrayList(activeCharacter.getTraits().getTraitMap().keySet());
+                BarChart chart = chartCreator.createChart(traitNames, characterName);
+                chartPane.getChildren().clear();
+                chartPane.getChildren().add(chart);
+                AnchorPane.setTopAnchor(chart, (double) 0);
+                AnchorPane.setLeftAnchor(chart, (double) 0);
+                AnchorPane.setRightAnchor(chart, (double) 0);
+                AnchorPane.setBottomAnchor(chart, (double) 0);
+                chartTitledPane.expandedProperty().setValue(true);
+                setHpProgressBar();
+                setWealthDisplay();
+                setXPProgressBar();
+            }
         }
     }
 
@@ -176,6 +190,10 @@ public class CampaignViewTabController {
         hpVBox.getChildren().add(label);
         float progress = (float)activeCharacter.getCurrentHitPoints() / activeCharacter.getMaxHitPoints();
         ProgressBar progressBar = new ProgressBar(progress);
+        if(!isDarkTheme){
+            progressBar.getStylesheets().add(getClass().getResource("/Stylesheets/LightThemeProgressBar.css").toExternalForm());
+            progressBar.getStyleClass().add("LightThemeProgressBar");
+        }
         hpVBox.getChildren().add(progressBar);
 
     }
@@ -203,20 +221,28 @@ public class CampaignViewTabController {
         Label label = new Label("Wealth: "+activeCharacter.getWealth());
         wealthVBox.getChildren().add(label);
         ProgressBar progressBar = new ProgressBar((float)activeCharacter.getWealth());
+        if(!isDarkTheme){
+            progressBar.getStylesheets().add(getClass().getResource("/Stylesheets/LightThemeProgressBar.css").toExternalForm());
+            progressBar.getStyleClass().add("LightThemeProgressBar");
+        }
         wealthVBox.getChildren().add(progressBar);
     }
 
     @FXML
     private void incrementActiveCharacterWealth(ActionEvent actionEvent){
-        activeCharacter.setWealth(activeCharacter.getWealth()+1);
-        setWealthProgressBar();
+        if(activeCharacter!=null) {
+            activeCharacter.setWealth(activeCharacter.getWealth() + 1);
+            setWealthProgressBar();
+        }
     }
 
     @FXML
     private void decrementActiveCharacterWealth(ActionEvent actionEvent){
-        if(activeCharacter.getWealth()!=0){
-            activeCharacter.setWealth(activeCharacter.getWealth()-1);
-            setWealthProgressBar();
+        if(activeCharacter!=null) {
+            if (activeCharacter.getWealth() != 0) {
+                activeCharacter.setWealth(activeCharacter.getWealth() - 1);
+                setWealthProgressBar();
+            }
         }
     }
 
@@ -225,30 +251,38 @@ public class CampaignViewTabController {
     //----------------------- START OF XP PROGRESS BAR CODE ------------------------------------//
     @FXML
     private void incrementActiveCharacterXP(ActionEvent actionEvent){
-        Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
-        Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
-        Integer currentXP = activeCharacter.getExperiencepoints();
-        Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
-        int incrementAmount =  (levelUp-lowerBound) / 10;
-        if( (levelUp - currentXP < incrementAmount )){
-            incrementAmount = levelUp - currentXP;
-        }if(activeCharacter.getLevel().getCurrentLevel()!=20) {
-            activeCharacter.setExperiencepoints(incrementAmount + currentXP);
-        }
-        setXPProgressBar();
-        boolean hasLeveledUp = activeCharacter.getHasLeveledUp();
-        if(hasLeveledUp){
-            String alertText = activeCharacter.getName() + " has increased their "+activeCharacter.getdndClassName() + " from " +
-                    currentLevel.toString() +" to "+activeCharacter.getLevel().getCurrentLevel().toString() +". As a result, their " +
-                    "maximum HP has increased to "+activeCharacter.getMaxHitPoints().toString();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,alertText);
-            alert.setHeaderText("LEVEL UP");
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
-            alert.showAndWait();
-            addEntryToLog(new Date().toString() +": "+ activeCharacter.getName() +" leveled up from level "+currentLevel.toString() + " to "+activeCharacter.getLevel().getCurrentLevel().toString());
-            refreshProgressBars();
+        if(activeCharacter!=null) {
+            Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
+            Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
+            Integer currentXP = activeCharacter.getExperiencepoints();
+            Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
+            Integer currentMaxHP = activeCharacter.getMaxHitPoints();
+            int incrementAmount = (levelUp - lowerBound) / 10;
+            if ((levelUp - currentXP < incrementAmount)) {
+                incrementAmount = levelUp - currentXP;
+            }
+            if (activeCharacter.getLevel().getCurrentLevel() != 20) {
+                activeCharacter.setExperiencepoints(incrementAmount + currentXP);
+            }
+            setXPProgressBar();
+            boolean hasLeveledUp = activeCharacter.getHasLeveledUp();
+            if (hasLeveledUp) {
+                String alertText = activeCharacter.getName() + " has increased their " + activeCharacter.getdndClassName() + " from " +
+                        currentLevel.toString() + " to " + activeCharacter.getLevel().getCurrentLevel().toString() + ". As a result, their " +
+                        "maximum HP has increased to " + activeCharacter.getMaxHitPoints().toString();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, alertText);
+                alert.setHeaderText("LEVEL UP");
+                if (isDarkTheme) {
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                    dialogPane.getStyleClass().add("DarkTheme");
+                }
+                alert.showAndWait();
+                addEntryToLog(new Date().toString() + ": " + activeCharacter.getName() + " leveled up from level "
+                        + currentLevel.toString() + " to " + activeCharacter.getLevel().getCurrentLevel().toString()
+                + " which increased their max HP from "+ currentMaxHP.toString() + " to " + activeCharacter.getMaxHitPoints().toString());
+                refreshProgressBars();
+            }
         }
     }
 
@@ -260,29 +294,36 @@ public class CampaignViewTabController {
 
     @FXML
     private void decrementActiveCharacterXP(ActionEvent actionEvent){
-        Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
-        Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
-        Integer currentXP = activeCharacter.getExperiencepoints();
-        Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
-        int decrementAmount =  (levelUp-lowerBound) / 10;
-        if(!currentXP.equals(lowerBound)){
-            if(currentXP - decrementAmount < lowerBound){
-                decrementAmount = currentXP - lowerBound;
+        if(activeCharacter!=null) {
+            Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
+            Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
+            Integer currentXP = activeCharacter.getExperiencepoints();
+            Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
+            int decrementAmount = (levelUp - lowerBound) / 10;
+            if (!currentXP.equals(lowerBound)) {
+                if (currentXP - decrementAmount < lowerBound) {
+                    decrementAmount = currentXP - lowerBound;
+                }
+                activeCharacter.setExperiencepoints(currentXP - decrementAmount);
             }
-            activeCharacter.setExperiencepoints(currentXP - decrementAmount);
+            setXPProgressBar();
         }
-        setXPProgressBar();
     }
 
     private void setXPProgressBar(){
         XPVBox.getChildren().clear();
         Label label = new Label("Level: "+activeCharacter.getLevel().getCurrentLevel());
+        Label xpLabel = new Label(activeCharacter.getExperiencepoints().toString() + "/" + activeCharacter.getNextLevel().getLevelUpAt().toString());
         XPVBox.getChildren().add(label);
+        ProgressBar progressBar = new ProgressBar(0);
+        if(!isDarkTheme){
+            progressBar.getStylesheets().add(getClass().getResource("/Stylesheets/LightThemeProgressBar.css").toExternalForm());
+            progressBar.getStyleClass().add("LightThemeProgressBar");
+        }
         StackPane stackPane = new StackPane();
-        float progress = (float) activeCharacter.getExperiencepoints() / (float) activeCharacter.getNextLevel().getLevelUpAt();
-        ProgressBar progressBar = new ProgressBar(progress);
-        stackPane.getChildren().clear();
         stackPane.getChildren().add(progressBar);
+        stackPane.getChildren().add(xpLabel);
+        xpLabel.translateYProperty().setValue(-1);
         XPVBox.getChildren().add(stackPane);
     }
 
@@ -299,9 +340,11 @@ public class CampaignViewTabController {
         if(combatOrderErrors.length()>0){
             Alert combatOrderAlert = new Alert(Alert.AlertType.ERROR, combatOrderErrors.toString(),ButtonType.OK);
             combatOrderAlert.setHeaderText("Invalid Combat Order Information");
-            DialogPane dialogPane = combatOrderAlert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = combatOrderAlert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             combatOrderAlert.showAndWait();
             return false;
         }
@@ -355,9 +398,11 @@ public class CampaignViewTabController {
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
                 " was greater than or equal to the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         success.setHeaderText("Success");
-        DialogPane dialogPane = success.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-        dialogPane.getStyleClass().add("DarkTheme");
+        if(isDarkTheme) {
+            DialogPane dialogPane = success.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
+        }
         success.showAndWait();
     }
 
@@ -367,9 +412,11 @@ public class CampaignViewTabController {
                 " added to their " + traitCheck.getTraitNameChecked() + " modifier of " + traitCheck.getAbilityModifier() +
                 " was less than the difficulty class of : \"" + traitCheck.getDifficultyClass() + "\"", ButtonType.OK);
         failure.setHeaderText("Failure");
-        DialogPane dialogPane = failure.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-        dialogPane.getStyleClass().add("DarkTheme");
+        if(isDarkTheme) {
+            DialogPane dialogPane = failure.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
+        }
         failure.showAndWait();
     }
 
@@ -387,9 +434,11 @@ public class CampaignViewTabController {
         if(traitCheckErrors.length()>0){
             Alert characterAlert = new Alert(Alert.AlertType.ERROR, traitCheckErrors.toString(),ButtonType.OK);
             characterAlert.setHeaderText("Invalid Trait Check Information");
-            DialogPane dialogPane = characterAlert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = characterAlert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             characterAlert.showAndWait();
             return false;
         }
@@ -475,6 +524,9 @@ public class CampaignViewTabController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Wealth Modification Menu");
+            if(isDarkTheme){
+                wealthModificationController.toDarkTheme();
+            }
             stage.show();
             stage.onCloseRequestProperty().set(event -> {
                 setWealthDisplay();

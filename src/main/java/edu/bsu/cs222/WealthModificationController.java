@@ -2,6 +2,7 @@ package edu.bsu.cs222;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,9 +11,16 @@ class WealthModificationController{
     @FXML private ChoiceBox<String> wealthCharacterChoiceBox;
     @FXML private ChoiceBox<String> payToChoiceBox;
     @FXML private TextField modificationAmountWindow;
+    @FXML private AnchorPane rootPane;
     private ArrayList<Character> characters;
     private String logUpdates;
+    private boolean isDarkTheme;
 
+    void toDarkTheme(){
+        rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkThemeWealthModificationMenu.css").toExternalForm());
+        rootPane.getStyleClass().add("DarkThemeWealthModificationMenu");
+        isDarkTheme = true;
+    }
 
     private boolean validateWealthModification(String characterName, String payTo, String modificationAmount){
         StringBuilder wealthModificationErrors = new StringBuilder();
@@ -45,9 +53,11 @@ class WealthModificationController{
         if(wealthModificationErrors.length()!=0){
             Alert alert = new Alert(Alert.AlertType.ERROR, wealthModificationErrors.toString(), ButtonType.OK);
             alert.setHeaderText("Wealth Modification Errors");
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             alert.showAndWait();
             return false;
         }
@@ -118,7 +128,9 @@ class WealthModificationController{
     }
 
     private void addUpdateToLog(String update){
-        this.logUpdates += update+"\n";
+        if(!update.trim().isEmpty()) {
+            this.logUpdates += update + "\n";
+        }
     }
 
     String getLogUpdates(){

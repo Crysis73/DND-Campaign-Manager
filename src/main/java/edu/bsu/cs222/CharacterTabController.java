@@ -3,6 +3,7 @@ package edu.bsu.cs222;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
 
 class CharacterTabController {
@@ -12,12 +13,20 @@ class CharacterTabController {
             strengthBox, dexterityBox, constitutionBox, intelligenceBox, wisdomBox, charismaBox,
     heightBox, weightBox, ageBox, eyeColorBox, skinColorBox, additionalFeaturesBox,
             alignmentBox, languagesBox, exoticLanguagesBox, personalityTraitsBox, idealsBox, bondsBox, flawsBox;
-    private boolean XPChanged;
+    @FXML private AnchorPane rootPane;
+    private boolean XPChanged, isDarkTheme;
     private final Character character;
 
     CharacterTabController(Character characterName){
         this.character = characterName;
     }
+
+    void toDarkTheme(){
+        rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkThemeCharacterSheet.css").toExternalForm());
+        rootPane.getStyleClass().add("DarkThemeCharacterSheet");
+        isDarkTheme = true;
+    }
+
 
     void initialize(){
         this.characterNameText.setText(character.getName());
@@ -58,9 +67,11 @@ class CharacterTabController {
             updateDescription();
             initialize();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"All values have been updated successfully", ButtonType.OK);
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             alert.showAndWait();
             this.XPChanged = false;
         }
@@ -106,9 +117,11 @@ class CharacterTabController {
         }
         if(errors.length()!=0){
             Alert alert = new Alert(Alert.AlertType.ERROR,errors.toString(),ButtonType.OK);
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             alert.showAndWait();
         }
         return errors.length() <= 0;

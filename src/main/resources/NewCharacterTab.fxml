@@ -3,95 +3,129 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.NewCharacterTabController">
-    <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bsu.cs222.NewCharacterTabController">
+    <AnchorPane fx:id="anchorPane" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
             <Insets left="5.0" right="5.0" top="5.0" />
         </padding>
         <TextField fx:id="characterNameField" layoutX="16.0" layoutY="14.0" promptText="Character Name" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="10.0" />
-        <TitledPane layoutX="10.0" layoutY="70.0" maxHeight="519.0" prefHeight="519.0" prefWidth="1070.0" text="Description" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" scaleX="1.002" style="-fx-background-color: #595959; -fx-border-color: #595959;">
-                <padding>
-                    <Insets left="1.0" />
-                </padding>
-                <GridPane maxHeight="-Infinity" prefHeight="500.0" prefWidth="1043.0" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <padding>
-                        <Insets left="2.0" right="2.0" />
-                    </padding>
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Items:" GridPane.halignment="LEFT" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Race:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Class:" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                    <ComboBox fx:id="raceComboBox" focusTraversable="false" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                    <ComboBox fx:id="dndClassComboBox" focusTraversable="false" prefWidth="125.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Height:" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Eye Color:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Skin Color:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Features:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Alignment:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Languages:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Exotic Languages:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 1:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Personality Trait 2:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="10" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Ideals:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="11" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonds:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="12" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Flaws:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="13" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Experience Points:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="14" />
-                    <Text fill="#d9d9d9" strokeType="OUTSIDE" strokeWidth="0.0" text="Wealth:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="15" />
-                    <TextField fx:id="setHeight" promptText="Height" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-                    <TextField fx:id="setWeight" promptText="Weight" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                    <TextField fx:id="setAge" promptText="Age" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                    <TextField fx:id="setEyeColor" promptText="Eye Color" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                    <TextField fx:id="setSkinColor" promptText="Skin Color" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                    <TextField fx:id="setAdditionalFeatures" promptText="Additional Features" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                    <TextField fx:id="setAlignment" promptText="Alignment" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                    <TextField fx:id="setLanguages" promptText="Languages" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-                    <TextField fx:id="setExoticLanguages" promptText="Exotic Languages" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                    <TextField fx:id="setPersonalityTrait1" promptText="Personality Trait 1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                    <TextField fx:id="setPersonalityTrait2" promptText="Personality Trait 2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-                    <TextField fx:id="setIdeals" promptText="Ideals" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-                    <TextField fx:id="setBonds" promptText="Bonds" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
-                    <TextField fx:id="setFlaws" promptText="Flaws" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
-                    <TextField fx:id="setXP" promptText="Wealth" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
-                    <TextField fx:id="setWealth" promptText="Experience Points" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
-                </GridPane>
-            </AnchorPane>
-        </TitledPane>
-        <Button  focusTraversable="false" layoutX="728.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAddCharacterToCampaign" text="Add Character to Campaign" AnchorPane.rightAnchor="14.399999999999977" AnchorPane.topAnchor="9.0" />
+        <Button focusTraversable="false" layoutX="728.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAddCharacterToCampaign" text="Add Character to Campaign" AnchorPane.rightAnchor="14.399999999999977" AnchorPane.topAnchor="9.0" />
         <Button fx:id="clearAllNewCharacter" focusTraversable="false" layoutX="431.0" layoutY="2.0" mnemonicParsing="false" onAction="#clearAllNewCharacter" text="Clear All" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="9.0" />
+        <SplitPane dividerPositions="0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0"
+                   stylesheets="@Stylesheets/LightThemeCharacterSheet.css" AnchorPane.bottomAnchor="10.0"
+                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <TitledPane maxHeight="519.0" prefHeight="519.0" prefWidth="1070.0" text="Description"
+                            textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0"
+                            AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+                    <AnchorPane fx:id="descriptionPane" scaleX="1.002">
+                        <padding>
+                            <Insets bottom="-1.0" left="1.0"/>
+                        </padding>
+                        <GridPane fx:id="decsriptionBackground" maxHeight="-Infinity" prefHeight="500.0"
+                                  prefWidth="1043.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="75.0"
+                                                   prefWidth="75.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="611.2794494628906"
+                                                   minWidth="10.0" prefWidth="539.4231262207031"/>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="528.9281005859375" minWidth="10.0"
+                                                   prefWidth="240.57687377929688"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="75.0" prefWidth="75.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <padding>
+                                <Insets left="2.0" right="2.0"/>
+                            </padding>
+                            <Label text="Required Items:" GridPane.columnIndex="1"/>
+                            <Label text="Race:" GridPane.rowIndex="1"/>
+                            <Label text="Class:" GridPane.rowIndex="2"/>
+                            <ComboBox fx:id="raceComboBox" focusTraversable="false" prefWidth="125.0"
+                                      GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
+                            <ComboBox fx:id="dndClassComboBox" focusTraversable="false" prefWidth="125.0"
+                                      GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
+                            <Label text="Height:" GridPane.columnIndex="2"/>
+                            <Label text="Weight:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                            <Label text="Age:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                            <Label text="Eye Color:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                            <Label text="Skin Color:" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                            <Label text="Additional Features:" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                            <Label text="Alignment:" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                            <Label text="Languages:" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                            <Label text="Exotic Languages:" GridPane.columnIndex="2" GridPane.rowIndex="8"/>
+                            <Label text="Personality Trait 1:" GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+                            <Label text="Personality Trait 2:" GridPane.columnIndex="2" GridPane.rowIndex="10"/>
+                            <Label text="Ideals:" GridPane.columnIndex="2" GridPane.rowIndex="11"/>
+                            <Label text="Bonds:" GridPane.columnIndex="2" GridPane.rowIndex="12"/>
+                            <Label text="Flaws:" GridPane.columnIndex="2" GridPane.rowIndex="13"/>
+                            <Label text="Add Experience Points:" GridPane.columnIndex="2" GridPane.rowIndex="14"/>
+                            <Label text="Wealth:" GridPane.columnIndex="2" GridPane.rowIndex="15"/>
+                            <TextField fx:id="setHeight" promptText="Height" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER"/>
+                            <TextField fx:id="setWeight" promptText="Weight" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
+                            <TextField fx:id="setAge" promptText="Age" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
+                            <TextField fx:id="setEyeColor" promptText="Eye Color" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
+                            <TextField fx:id="setSkinColor" promptText="Skin Color" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="4"/>
+                            <TextField fx:id="setAdditionalFeatures" promptText="Additional Features"
+                                       GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
+                            <TextField fx:id="setAlignment" promptText="Alignment" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="6"/>
+                            <TextField fx:id="setLanguages" promptText="Languages" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
+                            <TextField fx:id="setExoticLanguages" promptText="Exotic Languages" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="8"/>
+                            <TextField fx:id="setPersonalityTrait1" promptText="Personality Trait 1"
+                                       GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9"/>
+                            <TextField fx:id="setPersonalityTrait2" promptText="Personality Trait 2"
+                                       GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10"/>
+                            <TextField fx:id="setIdeals" promptText="Ideals" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="11"/>
+                            <TextField fx:id="setBonds" promptText="Bonds" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="12"/>
+                            <TextField fx:id="setFlaws" promptText="Flaws" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="13"/>
+                            <TextField fx:id="setXP" promptText="Wealth" text="0" GridPane.columnIndex="3"
+                                       GridPane.halignment="CENTER" GridPane.rowIndex="14"/>
+                            <TextField fx:id="setWealth" promptText="Experience Points" text="0"
+                                       GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="15"/>
+                        </GridPane>
+                    </AnchorPane>
+                </TitledPane>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0"/>
+        </SplitPane>
     </AnchorPane>
 </AnchorPane>

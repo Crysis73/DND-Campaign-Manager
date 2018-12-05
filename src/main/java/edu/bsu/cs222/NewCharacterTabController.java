@@ -2,19 +2,20 @@ package edu.bsu.cs222;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
 
 @SuppressWarnings("unchecked")
 public class NewCharacterTabController {
 
-    @FXML
-    private TextField characterNameField, setAge, setHeight, setWeight, setEyeColor, setSkinColor, setAdditionalFeatures, setAlignment,
+    @FXML private TextField
+            characterNameField, setAge, setHeight, setWeight, setEyeColor, setSkinColor, setAdditionalFeatures, setAlignment,
             setLanguages, setExoticLanguages, setPersonalityTrait1, setPersonalityTrait2, setIdeals, setBonds, setFlaws,
             setWealth, setXP;
-    @FXML
-    private ComboBox raceComboBox,dndClassComboBox;
-
+    @FXML private ComboBox raceComboBox,dndClassComboBox;
     @FXML private MainController mainController;
+    @FXML private AnchorPane rootPane;
+    private boolean isDarkTheme;
 
 
     void injectMainController(MainController mainController){
@@ -24,16 +25,24 @@ public class NewCharacterTabController {
     void initializeNewCharacterTab(){
         initializeDndClassChoices();
         initializeRaceChoices();
+        isDarkTheme = false;
     }
 
+    void toDarkTheme(){
+        rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkThemeCharacterCreator.css").toExternalForm());
+        rootPane.getStyleClass().add("DarkThemeCharacterCreator");
+        isDarkTheme = true;
+    }
 
     private void showCharacterCreationSuccessAlert(String characterName){
         Alert characterCreated = new Alert(Alert.AlertType.INFORMATION,characterName+" has been created!");
         characterCreated.setTitle("Character Created");
         characterCreated.setHeaderText("SUCCESS");
-        DialogPane dialogPane = characterCreated.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-        dialogPane.getStyleClass().add("DarkTheme");
+        if(isDarkTheme) {
+            DialogPane dialogPane = characterCreated.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+            dialogPane.getStyleClass().add("DarkTheme");
+        }
         characterCreated.showAndWait();
     }
 
@@ -103,9 +112,11 @@ public class NewCharacterTabController {
         if(characterErrors.length()>0){
             Alert characterAlert = new Alert(Alert.AlertType.ERROR, characterErrors.toString(),ButtonType.OK);
             characterAlert.setHeaderText("Invalid Character Information");
-            DialogPane dialogPane = characterAlert.getDialogPane();
-            dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-            dialogPane.getStyleClass().add("DarkTheme");
+            if(isDarkTheme) {
+                DialogPane dialogPane = characterAlert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
             characterAlert.showAndWait();
             return false;
         }
@@ -123,7 +134,7 @@ public class NewCharacterTabController {
             mainController.getCampaign().addCharacer(character);
             mainController.createNewCharacterTab(character);
             showCharacterCreationSuccessAlert(characterName);
-            //clearAllNewCharacter();
+            clearAllNewCharacter();
             mainController.addEntryToLog(character.getName() + " was added to \""+ mainController.getCampaign().getCampaignName()+"\"");
         }
 
@@ -144,15 +155,20 @@ public class NewCharacterTabController {
         dndClassComboBox.setConverter(new StringConverter<dndClass>() {
             @Override
             public String toString(dndClass dndClass) {
-                return dndClass.getName();
+                try {
+                    return dndClass.getName();
+                }catch (NullPointerException e){
+                    return "";
+                }
             }
 
             @Override
             public dndClass fromString(String string) {
                 return (dndClass) dndClassComboBox.getItems().stream().filter(dndClass -> dndClass.getClass().getName().equals(string)).findFirst().orElse(null);
-            }
+               }
         });
     }
+
 
     private void initializeDndClassTooltips(){
         dndClassComboBox.setCellFactory(param -> new ListCell<dndClass>(){
@@ -205,7 +221,11 @@ public class NewCharacterTabController {
         raceComboBox.setConverter(new StringConverter<Race>() {
             @Override
             public String toString(Race race) {
-                return race.getName();
+                try {
+                    return race.getName();
+                }catch(NullPointerException e){
+                    return "";
+                }
             }
 
             @Override
@@ -217,10 +237,11 @@ public class NewCharacterTabController {
 
 
 
+
     @FXML
     private void clearAllNewCharacter(){
-        //raceComboBox.getSelectionModel().clearSelection();
-        //dndClassComboBox.getSelectionModel().clearSelection();
+        raceComboBox.getSelectionModel().clearSelection();
+        dndClassComboBox.getSelectionModel().clearSelection();
         setHeight.clear();
         setWeight.clear();
         setAge.clear();

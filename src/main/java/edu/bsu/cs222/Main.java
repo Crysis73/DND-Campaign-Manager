@@ -22,4 +22,6 @@ public class Main extends Application{
         stage.setTitle("D&D Game Master Thingy 3000");
         stage.show();
     }
+
+
 }

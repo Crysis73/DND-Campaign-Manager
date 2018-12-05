@@ -6,11 +6,11 @@
 .tab-header-background{-fx-background-color:#595959;}
 .tab-label{-fx-text-fill:#d9d9d9;}
 .text{-fx-fill:#d9d9d9;}
-.titled-pane{-fx-background-color:#1a1a1a;}
+.titled-pane{-fx-background-color:#595959;}
 .title{-fx-background-color:#404040;}
 #additionalInformationPane{-fx-background-color:#1a1a1a;}
 .tool-bar{-fx-background-color:#8c8c8c;}
-.list-view{-fx-background-color:#1a1a1a;}
+.list-view{-fx-background-color:#595959;}
 #traitCheckAnchorPane{-fx-background-color:#404040;}
 #characterListAnchorPane{-fx-background-color:#8c8c8c;}
 
@@ -215,8 +215,13 @@
  }
 
 
-
-
+#progressBarHBox{-fx-background-color:#1a1a1a;}
+#combatOrderMenuBar{-fx-background-color:#404040;}
+#combatOrderMenuBar .container .menu:openvertically{-fx-background-color:#404040;}
+.tool-bar:horizontal{-fx-background-color:#1a1a1a;}
+#traitCheckHBox{-fx-background-color:#1a1a1a;}
+#traitCheckVBox{-fx-background-color:#1a1a1a;}
+.text-field:readonly{-fx-background-color:#404040;}
 
 
 

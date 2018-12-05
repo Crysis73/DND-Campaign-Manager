@@ -11,13 +11,14 @@
 <?import javafx.scene.text.Font?>
 
 <!--suppress XmlHighlighting, XmlHighlighting -->
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #1a1a1a;" stylesheets="@Stylesheets/DarkTheme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Label alignment="CENTER" contentDisplay="CENTER" text="Wealth Modification Menu" textAlignment="CENTER" AnchorPane.bottomAnchor="612.5" AnchorPane.leftAnchor="17.5" AnchorPane.rightAnchor="17.5" AnchorPane.topAnchor="17.5">
         <font>
           <Font size="50.555" />
         </font>
     </Label>
-    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #404040;" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="262.5" AnchorPane.rightAnchor="17.5" AnchorPane.topAnchor="105.0">
+    <AnchorPane fx:id="instructions" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="262.5" AnchorPane.rightAnchor="17.5" AnchorPane.topAnchor="105.0">
         <Label alignment="CENTER" contentDisplay="CENTER" text="Instructions" AnchorPane.bottomAnchor="437.5" AnchorPane.leftAnchor="8.75" AnchorPane.rightAnchor="8.75" AnchorPane.topAnchor="8.75">
             <font>
                 <Font size="35.0" />
@@ -123,7 +124,7 @@
             </Label>
         </GridPane>
     </AnchorPane>
-    <GridPane gridLinesVisible="true" layoutX="159.0" layoutY="92.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="17.5" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="175.0">
+    <GridPane fx:id="gridpane" gridLinesVisible="true" layoutX="159.0" layoutY="92.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="17.5" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="175.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -154,7 +155,7 @@
             <ChoiceBox fx:id="wealthCharacterChoiceBox" layoutX="1.0" layoutY="2.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-            <TextField fx:id="modificationAmountWindow" layoutX="21.0" layoutY="7.0" style="-fx-background-color: #404040;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TextField fx:id="modificationAmountWindow" layoutX="21.0" layoutY="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <font>
                     <Font size="15.0" />
                 </font>
