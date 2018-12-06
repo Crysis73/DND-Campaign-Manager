@@ -163,6 +163,7 @@ public class CampaignViewTabController {
         });
     }
 
+    @FXML
     private void createChart(MouseEvent mouseEvent) {
         if(validateChartCharacter() && mainController.getCampaign().getCharacters().size()!=0) {
             ObservableList<String> activeCharacterName = characterList.getSelectionModel().getSelectedItems();
