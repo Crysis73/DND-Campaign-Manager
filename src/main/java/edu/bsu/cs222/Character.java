@@ -2,7 +2,6 @@ package edu.bsu.cs222;
 
 import java.util.Objects;
 
-@SuppressWarnings("unused")
 class Character implements Comparable<Character> {
     private final String name;
     private TraitMap traits;
@@ -84,16 +83,8 @@ class Character implements Comparable<Character> {
         return this.name;
     }
 
-    dndClass getDndClass(){
-        return this.dndClass;
-    }
-
     String getdndClassName(){
         return this.dndClass.getName();
-    }
-
-    Race getRace(){
-        return this.race;
     }
 
     String getRaceName(){

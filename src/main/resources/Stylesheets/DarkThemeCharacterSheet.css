@@ -1,0 +1,8 @@
+.root{-fx-background-color:#1a1a1a;}
+.split-pane:horizontal, .split-pane:vertical{-fx-background-color:#1a1a1a;}
+.split-pane:horizontal .split-pane-divider,
+.split-pane:vertical .split-pane-divider{visibility:false;}
+.text-field{-fx-background-color:#1a1a1a;-fx-border-color:transparent;
+  -fx-text-fill:#005c99;}
+.label{-fx-text-fill:#d9d9d9;}
+.button{-fx-background-color:#404040;-fx-font-family:"Segoe UI light";-fx-text-fill:#d9d9d9;}

@@ -1,0 +1,262 @@
+.menu-bar {-fx-background-color: #f2f2f2; -fx-font-family: "Segoe UI light";}
+.label {-fx-text-fill:#0d0d0d;}
+.tab-pane:top {-fx-background-color:#f2f2f2;}
+.button{-fx-background-color:#cccccc;-fx-font-family:"Segoe UI light";}
+.tab{-fx-background-color:#f2f2f2;}
+.tab-header-background{-fx-background-color:#b3b3b3;}
+.text{-fx-fill:#0d0d0d;}
+.titled-pane{-fx-background-color:#d9d9d9;}
+.title{-fx-background-color:#f2f2f2;}
+#additionalInformationPane{-fx-background-color:#d9d9d9;}
+.tool-bar{-fx-background-color:#d9d9d9;}
+.list-view{-fx-background-color:#e6e6e6;}
+#combatOrderPane{-fx-background-color:#e6e6e6;}
+#traitCheckAnchorPane{-fx-background-color:#e6e6e6;}
+#characterListAnchorPane{-fx-background-color:#d9d9d9;}
+
+
+.split-pane:horizontal{-fx-background-color:#d9d9d9;}
+
+.spinner{-fx-background-color:#e6e6e6;}
+.spinner > .text-field{-fx-background-color:#e6e6e6;}
+.spinner > .text-field{-fx-text-fill:#0d0d0d;}
+
+.menu .context-menu{-fx-background-color:#d9d9d9;}
+.menu-item{-fx-background-color:#e6e6e6;}
+.menu-item .label{-fx-text-fill:#0d0d0d;}
+
+.menu-button{-fx-background-color:#f2f2f2;}
+
+#CombatOrderButton{-fx-background-color:#e6e6e6;}
+#logDisplay{-fx-background-color:#e6e6e6;-fx-text-fill:#0d0d0d;}
+#logDisplay .content {-fx-background-color:#e6e6e6;-fx-text-fill:#0d0d0d;}
+
+
+
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :#d9d9d9;
+    -fx-border-color :#d9d9d9;
+
+}
+
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :#d9d9d9;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 0 0.0;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :#d9d9d9;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+ .scroll-bar .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.15em 0.0;
+}
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";    
+    -fx-padding :0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color :#e65c00;
+    -fx-background-insets : 0.0, 0.0, 0.0;
+    -fx-background-radius : 0.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color :#005c99;
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#modificationAmountWindow{-fx-text-fill:#d9d9d9;}
+
+#logEntry{-fx-background-color:#e6e6e6;-fx-text-fill:#0d0d0d;}
+#logEntry .content{-fx-background-color:#e6e6e6;}
+
+#resultWindow{-fx-text-inner-color:#0d0d0d;}
+
+.choice-box{-fx-background-color:#e6e6e6;-fx-focus-traversable:false;}
+.choice-box .context-menu { -fx-background-color: #e6e6e6; }
+.choice-box .menu-item:focused { -fx-background-color:#005c99; }
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label { -fx-fill: black; }
+
+.combo-box .list-cell 
+{
+    -fx-background-color: #e6e6e6;
+    -fx-text-fill: -fx-text-base-color; 
+}
+
+.combo-box-popup .list-view 
+{
+    -fx-background-color: #d9d9d9;
+}    
+
+.combo-box-popup .list-view .list-cell 
+{
+
+    -fx-background-color: #d9d9d9;
+}
+
+
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: #005c99;
+    -fx-text-fill:black;
+}
+
+.combo-box-base  
+{
+    -fx-background-color: #e6e6e6;
+}
+.combo-box-base:showing 
+{
+    -fx-color: -fx-pressed-base;
+}
+
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+
+.progress-bar > .track{-fx-background-color:#d9d9d9;}
+.progress-bar{-fx-background-color:-fx-box-border,white;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .dialog-pane{
+  -fx-border-color:black;
+ }
+
+/**Customization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+  -fx-background-color:#d9d9d9;
+}
+
+.dialog-pane > .content.label {
+   -fx-background-color: #d9d9d9;
+   -fx-text-fill:#d9d9d9;
+   -fx-font-size:13.0px;
+}
+
+/**Customization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+  -fx-background-color: #d9d9d9;
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color: #d9d9d9;
+  -fx-text-fill:#d9d9d9;
+  -fx-font-size:18.0px;
+}
+
+
+/**Customization of Buttons**/
+.dialog-pane .button{
+   -fx-background-color:#e6e6e6;
+   -fx-text-fill:#d9d9d9;
+   -fx-wrap-text: true;
+   -fx-cursor:hand;
+ }
+
+.dialog-pane .button:hover{     
+  -fx-background-color:#f2f2f2;
+  -fx-text-fill:#f2f2f2;
+  -fx-font-weight:bold; 
+ }
+
+
+#progressBarHBox{-fx-background-color:#e6e6e6;}
+#combatOrderMenuBar{-fx-background-color:#f2f2f2;}
+#combatOrderMenuBar .container .menu:openvertically{-fx-background-color:#f2f2f2;}
+.tool-bar:horizontal{-fx-background-color:#e6e6e6;}
+#traitCheckHBox{-fx-background-color:#e6e6e6;}
+#traitCheckVBox{-fx-background-color:#e6e6e6;}
+.text-field:readonly{-fx-background-color:#e6e6e6;}
+.label{-fx-text-fill:#d9d9d9;}
+.list-cell:filled:selected:focused, .list-cell:filled:selected {-fx-background-color:#e6e6e6;}
+.list-cell{-fx-background-color:#e6e6e6;}
+
+
+.chart-plot-background{-fx-background-color:#d9d9d9;}
+.chart-vertical-grid-lines{-fx-stroke:transparent;}
+.chart-horizontal-grid-lines{-fx-stroke:#e6e6e6;}
+.chart-alternative-row-fill{-fx-fill:#cccccc;-fx-stroke:#e6e6e6;-fx-stroke-width:0;}
+.default-color0.chart-bar { -fx-bar-fill:#e65c00;}
+#chartPane{-fx-background-color:#e6e6e6;}
+
+
+.split-pane > .split-pane-divider{-fx-background-color:#ffffff;-fx-padding: 0 0.1em 0 0.1em;}
+.split-pane {
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.titled-pane > *.content {
+    -fx-border-color: transparent;
+}
+.chart-title{-fx-background-color:#d9d9d9;-fx-border-color:#d9d9d9;}
+.chart-content{-fx-background-color: #d9d9d9;-fx-border-color:#d9d9d9;-fx-padding:0em;}
+.button:focused,
+.toggle-button:focused,
+.radio-button:focused > .radio,
+.check-box:focused > .box,
+.menu-button:focused,
+.choice-box:focused,
+.color-picker.split-button:focused > .color-picker-label,
+.combo-box-base:focused,
+.slider:focused .thumb {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;}
+
+

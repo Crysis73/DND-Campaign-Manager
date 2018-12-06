@@ -4,7 +4,7 @@ import java.util.Map;
 
 class Race {
     private final String name;
-    private String description; //Will need to be manually set for each race.
+    private String description;
     private final TraitMap traitBonus;
 
     Race(String name, TraitMap traitBonus){

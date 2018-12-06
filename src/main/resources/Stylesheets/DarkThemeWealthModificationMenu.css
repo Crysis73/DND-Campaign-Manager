@@ -1,0 +1,15 @@
+.root{-fx-background-color:#1a1a1a;}
+.split-pane:horizontal, .split-pane:vertical{-fx-background-color:#1a1a1a;}
+.split-pane:horizontal .split-pane-divider,
+.split-pane:vertical .split-pane-divider{visibility:false;}
+.text-field{-fx-background-color:#404040;-fx-border-color:transparent;
+  -fx-text-fill:#d9d9d9;}
+.label{-fx-text-fill:#d9d9d9;}
+.button{-fx-background-color:#404040;-fx-font-family:"Segoe UI light";-fx-text-fill:#d9d9d9;}
+.choice-box{-fx-background-color:#404040;-fx-focus-traversable:false;}
+.choice-box .context-menu { -fx-background-color: black; }
+.choice-box .menu-item:focused { -fx-background-color:#005c99; }
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label { -fx-fill: black; }
+#instructions{-fx-background-color:#595959;}
+#gridpane{-fx-background-color:#1a1a1a;}

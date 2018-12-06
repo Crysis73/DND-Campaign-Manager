@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked"})
 public class NewCharacterTabController {
 
     @FXML private TextField

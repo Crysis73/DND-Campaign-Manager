@@ -54,4 +54,5 @@ class Die {
         Integer value2 = rollDie();
         return min(value1,value2);
     }
+
 }

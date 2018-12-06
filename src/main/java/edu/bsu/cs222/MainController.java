@@ -28,8 +28,11 @@ public class MainController{
     private boolean isDarkTheme;
     private Campaign campaign;
 
+    TabPane getMainTabPane(){
+        return this.mainTabPane;
+    }
+
     @FXML private void initialize(){
-        WealthModificationController wealthModificationController = new WealthModificationController();
         campaignOpenTabController.injectMainController(this);
         campaignViewTabController.injectMainController(this);
         newCharacterTabController.injectMainController(this);
@@ -122,13 +125,24 @@ public class MainController{
         }
     }
 
-    void loadOldCampaign(String filename) {
+    private void loadOldCampaign(String filename) {
         refreshProgram();
         Date date = new Date();
         JsonLoader loader = new JsonLoader();
         Campaign campaign = loader.fromJsontoCampaign(filename);
         this.campaign = campaign;
-        campaign.fromFileToLog();
+        try {
+            campaign.fromFileToLog();
+        } catch(NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "We couldn't seem to find a log associated with your campaign, one has been created for you.");
+            alert.setHeaderText("No log found");
+            if(isDarkTheme) {
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                dialogPane.getStyleClass().add("DarkTheme");
+            }
+            alert.showAndWait();
+        }
         campaignViewTabController.addEntryToLog(date.toString() +": " +this.campaign.getCampaignName().replace(".json","")+" loaded.");
         setCharacterCreatorTab();
         for(int j=0;j<campaign.getCharacters().size();j++){
@@ -156,7 +170,7 @@ public class MainController{
         }
     }
 
-    public void openCampaign(ActionEvent actionEvent){
+    public void openCampaign(){
         FileChooser fileChooser = new FileChooser();
         AnchorPane anchorPane = new AnchorPane();
         Scene scene = new Scene(anchorPane);
@@ -164,24 +178,23 @@ public class MainController{
         stage.setScene(scene);
         stage.setTitle("Choose campaign file");
         File file = fileChooser.showOpenDialog(stage);
-        if(!file.getName().trim().isEmpty()) {
-            if (file.getName().contains(".json")) {
-                loadOldCampaign(file.getName());
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "The file you selected doesn't seem to be readable by our program.");
-                if (isDarkTheme) {
-                    DialogPane dialogPane = alert.getDialogPane();
-                    dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
-                    dialogPane.getStyleClass().add("DarkTheme");
+        if(file != null) {
+            if (!file.getName().trim().isEmpty()) {
+                if(file.getName().contains(".json")) {
+                    loadOldCampaign(file.getName());
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "The file you selected doesn't seem to be readable by our program.");
+                    if (isDarkTheme) {
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                        dialogPane.getStyleClass().add("DarkTheme");
+                    }
+                    alert.setHeaderText("Invalid File");
+                    alert.showAndWait();
+
                 }
-                alert.setHeaderText("Invalid File");
-                alert.showAndWait();
             }
         }
     }
 
-
-    public void loadOldCampaign(ActionEvent actionEvent) {
-        loadOldCampaign("My Campaign.json");
-    }
 }

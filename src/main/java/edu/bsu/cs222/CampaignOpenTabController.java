@@ -1,5 +1,6 @@
 package edu.bsu.cs222;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -61,10 +62,6 @@ public class CampaignOpenTabController {
         }
     }
 
-    public void loadOldCampaign() {
-        mainController.loadOldCampaign("My Campaign.json");
-    }
-
     void toDarkTheme(){
         rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
         rootPane.getStyleClass().add("DarkTheme");
@@ -72,6 +69,7 @@ public class CampaignOpenTabController {
     }
 
 
-
-
+    public void openCampaign(ActionEvent actionEvent) {
+        mainController.openCampaign();
+    }
 }

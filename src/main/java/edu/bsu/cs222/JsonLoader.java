@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 
 class JsonLoader {
 
-    @SuppressWarnings("UnusedReturnValue")
     Campaign fromJsontoCampaign(String filename){
         try {
             Campaign campaign = new Campaign(filename.replace(".json",""));

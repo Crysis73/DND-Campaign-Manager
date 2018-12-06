@@ -4,7 +4,7 @@ class Level {
     private final Integer currentLevel;
     private final Integer levelUpAt;
 
-    public Level(Integer currentLevel, Integer levelUpAt){
+    Level(Integer currentLevel, Integer levelUpAt){
         this.currentLevel = currentLevel;
         this.levelUpAt = levelUpAt;
     }

@@ -1,7 +1,6 @@
 package edu.bsu.cs222;
 
 
-@SuppressWarnings({"unused"})
 class dndClass {
     private final String name;
     private final String description;

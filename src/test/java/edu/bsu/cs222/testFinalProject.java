@@ -8,7 +8,6 @@ import java.util.*;
 import static java.lang.Math.min;
 import static java.lang.StrictMath.max;
 
-@SuppressWarnings("WeakerAccess")
 public class testFinalProject {
 
 
@@ -28,6 +27,7 @@ public class testFinalProject {
             results[i] = d6.rollD6FourTimesDropLeast();
         }
         for (Integer result : results) {
+            // noinspection ConstantConditions
             Assert.assertTrue(result <= 18 || result >=3);
         }
     }
@@ -190,9 +190,4 @@ public class testFinalProject {
         Assert.assertTrue(levelAfter>startingLevel && levelAfter == 3);
     }
 
-    @Test
-    public void testSetLevel(){
-        Character Jack = new Character("Jack","Fighter","Dwarf");
-
-    }
 }

@@ -10,7 +10,6 @@ class TraitCheck {
     private final Integer finalValue;
     private Integer advantageRoll;
 
-    @SuppressWarnings("ConstantConditions")
     TraitCheck(Character character, String traitName, DifficultyClass difficultyClass, String advantageType){
         this.character = character;
         this.traitName = traitName;
@@ -21,8 +20,7 @@ class TraitCheck {
         }
         if(advantageType.equals("Neutral")){
             advantageRoll = d20.rollDie();
-        }
-        if(advantageType.equals("Disadvantage")){
+        }else {
             advantageRoll = d20.rollDieTwiceUseLeast();
         }
         this.abilityModifier = ((Objects.requireNonNull(character).getTraits().getValue(traitName)-10)/2);

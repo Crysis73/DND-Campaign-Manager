@@ -1,0 +1,4 @@
+.split-pane:horizontal .split-pane-divider,
+.split-pane:vertical .split-pane-divider{visibility:false;}
+.split-pane:horizontal, .split-pane:vertical{-fx-background-color:transparent;}
+.tab-pane:top {-fx-background-color:white;}

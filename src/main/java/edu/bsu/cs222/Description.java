@@ -1,6 +1,5 @@
 package edu.bsu.cs222;
 
-@SuppressWarnings("unused")
 class Description {
     private String height, weight, age, eyeColor, skinColor, additionalFeatures, alignment, languages, exoticLanguages, personalityTrait1, personalityTrait2, ideals, bonds, flaws;
 
@@ -34,7 +33,6 @@ class Description {
     public void setPersonalityTrait1(String personalityTrait1){
         this.personalityTrait1 = personalityTrait1;
     }
-    @SuppressWarnings("SameParameterValue")
     void setPersonalityTrait2(String personalityTrait2){
         this.personalityTrait2 = personalityTrait2;
     }

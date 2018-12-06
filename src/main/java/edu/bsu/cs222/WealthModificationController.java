@@ -105,6 +105,11 @@ class WealthModificationController{
             if (payToName.equals("The Void")) {
                 character.setWealth(character.getWealth() - Integer.parseInt(modificationAmount));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,characterName + " successfully paid " + modificationAmount + " wealth to " + payToName+".");
+                if(isDarkTheme) {
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                    dialogPane.getStyleClass().add("DarkTheme");
+                }
                 alert.showAndWait();
                 addUpdateToLog(new Date().toString() + ": "+characterName +" successfully paid " + modificationAmount + " wealth to "+payToName+".");
             } else {
@@ -121,6 +126,11 @@ class WealthModificationController{
                     wealthRecipient = payToName;
                 }
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION,characterName + " successfully paid " + modificationAmount + " wealth to " + wealthRecipient+".");
+                if(isDarkTheme) {
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                    dialogPane.getStyleClass().add("DarkTheme");
+                }
                 alert.showAndWait();
                 addUpdateToLog(new Date().toString() + ": "+characterName + " successfully paid " +modificationAmount + " wealth to "+wealthRecipient+".");
             }

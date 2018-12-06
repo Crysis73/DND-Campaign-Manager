@@ -22,13 +22,13 @@ class ChartCreator {
         this.series = series;
     }
 
-    private ObservableList generateChartData(XYChart.Series series){
+    private ObservableList generateChartData(XYChart.Series<String, Integer> series){
         ObservableList<XYChart.Series<String,Integer>> chartData = FXCollections.observableArrayList();
         chartData.add(series);
         return chartData;
     }
 
-    BarChart createChart(ObservableList<String> categories,String characterName){
+    BarChart<String, Integer> createChart(ObservableList<String> categories, String characterName){
         CategoryAxis xAxis = new CategoryAxis();
         Axis<? extends Number> yAxis = new NumberAxis();
         ((NumberAxis) yAxis).setUpperBound(20);

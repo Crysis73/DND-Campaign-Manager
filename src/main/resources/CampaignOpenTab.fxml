@@ -19,6 +19,6 @@
         </rowConstraints>
         <TextField fx:id="inputCampaignText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="331.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
         <Button mnemonicParsing="false" onAction="#onCreateNewCampaign" prefHeight="63.0" prefWidth="335.0" text="Create New Campaign" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Button mnemonicParsing="false" onAction="#loadOldCampaign" prefHeight="63.0" prefWidth="335.0" text="Load Campaign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button mnemonicParsing="false" onAction="#openCampaign" prefHeight="63.0" prefWidth="335.0" text="Load Campaign" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
     </GridPane>
 </AnchorPane>

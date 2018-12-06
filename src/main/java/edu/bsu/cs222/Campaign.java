@@ -7,10 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 
-@SuppressWarnings("unused")
 class Campaign {
     private final ArrayList<Character> characters;
-    private String campaignName;
+    private final String campaignName;
     private String log;
 
 
@@ -83,7 +82,4 @@ class Campaign {
         return result;
     }
 
-    void setCampaignName(String campaignName){
-        this.campaignName = campaignName;
-    }
 }

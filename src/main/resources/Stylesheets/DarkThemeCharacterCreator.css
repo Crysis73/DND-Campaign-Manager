@@ -1,0 +1,26 @@
+.label {-fx-text-fill:#d9d9d9;}
+.button{-fx-background-color:#404040;-fx-font-family:"Segoe UI light";}
+.combo-box .list-cell {-fx-background-color: #404040;-fx-text-fill: -fx-text-base-color; }
+.combo-box-popup .list-view {-fx-background-color: #1a1a1a;}    
+.combo-box-popup .list-view .list-cell {-fx-background-color: #1a1a1a;}
+.combo-box-popup .list-view .list-cell:filled:hover {-fx-background-color: #005c99;-fx-text-fill:black;}
+.combo-box-base  {-fx-background-color: #404040;}
+.combo-box-base:showing {-fx-color: -fx-pressed-base;}
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+.title{-fx-background-color:#404040;}
+.text{-fx-fill:#d9d9d9;}
+.text-field{-fx-background-color:#1d1d1d;-fx-text-fill:#d9d9d9;}
+
+#anchorPane{-fx-background-color:#595959;}
+.root{-fx-background-color:#595959;}
+#descriptionPane{-fx-background-color:#595959;}
+#decsriptionBackground{-fx-background-color:#1a1a1a;}
+.titled-pane{-fx-background-color:#595959;}
+.split-pane:horizontal, .split-pane:vertical{-fx-background-color:transparent;}
+.split-pane:horizontal .split-pane-divider,
+.split-pane:vertical .split-pane-divider{visibility:false;}
+

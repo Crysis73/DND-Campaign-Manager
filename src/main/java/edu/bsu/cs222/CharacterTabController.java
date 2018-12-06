@@ -1,12 +1,11 @@
 package edu.bsu.cs222;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 
-class CharacterTabController {
+public class CharacterTabController {
     @FXML private Label characterNameText, raceNameText, classNameText, raceDescription, classDescription;
     @FXML private TextArea raceDescriptionBox, classDescriptionBox;
     @FXML private TextField wealthBox, currentHPBox, maxHPBox, xpBox, levelBox,
@@ -26,7 +25,6 @@ class CharacterTabController {
         rootPane.getStyleClass().add("DarkThemeCharacterSheet");
         isDarkTheme = true;
     }
-
 
     void initialize(){
         this.characterNameText.setText(character.getName());
@@ -60,7 +58,7 @@ class CharacterTabController {
     }
 
     @FXML
-    private void onSaveChanges(ActionEvent actionEvent){
+    private void onSaveChanges(){
         if(validateChanges()){
             updateTraits();
             updateStats();
@@ -139,14 +137,27 @@ class CharacterTabController {
     }
 
     private void updateStats(){
-        character.setWealth(Integer.parseInt(wealthBox.getText()));
-        character.setCurrentHitPoints(Integer.parseInt(currentHPBox.getText()));
-        character.setMaxHitPoints(Integer.parseInt(maxHPBox.getText()));
-        if(XPChanged) {
-            character.setExperiencepoints(Integer.parseInt(xpBox.getText()));
-            this.levelBox.setText(character.getLevel().getCurrentLevel().toString());
-        }else{
-            character.setLevel(character.getLevel().getCurrentLevel(),Integer.parseInt(levelBox.getText()));
+        if(validateChanges()) {
+            try {
+                character.setWealth(Integer.parseInt(wealthBox.getText()));
+                character.setCurrentHitPoints(Integer.parseInt(currentHPBox.getText()));
+                character.setMaxHitPoints(Integer.parseInt(maxHPBox.getText()));
+            }catch (NumberFormatException e ){
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "- Somewhere you entered a number that was way too big for our program to handle, and for this, you shall be punished.",ButtonType.OK);
+                if(isDarkTheme) {
+                    DialogPane dialogPane = alert.getDialogPane();
+                    dialogPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
+                    dialogPane.getStyleClass().add("DarkTheme");
+                }
+                alert.showAndWait();
+            }
+            if (XPChanged) {
+                character.setExperiencepoints(Integer.parseInt(xpBox.getText()));
+                this.levelBox.setText(character.getLevel().getCurrentLevel().toString());
+            } else {
+                character.setLevel(character.getLevel().getCurrentLevel(), Integer.parseInt(levelBox.getText()));
+            }
         }
     }
 
@@ -169,11 +180,9 @@ class CharacterTabController {
     }
 
 
-    @FXML public void setXPChanged(javafx.scene.input.KeyEvent keyEvent) {
+    @FXML public void setXPChanged() {
         if(validateChanges()) {
             XPChanged = character.getExperiencepoints() != Integer.parseInt(xpBox.getText());
         }
-
-
     }
 }

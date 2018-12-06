@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -38,6 +39,8 @@ public class CampaignViewTabController {
     private boolean isDarkTheme;
     private Character activeCharacter;
 
+
+
     void toDarkTheme(){
         rootPane.getStylesheets().add(getClass().getResource("/Stylesheets/DarkTheme.css").toExternalForm());
         rootPane.getStyleClass().add("DarkTheme");
@@ -52,6 +55,7 @@ public class CampaignViewTabController {
     }
 
     void displayCharacters(){
+        onCharacterClicked();
         ArrayList<String> characters = new ArrayList<>();
         for(int i=0;i<mainController.getCampaign().getCharacters().size();i++){
             characters.add(mainController.getCampaign().getCharacters().get(i).getName());
@@ -81,7 +85,7 @@ public class CampaignViewTabController {
     }
 
     @FXML
-    protected void initializeCharacterChoices(){
+    void initializeCharacterChoices(){
         ArrayList<Character> characters = mainController.getCampaign().getCharacters();
         ArrayList<String> characterNames = new ArrayList<>();
         for (Character character : characters) {
@@ -141,7 +145,25 @@ public class CampaignViewTabController {
         return true;
     }
 
-    public void createChart(MouseEvent mouseEvent) {
+    private void onCharacterClicked(){
+        characterList.setOnMouseClicked(mouseEvent -> {
+            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                if(mouseEvent.getClickCount() == 2){
+                    ObservableList<String> activeCharacterName = characterList.getSelectionModel().getSelectedItems();
+                    String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
+                    for(int i=0;i<mainController.getMainTabPane().getTabs().size();i++) {
+                        if(mainController.getMainTabPane().getTabs().get(i).getText().equals(characterName)) {
+                            mainController.getMainTabPane().getSelectionModel().select(i);
+                        }
+                    }
+                }else{
+                    createChart(mouseEvent);
+                }
+            }
+        });
+    }
+
+    private void createChart(MouseEvent mouseEvent) {
         if(validateChartCharacter() && mainController.getCampaign().getCharacters().size()!=0) {
             ObservableList<String> activeCharacterName = characterList.getSelectionModel().getSelectedItems();
             String characterName = activeCharacterName.toString().replace("[", "").replace("]", "");
@@ -295,7 +317,6 @@ public class CampaignViewTabController {
     @FXML
     private void decrementActiveCharacterXP(ActionEvent actionEvent){
         if(activeCharacter!=null) {
-            Integer currentLevel = activeCharacter.getLevel().getCurrentLevel();
             Integer lowerBound = activeCharacter.getLevel().getLevelUpAt();
             Integer currentXP = activeCharacter.getExperiencepoints();
             Integer levelUp = activeCharacter.getNextLevel().getLevelUpAt();
@@ -527,6 +548,7 @@ public class CampaignViewTabController {
             if(isDarkTheme){
                 wealthModificationController.toDarkTheme();
             }
+            stage.setResizable(false);
             stage.show();
             stage.onCloseRequestProperty().set(event -> {
                 setWealthDisplay();
@@ -538,9 +560,31 @@ public class CampaignViewTabController {
         }
     }
     //--------------------------- END OF WEALTH CODE --------------------//
-
     Character getActiveCharacter(){
         return this.activeCharacter;
+    }
+
+    @FXML
+    private void showDieRollMenu(ActionEvent actionEvent){
+        FXMLLoader loader = new FXMLLoader();
+        DieRollerController dieRollerController = new DieRollerController();
+        loader.setController(dieRollerController);
+        loader.setLocation(getClass().getResource("/DieRoller.fxml"));
+        ArrayList<Character> characters = mainController.getCampaign().getCharacters();
+        try {
+            AnchorPane anchorPane = loader.load();
+            Scene scene = new Scene(anchorPane);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Die Roller");
+            if(isDarkTheme){
+                dieRollerController.toDarkTheme();
+            }
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
