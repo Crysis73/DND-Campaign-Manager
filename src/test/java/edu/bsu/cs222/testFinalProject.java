@@ -169,7 +169,6 @@ public class testFinalProject {
         String filename = "myCampaign.json";
         JsonLoader loader = new JsonLoader();
         Campaign campaign = loader.fromJsontoCampaign(filename);
-        System.out.println(campaign.toString());
     }
 
     @Test
