@@ -2,7 +2,24 @@
 
 Authors: Casey Haskins <cahaskins@bsu.edu>, Rebecca Auger <raauger@bsu.edu>
 
-For our final project in CS222, we decided to make a DND Campaign Manager. Our program allows for a DM to create and manage existing campaigns using an intuitive user interface. Users can create a new campaign, create characters for that campaign, save/load campaigns, and manage character stats. 
+This is our final project for our CS222 class at Ball State University. Our project guidelines were simply to create something from the ground up and make it do a little more with each successive iteration. For our project, we decided to make a DND Campaign Manger (which we might generify in the future that way we can license and distribute this software).
 
-There are a couple warnings suppressed in our project. ALL warnings are suppressed for the Equipment class because that class is not currently being used. In our Character class we suppressed the unused method warning because we have several methods that will be used in the future that we just have not implemented yet. In our Description class we suppressed the unused method warning because several of our methods that the compiler thinks aren't used are in fact used in our GUI. We also have a SameParameterValue warning suppressed for the setPersonalityTrait2 method because we only used that method once in our tests to set a second personality trait, so the compiler thinks that the value of personalityTrait2 is always cool. For our dndClass class, we suppressed the warning for UnusedMethod. The unused method warning is suppressed because the unused methods will have use in the future. In our JsonLoader class, we suppressed the unused return value warning because the return value of the method will be used in the future.
-A section of the GUIFile.fxml is commented out. This will be used for adding character equipment in the future.
+We allow users to: 
+• Create new campaigns 
+• Save their campaigns 
+• Load existing campaigns 
+• Create characters and add them to campaigns 
+• Auto generate character stats necessary for gameplay 
+• Perform trait checks 
+• Perform dice rolls outside of trait checks. 
+• Manage character level/XP 
+• If a character levels up, their HP bonus from leveling is automatically generated and applied. 
+• Manage character Wealth 
+• Transfer wealth from one character to another using a "PayTo" menu. 
+• Manage current HP and Max HP 
+• Read/View/Save a log of all the actions that have taken place in their campaign 
+• Manually add entries to log • Switch from a light theme to a dark theme 
+• Generate and save a Combat Order for the characters in a campaign 
+• Resize the multiple panes within a view 
+• Manually edit character information after creation 
+• And probably a few more things I'm forgetting after having worked on this project for a while that all take place within a responsive and well designed user interface
