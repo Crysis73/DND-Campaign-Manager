@@ -44,15 +44,11 @@ class Die {
     }
 
     Integer rollDieTwiceUseGreatest(){
-        Integer value1 = rollDie();
-        Integer value2 = rollDie();
-        return(max(value1,value2));
+        return(max(rollDie(),rollDie()));
     }
 
     Integer rollDieTwiceUseLeast(){
-        Integer value1 = rollDie();
-        Integer value2 = rollDie();
-        return min(value1,value2);
+        return min(rollDie(),rollDie());
     }
 
 }

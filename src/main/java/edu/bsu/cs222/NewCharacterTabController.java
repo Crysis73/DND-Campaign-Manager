@@ -22,10 +22,10 @@ public class NewCharacterTabController {
         this.mainController = mainController;
     }
 
-    void initializeNewCharacterTab(){
+    void initializeNewCharacterTab(boolean isDarkTheme){
         initializeDndClassChoices();
         initializeRaceChoices();
-        isDarkTheme = false;
+        this.isDarkTheme = isDarkTheme;
     }
 
     void toDarkTheme(){

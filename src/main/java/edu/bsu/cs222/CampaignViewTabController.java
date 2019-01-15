@@ -73,8 +73,6 @@ public class CampaignViewTabController {
         }
     }
 
-    //--------------------- START OF INITIALIZE CAMPAIGN VIEW CODE ---------------------------//
-
     void initializeCampaignViewTab(){
         initializeCharacterChoices();
         initializeTraitChoices();
@@ -121,10 +119,6 @@ public class CampaignViewTabController {
         SpinnerValueFactory<String> valueFactory = new SpinnerValueFactory.ListSpinnerValueFactory<>(list);
         advantageSpinner.setValueFactory(valueFactory);
     }
-
-    //--------------------- END OF CAMPAIGN VIEW INITIALIZATION CHARACTER CODE ---------------------------//
-
-    //--------------------- START OF CHART POPULATION CODE ---------------------------//
 
     private boolean validateChartCharacter(){
         StringBuilder chartErrors = new StringBuilder();
@@ -187,10 +181,6 @@ public class CampaignViewTabController {
         }
     }
 
-    //--------------------- END OF CHART POPULATION CODE ---------------------------//
-
-    //--------------------- START OF HP PROGRESS BAR CODE ---------------------------//
-
     private boolean validateHPIncrement(){
         if(activeCharacter!=null){
             return !activeCharacter.getCurrentHitPoints().equals(activeCharacter.getMaxHitPoints());
@@ -235,10 +225,6 @@ public class CampaignViewTabController {
         }
     }
 
-    //--------------------- END OF HP PROGRESS BAR CODE ---------------------------//
-
-    //--------------------- START OF WEALTH PROGRESS BAR CODE ---------------------------//
-
     private void setWealthProgressBar(){
         wealthVBox.getChildren().clear();
         Label label = new Label("Wealth: "+activeCharacter.getWealth());
@@ -269,9 +255,6 @@ public class CampaignViewTabController {
         }
     }
 
-    //----------------------- END OF WEALTH PROGRESS BAR CODE ------------------------------//
-
-    //----------------------- START OF XP PROGRESS BAR CODE ------------------------------------//
     @FXML
     private void incrementActiveCharacterXP(ActionEvent actionEvent){
         if(activeCharacter!=null) {
@@ -349,11 +332,6 @@ public class CampaignViewTabController {
         XPVBox.getChildren().add(stackPane);
     }
 
-    //----------------------- END OF XP PROGRESS BAR CODE ---------------------------------------//
-
-
-    //--------------------- START OF COMBAT ORDER CODE ---------------------------//
-
     private boolean validateCombatRoll(){
         StringBuilder combatOrderErrors = new StringBuilder();
         if(mainController.getCampaign().getCharacters().size()==0){
@@ -391,10 +369,6 @@ public class CampaignViewTabController {
     private void clearCombatOrder(ActionEvent actionEvent){
         combatOrderDisplay.getItems().clear();
     }
-
-    //--------------------- END OF COMBAT ORDER CODE ---------------------------//
-
-    //--------------------- START OF TRAIT CHECK CODE ---------------------------//
 
     private Character getCharacterToCheck(){
         String characterName = characterChoiceBox.getItems().get(characterChoiceBox.getSelectionModel().getSelectedIndex());
@@ -493,10 +467,6 @@ public class CampaignViewTabController {
 
         }
     }
-    //---------------------- END OF TRAIT CHECK CODE ------------------------------//
-
-
-    //---------REFRESH AND LOAD OLD CAMPAIGN -------//
 
     void refreshCampaignView(){
         logEntry.clear();
@@ -506,8 +476,6 @@ public class CampaignViewTabController {
         characterList.getItems().clear();
         combatOrderDisplay.getItems().clear();
     }
-
-    //--------------------------- START OF LOG CODE ----------------------------------------//
 
     void addEntryToLog(String entry){
         mainController.getCampaign().addEntryToLog(entry);
@@ -519,10 +487,6 @@ public class CampaignViewTabController {
         addEntryToLog(new Date().toString() +": " + logEntry.getText());
         logEntry.clear();
     }
-
-    //-------------------------------- END OF LOG CODE -------------------------------------//
-
-    //--------------------------------- START OF WEALTH CODE -------------------------------------//
 
     private void setWealthDisplay(){
         if(activeCharacter!=null) {
@@ -560,7 +524,7 @@ public class CampaignViewTabController {
             e.printStackTrace();
         }
     }
-    //--------------------------- END OF WEALTH CODE --------------------//
+
     Character getActiveCharacter(){
         return this.activeCharacter;
     }

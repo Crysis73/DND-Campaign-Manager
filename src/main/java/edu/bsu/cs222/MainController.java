@@ -57,7 +57,7 @@ public class MainController{
         CampaignViewTab.disableProperty().setValue(false);
         campaignViewTabController.initializeCampaignViewTab();
         CharacterCreatorTab.disableProperty().setValue(false);
-        newCharacterTabController.initializeNewCharacterTab();
+        newCharacterTabController.initializeNewCharacterTab(isDarkTheme);
     }
 
     private void setLog(){

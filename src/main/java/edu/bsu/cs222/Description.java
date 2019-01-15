@@ -6,45 +6,59 @@ class Description {
     void setHeight(String height){
         this.height = height;
     }
+
     void setWeight(String weight){
         this.weight = weight;
     }
+
     void setAge(String age){
         this.age = age;
     }
+
     void setEyeColor(String eyeColor){
         this.eyeColor = eyeColor;
     }
+
     void setSkinColor(String skinColor){
         this.skinColor = skinColor;
     }
+
     public void setAdditionalFeatures(String additionalFeatures){
         this.additionalFeatures = additionalFeatures;
     }
+
     void setAlignment(String alignment){
         this.alignment = alignment;
     }
+
     void setLanguages(String languages){
         this.languages = languages;
     }
+
     public void setExoticLanguages(String exoticLanguages){
         this.exoticLanguages = exoticLanguages;
     }
+
     public void setPersonalityTrait1(String personalityTrait1){
         this.personalityTrait1 = personalityTrait1;
     }
+
     void setPersonalityTrait2(String personalityTrait2){
         this.personalityTrait2 = personalityTrait2;
     }
+
     public void setIdeals(String ideals){
         this.ideals = ideals;
     }
+
     public void setBonds(String bonds){
         this.bonds = bonds;
     }
+
     void setFlaws(String flaws){
         this.flaws = flaws;
     }
+
     void setAllValues(String height, String weight, String age, String eyeColor, String skinColor, String additionalFeatures,
                       String alignment, String languages, String exoticLanguages, String personalityTrait1,
                       String personalityTrait2, String ideals, String bonds, String flaws){
